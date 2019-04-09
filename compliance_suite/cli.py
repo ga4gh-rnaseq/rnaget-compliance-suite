@@ -1,11 +1,12 @@
-import click
-import os
 import json
-import tarfile
+import os
 import sys
+import tarfile
 
-from compliance_suite.test_runner import TestRunner
+import click
+
 from compliance_suite.report_server import start_mock_server
+from compliance_suite.test_runner import TestRunner
 
 
 def valid_file_name(file_name, val):
@@ -25,21 +26,21 @@ def scan_for_errors(json):
     - study
     - expression
     '''
-    high_level_summary={}
+    high_level_summary = {}
     available_tests = ('test_project_implement')
-    #available_tests = ('test_project_implement',
+    # available_tests = ('test_project_implement',
     #                    'test_study_implement',
     #                    'test_expression_implement')
     for high_level_name in (available_tests):
         # We are successful unless proven otherwise
-        result=1
+        result = 1
         for test in json[0]["test_results"]:
             if high_level_name in test["parents"]:
                 if test['warning']:
                     result = test["result"]
                     break
-        high_level_summary[high_level_name] =  {
-            'result' : result,
+        high_level_summary[high_level_name] = {
+            'result': result,
             'name': high_level_name
         }
     json[0]["high_level_summary"] = high_level_summary
@@ -52,6 +53,7 @@ def main():
 
 @main.command(help='run compliance utility report using base urls')
 @click.option('--server', '-s', multiple=True, help='base_url')
+@click.option('--token', '-t', help='OAuth2 token')
 @click.option(
     '--file_path_name',
     '-fpn', default='web', help='to create a tar.gz file')
@@ -62,7 +64,7 @@ def main():
     '--serve', is_flag=True, help='spin up a server')
 @click.option(
     '--no-web', is_flag=True, help='skip the creation of a tarball')
-def report(server, file_path_name, json_path, serve, no_web):
+def report(server, token, file_path_name, json_path, serve, no_web):
     '''
     CLI command report to execute the report session and generate report on
     terminal, html file and json file if provided by the user
@@ -81,6 +83,8 @@ def report(server, file_path_name, json_path, serve, no_web):
         raise Exception('No server url provided. Provide at least one')
     for s in server:
         tr = TestRunner(s)
+        if token:
+            tr.headers['Authorization'] = 'Bearer ' + str(token)
         tr.run_tests()
         final_json.append(tr.generate_final_json())
 

@@ -1,8 +1,9 @@
-from compliance_suite.tests import initiate_tests
-from compliance_suite.utils import data
 import datetime
 import re
 import sys
+
+from compliance_suite.tests import initiate_tests
+from compliance_suite.utils import data
 
 
 def processed_func_descrp(text):
@@ -14,6 +15,7 @@ class TestRunner():
     Test runner class used to run tests, pass context variables through test
     graph to generate report appropriately.
     '''
+
     def __init__(self, base_url):
         '''
         Required params:
@@ -29,10 +31,11 @@ class TestRunner():
             total_tests_skipped - Total number of tests skipped
             total_tests_warning - Total number of tests generated warning
             results - To store test result objects for report generation
+            headers - Additional HTTP headers for the requests
         '''
 
         self.root = None
-        #TODO: remove session_params if we don't need
+        # TODO: remove session_params if we don't need
         self.session_params = {}
         self.test_data = data()
         self.total_tests = 0
@@ -42,6 +45,7 @@ class TestRunner():
         self.total_tests_warning = 0
         self.base_url = base_url
         self.results = []
+        self.headers = {}
 
     def recurse_label_tests(self, root):
         '''
