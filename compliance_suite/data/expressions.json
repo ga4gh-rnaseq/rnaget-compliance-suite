@@ -1,0 +1,13 @@
+[{
+    "id": "a97f0c22811c508c92a765fde3e13d54",
+    "URL": "https://localhost:58852/rnaget/data/matrix.tsv",
+    "fileType": "tsv",
+    "tags": [
+        "bulk",
+        "cancer",
+        "human",
+        "PCAWG",
+        "RNA-seq"
+    ],
+    "studyID": "0a5c41465e7072eb24b53436be64f191"
+}]
