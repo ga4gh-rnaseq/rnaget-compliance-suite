@@ -1,7 +1,19 @@
 [{
     "id": "a97f0c22811c508c92a765fde3e13d54",
-    "URL": "https://localhost:58852/rnaget/data/matrix.tsv",
+    "URL": "https://rnaget.server.com/rnaget/data/matrix.tsv",
     "fileType": "tsv",
+    "tags": [
+        "bulk",
+        "cancer",
+        "human",
+        "PCAWG",
+        "RNA-seq"
+    ],
+    "studyID": "0a5c41465e7072eb24b53436be64f191"
+}, {
+    "id": "457d8a7f9755d3b2592bb30f7a56baf5",
+    "URL": "https://rnaget.server.com/rnaget/data/matrix.loom",
+    "fileType": "loom",
     "tags": [
         "bulk",
         "cancer",
