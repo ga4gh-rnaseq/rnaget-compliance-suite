@@ -31,4 +31,4 @@ Setting `--json -` will have the compliance suite write the JSON to STDOUT.
 ## Example report output
 
 An example of the json and html reports can be found in
-[report](https://github.com/ga4gh-rnaseq/rnaget-compliance-suite/report).
+[report](https://github.com/ga4gh-rnaseq/rnaget-compliance-suite/tree/master/report).
