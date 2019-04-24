@@ -1,7 +1,9 @@
+import sys
+
+from compliance_suite.expression_algorithms import *
 from compliance_suite.project_algorithms import *
 from compliance_suite.study_algorithms import *
-from compliance_suite.expression_algorithms import *
-import sys
+
 
 class Test():
     '''
@@ -18,6 +20,7 @@ class Test():
     warning - if the result of this test case is warning for the server implementation
     cases - multiple edge cases of same test object
     '''
+
     def __init__(self, algorithm):
         '''
         Initiates the Test Case object. Algorithm is a required field to initiate test case object
@@ -137,23 +140,86 @@ def initiate_tests():
 
     # Project Success Test Cases
 
-    test_project_implement = Test(project_implement)
-    test_project_implement.set_pass_text('Project endpoint implemented by the server')
-    test_project_implement.set_fail_text('Project endpoint not implemented by the server')
+    test_project_implement = Test(project_get)
+    test_project_implement.set_pass_text(
+        'Project endpoint implemented by the server')
+    test_project_implement.set_fail_text(
+        'Project endpoint not implemented by the server')
 
-    test_project_implement_default = Test(project_implement_default)
-    test_project_implement_default.set_pass_text('Project endpoint implemented with default encoding')
-    test_project_implement_default.set_fail_text('Project endpoint not implemented with default encoding')
+    test_project_implement_default = Test(project_get_default)
+    test_project_implement_default.set_pass_text(
+        'Project endpoint implemented with default encoding')
+    test_project_implement_default.set_fail_text(
+        'Project endpoint not implemented with default encoding')
+
+    test_project_search = Test(project_search)
+    test_project_search.set_pass_text(
+        'Projects can be retrieved through the search endpoint')
+    test_project_search.set_fail_text(
+        'Projects cannot be retrieved through the search endpoint')
+
+    test_project_search_url_params = Test(project_search_url_params)
+    test_project_search_url_params.set_pass_text(
+        'Projects can be retrieved using URL parameters through the search endpoint')
+    test_project_search_url_params.set_fail_text(
+        'Projects cannot be retrieved using URL parameters through the search endpoint')
+
+    test_project_search_url_params_cases = Test(
+        project_search_url_params_cases)
+    test_project_search_url_params_cases.set_pass_text(
+        'Projects can be retrieved using URL parameters through the search endpoint for all cases')
+    test_project_search_url_params_cases.set_fail_text(
+        'Projects cannot be retrieved using URL parameters through the search endpoint for all cases')
+    test_project_search_url_params_cases.cases = [
+        ('?version=2.0', [404, None]),
+        ('?tags=PCAWG,cancer', [200, 1]),
+        ('?tags=single-cell', [404, None]),
+        ('?foo=bar', [404, None])
+    ]
+
+    test_project_search_filters = Test(project_search_filters)
+    test_project_search_filters.set_pass_text(
+        'Project filters can be retrieved through the search endpoint')
+    test_project_search_filters.set_fail_text(
+        'Project filters be retrieved through the search endpoint')
 
     # Study Success Test Cases
 
-    test_study_implement = Test(study_implement)
-    test_study_implement.set_pass_text('Study endpoint implemented by the server')
-    test_study_implement.set_fail_text('Study endpoint not implemented by the server')
+    test_study_implement = Test(study_get)
+    test_study_implement.set_pass_text(
+        'Study endpoint implemented by the server')
+    test_study_implement.set_fail_text(
+        'Study endpoint not implemented by the server')
 
-    test_study_implement_default = Test(study_implement_default)
-    test_study_implement_default.set_pass_text('Study endpoint implemented with default encoding')
-    test_study_implement_default.set_fail_text('Study endpoint not implemented with default encoding')
+    test_study_implement_default = Test(study_get_default)
+    test_study_implement_default.set_pass_text(
+        'Study endpoint implemented with default encoding')
+    test_study_implement_default.set_fail_text(
+        'Study endpoint not implemented with default encoding')
+
+    test_study_search = Test(study_search)
+    test_study_search.set_pass_text(
+        'Studies can be retrieved through the search endpoint')
+    test_study_search.set_fail_text(
+        'Studies cannot be retrieved through the search endpoint')
+
+    test_study_search_url_params = Test(study_search_url_params)
+    test_study_search_url_params.set_pass_text(
+        'Studies can be retrieved using URL parameters through the search endpoint')
+    test_study_search_url_params.set_fail_text(
+        'Studies cannot be retrieved using URL parameters through the search endpoint')
+
+    test_study_search_url_params_cases = Test(study_search_url_params_cases)
+    test_study_search_url_params_cases.set_pass_text(
+        'Studies can be retrieved using URL parameters through the search endpoint for all cases')
+    test_study_search_url_params_cases.set_fail_text(
+        'Studies cannot be retrieved using URL parameters through the search endpoint for all cases')
+    test_study_search_url_params_cases.cases = [
+        ('?version=2.0', [404, None]),
+        ('?tags=PCAWG,cancer', [200, 1]),
+        ('?tags=single-cell', [404, None]),
+        ('?foo=bar', [404, None])
+    ]
 
     # Expression endpoint test cases
 
@@ -171,9 +237,18 @@ def initiate_tests():
 
     test_project_implement.add_child(test_project_implement_default)
 
+    test_base.add_child(test_project_search)
+    test_project_search.add_child(test_project_search_url_params)
+    test_project_search.add_child(test_project_search_filters)
+    test_project_search.add_child(test_project_search_url_params_cases)
+
     test_base.add_child(test_study_implement)
 
     test_study_implement.add_child(test_study_implement_default)
+
+    test_base.add_child(test_study_search)
+    test_study_search.add_child(test_study_search_url_params)
+    test_study_search.add_child(test_study_search_url_params_cases)
 
     test_base.add_child(test_expression_implement)
 
