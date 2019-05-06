@@ -87,7 +87,9 @@ TESTS = [
         "global_params": {"version": "1.0"},
         "params_cases": [{}]
     }, {
-        # PROJECT SEARCH URL PARAMS CASES
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: PROJECT SEARCH URL PARAMS CASES
+        # # # # # # # # # # # # # # # # # # # #
         "name": "project_search_url_params_cases",
         "uri": c.PROJECT_API + "search",
         "schema": c.SCHEMA_FILE_PROJECT,
@@ -132,7 +134,6 @@ TESTS = [
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY GET DEFAULT
         # # # # # # # # # # # # # # # # # # # #
-    }, {
         "name": "study_get_default",
         "uri": c.STUDY_API + "V_STUDY_ID",
         "schema": c.SCHEMA_FILE_STUDY,
@@ -142,10 +143,10 @@ TESTS = [
         "skip_text": "Study endpoint default encoding test skipped",
         "global_params": {},
         "params_cases": [{}]
+    }, {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY SEARCH
         # # # # # # # # # # # # # # # # # # # #
-    }, {
         "name": "study_search",
         "uri": c.STUDY_API + "search",
         "schema": c.SCHEMA_FILE_STUDY,
@@ -155,10 +156,10 @@ TESTS = [
         "skip_text": "Study search test skipped",
         "global_params": {},
         "params_cases": [{}]
+    }, {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY SEARCH URL PARAMS
         # # # # # # # # # # # # # # # # # # # #
-    }, {
         "name": "study_search_url_params",
         "uri": c.STUDY_API + "search",
         "schema": c.SCHEMA_FILE_STUDY,
@@ -170,10 +171,10 @@ TESTS = [
         "skip_text": "Study search with URL parameters test skipped",
         "global_params": {},
         "params_cases": [{}]
+    }, {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY SEARCH URL PARAMS CASES
         # # # # # # # # # # # # # # # # # # # #
-    }, {
         "name": "study_search_url_params_cases",
         "uri": c.STUDY_API + "search",
         "schema": c.SCHEMA_FILE_STUDY,
@@ -186,10 +187,10 @@ TESTS = [
                      + "skipped",
         "global_params": {},
         "params_cases": [{}]
+    }, {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY SEARCH FILTERS
         # # # # # # # # # # # # # # # # # # # #
-    }, {
         "name": "study_search_filters",
         "uri": c.STUDY_API + "search/filters",
         "schema": c.SCHEMA_FILE_STUDY,
@@ -201,10 +202,10 @@ TESTS = [
         "skip_text": "Study filters search test skipped",
         "global_params": {},
         "params_cases": [{}]
+    }, {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION GET
         # # # # # # # # # # # # # # # # # # # #
-    }, {
         "name": "expression_get",
         "uri": c.EXPRESSION_API + "V_EXPRESSION_ID",
         "schema": c.SCHEMA_FILE_EXPRESSION,
