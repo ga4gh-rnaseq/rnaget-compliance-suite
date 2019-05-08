@@ -154,7 +154,7 @@ def report(user_config, file_path_name, json_path, serve, no_web):
     except ArgumentException as e:
         with click.Context(report) as ctx:
             click.echo(report.get_help(ctx))
-        print("\n: "+ str(e) + "\n")
+        print("\n"+ str(e) + "\n")
     except UserConfigException as e:
         with click.Context(report) as ctx:
             click.echo(report.get_help(ctx))
