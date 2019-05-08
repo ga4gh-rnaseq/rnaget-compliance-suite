@@ -1,57 +1,73 @@
 function load() {
+    var singularDict = {
+        "projects": "project",
+        "studies": "study",
+        "expressions": "expression"
+    };
+
     $.getJSON("temp_result.json", function (data) {
         var text_report = "<h3>Compliance Report Text</h3>";
         var num_reports = data.length;
         var num_tests = data[0].test_results.length;
         console.log(data);
         $.each(data, function (index, report) {
-            text_report += "<h4>Server: " + report.server + "</h4>";
-            text_report += "<p>Total tests: " + report.total_tests + "</p>";
-            text_report += "<p>Total tests passed: " + report.total_tests_passed + "</p>";
+            text_report += "<h4>Server name: " + report.server_name + "</h4>";
+            text_report += "<h4>Base URL: " + report.base_url + "</h4>";
+            text_report += '<p>Total tests: ' + report.total_tests + '</p>';
+            text_report += '<p>Total tests passed: ' + report.total_tests_passed + "</p>";
             text_report += "<p>Total tests failed: " + report.total_tests_failed + "</p>";
             text_report += "<p>Total tests skipped: " + report.total_tests_skipped + "</p>";
             text_report += "<p>Total warnings generated: " + report.total_warnings + "</p>";
-            text_report += "<h3>Test result reports</h3>";
+            text_report += "<h3>" + report.server_name + ": Test result reports</h3>";
 
-            $.each(report.test_results, function (index, result){
-                console.log(result);
-                if(result.result == 1){
-                    text_report += "<p class='text-success'>" + result.name + ": " +  "PASSED</p>";
-                }
-                else if (result.result == 0 && result.warning == true){
-                    text_report += "<p class='text-warning'>" + result.name + ": " +  "SKIPPED | WARNING</p>";
-                }
-                else if (result.result == 0 && result.warning == false){
-                    text_report += "<p class='text-info'>" + result.name + ": " +  "SKIPPED</p>";
-                }
-                else {
-                    text_report += "<p class='text-danger'>" + result.name + ": " +  "FAILED | WARNING</p>";
-                }
-                text_report += "<p>--->" + result.text + "</p>&nbsp;";
-                if(result.edge_cases != 0){
-                    var table = '<table style="margin-left:20px" class="table"><thead><tr><th>API</th><th>Result</th></tr></thead><tbody>';
+            $.each(["projects", "studies", "expressions"], function(index, obj_type) {
+                text_report += `<h3>${obj_type.charAt(0).toUpperCase() + obj_type.slice(1)}</h3>`;
+                $.each(Object.keys(report.test_results[obj_type]), function(index, obj_id) {
+                    text_report += `<h4>${singularDict[obj_type]} id: ${obj_id}</h4>`;
 
-                    $.each(result.edge_cases, function(index, edge_case){
-                        var row = '<tr><td>';
-                        row += edge_case.api + '</td>';
-                        if(edge_case.result == 1){
-                            row += '<td class="text-success">PASSED</td></tr>';
+                    $.each(report.test_results[obj_type][obj_id], function (index, result){
+                        console.log(result);
+                        if(result.result == 1){
+                            text_report += "<p class='tab1 text-success'>" + result.name + ": " +  "PASSED</p>";
                         }
-                        else if(edge_case.result == 0 && edge_case.result.warning) {
-                            row += '<td>SKIPPED - WARNING</td></tr>';
+                        else if (result.result == 0 && result.warning == true){
+                            text_report += "<p class='tab1 text-warning'>" + result.name + ": " +  "SKIPPED | WARNING</p>";
                         }
-                        else if (edge_case.result == 0 && ! edge_case.result.warning) {
-                            row += '<td>SKIPPED</td></tr>';
+                        else if (result.result == 0 && result.warning == false){
+                            text_report += "<p class='tab1 text-info'>" + result.name + ": " +  "SKIPPED</p>";
                         }
-                        else{
-                            row += '<td class="text-warning">FAILED</td></tr>';
+                        else {
+                            text_report += "<p class='tab1 text-danger'>" + result.name + ": " +  "FAILED | WARNING</p>";
                         }
-                        table += row;
-                    })
-                    table += '</tbody></table>';
-                    text_report += table;
-                }
-            });
+                        text_report += "<p class='tab1'>--->" + result.text + "</p>&nbsp;";
+                        if(result.edge_cases != 0){
+                            var table = '<table style="margin-left:20px" class="table"><thead><tr><th>API</th><th>Result</th></tr></thead><tbody>';
+        
+                            $.each(result.edge_cases, function(index, edge_case){
+                                var row = '<tr><td>';
+                                row += edge_case.api + '</td>';
+                                if(edge_case.result == 1){
+                                    row += '<td class="text-success">PASSED</td></tr>';
+                                }
+                                else if(edge_case.result == 0 && edge_case.result.warning) {
+                                    row += '<td>SKIPPED - WARNING</td></tr>';
+                                }
+                                else if (edge_case.result == 0 && ! edge_case.result.warning) {
+                                    row += '<td>SKIPPED</td></tr>';
+                                }
+                                else{
+                                    row += '<td class="text-warning">FAILED</td></tr>';
+                                }
+                                table += row;
+                            })
+                            table += '</tbody></table>';
+                            text_report += table;
+                        }
+                    });
+                })
+            })
+
+            
 
             text_report += "-----------------------------------------------------------------";
         });
