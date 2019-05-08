@@ -15,29 +15,37 @@ Attributes:
 """
 
 TEST_GRAPH = {
-    "base": {
-        "project_get": {
-            "project_get_default": {}
-        },
+    "projects": {
+        "base": {
+            "project_get": {
+                "project_get_default": {}
+            },
 
-        "project_search": {
-            "project_search_url_params": {},
-            "project_search_filters": {},
-            "project_search_url_params_cases": {}
-        },
+            "project_search": {
+                "project_search_url_params_all": {},
+                "project_search_url_params_cases": {},
+                "project_search_filters": {}
+            }
+        }
+    },
+    "studies": {
+        "base": {
+            "study_get": {
+                "study_get_default": {}
+            },
 
-        "study_get": {
-            "study_get_default": {}
-        },
-
-        "study_search": {
-            "study_search_url_params": {},
-            "study_search_url_params_cases": {},
-            "study_search_filters": {}
-        },
-
-        "expression_get": {
-            "expression_get_default": {}
+            "study_search": {
+                "study_search_url_params_all": {},
+                "study_search_url_params_cases": {},
+                "study_search_filters": {}
+            }
+        }
+    },
+    "expressions": {
+        "base": {
+            "expression_get": {
+                "expression_get_default": {}
+            }
         }
     }
 }
