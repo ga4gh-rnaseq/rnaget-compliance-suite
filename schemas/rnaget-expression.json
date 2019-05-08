@@ -3,6 +3,7 @@
     "$id": "http://json-schema.org/draft-04/schema#",
     "title": "RNAGetExpression",
     "type": "object",
+    "$ref": "rnaget-expression.json#/definitions/RNAGetExpression",
   
     "definitions": {
       "RNAGetExpression": {

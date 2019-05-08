@@ -3,6 +3,7 @@
     "$id": "http://json-schema.org/draft-04/schema#",
     "title": "RNAGetSearchFilter",
     "type": "object",
+    "$ref": "rnaget-search-filter.json#/definitions/RNAGetSearchFilter",
   
     "definitions": {
       "RNAGetSearchFilter": {

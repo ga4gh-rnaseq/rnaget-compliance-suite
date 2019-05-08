@@ -18,7 +18,8 @@ TEST_GRAPH = {
     "projects": {
         "base": {
             "project_get": {
-                "project_get_default": {}
+                "project_get_default": {},
+                "project_get_not_found": {}
             },
 
             "project_search": {
@@ -31,7 +32,8 @@ TEST_GRAPH = {
     "studies": {
         "base": {
             "study_get": {
-                "study_get_default": {}
+                "study_get_default": {},
+                "study_get_not_found": {}
             },
 
             "study_search": {
@@ -44,7 +46,8 @@ TEST_GRAPH = {
     "expressions": {
         "base": {
             "expression_get": {
-                "expression_get_default": {}
+                "expression_get_default": {},
+                "expression_get_not_found": {}
             }
         }
     }

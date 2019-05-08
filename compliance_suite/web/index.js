@@ -1,45 +1,86 @@
-function load() {
-    var singularDict = {
-        "projects": "project",
-        "studies": "study",
-        "expressions": "expression"
-    };
+var statusDict = {
+    "0": {
+        "status": "SKIPPED",
+        "cssClass": "text-info"
+    },
+    "1": {
+        "status": "PASSED",
+        "cssClass": "text-success"
+    },
+    "-1": {
+        "status": "FAILED",
+        "cssClass": "text-danger"
+    }
+}
 
+var apiObjects = ["projects", "studies", "expressions"];
+
+var singularDict = {
+    "projects": "project",
+    "studies": "study",
+    "expressions": "expression"
+};
+
+function capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function getSpacer(count) {
+    return "-".repeat(count);
+}
+
+function getReportLine(element, field_name, field_value) {
+    return `<${element}>${field_name}: ${field_value}</${element}>`;
+}
+
+function getMatrixCell(cssClass, content) {
+    return `<td><span class='${cssClass}'>${content}</span></td>`;
+}
+
+function load() {
+    
     $.getJSON("temp_result.json", function (data) {
-        var text_report = "<h3>Compliance Report Text</h3>";
+        var text_html = "<h3>Compliance Report Text</h3>";
+        var matrix_thead_html = "<tr>"
+            + "<th>Server name</th>"
+            + "<th>Object and Id</th>"
+            + "<th>Test case</th>"
+            + "<th>Status</th>"
+            + "</tr>";
+        var matrix_tbody_html = "";
+
         var num_reports = data.length;
         var num_tests = data[0].test_results.length;
-        console.log(data);
+        
         $.each(data, function (index, report) {
-            text_report += "<h4>Server name: " + report.server_name + "</h4>";
-            text_report += "<h4>Base URL: " + report.base_url + "</h4>";
-            text_report += '<p>Total tests: ' + report.total_tests + '</p>';
-            text_report += '<p>Total tests passed: ' + report.total_tests_passed + "</p>";
-            text_report += "<p>Total tests failed: " + report.total_tests_failed + "</p>";
-            text_report += "<p>Total tests skipped: " + report.total_tests_skipped + "</p>";
-            text_report += "<p>Total warnings generated: " + report.total_warnings + "</p>";
-            text_report += "<h3>" + report.server_name + ": Test result reports</h3>";
+            text_html += getReportLine("h4", "Server name", report.server_name)
+                + getReportLine("h4", "Base URL", report.base_url)
+                + getReportLine("p", "Total tests", report.total_tests)
+                + getReportLine("p", "Total tests passed", 
+                                report.total_tests_passed)
+                + getReportLine("p", "Total tests failed",
+                                report.total_tests_failed)
+                + getReportLine("p", "Total tests skipped",
+                                report.total_tests_skipped)
+                + getReportLine("p", "Total warnings generated",
+                                report.total_warnings)
+                + getReportLine("h3", report.server_name,
+                                "Test result reports");
 
-            $.each(["projects", "studies", "expressions"], function(index, obj_type) {
-                text_report += `<h3>${obj_type.charAt(0).toUpperCase() + obj_type.slice(1)}</h3>`;
+            $.each(apiObjects, function(index, obj_type) {
+                text_html += `<h3>${capitalize(obj_type)}</h3>`;
                 $.each(Object.keys(report.test_results[obj_type]), function(index, obj_id) {
-                    text_report += `<h4>${singularDict[obj_type]} id: ${obj_id}</h4>`;
+                    text_html += `<h4>${singularDict[obj_type]} id: ${obj_id}</h4>`;
 
                     $.each(report.test_results[obj_type][obj_id], function (index, result){
-                        console.log(result);
-                        if(result.result == 1){
-                            text_report += "<p class='tab1 text-success'>" + result.name + ": " +  "PASSED</p>";
-                        }
-                        else if (result.result == 0 && result.warning == true){
-                            text_report += "<p class='tab1 text-warning'>" + result.name + ": " +  "SKIPPED | WARNING</p>";
-                        }
-                        else if (result.result == 0 && result.warning == false){
-                            text_report += "<p class='tab1 text-info'>" + result.name + ": " +  "SKIPPED</p>";
-                        }
-                        else {
-                            text_report += "<p class='tab1 text-danger'>" + result.name + ": " +  "FAILED | WARNING</p>";
-                        }
-                        text_report += "<p class='tab1'>--->" + result.text + "</p>&nbsp;";
+                        var cssClass = statusDict[result.result]["cssClass"];
+                        var status = statusDict[result.result]["status"];
+
+                        // TEXT REPORT
+                        text_html += `<p class='tab1 ${cssClass}'>`
+                            + `${result.name}: ${status}</p>`;
+                        text_html += "<p class='tab1'>--->" + result.text + "</p>&nbsp;";
+
                         if(result.edge_cases != 0){
                             var table = '<table style="margin-left:20px" class="table"><thead><tr><th>API</th><th>Result</th></tr></thead><tbody>';
         
@@ -61,49 +102,31 @@ function load() {
                                 table += row;
                             })
                             table += '</tbody></table>';
-                            text_report += table;
+                            text_html += table;
                         }
+
+                        // MATRIX REPORT
+                        var obj_name = singularDict[obj_type];
+                        var row = "<tr>"
+                            + getMatrixCell(cssClass, report.server_name)
+                            + getMatrixCell(
+                                cssClass,
+                                capitalize(obj_name) + ": " + obj_id
+                            )
+                            + getMatrixCell(cssClass, result.name)
+                            + getMatrixCell(cssClass, status)
+                            + "</tr>";
+                        matrix_tbody_html += row;
                     });
                 })
             })
 
-            
-
-            text_report += "-----------------------------------------------------------------";
+            text_html += getSpacer(65);
         });
 
-        $("#text").html(text_report);
-
-        var t_head = "<tr><th>Test Cases</th>";
-        for(i=0; i<num_reports; i++){
-            t_head += "<th>" + data[i].server + "</th>";
-        }
-        t_head += "</tr>";
-        $("#compliance_matrix").find("thead").html(t_head);
-
-        var t_body = "";
-        for(i=0; i<num_tests; i++) {
-            t_body += "<tr><td>" + data[0]["test_results"][i]["name"] + "</td>";
-            for(j=0; j<num_reports; j++){
-                var test = data[j]["test_results"][i];
-
-                if (test.result == 1){
-                    t_body += "<td class='text-success'>PASSED</td>";
-                }
-                else if(test.result == 0 && test.warning){
-                    t_body += "<td class='text-warning'>SKIPPED | WARNING</td>";
-                }
-                else if(test.result == 0 && ! test.warning){
-                    t_body += "<td class='text-info'>SKIPPED</td>";
-                }
-                else{
-                    t_body += "<td class='text-danger'>FAILED | WARNING</td>";
-                }
-            }
-            t_body += "</tr>";
-            console.log(t_body);
-        }
-        $("#compliance_matrix").find("tbody").html(t_body);
+        $("#text").html(text_html);
+        $("#compliance_matrix").find("thead").html(matrix_thead_html);
+        $("#compliance_matrix").find("tbody").html(matrix_tbody_html);
 
         var json_container = $('#json');
         json_container
@@ -115,8 +138,4 @@ function load() {
         var data_str = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
         $('<a href="data:' + data_str + '" download="data.json"><button style="margin:10px; width:100%" class="btn"><i class="fa fa-download"></i> Download</button></a>').prependTo('#json');
     });
-
-
-
-
 }

@@ -21,6 +21,8 @@ Attributes:
     PROJECT_API (str): api route for project-related requests
     STUDY_API (str): api route for study-related requests
     EXPRESSION_API (str): api route for expression-related requests
+    NONEXISTENT_ID (str): id for requesting api objects that do not exist
+        on the host server
 """
 
 import requests
@@ -38,6 +40,7 @@ ACCEPT_HEADER = {
 }
 
 SCHEMA_RELATIVE_DIR = "schemas"
+SCHEMA_FILE_EMPTY = "rnaget-empty.json"
 SCHEMA_FILE_PROJECT = "rnaget-project.json"
 SCHEMA_FILE_STUDY = "rnaget-study.json"
 SCHEMA_FILE_EXPRESSION = "rnaget-expression.json"
@@ -50,3 +53,5 @@ SCHEMA_FILE_SEARCH_FILTER_ARRAY = "rnaget-search-filter-array.json"
 PROJECT_API = 'projects/'
 STUDY_API = 'studies/'
 EXPRESSION_API = "expressions/"
+
+NONEXISTENT_ID = "999999999"

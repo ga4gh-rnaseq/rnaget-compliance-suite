@@ -20,6 +20,8 @@ Attributes:
         apply_params (required): "all" if all param filters applied at once,
             "cases" if param filters tested one at a time, "no" if params not
             applied at all
+        expected_status (optional): int indicating expected response code. If
+            nothing specified, test expects OK status code (200)
     
     TESTS_BY_OBJECT_TYPE (dict): lists the name of tests grouped by the object
         type they pertain to (project, study, expression)
@@ -56,6 +58,19 @@ TESTS_DICT = {
         "fail_text": "Project endpoint not implemented with default encoding",
         "skip_text": "Project endpoint default encoding test skipped",
         "apply_params": "no"
+    }, "project_get_not_found": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: PROJECT GET NOT FOUND
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "project_get_not_found",
+        "uri": c.PROJECT_API + c.NONEXISTENT_ID,
+        "schema": c.SCHEMA_FILE_EMPTY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Project not found endpoint correctly implemented",
+        "fail_text": "Project not found endpoint not correctly implemented",
+        "skip_text": "Project not found test skipped",
+        "apply_params": "no",
+        "expected_status": 404
     }, "project_search": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: PROJECT SEARCH
@@ -135,6 +150,19 @@ TESTS_DICT = {
         "fail_text": "Study endpoint not implemented with default encoding",
         "skip_text": "Study endpoint default encoding test skipped",
         "apply_params": "no"
+    }, "study_get_not_found": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: STUDY GET NOT FOUND
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "study_get_not_found",
+        "uri": c.STUDY_API + c.NONEXISTENT_ID,
+        "schema": c.SCHEMA_FILE_EMPTY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Study not found endpoint correctly implemented",
+        "fail_text": "Study not found endpoint not correctly implemented",
+        "skip_text": "Study not found test skipped",
+        "apply_params": "no",
+        "expected_status": 404
     }, "study_search": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY SEARCH
@@ -215,6 +243,19 @@ TESTS_DICT = {
                      + "encoding",
         "skip_text": "Expression endpoint default encoding test skipped",
         "apply_params": "no"
+    }, "expression_get_not_found": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION GET NOT FOUND
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "expression_get_not_found",
+        "uri": c.EXPRESSION_API + c.NONEXISTENT_ID,
+        "schema": c.SCHEMA_FILE_EMPTY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Expression not found endpoint correctly implemented",
+        "fail_text": "Expression not found endpoint not correctly implemented",
+        "skip_text": "Expression not found test skipped",
+        "apply_params": "no",
+        "expected_status": 404
     }
 }
 """dict: dictionary of dicts, each representing a test scenario"""
@@ -223,6 +264,7 @@ TESTS_BY_OBJECT_TYPE = {
     "projects": [
         "project_get",
         "project_get_default",
+        "project_get_not_found",
         "project_search",
         "project_search_url_params_all",
         "project_search_url_params_cases",
@@ -231,6 +273,7 @@ TESTS_BY_OBJECT_TYPE = {
     "studies": [
         "study_get",
         "study_get_default",
+        "study_get_not_found",
         "study_search",
         "study_search_url_params_all",
         "study_search_url_params_cases",
@@ -238,7 +281,8 @@ TESTS_BY_OBJECT_TYPE = {
     ],
     "expressions": [
         "expression_get",
-        "expression_get_default"
+        "expression_get_default",
+        "expression_get_not_found"
     ]
 }
 """dict: names of tests by project, study, expression object types"""

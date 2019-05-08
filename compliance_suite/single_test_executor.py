@@ -80,11 +80,17 @@ class SingleTestExecutor(object):
     def set_test_status(self, uri, params, response):
         # if response is 200, validate against external schema
         # if schema matches instance, test succeeds, otherwise, test fails
+        
+        k = "expected_status"
+        exp_status = \
+            200 if k not in self.test.kwargs.keys() else self.test.kwargs[k]
 
         if self.test.result != -1:
-            if response.status_code == 200:
+            if response.status_code == exp_status:
                 sv = SchemaValidator(self.schema_file)
                 validation_result = sv.validate_instance(response.json())
+                print(self.schema_file)
+                print(validation_result)
                 self.test.result = validation_result["status"]
 
                 helper_text = "<br>Request: " + uri \

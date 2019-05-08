@@ -3,8 +3,15 @@
     "$id": "http://json-schema.org/draft-04/schema#",
     "title": "RNAGetExpressionArray",
     "type": "array",
-    "items": {
-        "type": "object",
-        "$ref": "rnaget-expression.json#/definitions/RNAGetExpression"
+    "$ref": "rnaget-expression-array.json#/definitions/RNAGetExpressionArray",
+
+    "definitions": {
+        "RNAGetExpressionArray": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "$ref": "rnaget-expression.json#/definitions/RNAGetExpression"
+            }
+        }
     }
 }

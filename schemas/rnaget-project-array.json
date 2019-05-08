@@ -3,8 +3,15 @@
     "$id": "http://json-schema.org/draft-04/schema#",
     "title": "RNAGetProjectArray",
     "type": "array",
-    "items": {
-        "type": "object",
-        "$ref": "rnaget-project.json#/definitions/RNAGetProject"
+    "$ref": "rnaget-project-array.json#/definitions/RNAGetProjectArray",
+
+    "definitions": {
+        "RNAGetProjectArray": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "$ref": "rnaget-project.json#/definitions/RNAGetProject"
+            }
+        }
     }
 }

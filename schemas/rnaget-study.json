@@ -3,6 +3,7 @@
   "$id": "http://json-schema.org/draft-04/schema#",
   "title": "RNAGetStudy",
   "type": "object",
+  "$ref": "rnaget-study.json#/definitions/RNAGetStudy",
 
   "definitions": {
     "RNAGetStudy": {
