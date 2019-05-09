@@ -8,7 +8,7 @@ JSON object instance against a known schema that it should match.
 from jsonschema import validate
 from jsonschema import RefResolver
 from jsonschema.exceptions import ValidationError
-from compliance_suite.constants import *
+from compliance_suite.config.constants import *
 import os
 import json
 import requests

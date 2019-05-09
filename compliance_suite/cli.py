@@ -20,6 +20,7 @@ from compliance_suite.user_config_parser import UserConfigParser
 from compliance_suite.exceptions.argument_exception import ArgumentException
 from compliance_suite.exceptions.user_config_exception import \
     UserConfigException
+from compliance_suite.config.tests import TESTS_BY_OBJECT_TYPE
 
 def scan_for_errors(json):
     """generate high-level summaries from available results data structure
@@ -36,22 +37,28 @@ def scan_for_errors(json):
     """
 
     high_level_summary = {}
-    available_tests = ('test_project_implement')
-    for high_level_name in (available_tests):
-        # We are successful unless proven otherwise
-        result = 1
-        for test in json[0]["test_results"]:
-            if high_level_name in test["parents"]:
-                if test['warning']:
-                    result = test["result"]
-                    break
-        high_level_summary[high_level_name] = {
-            'result': result,
-            'name': high_level_name
-        }
+    available_tests = ('project_get')
 
-    json[0]["high_level_summary"] = high_level_summary
+    for server in json:
+        for obj_type in ["projects", "studies", "expressions"]:
+            for obj_id in server["test_results"][obj_type].keys():
+                server_tests = server["test_results"][obj_type][obj_id]
+                
+                for high_level_name in (available_tests):
+                    # We are successful unless proven otherwise
+                    result = 1
+                    for test in server_tests:
+                        if high_level_name in test["parents"]:
+                            if test['warning']:
+                                result = test["result"]
+                                break
+                    high_level_summary[high_level_name] = {
+                        'result': result,
+                        'name': high_level_name
+                    }
 
+                server["high_level_summary"] = high_level_summary
+    
 @click.group()
 def main():
     """Main method. Deprecated as program entry is through 'report' method"""
@@ -115,9 +122,7 @@ def report(user_config, file_path_name, json_path, serve, no_web):
             tr.run_tests()
             final_json.append(tr.generate_final_json())
 
-        # scan_for_errors(final_json)
-
-        print(final_json)
+        scan_for_errors(final_json)
 
         # write final report to output file if specified
         if json_path is not None:

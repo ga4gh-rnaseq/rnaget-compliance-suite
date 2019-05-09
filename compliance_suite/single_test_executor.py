@@ -50,7 +50,7 @@ class SingleTestExecutor(object):
         self.params = params
         self.test = test
         self.runner = runner
-        self.headers = ACCEPT_HEADER
+        self.headers = {k:ACCEPT_HEADER[k] for k in ACCEPT_HEADER.keys()}
     
     def execute_test(self):
         """Test API URI, validate response and set test to pass/fail"""
@@ -89,8 +89,6 @@ class SingleTestExecutor(object):
             if response.status_code == exp_status:
                 sv = SchemaValidator(self.schema_file)
                 validation_result = sv.validate_instance(response.json())
-                print(self.schema_file)
-                print(validation_result)
                 self.test.result = validation_result["status"]
 
                 helper_text = "<br>Request: " + uri \

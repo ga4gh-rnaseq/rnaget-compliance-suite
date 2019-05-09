@@ -1,6 +1,7 @@
 servers:
   - server_name: Server A
     base_url: https://felcat.caltech.edu/rnaget/
+    token: gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa
     
     projects:
       - id: 43378a5d48364f9d8cf3c3d5104df560

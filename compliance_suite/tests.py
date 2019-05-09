@@ -9,10 +9,6 @@ JSON object matches the required schema.
 
 import sys
 
-from compliance_suite.expression_algorithms import *
-from compliance_suite.project_algorithms import *
-from compliance_suite.study_algorithms import *
-
 from compliance_suite.single_test_executor import SingleTestExecutor as STE
 from compliance_suite.config.tests import TESTS_DICT as tests_config_dict
 from compliance_suite.config.tests import TESTS_BY_OBJECT_TYPE as tests_by_obj
