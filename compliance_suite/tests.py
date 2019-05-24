@@ -256,7 +256,8 @@ class Test():
         obj_type_placeholders = {
             "projects": "V_PROJECT_ID",
             "studies": "V_STUDY_ID",
-            "expressions": "V_EXPRESSION_ID"
+            "expressions": "V_EXPRESSION_ID",
+            "continuous": "V_CONTINUOUS_ID"
         }
 
         mature_uri += immature_uri.replace(
@@ -286,7 +287,8 @@ def initiate_tests(server_config):
     test_obj_dict = {
         "projects": {},
         "studies": {},
-        "expressions": {}
+        "expressions": {},
+        "continuous": {}
     }
     
     test_bases = []
@@ -321,7 +323,7 @@ def initiate_tests(server_config):
     # For each object type and instance, create a test base and the full set of
     # tests. Assign pass, fail, skip text, then start the recursive method to
     # construct the test graph
-    for obj_type in ["projects", "studies", "expressions"]:
+    for obj_type in ["projects", "studies", "expressions", "continuous"]:
         for obj_instance in server_config[obj_type]:
 
             test_base = Test(**{"name": "base",
