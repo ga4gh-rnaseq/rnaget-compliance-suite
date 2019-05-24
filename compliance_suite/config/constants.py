@@ -44,14 +44,17 @@ SCHEMA_FILE_EMPTY = "rnaget-empty.json"
 SCHEMA_FILE_PROJECT = "rnaget-project.json"
 SCHEMA_FILE_STUDY = "rnaget-study.json"
 SCHEMA_FILE_EXPRESSION = "rnaget-expression.json"
+SCHEMA_FILE_CONTINUOUS = "rnaget-continuous.json"
 SCHEMA_FILE_SEARCH_FILTER = "rnaget-search-filter.json"
 SCHEMA_FILE_PROJECT_ARRAY = "rnaget-project-array.json"
 SCHEMA_FILE_STUDY_ARRAY = "rnaget-study-array.json"
 SCHEMA_FILE_EXPRESSION_ARRAY = "rnaget-expression-array.json"
+SCHEMA_FILE_CONTINUOUS_ARRAY = "rnaget-continuous-array.json"
 SCHEMA_FILE_SEARCH_FILTER_ARRAY = "rnaget-search-filter-array.json"
 
 PROJECT_API = 'projects/'
 STUDY_API = 'studies/'
 EXPRESSION_API = "expressions/"
+CONTINUOUS_API = "continuous/"
 
 NONEXISTENT_ID = "999999999"
