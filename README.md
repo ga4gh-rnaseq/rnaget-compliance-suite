@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 # Rnaget Compliance Suite
 
 Repository for the [rnaget API](https://github.com/ga4gh-rnaseq/schema) 

@@ -75,11 +75,11 @@ class UserConfigParser(object):
             # one root element
             if len(self.d.keys()) != 1:
                 raise UserConfigException('"servers" should be the only root '
-                    + ' key')
+                    + 'key')
             
             if list(self.d.keys())[0] != "servers":
                 raise UserConfigException('"servers" should be the only root '
-                    + ' key')
+                    + 'key')
 
             server_count = 1
 
@@ -91,7 +91,7 @@ class UserConfigParser(object):
                 if len(server_keys_diff) > 0:
                     raise UserConfigException(
                         "missing attribute(s) from server " + str(server_count)
-                        + ": " + ", ".join(list(server_keys_diff)))
+                        + ": " + ", ".join(sorted(list(server_keys_diff))))
 
                 obj_type_d = {"projects": "project", "studies": "study",
                     "expressions": "expression"}
@@ -111,7 +111,7 @@ class UserConfigParser(object):
                                 + obj_type_d[object_string] + " " 
                                 + str(obj_count) + " in "
                                 + server["server_name"] + ": "
-                                + ", ".join(list(object_keys_diff))
+                                + ", ".join(sorted(list(object_keys_diff)))
                             )
 
                     obj_count += 1
