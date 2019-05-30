@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+"""Module unittests.unittests_constants.py
+
+This module contains constant data structures to be accessed by multiple
+unit testing modules.
+
+Attributes:
+    SERVER_CONFIG (dict): complete, correct user config dictionary
+    SERVER_CONFIG_NOT_IMPLEMENTED (dict): config without implemented endpoints 
+"""
+
 SERVER_CONFIG = {
     "server_name": "Server A",
     "base_url": "http://localhost:5000/",
@@ -46,6 +57,7 @@ SERVER_CONFIG = {
         }
     ]
 }
+"""complete, correct user config dictionary, as if parsed from yaml file"""
 
 SERVER_CONFIG_NOT_IMPLEMENTED = {
     "server_name": "Server A",
@@ -57,3 +69,4 @@ SERVER_CONFIG_NOT_IMPLEMENTED = {
         "expressions": False
     }
 }
+"""user config dictionary as if parsed from yaml file, without any endpoints"""
