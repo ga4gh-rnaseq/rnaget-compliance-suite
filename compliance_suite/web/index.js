@@ -68,7 +68,12 @@ function load() {
                                 "Test result reports");
 
             $.each(apiObjects, function(index, obj_type) {
-                text_html += `<h3>${capitalize(obj_type)}</h3>`;
+                obj_type_title = capitalize(obj_type);
+                if (!report.implemented[obj_type]) {
+                    obj_type_title += " not implemented for this server";
+                }
+
+                text_html += `<h3>${obj_type_title}</h3>`;
                 $.each(Object.keys(report.test_results[obj_type]), function(index, obj_id) {
                     text_html += `<h4>${singularDict[obj_type]} id: ${obj_id}</h4>`;
 

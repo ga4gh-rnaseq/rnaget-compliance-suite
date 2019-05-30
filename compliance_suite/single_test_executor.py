@@ -107,3 +107,8 @@ class SingleTestExecutor(object):
                     )
             else:
                 self.test.result = -1
+
+                helper_text = "<br>Expected Status: " + str(exp_status) \
+                              + "<br>Actual Status: " \
+                              + str(response.status_code)
+                self.test.set_fail_text(self.test.get_fail_text() + helper_text)

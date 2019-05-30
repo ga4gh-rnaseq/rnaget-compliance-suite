@@ -10,6 +10,9 @@ project_ids_files = {
     "38n54mgtogq4nq2s5nfqcoop4160vso7": "project_invalid_0.json"
 }
 
+study_ids_files = {}
+expression_ids_files = {}
+
 data_dir = "unittests/testdata/json_instances/"
 
 @app.route('/')
@@ -42,7 +45,6 @@ def search_project():
 @app.route("/projects/<project_id>")
 def get_project(project_id):
     
-
     response = None
     if project_id in project_ids_files.keys():
         json_file = data_dir + project_ids_files[project_id]
@@ -51,6 +53,46 @@ def get_project(project_id):
         else:
             response = Response(not_found_json, status=404)
     else:
-        response = Response(not_found_json, status=404)
+        if project_id == "NA": # endpoint not implemented simultation,
+                               # return 501 instead of 404
+            response = Response(not_found_json, status=501)
+        else:    
+            response = Response(not_found_json, status=404)
+    
+    return response
+
+@app.route("/studies/<study_id>")
+def get_study(study_id):
+    response = None
+    if study_id in study_ids_files.keys():
+        json_file = data_dir + study_ids_files[study_id]
+        if os.path.exists(json_file):
+            response = Response(open(json_file, "r").read(), status=200)
+        else:
+            response = Response(not_found_json, status=404)
+    else:
+        if study_id == "NA": # endpoint not implemented simultation,
+                               # return 501 instead of 404
+            response = Response(not_found_json, status=501)
+        else:    
+            response = Response(not_found_json, status=404)
+    
+    return response
+
+@app.route("/expressions/<expression_id>")
+def get_expression(expression_id):
+    response = None
+    if expression_id in expression_ids_files.keys():
+        json_file = data_dir + expression_ids_files[expression_id]
+        if os.path.exists(json_file):
+            response = Response(open(json_file, "r").read(), status=200)
+        else:
+            response = Response(not_found_json, status=404)
+    else:
+        if expression_id == "NA": # endpoint not implemented simultation,
+                               # return 501 instead of 404
+            response = Response(not_found_json, status=501)
+        else:    
+            response = Response(not_found_json, status=404)
     
     return response

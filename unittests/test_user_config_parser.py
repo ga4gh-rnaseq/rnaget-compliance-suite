@@ -43,10 +43,12 @@ def test_validate_config_file_failures():
             + "studies",
         "missing attribute(s) from project 1 in Server A: filters, id",
         "YAML config file could not be parsed. Please refer to the template "
-            + "config file."
+            + "config file.",
+        'value of implemented:expressions must be a boolean',
+        'wrongendpoint not a valid endpoint'
     ]
 
-    for i in range(0,5):
+    for i in range(0,7):
         config_file = yaml_dir + "fail_" + str(i) + ".yaml"
         message = messages[i]
 

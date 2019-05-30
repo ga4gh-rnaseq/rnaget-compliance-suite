@@ -28,6 +28,15 @@ uri_project_search_url_params_all = SERVER_CONFIG["base_url"] \
     + TESTS_DICT["project_search_url_params_all"]["uri"]
 params_project_search_url_params_all = SERVER_CONFIG["projects"][0]["filters"]
 
+uri_project_not_implemented = SERVER_CONFIG["base_url"] + \
+    "projects/NA"
+
+uri_study_not_implemented = SERVER_CONFIG["base_url"] + \
+    "studies/NA"
+
+uri_expression_not_implemented = SERVER_CONFIG["base_url"] + \
+    "expressions/NA"
+
 def get_ste(uri, test_name, params):
     test_config = TESTS_DICT[test_name]
     test_obj = Test(**test_config)
@@ -81,3 +90,15 @@ def test_execute_project_search_url_params_cases():
                   params_project_search_url_params_all)
     ste.execute_test()
     assert ste.test.result == -1
+
+def test_execute_not_implemented():
+    cases = [
+        [uri_project_not_implemented, "project_endpoint_not_implemented"],
+        [uri_study_not_implemented, "study_endpoint_not_implemented"],
+        [uri_expression_not_implemented, "expression_endpoint_not_implemented"]
+    ]
+
+    for case in cases:
+        ste = get_ste(case[0], case[1], {})
+        ste.execute_test()
+        assert ste.test.result == 1

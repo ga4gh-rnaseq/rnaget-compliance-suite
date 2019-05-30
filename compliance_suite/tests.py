@@ -12,7 +12,12 @@ import sys
 from compliance_suite.single_test_executor import SingleTestExecutor as STE
 from compliance_suite.config.tests import TESTS_DICT as tests_config_dict
 from compliance_suite.config.tests import TESTS_BY_OBJECT_TYPE as tests_by_obj
+from compliance_suite.config.tests import NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE \
+    as not_impl_tests_by_obj
 from compliance_suite.config.graph import TEST_GRAPH as graph
+from compliance_suite.config.graph import NOT_IMPLEMENTED_TEST_GRAPH as \
+    not_impl_graph
+from compliance_suite.config.constants import ENDPOINTS
 
 class Test():
     """Run a single test of the API for one route and one object instance
@@ -321,16 +326,33 @@ def initiate_tests(server_config):
     # For each object type and instance, create a test base and the full set of
     # tests. Assign pass, fail, skip text, then start the recursive method to
     # construct the test graph
-    for obj_type in ["projects", "studies", "expressions"]:
-        for obj_instance in server_config[obj_type]:
+    # if an object type is not implemented, then check the endpoint for the
+    # appropriate response code error.
+
+    for obj_type in ENDPOINTS:
+        obj_instances = None
+        test_list = None
+        test_tree = None
+
+        if server_config["implemented"][obj_type]:
+            obj_instances = server_config[obj_type]
+            test_list = tests_by_obj[obj_type]
+            test_tree = graph
+        else:
+            obj_instances = [{"id": "NA", "filters": {"version": "1.0"}}]
+            test_list = not_impl_tests_by_obj[obj_type]
+            test_tree = not_impl_graph
+
+        for obj_instance in obj_instances:
 
             test_base = Test(**{"name": "base",
                                 "obj_type": "base", 
                                 "obj_instance": "base"})
             test_bases.append([obj_type, obj_instance["id"], test_base])
-            test_obj_dict[obj_type][obj_instance["id"]] = {"base": test_base}
+            test_obj_dict[obj_type][obj_instance["id"]] = \
+                {"base": test_base}
 
-            for test_key in tests_by_obj[obj_type]:
+            for test_key in test_list:
                 kwargs = tests_config_dict[test_key]
                 kwargs["obj_type"] = obj_type
                 kwargs["obj_instance"] = obj_instance
@@ -338,10 +360,10 @@ def initiate_tests(server_config):
                 test_obj.set_pass_text(kwargs["pass_text"])
                 test_obj.set_fail_text(kwargs["fail_text"])
                 test_obj.set_skip_text(kwargs["skip_text"])
-                test_obj_dict[obj_type][obj_instance["id"]][kwargs["name"]] \
+                test_obj_dict[obj_type][obj_instance["id"]][kwargs["name"]]\
                     = test_obj
         
-            add_test_children(graph[obj_type], "base", obj_type,
-                              obj_instance["id"])
+            add_test_children(test_tree[obj_type], "base", obj_type,
+                            obj_instance["id"])
 
     return test_bases

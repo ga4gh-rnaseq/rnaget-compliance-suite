@@ -25,6 +25,11 @@ Attributes:
     
     TESTS_BY_OBJECT_TYPE (dict): lists the name of tests grouped by the object
         type they pertain to (project, study, expression)
+    
+    NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE (dict): lists the name of tests
+        associated with non-implemented endpoints, grouped by the object type
+        they pertain to. Non-implemented endpoints must still be correctly
+        configured, ie must yield 501 response.
 
 Todo:
     * test scenarios for studies, expressions
@@ -126,6 +131,21 @@ TESTS_DICT = {
                      + "endpoint",
         "skip_text": "Project filters search test skipped",
         "apply_params": "no"
+    }, "project_endpoint_not_implemented": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: PROJECT ENDPOINT NOT IMPLEMENTED
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "project_endpoint_not_implemented",
+        "uri": c.PROJECT_API + c.NONEXISTENT_ID,
+        "schema": c.SCHEMA_FILE_EMPTY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Project endpoint correctly not implemented, yields 501 " +
+            "status code",
+        "fail_text": "Project endpoint incorrectly not implemented, does not " +
+            "yield 501 status code",
+        "skip_text": "Project endpoint not implemented test skipped",
+        "apply_params": "no",
+        "expected_status": 501
     }, "study_get": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY GET
@@ -218,6 +238,21 @@ TESTS_DICT = {
                      + "endpoint",
         "skip_text": "Study filters search test skipped",
         "apply_params": "no"
+    }, "study_endpoint_not_implemented": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: STUDY ENDPOINT NOT IMPLEMENTED
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "study_endpoint_not_implemented",
+        "uri": c.STUDY_API + c.NONEXISTENT_ID,
+        "schema": c.SCHEMA_FILE_EMPTY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Study endpoint correctly not implemented, yields 501 " +
+            "status code",
+        "fail_text": "Study endpoint incorrectly not implemented, does not " +
+            "yield 501 status code",
+        "skip_text": "Study endpoint not implemented test skipped",
+        "apply_params": "no",
+        "expected_status": 501
     }, "expression_get": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION GET
@@ -256,6 +291,21 @@ TESTS_DICT = {
         "skip_text": "Expression not found test skipped",
         "apply_params": "no",
         "expected_status": 404
+    }, "expression_endpoint_not_implemented": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION ENDPOINT NOT IMPLEMENTED
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "expression_endpoint_not_implemented",
+        "uri": c.EXPRESSION_API + c.NONEXISTENT_ID,
+        "schema": c.SCHEMA_FILE_EMPTY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Expression endpoint correctly not implemented, " +
+            "yields 501 status code",
+        "fail_text": "Expression endpoint incorrectly not implemented, does " +
+            "not yield 501 status code",
+        "skip_text": "Expression endpoint not implemented test skipped",
+        "apply_params": "no",
+        "expected_status": 501
     }
 }
 """dict: dictionary of dicts, each representing a test scenario"""
@@ -286,3 +336,16 @@ TESTS_BY_OBJECT_TYPE = {
     ]
 }
 """dict: names of tests by project, study, expression object types"""
+
+NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE = {
+    "projects": [
+        "project_endpoint_not_implemented"
+    ],
+    "studies": [
+        "study_endpoint_not_implemented"
+    ],
+    "expressions": [
+        "expression_endpoint_not_implemented"
+    ]
+}
+"""dict: names of tests by endpoint obj types, when endpoint not implemented"""

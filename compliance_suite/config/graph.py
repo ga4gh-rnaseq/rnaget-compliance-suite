@@ -11,7 +11,13 @@ Attributes:
     TEST_GRAPH (dict): hierarchical graph of parent-child test relationships
         key: string of parent test name
         value: dictionary of child tests
-
+    
+    NOT_IMPLEMENTED_TEST_GRAPH (dict): graph of parent-child test relationships
+        when the endpoint is not implemented by the server. Not implemented
+        endpoints must still be tested to ensure that they yield the correct
+        status code
+        key: string of parent test name
+        value: dictionary of child tests
 """
 
 TEST_GRAPH = {
@@ -53,3 +59,22 @@ TEST_GRAPH = {
     }
 }
 """dict: hierarchical graph of parent-child test relationships"""
+
+NOT_IMPLEMENTED_TEST_GRAPH = {
+    "projects": {
+        "base": {
+            "project_endpoint_not_implemented": {}
+        }
+    },
+    "studies": {
+        "base": {
+            "study_endpoint_not_implemented": {}
+        }
+    },
+    "expressions": {
+        "base": {
+            "expression_endpoint_not_implemented": {}
+        }
+    },
+}
+"""dict: parent-child test relationships when endpoint not implemented"""

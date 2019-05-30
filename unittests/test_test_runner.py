@@ -18,6 +18,15 @@ def test_constructor():
     assert tr.results == {"projects": {}, "studies": {}, "expressions": {}}
     assert tr.headers == {}
 
+def test_not_implemented():
+    server_config = copy_dict(SERVER_CONFIG_NOT_IMPLEMENTED)
+    tr = TestRunner(server_config)
+    tr.run_tests()
+    a = "_endpoint_not_implemented"
+    assert tr.base_tests[0][2].children[0].kwargs["name"] == "project" + a
+    assert tr.base_tests[1][2].children[0].kwargs["name"] == "study" + a
+    assert tr.base_tests[2][2].children[0].kwargs["name"] == "expression" + a
+
 def test_flask():
     response = requests.get("http://localhost:5000/")
     val = response.text

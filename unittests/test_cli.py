@@ -1,7 +1,9 @@
 import os
 import click
+import signal
 from compliance_suite.cli import main, report
 from click.testing import CliRunner
+from multiprocessing import Process
 
 user_config_dir = "unittests/testdata/user_config/"
 user_config_success = user_config_dir + "config_0.yaml"

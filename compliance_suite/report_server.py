@@ -54,13 +54,19 @@ class ReportServer(object):
         self.httpd = socketserver.TCPServer(("", self.port), Handler)
         print("serving at http://localhost:" + str(self.port), file=sys.stderr)
         webbrowser.open("http://localhost:" + str(self.port))
-        print("server will shut down after " + str(uptime) + " seconds")
+        print("server will shut down after " + str(uptime) + " seconds, "
+              + "press CTRL+C to shut down manually")
         self.httpd.serve_forever()
 
     def serve_thread(self, uptime=3600):
-        self.thread = threading.Thread(target=self.start_mock_server,
-                                       args=(uptime,))
-        self.thread.start()
-        time.sleep(uptime)
-        self.httpd.shutdown()
-        os.chdir(self.cwd)
+
+        try:
+            self.thread = threading.Thread(target=self.start_mock_server,
+                                        args=(uptime,))
+            self.thread.start()
+            time.sleep(uptime)
+        except KeyboardInterrupt as e:
+            print("stopping server")
+        finally:
+            self.httpd.shutdown()
+            os.chdir(self.cwd)

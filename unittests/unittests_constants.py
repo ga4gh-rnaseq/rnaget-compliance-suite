@@ -2,6 +2,11 @@ SERVER_CONFIG = {
     "server_name": "Server A",
     "base_url": "http://localhost:5000/",
     "token": "gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa",
+    "implemented": {
+        "projects": True,
+        "studies": True,
+        "expressions": True
+    },
     "projects": [
         {
             "id": "43378a5d48364f9d8cf3c3d5104df560",
@@ -40,4 +45,15 @@ SERVER_CONFIG = {
             }
         }
     ]
+}
+
+SERVER_CONFIG_NOT_IMPLEMENTED = {
+    "server_name": "Server A",
+    "base_url": "http://localhost:5000/",
+    "token": "gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa",
+    "implemented": {
+        "projects": False,
+        "studies": False,
+        "expressions": False
+    }
 }

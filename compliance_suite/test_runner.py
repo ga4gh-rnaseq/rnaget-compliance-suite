@@ -170,6 +170,7 @@ class TestRunner():
         report_object = {
             'server_name': self.server_config["server_name"],
             'base_url': self.server_config["base_url"],
+            'implemented': self.server_config["implemented"],
             'date_time': str(now),
             'test_results': self.results,
             'total_tests': self.total_tests,

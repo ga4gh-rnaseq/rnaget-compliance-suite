@@ -63,4 +63,3 @@ def test_expression_invalid():
         "1 is not of type 'string'"
     ]
     schema_fail_template(m, "expression_invalid", c.SCHEMA_FILE_EXPRESSION)
-
