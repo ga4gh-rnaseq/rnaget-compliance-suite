@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 # Rnaget Compliance Suite
 
 Repository for the [rnaget API](https://github.com/ga4gh-rnaseq/schema) 
@@ -41,6 +43,10 @@ servers:
   - server_name: Server A
     base_url: https://felcat.caltech.edu/rnaget/
     token: gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa
+    implemented:
+        projects: true
+        studies: true
+        expressions: true
     projects:
       - id: 43378a5d48364f9d8cf3c3d5104df560
         filters:
@@ -57,11 +63,21 @@ servers:
           studyID: 6cccbbd76b9c4837bd7342dd616d0fec
 ```
 
-Multiple projects, studies, and expressions can be queried for a single server
-by listing object id and filters below the appropriate heading. To query
-multiple servers, list multiple server configurations below "servers". The 
-"token" attribute is only required if the data holder requires 
-authentication/authorization.
+The yaml file requires a single root element "servers" under which multiple
+server definitions can be listed. The program will query, in sequence, each
+defined server. Multiple projects, studies, and expressions can be queried for a single server.
+
+Accepted parameters for each server definition are as follows:
+
+| Field       | Required | Description |
+| ----------- | -------- | ----------- |
+| server_name | Yes      | A unique name for the server, used to identify each server in report  |
+| base_url    | Yes      | The base URL at which to access the API |
+| token       | Optional | Bearer access token if required by data provider |
+| implemented | Optional | Indicate which endpoint(s) (projects, studies, expressions) are implemented by the server. If an endpoint is implemented, all tests will be run for routes pertaining to it. If not, the program will expect a "not implemented" (501) response. If this parameter is not provided in the user config, all endpoints are assumed to be implemented. |
+| projects    | Optional | Required if projects endpoint is implemented. List multiple projects to be queried by the program. Each project requires an "id" at which it can be retrieved, and a key:value listing of filter names and expected values under "filters." Filters will be applied to determine if the project can be retrieved via the search route. |
+| studies     | Optional | Required if studies endpoint is implemented. List multiple studies to be queried by the program. Each study requires an "id" and "filters." |
+| expressions | Optional | Required if expressions endpoint is implemented. List multiple expressions to be queried by the program. Each expression requires an "id" and "filters." |
 
 An example user config file can be found in [user_config_template.yaml](https://github.com/ga4gh-rnaseq/rnaget-compliance-suite/blob/ja_new_test_cases/user_config_template.yaml).
 

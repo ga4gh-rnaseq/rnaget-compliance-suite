@@ -7,7 +7,7 @@ errors. Will raise UserConfigException if an error is detected.
 """
 
 import yaml
-
+from compliance_suite.config.constants import ENDPOINTS
 from compliance_suite.exceptions.user_config_exception import \
     UserConfigException
 
@@ -64,8 +64,10 @@ class UserConfigParser(object):
             UserConfigException
         """
 
-        server_req_keys = {"server_name", "base_url", "projects", "studies",
-            "expressions"} # required attributes for server definition
+        server_req_keys_template = {"server_name", "base_url", "projects", 
+            "studies", "expressions"} # required attributes for server def,
+                                      # can change if implemented set to false
+                                      # for one or more endpoints
         object_req_keys = {"id", "filters"} # required attributes for projects,
         # studies, expressions
 
@@ -75,23 +77,51 @@ class UserConfigParser(object):
             # one root element
             if len(self.d.keys()) != 1:
                 raise UserConfigException('"servers" should be the only root '
-                    + ' key')
+                    + 'key')
             
             if list(self.d.keys())[0] != "servers":
                 raise UserConfigException('"servers" should be the only root '
-                    + ' key')
+                    + 'key')
 
-            server_count = 1
+            server_count = 0
 
             # for each server, validate that there are no missing attributes
             # given the list of required server keys above
             for server in self.d["servers"]:
                 server_keys = set(list(server.keys()))
+
+                # for the server, all endpoints are expected to be implemented
+                # except if specified in the "implemented" config
+                obj_implemented = {e: True for e in ENDPOINTS}
+                if "implemented" in server_keys:
+                    for impl_key in server["implemented"]:
+                        if impl_key not in set(ENDPOINTS):
+                            raise UserConfigException(
+                                impl_key + ' not a valid endpoint'
+                            )
+
+                    for obj_type in ENDPOINTS:
+                        if obj_type in server["implemented"].keys():
+                            if type(server["implemented"][obj_type]) != bool:
+                                raise UserConfigException(
+                                    'value of implemented:' + obj_type 
+                                    + ' must be a boolean')
+                            obj_implemented[obj_type] = \
+                                server["implemented"][obj_type]
+                
+                self.d["servers"][server_count]["implemented"] = obj_implemented
+                
+                server_req_keys = server_req_keys_template.copy()
+                for obj_type in ENDPOINTS:
+                    if not obj_implemented[obj_type]:
+                        server_req_keys.remove(obj_type)
+
                 server_keys_diff = server_req_keys.difference(server_keys)
                 if len(server_keys_diff) > 0:
                     raise UserConfigException(
-                        "missing attribute(s) from server " + str(server_count)
-                        + ": " + ", ".join(list(server_keys_diff)))
+                        "missing attribute(s) from server " 
+                        + str(server_count + 1) + ": " 
+                        + ", ".join(sorted(list(server_keys_diff))))
 
                 obj_type_d = {"projects": "project", "studies": "study",
                     "expressions": "expression"}
@@ -100,21 +130,22 @@ class UserConfigParser(object):
                 # are no missing attributes given the list of required keys
                 # above
                 for object_string in ["projects", "studies", "expressions"]:
-                    obj_count = 1 
-                    for object_instance in server[object_string]:
-                        object_keys = set(list(object_instance.keys()))
-                        object_keys_diff = object_req_keys.difference(
-                            object_keys)
-                        if len(object_keys_diff) > 0:
-                            raise UserConfigException(
-                                "missing attribute(s) from " 
-                                + obj_type_d[object_string] + " " 
-                                + str(obj_count) + " in "
-                                + server["server_name"] + ": "
-                                + ", ".join(list(object_keys_diff))
-                            )
+                    if obj_implemented[object_string]:
+                        obj_count = 1 
+                        for object_instance in server[object_string]:
+                            object_keys = set(list(object_instance.keys()))
+                            object_keys_diff = object_req_keys.difference(
+                                object_keys)
+                            if len(object_keys_diff) > 0:
+                                raise UserConfigException(
+                                    "missing attribute(s) from " 
+                                    + obj_type_d[object_string] + " " 
+                                    + str(obj_count) + " in "
+                                    + server["server_name"] + ": "
+                                    + ", ".join(sorted(list(object_keys_diff)))
+                                )
 
-                    obj_count += 1
+                        obj_count += 1
                 server_count += 1
         
         # AttributeError converted to UserConfigException

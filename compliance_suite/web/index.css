@@ -1,3 +1,26 @@
+body {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+.test-result-div {
+  margin-bottom: 1.0em;
+}
+.underline {
+  text-decoration: underline;
+}
 .tab1 {
-    margin-left: 20px;
+  text-indent: 8px;
+}
+.tab2 {
+  text-indent: 16px;
+}
+.tab3 {
+  text-indent: 24px;
+}
+#btn-json-dload-foo {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
 }

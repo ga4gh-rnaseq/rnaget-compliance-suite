@@ -21,6 +21,7 @@ Attributes:
     PROJECT_API (str): api route for project-related requests
     STUDY_API (str): api route for study-related requests
     EXPRESSION_API (str): api route for expression-related requests
+    ENDPOINTS (list): all endpoints/object types
     NONEXISTENT_ID (str): id for requesting api objects that do not exist
         on the host server
 """
@@ -56,5 +57,7 @@ PROJECT_API = 'projects/'
 STUDY_API = 'studies/'
 EXPRESSION_API = "expressions/"
 CONTINUOUS_API = "continuous/"
+
+ENDPOINTS = ["projects", "studies", "expressions"]
 
 NONEXISTENT_ID = "999999999"

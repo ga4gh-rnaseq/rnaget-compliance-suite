@@ -1,0 +1,8 @@
+servers:
+  - server_name: Server A
+    base_url: https://felcat.caltech.edu/rnaget/
+    implemented:
+      projects: true
+      studies: true
+      expressions: true
+      wrongendpoint: true
