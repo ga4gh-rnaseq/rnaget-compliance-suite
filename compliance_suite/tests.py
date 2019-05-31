@@ -58,6 +58,7 @@ class Test():
         self.pass_text = ''
         self.fail_text = ''
         self.skip_text = ''
+        self.full_message = []
         self.parents = []
         self.children = []
         self.warning = False
