@@ -116,7 +116,7 @@ class TestRunner():
                     'test_description': processed_func_descrp(
                         child.kwargs["name"]),
                     'text': child.to_echo(),
-                    'full_message': [str(child.full_message)],
+                    'full_message': child.full_message,
                     'parents': [str(parent) for parent in child.parents],
                     'children': [str(child) for child in child.children],
                     'warning': child.warning,
