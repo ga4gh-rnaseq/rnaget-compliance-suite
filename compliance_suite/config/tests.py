@@ -344,6 +344,21 @@ TESTS_DICT = {
         "skip_text": "Continuous not found test skipped",
         "apply_params": "no",
         "expected_status": 404
+    }, "continuous_endpoint_not_implemented": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS ENDPOINT NOT IMPLEMENTED
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "continuous_endpoint_not_implemented",
+        "uri": c.CONTINUOUS_API + c.NONEXISTENT_ID,
+        "schema": c.SCHEMA_FILE_EMPTY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous endpoint correctly not implemented, " +
+            "yields 501 status code",
+        "fail_text": "Continuous endpoint incorrectly not implemented, does " +
+            "not yield 501 status code",
+        "skip_text": "Continuous endpoint not implemented test skipped",
+        "apply_params": "no",
+        "expected_status": 501
     }
 }
 """dict: dictionary of dicts, each representing a test scenario"""
@@ -389,6 +404,9 @@ NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE = {
     ],
     "expressions": [
         "expression_endpoint_not_implemented"
+    ],
+    "continuous": [
+        "continuous_endpoint_not_implemented"
     ]
 }
 """dict: names of tests by endpoint obj types, when endpoint not implemented"""

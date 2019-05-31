@@ -65,9 +65,10 @@ class UserConfigParser(object):
         """
 
         server_req_keys_template = {"server_name", "base_url", "projects", 
-            "studies", "expressions"} # required attributes for server def,
-                                      # can change if implemented set to false
-                                      # for one or more endpoints
+            "studies", "expressions", "continuous"} 
+            # required attributes for server def,
+            # can change if implemented set to false
+            # for one or more endpoints
         object_req_keys = {"id", "filters"} # required attributes for projects,
         # studies, expressions
 

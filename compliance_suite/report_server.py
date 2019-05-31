@@ -16,6 +16,7 @@ import sys
 import threading
 import json
 import jinja2 as j2
+from compliance_suite.config.constants import ENDPOINTS
 
 def capitalize(text):
     return text[0].upper() + text[1:]
@@ -30,11 +31,12 @@ class ReportServer(object):
         self.cwd = os.getcwd()
         self.render_helper = {
             "s": { # s: structures
-                "endpoints": ["projects", "studies", "expressions"],
+                "endpoints": ENDPOINTS,
                 "singles": {
                     "projects": "project",
                     "studies": "study",
-                    "expressions": "expression"
+                    "expressions": "expression",
+                    "continuous": "continuous"
                 },
                 "status": {
                     0: {

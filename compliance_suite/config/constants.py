@@ -58,6 +58,6 @@ STUDY_API = 'studies/'
 EXPRESSION_API = "expressions/"
 CONTINUOUS_API = "continuous/"
 
-ENDPOINTS = ["projects", "studies", "expressions"]
+ENDPOINTS = ["projects", "studies", "expressions", "continuous"]
 
 NONEXISTENT_ID = "999999999"

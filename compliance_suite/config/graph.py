@@ -84,5 +84,10 @@ NOT_IMPLEMENTED_TEST_GRAPH = {
             "expression_endpoint_not_implemented": {}
         }
     },
+    "continuous": {
+        "base": {
+            "continuous_endpoint_not_implemented": {}
+        }
+    }
 }
 """dict: parent-child test relationships when endpoint not implemented"""

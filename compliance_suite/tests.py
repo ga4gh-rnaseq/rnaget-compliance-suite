@@ -332,7 +332,7 @@ def initiate_tests(server_config):
     # if an object type is not implemented, then check the endpoint for the
     # appropriate response code error.
 
-    for obj_type in ["projects", "studies", "expressions", "continuous"]:
+    for obj_type in ENDPOINTS:
         obj_instances = None
         test_list = None
         test_tree = None
