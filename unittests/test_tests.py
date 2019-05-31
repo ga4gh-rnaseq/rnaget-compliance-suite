@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""Module unittests.test_tests.py
+
+This module contains methods to test the tests module via pytest.
+
+Attributes:
+    server_config (dict): represents valid server config as from yaml file
+    tr (TestRunner): base test runner object to assign tests to
+"""
+
 from unittests.unittests_constants import *
 from unittests.unittests_methods import *
 from compliance_suite.test_runner import TestRunner
@@ -8,6 +18,8 @@ tr = TestRunner(server_config)
 tr.run_tests()
 
 def test_skip_text():
+    """assert skip text is correctly set"""
+
     test_node = tr.base_tests[0][2].children[0]
 
     skip_text = test_node.get_skip_text()
@@ -26,6 +38,8 @@ def test_skip_text():
     )
     
 def test_to_echo():
+    """assert echo method emits correct text based on test result status"""
+
     test_node = tr.base_tests[0][2].children[0]
     test_node.result = 2
     assert test_node.to_echo() == 'Unknown error'
