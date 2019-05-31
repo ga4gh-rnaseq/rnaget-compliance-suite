@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetSearchFilterArray",
+    "type": "array",
+    "$ref": "rnaget-search-filter-array.json#/definitions/RNAGetSearchFilterArray",
+
+    "definitions": {
+        "RNAGetSearchFilterArray": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "$ref": "rnaget-search-filter.json#/definitions/RNAGetSearchFilter"
+            }
+        }
+    }
+}

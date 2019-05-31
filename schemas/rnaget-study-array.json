@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetStudyArray",
+    "type": "array",
+    "$ref": "rnaget-study-array.json#/definitions/RNAGetStudyArray",
+
+    "definitions": {
+        "RNAGetStudyArray": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "$ref": "rnaget-study.json#/definitions/RNAGetStudy"
+            }
+        }
+    }
+}

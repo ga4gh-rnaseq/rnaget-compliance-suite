@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetSearchFilter",
+    "type": "object",
+    "$ref": "rnaget-search-filter.json#/definitions/RNAGetSearchFilter",
+  
+    "definitions": {
+      "RNAGetSearchFilter": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "string"
+          },
+          "fieldType": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+      
+        "required": [
+          "filter", "fieldType", "description"
+        ],
+        
+        "additionalProperties": false
+      }
+    }
+  }

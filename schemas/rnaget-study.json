@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "http://json-schema.org/draft-04/schema#",
+  "title": "RNAGetStudy",
+  "type": "object",
+  "$ref": "rnaget-study.json#/definitions/RNAGetStudy",
+
+  "definitions": {
+    "RNAGetStudy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+    
+        "parentProjectID": {
+            "type": "string"
+        },
+        "genome": {
+            "type": "string"
+        },
+        "sampleList": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        } 
+      },
+
+      "required": [
+          "id"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

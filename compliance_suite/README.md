@@ -2,7 +2,8 @@
 
 ## Compliance data
 
-In order to run the compliance test suite, the server to be tested has to be pre-loaded with a specific test dataset. The following files, that can be found in the [`data`](compliance_suite/data) folder, contain all the required information:
+In order to run the compliance test suite, the server to be tested has to be pre-loaded with a specific test dataset. The following files, that can be found 
+in the [`data`](compliance_suite/data) folder, contain all the required information:
 
 *JSON objects*
 - `studies.json`
@@ -13,8 +14,11 @@ In order to run the compliance test suite, the server to be tested has to be pre
 - matrix.tsv
 - matrix.loom
 
-The JSON objects reflect the response object types of the different API endpoints (as mock data) and must be loaded unchanged. The `expressions.json` file contains JSON objects for several data formats. Only objects for the data formats supported by the server should be loaded.
-The expression data files represent expressions matrices in different data formats. They can be injested either unchanged or passed through any additional ETL procedure depending on the backend implementation of the API server. Only data formats supported by the server should be considered.
+The JSON objects reflect the response object types of the different API
+endpoints (as mock data) and must be loaded unchanged. The `expressions.json`
+file contains JSON objects for several data formats. Only objects for the data formats supported by the server should be loaded.
+The expression data files represent expressions matrices in different data formats. They can be injested either unchanged or passed through any additional ETL procedure depending on the backend implementation of the API server. Only 
+data formats supported by the server should be considered.
 
 ## Troubleshooting
 
@@ -33,4 +37,5 @@ You need to update the CA bundle used by the `requests` python library, either r
 REQUESTS_CA_BUNDLE=path/to/cabundle rnaget-compliance-suite ...
 ```
 
-or exporting the `REQUESTS_CA_BUNDLE` environment variable and running the suite as usual. A CA bundle containing update CA certificates for CRG endpoints is distributed as part of this GitHub repository and is available at [`certs`](certs).
+or exporting the `REQUESTS_CA_BUNDLE` environment variable and running the suite as usual. A CA bundle containing update CA certificates for CRG endpoints is distributed as part of this GitHub repository and is available at 
+[`certs`](certs).

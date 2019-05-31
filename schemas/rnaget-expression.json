@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetExpression",
+    "type": "object",
+    "$ref": "rnaget-expression.json#/definitions/RNAGetExpression",
+  
+    "definitions": {
+      "RNAGetExpression": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fileType": {
+            "type": "string"
+          },
+          "studyID": {
+            "type": "string"
+          },
+          "URL": {
+            "type": "string"
+          },
+          "units": {
+            "type": "string"
+          }
+          
+        },
+      
+        "required": [
+          "id", "URL", "units" 
+        ],
+        
+        "additionalProperties": false
+      }
+    }
+  }
