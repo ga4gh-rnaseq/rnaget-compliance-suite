@@ -50,6 +50,14 @@ TEST_GRAPH = {
                 "expression_get_not_found": {}
             }
         }
+    },
+    "continuous": {
+        "base": {
+            "continuous_get": {
+                "continuous_get_default": {},
+                "continuous_get_not_found": {}
+            }
+        }
     }
 }
 """dict: hierarchical graph of parent-child test relationships"""

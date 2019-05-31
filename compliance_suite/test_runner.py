@@ -67,7 +67,7 @@ class TestRunner():
         self.total_tests_skipped = 0
         self.total_tests_warning = 0
         self.server_config = server_config
-        self.results = {"projects": {}, "studies": {}, "expressions": {}}
+        self.results = {"projects": {}, "studies": {}, "expressions": {}, "continuous": {}}
         self.headers = {}
 
     def recurse_label_tests(self, root):
