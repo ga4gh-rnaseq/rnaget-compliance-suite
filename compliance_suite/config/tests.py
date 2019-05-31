@@ -306,6 +306,44 @@ TESTS_DICT = {
         "skip_text": "Expression endpoint not implemented test skipped",
         "apply_params": "no",
         "expected_status": 501
+    }, "continuous_get": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS GET
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_get",
+        "uri": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+        "schema": c.SCHEMA_FILE_CONTINUOUS,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuos endpoint implemented by the server",
+        "fail_text": "Continuos endpoint not implemented by the server",
+        "skip_text": "Continuos endpoint test skipped",
+        "apply_params": "no"
+    }, "continuous_get_default": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS GET DEFAULT
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_get_default",
+        "uri": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+        "schema": c.SCHEMA_FILE_CONTINUOUS,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous endpoint implemented with default encoding",
+        "fail_text": "Continuous endpoint not implemented with default "
+                     + "encoding",
+        "skip_text": "Continuous endpoint default encoding test skipped",
+        "apply_params": "no"
+    }, "continuous_get_not_found": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS GET NOT FOUND
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "continuous_get_not_found",
+        "uri": c.CONTINUOUS_API + c.NONEXISTENT_ID,
+        "schema": c.SCHEMA_FILE_EMPTY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous not found endpoint correctly implemented",
+        "fail_text": "Continuous not found endpoint not correctly implemented",
+        "skip_text": "Continuous not found test skipped",
+        "apply_params": "no",
+        "expected_status": 404
     }
 }
 """dict: dictionary of dicts, each representing a test scenario"""
@@ -333,6 +371,11 @@ TESTS_BY_OBJECT_TYPE = {
         "expression_get",
         "expression_get_default",
         "expression_get_not_found"
+    ],
+    "continuous": [
+        "continuous_get",
+        "continuous_get_default",
+        "continuous_get_not_found"
     ]
 }
 """dict: names of tests by project, study, expression object types"""

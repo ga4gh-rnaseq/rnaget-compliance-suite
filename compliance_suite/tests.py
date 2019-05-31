@@ -262,7 +262,8 @@ class Test():
         obj_type_placeholders = {
             "projects": "V_PROJECT_ID",
             "studies": "V_STUDY_ID",
-            "expressions": "V_EXPRESSION_ID"
+            "expressions": "V_EXPRESSION_ID",
+            "continuous": "V_CONTINUOUS_ID"
         }
 
         mature_uri += immature_uri.replace(
@@ -292,7 +293,8 @@ def initiate_tests(server_config):
     test_obj_dict = {
         "projects": {},
         "studies": {},
-        "expressions": {}
+        "expressions": {},
+        "continuous": {}
     }
     
     test_bases = []
@@ -330,7 +332,7 @@ def initiate_tests(server_config):
     # if an object type is not implemented, then check the endpoint for the
     # appropriate response code error.
 
-    for obj_type in ENDPOINTS:
+    for obj_type in ["projects", "studies", "expressions", "continuous"]:
         obj_instances = None
         test_list = None
         test_tree = None
@@ -345,7 +347,6 @@ def initiate_tests(server_config):
             test_tree = not_impl_graph
 
         for obj_instance in obj_instances:
-
             test_base = Test(**{"name": "base",
                                 "obj_type": "base", 
                                 "obj_instance": "base"})
