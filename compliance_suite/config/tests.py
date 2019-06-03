@@ -291,6 +291,73 @@ TESTS_DICT = {
         "skip_text": "Expression not found test skipped",
         "apply_params": "no",
         "expected_status": 404
+    }, "expression_formats": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION FORMATS
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "expression_formats",
+        "uri": c.EXPRESSION_API + "formats",
+        "schema": c.SCHEMA_FILE_STRING_ARRAY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Expression formats endpoint implemented",
+        "fail_text": "Expression formats endpoint not implemented",
+        "skip_text": "Expression formats test skipped",
+        "apply_params": "no",
+    }, "expression_search": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION SEARCH
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "expression_search",
+        "uri": c.EXPRESSION_API + "search",
+        "schema": c.SCHEMA_FILE_EXPRESSION_ARRAY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Expressions can be retrieved through search endpoint",
+        "fail_text": "Expressions cannot be retrieved through search endpoint",
+        "skip_text": "Expression search test skipped",
+        "apply_params": "no"
+    }, "expression_search_url_params_all": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION SEARCH URL PARAMS ALL
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "expression_search_url_params_all",
+        "uri": c.EXPRESSION_API + "search",
+        "schema": c.SCHEMA_FILE_EXPRESSION_ARRAY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Expressions can be retrieved using URL parameters through"
+                     + " the search endpoint",
+        "fail_text": "Expressions cannot be retrieved using URL parameters "
+                     + " through the search endpoint",
+        "skip_text": "Expression search with URL parameters test skipped",
+        "apply_params": "all"
+    }, "expression_search_url_params_cases": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION SEARCH URL PARAMS CASES
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "expression_search_url_params_cases",
+        "uri": c.EXPRESSION_API + "search",
+        "schema": c.SCHEMA_FILE_EXPRESSION_ARRAY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Expressions can be retrieved using URL parameters through"
+                     + " the search endpoint for all cases",
+        "fail_text": "Expressions cannot be retrieved using URL parameters "
+                     + " through the search endpoint for all cases",
+        "skip_text": "Expressions search with multiple URL parameters cases "
+                     + " test skipped",
+        "apply_params": "cases"
+    }, "expression_search_filters": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION SEARCH FILTERS
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "expression_search_filters",
+        "uri": c.EXPRESSION_API + "search/filters",
+        "schema": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Expression filters can be retrieved through the search "
+                     + "endpoint",
+        "fail_text": "Expression filters cannot be retrieved through the "
+                     + "search endpoint",
+        "skip_text": "Expression filters search test skipped",
+        "apply_params": "no"
     }, "expression_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION ENDPOINT NOT IMPLEMENTED
@@ -385,7 +452,12 @@ TESTS_BY_OBJECT_TYPE = {
     "expressions": [
         "expression_get",
         "expression_get_default",
-        "expression_get_not_found"
+        "expression_get_not_found",
+        "expression_formats",
+        "expression_search",
+        "expression_search_url_params_all",
+        "expression_search_url_params_cases",
+        "expression_search_filters"
     ],
     "continuous": [
         "continuous_get",

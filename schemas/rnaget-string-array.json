@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetStringArray",
+    "type": "array",
+    "$ref": "rnaget-string-array.json#/definitions/RNAGetStringArray",
+
+    "definitions": {
+        "RNAGetStringArray": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}
