@@ -17,10 +17,16 @@ server_config = copy_dict(SERVER_CONFIG)
 tr = TestRunner(server_config)
 tr.run_tests()
 
-def test_skip_text():
-    """assert skip text is correctly set"""
+def test_text():
+    """assert pass, skip, fail text is correctly set"""
 
     test_node = tr.base_tests[0][2].children[0]
+
+    pass_text = test_node.get_pass_text()
+    assert pass_text == "Project endpoint implemented by the server"
+
+    fail_text = test_node.get_fail_text()
+    assert fail_text == "Project endpoint not implemented by the server"
 
     skip_text = test_node.get_skip_text()
     assert skip_text == "Project endpoint test skipped"

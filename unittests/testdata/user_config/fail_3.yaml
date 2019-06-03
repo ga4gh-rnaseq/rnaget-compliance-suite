@@ -9,4 +9,7 @@ servers:
 
     expressions:
       - key: value
+    
+    continuous:
+      - key: value
   
