@@ -16,6 +16,19 @@ body {
 .tab3 {
   text-indent: 24px;
 }
+.tr-div {
+  display: block;
+  margin-bottom: 5.0px;
+}
+.tr-elem {
+  display: inline-block;
+}
+.tr-p {
+  width: 25.0em;
+}
+#text {
+  margin-top: 5px;
+}
 #btn-json-dload-foo {
   background-color: DodgerBlue;
   border: none;

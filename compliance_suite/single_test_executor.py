@@ -30,6 +30,8 @@ class SingleTestExecutor(object):
         params (dict): parameters/filters to submit with query
         test (Test): reference to Test object
         runner (TestRunner): reference to TestRunner object
+        full_message (list): lists associated information with the api test,
+            to be assigned to Test object and displayed in report under case
     """
 
     def __init__(self, uri, schema_file, http_method, params, test, runner):
@@ -42,6 +44,7 @@ class SingleTestExecutor(object):
             params (dict): parameters/filters to submit with query
             test (Test): reference to Test object
             runner (TestRunner): reference to TestRunner object
+            full_message (list): associated information with the api test
         """
 
         self.uri = uri
@@ -79,6 +82,19 @@ class SingleTestExecutor(object):
                 self.set_test_status(self.uri, param_case, response)
     
     def set_test_status(self, uri, params, response):
+        """Sets test status and messages based on response
+        
+        After making the API request, this method parses the response object
+        and cross-references with the expected output (JSON schema, status code,
+        etc). Test results are marked pass/fail/skip, and associated messages
+        are added
+
+        Args:
+            uri (str): requested uri
+            params (dict): key-value mapping of supplied parameters
+            response (Response): response object from the request
+        """
+
         # if response is 200, validate against external schema
         # if schema matches instance, test succeeds, otherwise, test fails
         
@@ -87,7 +103,6 @@ class SingleTestExecutor(object):
             200 if k not in self.test.kwargs.keys() else self.test.kwargs[k]
 
         if self.test.result != -1:
-            
             self.full_message.append(["Request", uri])
             self.full_message.append(["Params", str(params)])
 
@@ -102,22 +117,9 @@ class SingleTestExecutor(object):
                                                str(response.status_code)])
                 self.full_message.append(["Response Body", response.text])
 
-                helper_text = "<br>Request: " + uri \
-                              + "<br>Params: " + str(params) \
-                              + "<br>Response Body: " + response.text
-
-                self.test.set_pass_text(self.test.get_pass_text() + helper_text)
-                self.test.set_fail_text(self.test.get_fail_text() + helper_text)
                 self.test.full_message = self.full_message
 
                 if validation_result["status"] == -1:
-                    self.test.set_fail_text(
-                        self.test.get_fail_text()
-                        + "<br>Exception: " 
-                        + validation_result["exception_class"]
-                        + "<br>Message:<br>" + validation_result["message"]
-                    )
-
                     self.full_message.append(["Exception",
                         validation_result["exception_class"]])
                     self.full_message.append(["Exception Message",
@@ -131,8 +133,4 @@ class SingleTestExecutor(object):
                 self.full_message.append(["Actual Response Status Code",
                                                str(response.status_code)])
 
-                helper_text = "<br>Expected Status: " + str(exp_status) \
-                              + "<br>Actual Status: " \
-                              + str(response.status_code)
-                self.test.set_fail_text(self.test.get_fail_text() + helper_text)
                 self.test.full_message = self.full_message

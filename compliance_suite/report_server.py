@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """Module compliance_suite.report_server.py
 
-This module contains methods to spin up a small web server to serve final report
-results as HTML.
-
+This module contains class definition of small web server utility. Serves final
+report results as HTML.
 """
 
 import time
@@ -19,11 +18,38 @@ import jinja2 as j2
 from compliance_suite.config.constants import ENDPOINTS
 
 def capitalize(text):
+    """capitalizes a word, for use in rendering template
+
+    Args:
+        text (str): word to capitalize
+    
+    Returns:
+        capitalized (str): capitalized word
+    """
+
     return text[0].upper() + text[1:]
 
 class ReportServer(object):
+    """Creates web server, serves test report as HTML
+
+    The ReportServer spins up a small, local web server to host test result
+    reports once the final JSON object has been generated. The server can be
+    shut down with CTRL+C.
+
+    Attributes:
+        port (Port): object representing free port to serve content
+        httpd (TCPServer): handle for web server
+        thread (Thread): thread serves content indefinitely, can be killed
+            safely from the outside via CTRL+C
+        web_dir (str): directory which host web files (CSS and generated HTML)
+        cwd (str): working directory to change back to after creating server
+        render_helper (dict): contains data structures and functions to be
+            passed to rendering engine to aid in rendering HTML
+    """
 
     def __init__(self):
+        """instantiates a ReportServer object"""
+
         self.port = None
         self.httpd = None
         self.thread = None
@@ -42,7 +68,7 @@ class ReportServer(object):
                     0: {
                         "status": "SKIPPED",
                         "css_class": "text-info",
-                        "fa_class": "foo"
+                        "fa_class": "fa-ban"
                     },
                     1: {
                         "status": "PASSED",
@@ -63,7 +89,7 @@ class ReportServer(object):
                 ),
                 "rm_space": lambda text: text.replace(" ", "_")
             }
-}
+        }
 
     def set_free_port(self):
         """get free port on local machine on which to run the report server
@@ -111,6 +137,12 @@ class ReportServer(object):
         self.httpd.serve_forever()
 
     def serve_thread(self, uptime=3600):
+        """serves server as separate thread so it can be stopped from outside
+        
+        Args:
+            uptime (int): server will remain up for this time in seconds unless
+                shutdown by user
+        """
 
         try:
             self.thread = threading.Thread(target=self.start_mock_server,

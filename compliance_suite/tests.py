@@ -35,6 +35,8 @@ class Test():
         pass_text (str): text in the report when test case is passed
         fail_text (str): text in the report when test case is failed
         skip_text (str): text in the report when test case is skipped
+        full_message (list): lists associated information with the api test,
+            to be displayed in report under case
         parents (list): Test nodes that are higher in the test graph than this.
             ie. Dependencies for this Test
         children (list): Test nodes which have this Test as dependency

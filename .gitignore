@@ -107,3 +107,6 @@ ENV/
 /*.json
 .vstags
 /.vscode
+
+index.html
+compliance_suite/web/temp_result.json

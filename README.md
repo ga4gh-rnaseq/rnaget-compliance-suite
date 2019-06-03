@@ -79,7 +79,7 @@ Accepted parameters for each server definition are as follows:
 | studies     | Optional | Required if studies endpoint is implemented. List multiple studies to be queried by the program. Each study requires an "id" and "filters." |
 | expressions | Optional | Required if expressions endpoint is implemented. List multiple expressions to be queried by the program. Each expression requires an "id" and "filters." |
 
-An example user config file can be found in [user_config_template.yaml](https://github.com/ga4gh-rnaseq/rnaget-compliance-suite/blob/ja_new_test_cases/user_config_template.yaml).
+An example user config file can be found in [user_config_template.yaml](https://github.com/ga4gh-rnaseq/rnaget-compliance-suite/blob/master/user_config_template.yaml).
 
 ## Example report output
 

@@ -16,7 +16,8 @@ SERVER_CONFIG = {
     "implemented": {
         "projects": True,
         "studies": True,
-        "expressions": True
+        "expressions": True,
+        "continuous": False
     },
     "projects": [
         {
@@ -55,6 +56,15 @@ SERVER_CONFIG = {
                 "studyID": "6cccbbd76b9c4837bd7342dd616d0fec"
             }
         }
+    ],
+    "continuous": [
+        {
+            "id": "9999",
+            "filters": {
+                "version": "1.0",
+                "name": "PCAWG"
+            }
+        }
     ]
 }
 """complete, correct user config dictionary, as if parsed from yaml file"""
@@ -66,7 +76,8 @@ SERVER_CONFIG_NOT_IMPLEMENTED = {
     "implemented": {
         "projects": False,
         "studies": False,
-        "expressions": False
+        "expressions": False,
+        "continuous": False
     }
 }
 """user config dictionary as if parsed from yaml file, without any endpoints"""

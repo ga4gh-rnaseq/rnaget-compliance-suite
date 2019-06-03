@@ -58,8 +58,8 @@ def test_validate_config_file_failures():
     messages = [
         '"servers" should be the only root key',
         '"servers" should be the only root key',
-        "missing attribute(s) from server 1: expressions, projects, " 
-            + "studies",
+        "missing attribute(s) from server 1: continuous, expressions, " 
+            + "projects, studies",
         "missing attribute(s) from project 1 in Server A: filters, id",
         "YAML config file could not be parsed. Please refer to the template "
             + "config file.",
