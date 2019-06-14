@@ -105,32 +105,37 @@ class SingleTestExecutor(object):
         if self.test.result != -1:
             self.full_message.append(["Request", uri])
             self.full_message.append(["Params", str(params)])
+            self.full_message.append(["Expected Response Status Code",
+                str(exp_status)])
+            self.full_message.append(["Actual Response Status Code",
+                str(response.status_code)])
 
             if response.status_code == exp_status:
-                sv = SchemaValidator(self.schema_file)
-                validation_result = sv.validate_instance(response.json())
-                self.test.result = validation_result["status"]
-
-                self.full_message.append(["Expected Response Status Code",
-                                               str(exp_status)])
-                self.full_message.append(["Actual Response Status Code",
-                                               str(response.status_code)])
                 self.full_message.append(["Response Body", response.text])
 
-                self.test.full_message = self.full_message
+                sv = SchemaValidator(self.schema_file)
+                
+                try:
+                    validation_result = sv.validate_instance(response.json())
+                    self.test.result = validation_result["status"]
 
-                if validation_result["status"] == -1:
+                    if validation_result["status"] == -1:
+                        self.full_message.append(["Exception",
+                            validation_result["exception_class"]])
+                        self.full_message.append(["Exception Message",
+                            validation_result["message"]])
+                
+                # if a JSON object can't be parsed from the response body,
+                # then catch this error and assign exception
+                except ValueError as e:
+                    self.test.result = -1
                     self.full_message.append(["Exception",
-                        validation_result["exception_class"]])
-                    self.full_message.append(["Exception Message",
-                        validation_result["message"]])
+                        str(e.__class__.__name__)])
+                    self.full_message.append(["Exception Message", str(e)])
+                    
+                finally:
                     self.test.full_message = self.full_message
+
             else:
                 self.test.result = -1
-
-                self.full_message.append(["Expected Response Status Code",
-                                               str(exp_status)])
-                self.full_message.append(["Actual Response Status Code",
-                                               str(response.status_code)])
-
                 self.test.full_message = self.full_message
