@@ -52,6 +52,7 @@ SCHEMA_FILE_STUDY_ARRAY = "rnaget-study-array.json"
 SCHEMA_FILE_EXPRESSION_ARRAY = "rnaget-expression-array.json"
 SCHEMA_FILE_CONTINUOUS_ARRAY = "rnaget-continuous-array.json"
 SCHEMA_FILE_SEARCH_FILTER_ARRAY = "rnaget-search-filter-array.json"
+SCHEMA_FILE_STRING_ARRAY = "rnaget-string-array.json"
 
 PROJECT_API = 'projects/'
 STUDY_API = 'studies/'

@@ -54,6 +54,12 @@ TEST_GRAPH = {
             "expression_get": {
                 "expression_get_default": {},
                 "expression_get_not_found": {}
+            },
+            "expression_formats": {},
+            "expression_search": {
+                "expression_search_url_params_all": {},
+                "expression_search_url_params_cases": {},
+                "expression_search_filters": {}
             }
         }
     },
