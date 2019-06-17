@@ -31,7 +31,7 @@ class SingleTestExecutor(object):
         params (dict): parameters/filters to submit with query
         test (Test): reference to Test object
         runner (TestRunner): reference to TestRunner object
-        accepted_media_types (list): all accepted media types
+        media_types (list): all accepted media types
         headers (dict): key, value mapping of request header
         full_message (list): lists associated information with the api test,
             to be assigned to Test object and displayed in report under case
@@ -55,9 +55,24 @@ class SingleTestExecutor(object):
         self.params = {k: params[k] for k in params.keys()}
         self.test = test
         self.runner = runner
-        self.accepted_media_types = [a for a in DEFAULT_ACCEPT_HEADERS]
-        self.headers = {"Accept": ", ".join(self.accepted_media_types) + ";"}
         self.full_message = []
+        
+        # assign accepted media types
+        # check if default media types will be used for this test,
+        # then add any other test-specific media types
+        self.media_types = []
+        use_default = \
+            True if "use_default_media_types" not in self.test.kwargs.keys() \
+            else self.test.kwargs["use_default_media_types"]
+        if use_default:
+            self.media_types = [a for a in DEFAULT_MEDIA_TYPES]
+        add_test_specific = \
+            False if "test_media_types" not in self.test.kwargs.keys() else True
+        if add_test_specific:
+            self.media_types += \
+                [a for a in self.test.kwargs["test_media_types"]]
+
+        self.headers = {"Accept": ", ".join(self.media_types) + ";"}
 
     def get_response_media_type(self, response):
         """Get media type from 'Content-Type' field of response header"""
@@ -125,11 +140,11 @@ class SingleTestExecutor(object):
                 # Validation 1, Content-Type, Media Type validation
                 # check response content type is in accepted media types
                 response_media_type = self.get_response_media_type(response)
-                if not response_media_type in set(self.accepted_media_types):
+                if not response_media_type in set(self.media_types):
                     raise tse.MediaTypeException(
                         "Response Content-Type '%s'" % response_media_type
                         + " not in request accepted media types: "
-                        + str(self.accepted_media_types) 
+                        + str(self.media_types) 
                     )
 
                 # Validation 2, Status Code match validation

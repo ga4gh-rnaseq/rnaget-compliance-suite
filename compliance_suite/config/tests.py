@@ -26,6 +26,12 @@ Attributes:
             params from the yaml file with something else
         replace_params (optional): str, if replace_params is true, indicate
             what to replace request params with
+        use_default_media_types (optional): bool indicating whether to 
+            include default json media types in the test request accept header
+            (true by default)
+        test_media_types (optional): list indicating test-specific
+            accepted media types (to be used instead of or in addition to 
+            defaults)
     
     TESTS_BY_OBJECT_TYPE (dict): lists the name of tests grouped by the object
         type they pertain to (project, study, expression)
