@@ -40,7 +40,7 @@
           "id", "URL", "units" 
         ],
         
-        "additionalProperties": false
+        "additionalProperties": true
       }
     }
   }

@@ -24,7 +24,7 @@
           "filter", "fieldType", "description"
         ],
         
-        "additionalProperties": false
+        "additionalProperties": true
       }
     }
   }

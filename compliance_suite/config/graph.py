@@ -24,13 +24,13 @@ TEST_GRAPH = {
     "projects": {
         "base": {
             "project_get": {
-                "project_get_default": {},
                 "project_get_not_found": {}
             },
 
             "project_search": {
                 "project_search_url_params_all": {},
                 "project_search_url_params_cases": {},
+                "project_search_filters_out": {},
                 "project_search_filters": {}
             }
         }
@@ -38,13 +38,13 @@ TEST_GRAPH = {
     "studies": {
         "base": {
             "study_get": {
-                "study_get_default": {},
                 "study_get_not_found": {}
             },
 
             "study_search": {
                 "study_search_url_params_all": {},
                 "study_search_url_params_cases": {},
+                "study_search_filters_out": {},
                 "study_search_filters": {}
             }
         }
@@ -52,13 +52,13 @@ TEST_GRAPH = {
     "expressions": {
         "base": {
             "expression_get": {
-                "expression_get_default": {},
                 "expression_get_not_found": {}
             },
             "expression_formats": {},
             "expression_search": {
                 "expression_search_url_params_all": {},
                 "expression_search_url_params_cases": {},
+                "expression_search_filters_out": {},
                 "expression_search_filters": {}
             }
         }
@@ -66,7 +66,6 @@ TEST_GRAPH = {
     "continuous": {
         "base": {
             "continuous_get": {
-                "continuous_get_default": {},
                 "continuous_get_not_found": {}
             }
         }
