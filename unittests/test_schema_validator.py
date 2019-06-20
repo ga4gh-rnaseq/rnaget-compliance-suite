@@ -78,8 +78,6 @@ def test_project_invalid():
 
     m = [
         "'id' is a required property",
-        "Additional properties are not allowed ('additionalAttribute' was " +
-            "unexpected)",
         "1 is not of type 'string'",
         "2 is not of type 'string'"
     ]
@@ -95,8 +93,6 @@ def test_study_invalid():
 
     m = [
         "'id' is a required property",
-        "Additional properties are not allowed ('additionalAttribute' was " +
-            "unexpected)",
         "1 is not of type 'string'"
     ]
     schema_fail_template(m, "study_invalid", c.SCHEMA_FILE_STUDY)
@@ -112,8 +108,6 @@ def test_expression_invalid():
     m = [
         "'id' is a required property",
         "'units' is a required property",
-        "Additional properties are not allowed ('additionalAttribute' was " +
-            "unexpected)",
         "1 is not of type 'string'"
     ]
     schema_fail_template(m, "expression_invalid", c.SCHEMA_FILE_EXPRESSION)

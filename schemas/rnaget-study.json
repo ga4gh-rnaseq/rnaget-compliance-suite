@@ -45,7 +45,7 @@
       "required": [
           "id"
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     }
   }
 }

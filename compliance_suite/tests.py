@@ -61,6 +61,7 @@ class Test():
         self.fail_text = ''
         self.skip_text = ''
         self.full_message = []
+        self.full_description = kwargs["description"]
         self.parents = []
         self.children = []
         self.warning = False
@@ -351,7 +352,9 @@ def initiate_tests(server_config):
         for obj_instance in obj_instances:
             test_base = Test(**{"name": "base",
                                 "obj_type": "base", 
-                                "obj_instance": "base"})
+                                "obj_instance": "base",
+                                "description": "root test node on which to "
+                                               + "base test graph"})
             test_bases.append([obj_type, obj_instance["id"], test_base])
             test_obj_dict[obj_type][obj_instance["id"]] = \
                 {"base": test_base}

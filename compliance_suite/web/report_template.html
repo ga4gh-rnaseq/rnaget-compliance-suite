@@ -58,6 +58,7 @@
               
               <div class="collapse" id="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{test.name}}">
                 <div class="well">
+                  <p><strong>Description:</strong> {{test.full_description}}</p>
                   <p><strong>Summary:</strong> {{test.text}}</p>
                   {% for m in test.full_message %}
                   <p><strong>{{m[0]}}:</strong> {{m[1]}}</p>

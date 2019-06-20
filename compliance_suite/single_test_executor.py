@@ -15,6 +15,7 @@ import requests
 
 from compliance_suite.schema_validator import SchemaValidator
 from compliance_suite.config.constants import *
+import compliance_suite.exceptions.test_status_exception as tse
 
 class SingleTestExecutor(object):
     """Executes API request, validates response and sets result to pass/fail
@@ -30,6 +31,8 @@ class SingleTestExecutor(object):
         params (dict): parameters/filters to submit with query
         test (Test): reference to Test object
         runner (TestRunner): reference to TestRunner object
+        media_types (list): all accepted media types
+        headers (dict): key, value mapping of request header
         full_message (list): lists associated information with the api test,
             to be assigned to Test object and displayed in report under case
     """
@@ -44,17 +47,42 @@ class SingleTestExecutor(object):
             params (dict): parameters/filters to submit with query
             test (Test): reference to Test object
             runner (TestRunner): reference to TestRunner object
-            full_message (list): associated information with the api test
         """
 
         self.uri = uri
         self.schema_file = schema_file
         self.http_method = http_method
-        self.params = params
+        self.params = {k: params[k] for k in params.keys()}
         self.test = test
         self.runner = runner
-        self.headers = {k:ACCEPT_HEADER[k] for k in ACCEPT_HEADER.keys()}
         self.full_message = []
+        self.set_media_types()
+
+    def set_media_types(self):
+        """sets accepted media types and accept header from passed params"""
+
+        self.media_types = []
+        # assign accepted media types
+        # check if default media types will be used for this test,
+        # then add any other test-specific media types
+        self.media_types = []
+        use_default = \
+            True if "use_default_media_types" not in self.test.kwargs.keys() \
+            else self.test.kwargs["use_default_media_types"]
+        if use_default:
+            self.media_types = [a for a in DEFAULT_MEDIA_TYPES]
+        add_test_specific = \
+            False if "test_media_types" not in self.test.kwargs.keys() else True
+        if add_test_specific:
+            self.media_types += \
+                [a for a in self.test.kwargs["test_media_types"]]
+        self.headers = {"Accept": ", ".join(self.media_types) + ";"}
+
+    def get_response_media_type(self, response):
+        """Get media type from 'Content-Type' field of response header"""
+
+        ct = response.headers["Content-Type"].split(";")[0]
+        return ct
     
     def execute_test(self):
         """Test API URI, validate response and set test to pass/fail"""
@@ -66,6 +94,16 @@ class SingleTestExecutor(object):
         # make GET/POST request
         apply_params = self.test.kwargs["apply_params"]
         request_method = REQUEST_METHOD[self.http_method]
+
+        # check if request params need to be changed for this test type
+        # if so, replace params with the replace value
+        replace_params = False
+        replace_value = None
+        if "replace_params" in self.test.kwargs.keys():
+            replace_params = self.test.kwargs["replace_params"]
+        if replace_params:
+            for param_key in self.params.keys():
+                self.params[param_key] = self.test.kwargs["replace_params_with"]
 
         if apply_params == "no":
             response = request_method(self.uri, headers=self.headers)
@@ -87,7 +125,9 @@ class SingleTestExecutor(object):
         After making the API request, this method parses the response object
         and cross-references with the expected output (JSON schema, status code,
         etc). Test results are marked pass/fail/skip, and associated messages
-        are added
+        are added. The 3 steps of validating a single test case are as follows:
+        1) validate content type/media type, 2) validate response status code,
+        3) validate response body matches correct JSON schema
 
         Args:
             uri (str): requested uri
@@ -95,47 +135,61 @@ class SingleTestExecutor(object):
             response (Response): response object from the request
         """
 
-        # if response is 200, validate against external schema
-        # if schema matches instance, test succeeds, otherwise, test fails
-        
-        k = "expected_status"
-        exp_status = \
-            200 if k not in self.test.kwargs.keys() else self.test.kwargs[k]
-
         if self.test.result != -1:
             self.full_message.append(["Request", uri])
             self.full_message.append(["Params", str(params)])
-            self.full_message.append(["Expected Response Status Code",
-                str(exp_status)])
-            self.full_message.append(["Actual Response Status Code",
-                str(response.status_code)])
+            self.full_message.append(["Response Body", response.text])
 
-            if response.status_code == exp_status:
-                self.full_message.append(["Response Body", response.text])
+            try:
+                # Validation 1, Content-Type, Media Type validation
+                # check response content type is in accepted media types
+                response_media_type = self.get_response_media_type(response)
+                if not response_media_type in set(self.media_types):
+                    raise tse.MediaTypeException(
+                        "Response Content-Type '%s'" % response_media_type
+                        + " not in request accepted media types: "
+                        + str(self.media_types) 
+                    )
 
-                sv = SchemaValidator(self.schema_file)
+                # Validation 2, Status Code match validation
+                # if response is 200, validate against external schema
+                k = "expected_status"
+                exp_status = \
+                200 if k not in self.test.kwargs.keys() else self.test.kwargs[k]
                 
-                try:
-                    validation_result = sv.validate_instance(response.json())
-                    self.test.result = validation_result["status"]
+                if response.status_code != exp_status:
+                    raise tse.StatusCodeException(
+                        "Response status code: %s" % str(response.status_code)
+                        + " does not match expected status code: "
+                        + str(exp_status)
+                    )
 
-                    if validation_result["status"] == -1:
-                        self.full_message.append(["Exception",
-                            validation_result["exception_class"]])
-                        self.full_message.append(["Exception Message",
-                            validation_result["message"]])
-                
+                # Validation 3, JSON Schema Validation
+                # if JSON schema matches response body, test succeeds
                 # if a JSON object can't be parsed from the response body,
                 # then catch this error and assign exception
-                except ValueError as e:
-                    self.test.result = -1
-                    self.full_message.append(["Exception",
-                        str(e.__class__.__name__)])
-                    self.full_message.append(["Exception Message", str(e)])
-                    
-                finally:
-                    self.test.full_message = self.full_message
 
-            else:
+                # if JSON object/dict cannot be parsed from the response body,
+                # raise a TestStatusException
+                response_json = None
+                try:
+                    response_json = response.json()
+                except ValueError as e:
+                    raise tse.JsonParseException(str(e))
+
+                sv = SchemaValidator(self.schema_file)
+                validation_result = sv.validate_instance(response_json)
+                self.test.result = validation_result["status"]
+
+                if validation_result["status"] == -1:
+                    raise tse.SchemaValidationException(
+                        validation_result["message"])
+
+            except tse.TestStatusException as e:
                 self.test.result = -1
+                self.full_message.append(["Exception", 
+                    str(e.__class__.__name__)])
+                self.full_message.append(["Exception Message", str(e)])
+                    
+            finally:
                 self.test.full_message = self.full_message

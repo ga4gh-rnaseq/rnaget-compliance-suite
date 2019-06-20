@@ -2,7 +2,7 @@
 	"name": "PCAWG",
 	"id": "43378a5d48364f9d8cf3c3d5104df560",
 	"studies": [{
-		"name": "PCAWG",
+		"name": 1,
 		"parentProjectID": "43378a5d48364f9d8cf3c3d5104df560",
 		"id": "6cccbbd76b9c4837bd7342dd616d0fec",
 		"version": "1.0",
@@ -11,6 +11,5 @@
 	}],
 	"version": "1.0",
 	"tags": ["PCAWG", "cancer"],
-	"description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423",
-	"additionalAttribute": "value"
+	"description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423"
 }

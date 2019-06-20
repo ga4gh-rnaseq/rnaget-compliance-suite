@@ -8,7 +8,7 @@ Attributes:
     HTTP_GET (int): integer corresponding to get request method
     HTTP_POST (int): integer corresponding to post request method
     REQUEST_METHOD (list): references to request library methods get and post
-    ACCEPT_HEADER (dict): dict of accepted request headers
+    DEFAULT_MEDIA_TYPES (list): media types in request header "Accept"
     SCHEMA_RELATIVE_DIR (str): path to schema directory
     SCHEMA_FILE_PROJECT (str): filename for project schema
     SCHEMA_FILE_STUDY (str): filename for study schema
@@ -36,12 +36,14 @@ REQUEST_METHOD = [
     requests.post
 ]
 
-ACCEPT_HEADER = {
-    'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json'
-}
+DEFAULT_MEDIA_TYPES = [
+    'application/vnd.ga4gh.rnaget.v1.0.0+json',
+    'application/json'
+]
 
 SCHEMA_RELATIVE_DIR = "schemas"
 SCHEMA_FILE_EMPTY = "rnaget-empty.json"
+SCHEMA_FILE_EMPTY_ARRAY = "rnaget-empty-array.json"
 SCHEMA_FILE_PROJECT = "rnaget-project.json"
 SCHEMA_FILE_STUDY = "rnaget-study.json"
 SCHEMA_FILE_EXPRESSION = "rnaget-expression.json"

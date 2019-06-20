@@ -31,7 +31,7 @@ def test_parse_config_file_pass():
     assert len(parser.d["servers"]) == 2
 
     server_a = parser.d["servers"][0]
-    assert server_a["server_name"] == "Server A"
+    assert server_a["server_name"] == "Caltech"
     assert server_a["base_url"] == "https://felcat.caltech.edu/rnaget/"
 
 def test_parse_config_file_not_found():

@@ -117,6 +117,7 @@ class TestRunner():
                         child.kwargs["name"]),
                     'text': child.to_echo(),
                     'full_message': child.full_message,
+                    'full_description': child.full_description,
                     'parents': [str(parent) for parent in child.parents],
                     'children': [str(child) for child in child.children],
                     'warning': child.warning,
