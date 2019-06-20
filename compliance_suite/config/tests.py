@@ -24,7 +24,7 @@ Attributes:
             nothing specified, test expects OK status code (200)
         replace_params (optional): bool indicating whether to replace request
             params from the yaml file with something else
-        replace_params (optional): str, if replace_params is true, indicate
+        replace_params_with (optional): str, if replace_params is true, indicate
             what to replace request params with
         use_default_media_types (optional): bool indicating whether to 
             include default json media types in the test request accept header

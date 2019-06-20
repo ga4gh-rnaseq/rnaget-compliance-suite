@@ -44,6 +44,8 @@ uri_project_search_url_params_all = SERVER_CONFIG["base_url"] \
     + TESTS_DICT["project_search_url_params_all"]["uri"]
 
 params_project_search_url_params_all = SERVER_CONFIG["projects"][0]["filters"]
+params_study_search = SERVER_CONFIG["studies"][0]["filters"]
+params_expression_search = SERVER_CONFIG["expressions"][0]["filters"]
 
 uri_project_not_implemented = SERVER_CONFIG["base_url"] + \
     "projects/NA"
@@ -91,7 +93,6 @@ def test_constructor():
     assert ste.schema_file == test_config["schema"]
     assert ste.http_method == test_config["http_method"]
     assert ste.params == params
-    assert ste.headers == ACCEPT_HEADER
 
 def test_execute_project_get_success():
     """assert valid project get request has success result"""
@@ -132,6 +133,36 @@ def test_execute_project_search_url_params_cases():
     ste.execute_test()
     assert ste.test.result == 1
 
+def test_execute_project_search_filters_out():
+    """assert project search endpoint filters out non-matching entries"""
+
+    tname = "project_search_filters_out"
+    uri = SERVER_CONFIG["base_url"] \
+          + TESTS_DICT[tname]["uri"]
+    ste = get_ste(uri, tname, params_project_search_url_params_all)
+    ste.execute_test()
+    assert ste.test.result == 1
+
+def test_execute_study_search_filters_out():
+    """assert study search endpoint filters out non-matching entries"""
+
+    tname = "study_search_filters_out"
+    uri = SERVER_CONFIG["base_url"] \
+          + TESTS_DICT[tname]["uri"]
+    ste = get_ste(uri, tname, params_study_search)
+    ste.execute_test()
+    assert ste.test.result == 1
+
+def test_execute_expression_search_filters_out():
+    """assert expression search endpoint filters out non-matching entries"""
+
+    tname = "expression_search_filters_out"
+    uri = SERVER_CONFIG["base_url"] \
+          + TESTS_DICT[tname]["uri"]
+    ste = get_ste(uri, tname, params_expression_search)
+    ste.execute_test()
+    assert ste.test.result == 1
+
 def test_execute_not_implemented():
     """assert not implemented endpoint simulations return 501 status"""
 
@@ -145,3 +176,27 @@ def test_execute_not_implemented():
         ste = get_ste(case[0], case[1], {})
         ste.execute_test()
         assert ste.test.result == 1
+
+def test_json_parse_error():
+    """asserts json parse error is raised when response body is not in json"""
+
+    b = "project_get" # modify parameters from project get test
+    uri = "emptyresponse"
+    ste = get_ste(uri, b, {})
+    ste.uri = SERVER_CONFIG["base_url"] + uri
+    ste.execute_test()
+    assert ste.test.result == -1
+
+def test_custom_media_types():
+    """asserts media type error is raised when accept doesn't match response"""
+
+    b = "project_get" # modify parameters from project get test
+    uri = uri_project_get_success
+    ste = get_ste(uri, b, {})
+    ste.test.kwargs["use_default_media_types"] = False
+    ste.test.kwargs["test_media_types"] = ["text/plain"]
+    ste.set_media_types()
+    ste.execute_test()
+
+    assert ste.media_types[0] == "text/plain"
+    assert ste.test.result == -1

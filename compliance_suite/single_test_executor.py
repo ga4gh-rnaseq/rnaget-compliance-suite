@@ -56,7 +56,12 @@ class SingleTestExecutor(object):
         self.test = test
         self.runner = runner
         self.full_message = []
-        
+        self.set_media_types()
+
+    def set_media_types(self):
+        """sets accepted media types and accept header from passed params"""
+
+        self.media_types = []
         # assign accepted media types
         # check if default media types will be used for this test,
         # then add any other test-specific media types
@@ -71,7 +76,6 @@ class SingleTestExecutor(object):
         if add_test_specific:
             self.media_types += \
                 [a for a in self.test.kwargs["test_media_types"]]
-
         self.headers = {"Accept": ", ".join(self.media_types) + ";"}
 
     def get_response_media_type(self, response):

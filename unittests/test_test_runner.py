@@ -48,11 +48,10 @@ def test_generate_final_json():
     expect_final_json = json.loads(
         open("unittests/testdata/json_reports/final_json.json", "r").read()
     )
-    
-    expect_final_json["date_time"] = "0"
-    
     actual_final_json = tr.generate_final_json()
     actual_final_json["date_time"] = "0"
-    
-    assert str(expect_final_json) == str(actual_final_json)
+    actual_json_s = str(actual_final_json).replace("'", '"').replace("\\","")
+    expect_json_s = str(expect_final_json).replace("'", '"').replace("\\","")
+
+    assert actual_json_s == expect_json_s
 
