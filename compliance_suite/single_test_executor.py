@@ -112,9 +112,23 @@ class SingleTestExecutor(object):
             response = request_method(self.uri, headers=self.headers, 
                                       params=self.params)
             self.set_test_status(self.uri, self.params, response)
+        elif apply_params == "some":
+            some_params = {p: self.params[p] for p in 
+                           self.test.kwargs["specified_params"]}
+            response = request_method(self.uri, headers=self.headers, 
+                                      params=some_params)
+            self.set_test_status(self.uri, some_params, response)
         elif apply_params == "cases":
-            for key, value in self.params.items():
-                param_case = {key: value}
+            constant_params = {}
+            if 'specified_params' in set(self.test.kwargs.keys()):
+                constant_params = {p: self.params[p] for p in
+                                   self.test.kwargs["specified_params"]}
+            case_params_keys = list(set(self.params.keys()).difference(
+                set(constant_params.keys())))
+
+            for key in list(case_params_keys):
+                param_case = {key: self.params[key]}
+                param_case.update(constant_params)
                 response = request_method(self.uri, headers=self.headers, 
                                       params=param_case)
                 self.set_test_status(self.uri, param_case, response)

@@ -71,9 +71,12 @@ class UserConfigParser(object):
             # for one or more endpoints
         object_req_keys = {"id", "filters"} # required attributes for projects,
         # studies, expressions
+        object_req_filters = {"projects": set(), "studies": set(), 
+            "expressions": {"format"}, "continuous": set()
+        } # required filters that any object of a given type MUST implement.
+        # ie. expressions must provide a format that they can be searched under
 
         try:
-            
             # validate the root element is "servers" and that there is only
             # one root element
             if len(self.d.keys()) != 1:
@@ -85,7 +88,7 @@ class UserConfigParser(object):
                     + 'key')
 
             server_count = 0
-
+            
             # for each server, validate that there are no missing attributes
             # given the list of required server keys above
             for server in self.d["servers"]:
@@ -126,7 +129,6 @@ class UserConfigParser(object):
 
                 obj_type_d = {"projects": "project", "studies": "study",
                     "expressions": "expression"}
-            
                 # for each project, study, and expression, validate that there
                 # are no missing attributes given the list of required keys
                 # above
@@ -141,11 +143,26 @@ class UserConfigParser(object):
                                 raise UserConfigException(
                                     "missing attribute(s) from " 
                                     + obj_type_d[object_string] + " " 
-                                    + str(obj_count) + " in "
+                                    + str(obj_count) + " of server "
                                     + server["server_name"] + ": "
                                     + ", ".join(sorted(list(object_keys_diff)))
                                 )
-
+                            # check the 'filters' attribute of an object
+                            # to ensure it implements the required params
+                            filt_req_keys = object_req_filters[object_string]
+                            filt_keys = set(
+                                list(object_instance["filters"]))
+                            filt_key_diff = filt_req_keys.difference(filt_keys)
+                            if len(filt_key_diff) > 0:
+                                raise UserConfigException(
+                                    "missing required filter(s) from 'filter' "
+                                    + "attribute in " 
+                                    + obj_type_d[object_string] + " "
+                                    + str(obj_count) + " of server " 
+                                    + server["server_name"] + ": "
+                                    + ", ".join(sorted(list(filt_key_diff)))
+                                )
+                            
                         obj_count += 1
                 server_count += 1
         

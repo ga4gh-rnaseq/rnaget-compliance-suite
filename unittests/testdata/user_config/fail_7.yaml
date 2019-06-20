@@ -1,6 +1,6 @@
 
 servers:
-  - server_name: Unit Test
+  - server_name: Server A
     base_url: http://localhost:5000/
     token: gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa
     implemented:
@@ -22,4 +22,3 @@ servers:
       - id: 2a7ab5533ef941eaa59edbfe887b58c4
         filters:
           studyID: 6cccbbd76b9c4837bd7342dd616d0fec
-          format: loom

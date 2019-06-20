@@ -19,7 +19,12 @@ Attributes:
         skip_text (required): message to display if test is skipped
         apply_params (required): "all" if all param filters applied at once,
             "cases" if param filters tested one at a time, "no" if params not
-            applied at all
+            applied at all, "some" if a specified list of params to use is
+            supplied
+        specified_params (optional): if 'apply_params' is 'some,' then this 
+            list includes the specific parameters to supply for the test. If
+            'apply_params' is 'cases', then this list includes parameters that
+            will be always supplied for each case in the test scenario
         expected_status (optional): int indicating expected response code. If
             nothing specified, test expects OK status code (200)
         replace_params (optional): bool indicating whether to replace request
@@ -395,7 +400,8 @@ TESTS_DICT = {
         "pass_text": "Expressions can be retrieved through search endpoint",
         "fail_text": "Expressions cannot be retrieved through search endpoint",
         "skip_text": "Expression search test skipped",
-        "apply_params": "no"
+        "apply_params": "some",
+        "specified_params": ["format"]
     }, "expression_search_url_params_all": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION SEARCH URL PARAMS ALL
@@ -434,7 +440,8 @@ TESTS_DICT = {
                      + " through the search endpoint for all cases",
         "skip_text": "Expressions search with multiple URL parameters cases "
                      + " test skipped",
-        "apply_params": "cases"
+        "apply_params": "cases",
+        "specified_params": ["format"]
     }, "expression_search_filters_out": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION SEARCH FILTERS OUT
@@ -453,6 +460,7 @@ TESTS_DICT = {
                      + "non-matching objects",
         "skip_text": "Expression search filters out test skipped",
         "apply_params": "cases",
+        "specified_params": ["format"],
         "replace_params": True,
         "replace_params_with": c.NONEXISTENT_ID
     }, "expression_search_filters": {

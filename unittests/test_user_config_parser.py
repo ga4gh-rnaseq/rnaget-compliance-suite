@@ -60,14 +60,16 @@ def test_validate_config_file_failures():
         '"servers" should be the only root key',
         "missing attribute(s) from server 1: continuous, expressions, " 
             + "projects, studies",
-        "missing attribute(s) from project 1 in Server A: filters, id",
+        "missing attribute(s) from project 1 of server Server A: filters, id",
         "YAML config file could not be parsed. Please refer to the template "
             + "config file.",
         'value of implemented:expressions must be a boolean',
-        'wrongendpoint not a valid endpoint'
+        'wrongendpoint not a valid endpoint',
+        "missing required filter(s) from 'filter' attribute in expression 1 "
+            + "of server Server A: format"
     ]
 
-    for i in range(0,7):
+    for i in range(0,8):
         config_file = yaml_dir + "fail_" + str(i) + ".yaml"
         message = messages[i]
 
