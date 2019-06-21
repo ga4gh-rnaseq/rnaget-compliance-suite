@@ -10,6 +10,7 @@ from jsonschema import RefResolver
 from jsonschema.exceptions import ValidationError
 from compliance_suite.config.constants import *
 import os
+import inspect
 import json
 import requests
 
@@ -36,7 +37,8 @@ class SchemaValidator(object):
 
         # reference resolved to "schemas" directory in this library,
         # schema loaded
-        schema_dir = os.path.abspath(SCHEMA_RELATIVE_DIR)
+        schema_dir = os.path.dirname(inspect.getmodule(self).__file__) \
+                     + "/" + SCHEMA_RELATIVE_DIR
         self.resolver = RefResolver('file://' + schema_dir + "/", None)
         self.schema_json = json.loads(
             open(schema_dir + "/" + schema_file, "r").read()

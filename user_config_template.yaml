@@ -49,4 +49,4 @@ servers:
       - id: 8beada7b93d5e55aa557138b39c6f930
         filters:
           tags: cancer
-          format: TSV
+          format: tsv

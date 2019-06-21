@@ -88,9 +88,8 @@ class Test():
             self.result = 1
         # all true tests run through the SingleTestExecution class
         else:
-            ste = STE(self.get_mature_uri(runner, self.kwargs["uri"]),
-                      self.kwargs["schema"], self.kwargs["http_method"],
-                      self.kwargs["obj_instance"]["filters"], test, runner)
+            ste = STE(self.get_mature_uri(runner, self.kwargs["uri"]), test, 
+                      runner)
             ste.execute_test()
 
     def __str__(self):

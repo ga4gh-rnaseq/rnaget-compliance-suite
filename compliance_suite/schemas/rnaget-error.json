@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetError",
+    "type": "object",
+    "$ref": "rnaget-error.json#/definitions/RNAGetError",
+  
+    "definitions": {
+      "RNAGetError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+      
+        "required": [
+          "message"
+        ],
+        
+        "additionalProperties": true
+      }
+    }
+  }

@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetExpressionArrayFull",
+    "type": "array",
+    "$ref": "rnaget-expression-array-full.json#/definitions/RNAGetExpressionArrayFull",
+
+    "definitions": {
+        "RNAGetExpressionArrayFull": {
+            "type": "array",
+            "allOf": [
+                {
+                    "$ref": "rnaget-expression-array.json#/definitions/RNAGetExpressionArray"
+                },
+                {
+                    "minItems": 1
+                }
+            ]
+        }
+    }
+}

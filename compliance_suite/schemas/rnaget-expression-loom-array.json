@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetExpressionLoomArray",
+    "type": "array",
+    "$ref": "rnaget-expression-loom-array.json#/definitions/RNAGetExpressionLoomArray",
+
+    "definitions": {
+        "RNAGetExpressionLoomArray": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "$ref": "rnaget-expression-loom.json#/definitions/RNAGetExpressionLoom"
+            }
+        }
+    }
+}

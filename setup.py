@@ -24,7 +24,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ga4gh-rnaseq/rnaget-compliance-suite",
-    package_data={'': ['web/*']},
+    package_data={'': ['web/*', 'schemas/*']},
     packages=setuptools.find_packages(),
     install_requires=install_requires,
     entry_points='''

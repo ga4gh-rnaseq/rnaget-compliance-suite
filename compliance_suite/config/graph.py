@@ -59,6 +59,9 @@ TEST_GRAPH = {
                 "expression_search_url_params_all": {},
                 "expression_search_url_params_cases": {},
                 "expression_search_filters_out": {},
+                "expression_search_format_not_specified": {},
+                "expression_search_filetypes_match": {},
+                "expression_search_no_filetype_mismatches": {},
                 "expression_search_filters": {}
             }
         }

@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetStudyArrayFull",
+    "type": "array",
+    "$ref": "rnaget-study-array-full.json#/definitions/RNAGetStudyArrayFull",
+
+    "definitions": {
+        "RNAGetStudyArrayFull": {
+            "type": "array",
+            "allOf": [
+                {
+                    "$ref": "rnaget-study-array.json#/definitions/RNAGetStudyArray"
+                },
+                {
+                    "minItems": 1
+                }
+            ]
+        }
+    }
+}

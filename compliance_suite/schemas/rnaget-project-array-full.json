@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetProjectArrayFull",
+    "type": "array",
+    "$ref": "rnaget-project-array-full.json#/definitions/RNAGetProjectArrayFull",
+
+    "definitions": {
+        "RNAGetProjectArrayFull": {
+            "type": "array",
+            "allOf": [
+                {
+                    "$ref": "rnaget-project-array.json#/definitions/RNAGetProjectArray"
+                },
+                {
+                    "minItems": 1
+                }
+            ]
+        }
+    }
+}

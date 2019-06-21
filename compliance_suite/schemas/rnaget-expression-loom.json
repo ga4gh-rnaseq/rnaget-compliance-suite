@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetExpressionLoom",
+    "type": "object",
+    "$ref": "rnaget-expression-loom.json#/definitions/RNAGetExpressionLoom",
+  
+    "definitions": {
+      "RNAGetExpressionLoom": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "rnaget-expression.json#/definitions/RNAGetExpression"
+          },
+          {
+            "properties": {
+              "fileType": {
+                "type": "string",
+                "enum": ["loom", "LOOM"]
+              }
+            },
+            "required": [
+              "fileType"
+            ]
+          }
+        ]
+      }
+    }
+  }
