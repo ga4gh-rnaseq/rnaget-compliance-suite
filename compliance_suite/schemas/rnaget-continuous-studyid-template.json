@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetContinuousStudyIdTemplate",
+    "type": "object",
+    "$ref": "VAR_FILENAME#/definitions/RNAGetContinuousStudyIdTemplate",
+  
+    "definitions": {
+      "RNAGetContinuousStudyIdTemplate": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "rnaget-continuous.json#/definitions/RNAGetContinuous"
+          },
+          {
+            "properties": {
+              "studyID": {
+                "type": "string",
+                "enum": ["VAR_STUDYIDS"]
+              }
+            },
+            "required": [
+              "studyID"
+            ]
+          }
+        ]
+      }
+    }
+  }

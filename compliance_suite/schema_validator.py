@@ -10,6 +10,7 @@ from jsonschema import RefResolver
 from jsonschema.exceptions import ValidationError
 from compliance_suite.config.constants import *
 import os
+import glob
 import inspect
 import json
 import requests
@@ -37,12 +38,18 @@ class SchemaValidator(object):
 
         # reference resolved to "schemas" directory in this library,
         # schema loaded
-        schema_dir = os.path.dirname(inspect.getmodule(self).__file__) \
-                     + "/" + SCHEMA_RELATIVE_DIR
-        self.resolver = RefResolver('file://' + schema_dir + "/", None)
+        self.schema_file = schema_file
+        self.schema_dir = os.path.dirname(inspect.getmodule(self).__file__) \
+                          + "/" + SCHEMA_RELATIVE_DIR
+        self.resolver = RefResolver('file://' + self.schema_dir + "/", None)
         self.schema_json = json.loads(
-            open(schema_dir + "/" + schema_file, "r").read()
+            open(self.schema_dir + "/" + self.schema_file, "r").read()
         )
+    
+    def delete_temp(self):
+        tempfiles = glob.glob(self.schema_dir + "/temp.*.json")
+        for t in tempfiles:
+            os.remove(t)
         
     def validate_instance(self, instance_json):
         """validate that a json object matches the schema
@@ -74,5 +81,7 @@ class SchemaValidator(object):
             validation_result["status"] = -1
             validation_result["exception_class"] = str(e.__class__.__name__)
             validation_result["message"] = e.message
+        
+        self.delete_temp()
 
         return validation_result

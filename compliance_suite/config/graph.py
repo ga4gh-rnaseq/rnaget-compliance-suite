@@ -70,6 +70,16 @@ TEST_GRAPH = {
         "base": {
             "continuous_get": {
                 "continuous_get_not_found": {}
+            },
+            "continuous_formats": {},
+            "continuous_search": {
+                "continuous_search_url_params_all": {},
+                "continuous_search_url_params_cases": {},
+                "continuous_search_filters_out": {},
+                "continuous_search_studyid_not_specified": {},
+                "continuous_search_studyids_match": {},
+                "continuous_search_no_studyid_mismatches": {},
+                "continuous_search_filters": {}
             }
         }
     }

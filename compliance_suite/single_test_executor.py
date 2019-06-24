@@ -111,7 +111,9 @@ class SingleTestExecutor(object):
         if self.test.result != -1:
             self.full_message.append(["Request", uri])
             self.full_message.append(["Params", str(params)])
-            self.full_message.append(["Response Body", response.text])
+            # only add response body if JSON format is expected
+            if self.is_json:
+                self.full_message.append(["Response Body", response.text])
 
             try:
                 # Validation 1, Content-Type, Media Type validation
@@ -141,19 +143,25 @@ class SingleTestExecutor(object):
 
                 # if JSON object/dict cannot be parsed from the response body,
                 # raise a TestStatusException
-                response_json = None
-                try:
-                    response_json = response.json()
-                except ValueError as e:
-                    raise tse.JsonParseException(str(e))
 
-                sv = SchemaValidator(self.schema_file)
-                validation_result = sv.validate_instance(response_json)
-                self.test.result = validation_result["status"]
+                # if endpoint not expected to return JSON (is_json == False),
+                # skip this step
+                if self.is_json:
+                    response_json = None
+                    try:
+                        response_json = response.json()
+                    except ValueError as e:
+                        raise tse.JsonParseException(str(e))
 
-                if validation_result["status"] == -1:
-                    raise tse.SchemaValidationException(
-                        validation_result["message"])
+                    sv = SchemaValidator(self.schema_file)
+                    validation_result = sv.validate_instance(response_json)
+                    self.test.result = validation_result["status"]
+
+                    if validation_result["status"] == -1:
+                        raise tse.SchemaValidationException(
+                            validation_result["message"])
+                else:
+                    self.test.result = 1
 
             except tse.TestStatusException as e:
                 self.test.result = -1
@@ -200,7 +208,7 @@ class SingleTestExecutor(object):
             False if "media_types" not in self.test.kwargs.keys() else True
         if add_test_specific:
             self.media_types += \
-                [a for a in self.test.kwargs["test_media_types"]]
+                [a for a in self.test.kwargs["media_types"]]
         self.headers = {"Accept": ", ".join(self.media_types) + ";"}
 
     def __set_params(self):
@@ -223,8 +231,12 @@ class SingleTestExecutor(object):
     
     def __set_schema(self):
         self.schema_file = None
+        self.is_json = True
+
         if "schema_file" in self.test.kwargs.keys():
             self.schema_file = self.test.kwargs["schema_file"]
         else:
             self.schema_file = self.test.kwargs["schema_func"](self.params)
-            print(self.schema_file)
+        
+        if "is_json" in self.test.kwargs.keys():
+            self.is_json = self.test.kwargs["is_json"]

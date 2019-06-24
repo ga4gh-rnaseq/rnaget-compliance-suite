@@ -72,7 +72,7 @@ class UserConfigParser(object):
         object_req_keys = {"id", "filters"} # required attributes for projects,
         # studies, expressions
         object_req_filters = {"projects": set(), "studies": set(), 
-            "expressions": {"format"}, "continuous": set()
+            "expressions": {"format"}, "continuous": {"studyID"}
         } # required filters that any object of a given type MUST implement.
         # ie. expressions must provide a format that they can be searched under
 
@@ -128,11 +128,11 @@ class UserConfigParser(object):
                         + ", ".join(sorted(list(server_keys_diff))))
 
                 obj_type_d = {"projects": "project", "studies": "study",
-                    "expressions": "expression"}
+                    "expressions": "expression", "continuous": "continuous"}
                 # for each project, study, and expression, validate that there
                 # are no missing attributes given the list of required keys
                 # above
-                for object_string in ["projects", "studies", "expressions"]:
+                for object_string in ENDPOINTS:
                     if obj_implemented[object_string]:
                         obj_count = 1 
                         for object_instance in server[object_string]:

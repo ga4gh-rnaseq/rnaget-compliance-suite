@@ -57,6 +57,8 @@ Attributes:
         
         expected_status (optional): list of ints indicating expected response
             codes. If nothing specified, test expects only OK status code (200)
+        is_json (optional): boolean indicating if response body is in JSON.
+            True by default if not specified.
     
     TESTS_BY_OBJECT_TYPE (dict): lists the name of tests grouped by the object
         type they pertain to (project, study, expression)
@@ -412,10 +414,11 @@ TESTS_DICT = {
         # TEST: EXPRESSION SEARCH
         # # # # # # # # # # # # # # # # # # # #
         "name": "expression_search",
-        "description": "Requests the /expressions/search endpoint without any "
-                       + "parameter filters. Checks content type and status "
-                       + "code (200). Validates response body matches "
-                       + "expression array schema in the specification.",
+        "description": "Requests the /expressions/search endpoint, only "
+                       + "specifying the required 'format' parameter. Checks "
+                       + "content type and status code (200). Validates "
+                       + "response body matches expression array schema in the "
+                       + "specification.",
         "uri": c.EXPRESSION_API + "search",
         "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
         "http_method": c.HTTP_GET,
@@ -594,12 +597,15 @@ TESTS_DICT = {
                        + "id in config file. Checks content type and status "
                        + "code (200).",
         "uri": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
-        "schema_file": c.SCHEMA_FILE_CONTINUOUS,
+        "schema_file": c.SCHEMA_FILE_EMPTY,
         "http_method": c.HTTP_GET,
         "pass_text": "Continuous endpoint implemented by the server",
         "fail_text": "Continuous endpoint not implemented by the server",
         "skip_text": "Continuous endpoint test skipped",
-        "apply_params": "no"
+        "apply_params": "no",
+        "use_default_media_types": False,
+        "media_types": ["application/vnd.loom", "text/tab-separated-values"],
+        "is_json": False
     }, "continuous_get_not_found": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS GET NOT FOUND
@@ -618,6 +624,182 @@ TESTS_DICT = {
         "skip_text": "Continuous not found test skipped",
         "apply_params": "no",
         "expected_status": [400, 404]
+    }, "continuous_formats": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS FORMATS
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "continuous_formats",
+        "description": "Requests the /continuous/formats endpoint. Checks "
+                       + "content type and status code (200). Validates "
+                       + "response body is an array of strings.",
+        "uri": c.CONTINUOUS_API + "formats",
+        "schema_file": c.SCHEMA_FILE_STRING_ARRAY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous formats endpoint implemented",
+        "fail_text": "Continuous formats endpoint not implemented",
+        "skip_text": "Continuous formats test skipped",
+        "apply_params": "no",
+    }, "continuous_search": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS SEARCH
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_search",
+        "description": "Requests the /continuous/search endpoint, only "
+                       + "specifying the required 'studyID' parameter. Checks "
+                       + "content type and status code (200). Validates "
+                       + "response body matches continuous array schema in the "
+                       + "specification.",
+        "uri": c.CONTINUOUS_API + "search",
+        "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous objects can be retrieved through search "
+            + "endpoint",
+        "fail_text": "Continuous objects cannot be retrieved through search "
+            + "endpoint",
+        "skip_text": "Continuous search test skipped",
+        "apply_params": "some",
+        "specified_params": ["studyID"]
+    }, "continuous_search_url_params_all": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS SEARCH URL PARAMS ALL
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_search_url_params_all",
+        "description": "Requests the /continuous/search endpoint using all "
+                       + "parameter filters in config file. Checks content "
+                       + "type and status code (200). Validates response body "
+                       + "matches continuous object array schema in the "
+                       + "specification.",
+        "uri": c.CONTINUOUS_API + "search",
+        "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous objects can be retrieved using URL parameters "
+                     + "through the search endpoint",
+        "fail_text": "Continuous objects cannot be retrieved using URL " 
+                     + "parameters through the search endpoint",
+        "skip_text": "Continuous search with URL parameters test skipped",
+        "apply_params": "all"
+    }, "continuous_search_url_params_cases": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS SEARCH URL PARAMS CASES
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_search_url_params_cases",
+        "description": "Performs multiple requests of the /continuous/search "
+                       + "endpoint, each time using a different parameter "
+                       + "filter in config file. Checks content type and "
+                       + "status code (200). Validates response body matches "
+                       + "continuous array schema in the specification.",
+        "uri": c.CONTINUOUS_API + "search",
+        "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous objects can be retrieved using URL parameters "
+                     + "through the search endpoint for all cases",
+        "fail_text": "Continuous objects cannot be retrieved using URL "
+                     + "parameters through the search endpoint for all cases",
+        "skip_text": "Continuous search with multiple URL parameters cases "
+                     + " test skipped",
+        "apply_params": "cases",
+        "specified_params": ["studyID"]
+    }, "continuous_search_filters_out": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS SEARCH FILTERS OUT
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_search_filters_out",
+        "description": "Requests the /continuous/search endpoint using "
+                       + "parameter filters that do not apply to any "
+                       + "continuous object. Checks content type and status "
+                       + "code (200). Validates response body is an empty "
+                       + "array.",
+        "uri": c.CONTINUOUS_API + "search",
+        "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous search endpoint successfully filters out "
+                     + "non-matching objects",
+        "fail_text": "Continuous search endpoint does not filter out "
+                     + "non-matching objects",
+        "skip_text": "Continuous search filters out test skipped",
+        "apply_params": "cases",
+        "specified_params": ["studyID"],
+        "replace_params": True,
+        "param_replacement": c.NONEXISTENT_ID
+    }, "continuous_search_studyid_not_specified": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS SEARCH STUDYID NOT SPECIFIED
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_search_studyid_not_specified",
+        "description": "Requests the /continuous/search endpoint without "
+                       + "specifying the required 'studyID' parameter. Checks "
+                       + "content type and status code (4xx). Validates "
+                       + "response body is an error message JSON.",
+        "uri": c.CONTINUOUS_API + "search",
+        "schema_file": c.SCHEMA_FILE_ERROR,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous search endpoint appropriately raises error "
+                     + "when studyID not specified",
+        "fail_text": "Continuous search endpoint does not raise error when "
+                     + "studyID not specified",
+        "skip_text": "Continuous search format not specified test skipped",
+        "apply_params": "no",
+        "expected_status": [400, 404, 422]
+    }, "continuous_search_studyids_match": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS SEARCH STUDYIDS MATCH
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_search_studyids_match",
+        "description": "Requests the /continuous/search endpoint with "
+                       + "'studyID' parameter specified. Checks "
+                       + "content type and status code (200). Validates "
+                       + "continuous objects in response body contain a "
+                       + "studyID that matches the studyID in the request.",
+        "uri": c.CONTINUOUS_API + "search",
+        "schema_func": sf.schema_continuous_search_studyids_match,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous search returns objects with "
+                     + "studyID matching request",
+        "fail_text": "Continuous search does not return objects "
+                     + "with studyID matching request",
+        "skip_text": "Continuous search studyIDs match test skipped",
+        "apply_params": "some",
+        "specified_params": ["studyID"],
+    }, "continuous_search_no_studyid_mismatches": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS SEARCH NO STUDYID MISMATCHES
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_search_no_studyid_mismatches",
+        "description": "Requests the /continuous/search endpoint with "
+                       + "'studyID' parameter that does not match the studyID "
+                       + "specified in config file. Checks content type and "
+                       + "status code (200). Validates continuous objects in "
+                       + "response body have a studyID matching the request.",
+        "uri": c.CONTINUOUS_API + "search",
+        "schema_func": sf.schema_continuous_search_no_studyid_mismatches,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous search returns objects with studyID matching "
+                     + "requested studyID when modified",
+        "fail_text": "Continuous search does not return objects with studyID"
+                     + "matching requested studyID when modified",
+        "skip_text": "Continuous search no studyID mismatches test skipped",
+        "apply_params": "some",
+        "replace_params": True,
+        "param_replacement": c.NONEXISTENT_ID,
+        "specified_params": ["studyID"],
+    }, "continuous_search_filters": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS SEARCH FILTERS
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_search_filters",
+        "description": "Requests the /continuous/search/filters endpoint. " 
+                       + "Checks content type and status code (200). Validates "
+                       + "response body matches search filter array schema "
+                       + "in the specification.",
+        "uri": c.CONTINUOUS_API + "search/filters",
+        "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Continuous filters can be retrieved through the search "
+                     + "endpoint",
+        "fail_text": "Continuous filters cannot be retrieved through the "
+                     + "search endpoint",
+        "skip_text": "Continous filters search test skipped",
+        "apply_params": "no"
     }, "continuous_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS ENDPOINT NOT IMPLEMENTED
@@ -674,7 +856,16 @@ TESTS_BY_OBJECT_TYPE = {
     ],
     "continuous": [
         "continuous_get",
-        "continuous_get_not_found"
+        "continuous_get_not_found",
+        "continuous_formats",
+        "continuous_search",
+        "continuous_search_url_params_all",
+        "continuous_search_url_params_cases",
+        "continuous_search_filters_out",
+        "continuous_search_studyid_not_specified",
+        "continuous_search_studyids_match",
+        "continuous_search_no_studyid_mismatches",
+        "continuous_search_filters"
     ]
 }
 """dict: names of tests by project, study, expression object types"""
