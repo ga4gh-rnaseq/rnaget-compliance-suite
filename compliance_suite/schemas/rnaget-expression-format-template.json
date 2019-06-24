@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetExpressionFormatTemplate",
+    "type": "object",
+    "$ref": "VAR_FILENAME#/definitions/RNAGetExpressionFormatTemplate",
+  
+    "definitions": {
+      "RNAGetExpressionFormatTemplate": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "rnaget-expression.json#/definitions/RNAGetExpression"
+          },
+          {
+            "properties": {
+              "fileType": {
+                "type": "string",
+                "enum": ["VAR_FORMATS"]
+              }
+            },
+            "required": [
+              "fileType"
+            ]
+          }
+        ]
+      }
+    }
+  }

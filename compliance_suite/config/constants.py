@@ -63,12 +63,19 @@ SCHEMA_FILE_EXPRESSION_LOOM_ARRAY_FULL = "rnaget-expression-loom-array-full" \
                                          + ".json"
 SCHEMA_FILE_EXPRESSION_TSV_ARRAY = "rnaget-expression-tsv-array.json"
 SCHEMA_FILE_EXPRESSION_TSV_ARRAY_FULL = "rnaget-expression-tsv-array-full.json"
+
+SCHEMA_FILE_EXPRESSION_FORMAT_TEMPLATE = \
+    "rnaget-expression-format-template.json"
+SCHEMA_FILE_EXPRESSION_ARRAY_FORMAT_TEMPLATE = \
+    "rnaget-expression-array-format-template.json"
+
 SCHEMA_FILE_CONTINUOUS_ARRAY = "rnaget-continuous-array.json"
 SCHEMA_FILE_CONTINUOUS_ARRAY_FULL = "rnaget-continuous-array-full.json"
 SCHEMA_FILE_CONTINUOUS_STUDYID_TEMPLATE = \
     "rnaget-continuous-studyid-template.json"
 SCHEMA_FILE_CONTINUOUS_ARRAY_STUDYID_TEMPLATE = \
     "rnaget-continuous-array-studyid-template.json"
+
 SCHEMA_FILE_SEARCH_FILTER_ARRAY = "rnaget-search-filter-array.json"
 SCHEMA_FILE_STRING_ARRAY = "rnaget-string-array.json"
 

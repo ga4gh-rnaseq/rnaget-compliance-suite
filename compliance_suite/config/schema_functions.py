@@ -2,6 +2,10 @@ import compliance_suite.config.constants as c
 import compliance_suite.schema_validator as sv
 import os
 
+def get_temp_filename(template_filename, value):
+     return "temp." + template_filename.replace(".json", "") \
+            + "-" + value + ".json"
+
 def render_and_write_temp_schema(output_filename, template, replace_l):
      schema_dir = os.path.dirname(sv.__file__) \
                      + "/" + c.SCHEMA_RELATIVE_DIR
@@ -12,40 +16,66 @@ def render_and_write_temp_schema(output_filename, template, replace_l):
      out_path = schema_dir + "/" + output_filename
      open(out_path, "w").write(json)
 
-def schema_expression_search_filetypes_match(params):
-    d = {"loom": c.SCHEMA_FILE_EXPRESSION_LOOM_ARRAY_FULL,
-         "tsv": c.SCHEMA_FILE_EXPRESSION_TSV_ARRAY_FULL}
-    return d[params["format"].lower()]
-
-def schema_expression_search_no_filetype_mismatches(params):
-    d = {"loom": c.SCHEMA_FILE_EXPRESSION_LOOM_ARRAY,
-         "tsv": c.SCHEMA_FILE_EXPRESSION_TSV_ARRAY}
-    return d[params["format"].lower()]
-
-def schema_continuous_search_studyid(params, full=False):
-     # render RNAGetContinuous template schema 
-     output_filename = "temp.rnaget-continuous-studyid-" + params["studyID"] \
-                       + ".json"
-     template = c.SCHEMA_FILE_CONTINUOUS_STUDYID_TEMPLATE
-     replace_l = [['["VAR_STUDYIDS"]', '["%s"]' % (params["studyID"])]]
-     render_and_write_temp_schema(output_filename, template, replace_l)
-
-     # render RNAGetContinuousArray template schema
-     arr_output_filename = "temp.rnaget-continuous-array-studyid-" \
-                           + params["studyID"] + ".json"
-     arr_template = c.SCHEMA_FILE_CONTINUOUS_ARRAY_STUDYID_TEMPLATE
-     arr_replace_l = [
-          ["VAR_ARRAY_FILENAME", arr_output_filename],
-          ["VAR_SINGLE_FILENAME", output_filename],
-     ]
+def render_endpoint_object_and_array(obj_filename, obj_template, obj_replace_l,
+     arr_filename, arr_template, arr_replace_l, value, full=False):
+     
+     render_and_write_temp_schema(obj_filename, obj_template, obj_replace_l)
      if full:
           arr_replace_l.append(['"minItems": 0', '"minItems": 1'])
-
-     render_and_write_temp_schema(arr_output_filename, arr_template, 
+     render_and_write_temp_schema(arr_filename, arr_template, 
                                   arr_replace_l)
-     
-     return arr_output_filename
 
+def schema_expression_search_format(params, full=False):
+     value = params["format"]
+     obj_template = c.SCHEMA_FILE_EXPRESSION_FORMAT_TEMPLATE
+     obj_filename = get_temp_filename(obj_template, value)
+     obj_replace_l = [
+          ['["VAR_FORMATS"]', 
+          '["%s", "%s"]' % (params["format"].lower(),
+                            params["format"].upper())],
+          ["VAR_FILENAME", obj_filename]
+     ]
+     
+     arr_template = c.SCHEMA_FILE_EXPRESSION_ARRAY_FORMAT_TEMPLATE
+     arr_filename = get_temp_filename(arr_template, value)
+     arr_replace_l = [
+          ["VAR_ARRAY_FILENAME", arr_filename],
+          ["VAR_SINGLE_FILENAME", obj_filename]
+     ]
+     
+     render_endpoint_object_and_array(obj_filename, obj_template,
+          obj_replace_l, arr_filename, arr_template, arr_replace_l, 
+          value, full)
+
+     return arr_filename
+
+def schema_expression_search_filetypes_match(params):
+    return schema_expression_search_format(params, full=True)
+
+def schema_expression_search_no_filetype_mismatches(params):
+    return schema_expression_search_format(params)
+
+def schema_continuous_search_studyid(params, full=False):
+     value = params["studyID"]
+     obj_template = c.SCHEMA_FILE_CONTINUOUS_STUDYID_TEMPLATE
+     obj_filename = get_temp_filename(obj_template, value)
+     obj_replace_l = [
+          ['["VAR_STUDYIDS"]', '["%s"]' % (params["studyID"])],
+          ['VAR_FILENAME', obj_filename]
+     ]
+     
+     arr_template = c.SCHEMA_FILE_CONTINUOUS_ARRAY_STUDYID_TEMPLATE
+     arr_filename = get_temp_filename(arr_template, value)
+     arr_replace_l = [
+          ["VAR_ARRAY_FILENAME", arr_filename],
+          ["VAR_SINGLE_FILENAME", obj_filename]
+     ]
+     
+     render_endpoint_object_and_array(obj_filename, obj_template,
+          obj_replace_l, arr_filename, arr_template, arr_replace_l, 
+          value, full)
+
+     return arr_filename
 
 def schema_continuous_search_studyids_match(params):
      return schema_continuous_search_studyid(params, full=True)
