@@ -55,16 +55,16 @@ def schema_expression_search_filetypes_match(params):
 def schema_expression_search_no_filetype_mismatches(params):
     return schema_expression_search_format(params)
 
-def schema_continuous_search_studyid(params, full=False):
-     value = params["studyID"]
-     obj_template = c.SCHEMA_FILE_CONTINUOUS_STUDYID_TEMPLATE
+def schema_continuous_search_format(params, full=False):
+     value = params["format"]
+     obj_template = c.SCHEMA_FILE_CONTINUOUS_FORMAT_TEMPLATE
      obj_filename = get_temp_filename(obj_template, value)
      obj_replace_l = [
-          ['["VAR_STUDYIDS"]', '["%s"]' % (params["studyID"])],
+          ['["VAR_FORMATS"]', '["%s"]' % (params["format"])],
           ['VAR_FILENAME', obj_filename]
      ]
      
-     arr_template = c.SCHEMA_FILE_CONTINUOUS_ARRAY_STUDYID_TEMPLATE
+     arr_template = c.SCHEMA_FILE_CONTINUOUS_ARRAY_FORMAT_TEMPLATE
      arr_filename = get_temp_filename(arr_template, value)
      arr_replace_l = [
           ["VAR_ARRAY_FILENAME", arr_filename],
@@ -77,8 +77,8 @@ def schema_continuous_search_studyid(params, full=False):
 
      return arr_filename
 
-def schema_continuous_search_studyids_match(params):
-     return schema_continuous_search_studyid(params, full=True)
+def schema_continuous_search_formats_match(params):
+     return schema_continuous_search_format(params, full=True)
 
-def schema_continuous_search_no_studyid_mismatches(params):
-     return schema_continuous_search_studyid(params)
+def schema_continuous_search_no_format_mismatches(params):
+     return schema_continuous_search_format(params)

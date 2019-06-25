@@ -645,7 +645,7 @@ TESTS_DICT = {
         # # # # # # # # # # # # # # # # # # # #
         "name": "continuous_search",
         "description": "Requests the /continuous/search endpoint, only "
-                       + "specifying the required 'studyID' parameter. Checks "
+                       + "specifying the required 'format' parameter. Checks "
                        + "content type and status code (200). Validates "
                        + "response body matches continuous array schema in the "
                        + "specification.",
@@ -658,7 +658,7 @@ TESTS_DICT = {
             + "endpoint",
         "skip_text": "Continuous search test skipped",
         "apply_params": "some",
-        "specified_params": ["studyID"]
+        "specified_params": ["format"]
     }, "continuous_search_url_params_all": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS SEARCH URL PARAMS ALL
@@ -698,7 +698,7 @@ TESTS_DICT = {
         "skip_text": "Continuous search with multiple URL parameters cases "
                      + " test skipped",
         "apply_params": "cases",
-        "specified_params": ["studyID"]
+        "specified_params": ["format"]
     }, "continuous_search_filters_out": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS SEARCH FILTERS OUT
@@ -718,70 +718,70 @@ TESTS_DICT = {
                      + "non-matching objects",
         "skip_text": "Continuous search filters out test skipped",
         "apply_params": "cases",
-        "specified_params": ["studyID"],
+        "specified_params": ["format"],
         "replace_params": True,
         "param_replacement": c.NONEXISTENT_ID
-    }, "continuous_search_studyid_not_specified": {
+    }, "continuous_search_format_not_specified": {
         # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH STUDYID NOT SPECIFIED
+        # TEST: CONTINUOUS SEARCH FORMAT NOT SPECIFIED
         # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search_studyid_not_specified",
+        "name": "continuous_search_format_not_specified",
         "description": "Requests the /continuous/search endpoint without "
-                       + "specifying the required 'studyID' parameter. Checks "
+                       + "specifying the required 'format' parameter. Checks "
                        + "content type and status code (4xx). Validates "
                        + "response body is an error message JSON.",
         "uri": c.CONTINUOUS_API + "search",
         "schema_file": c.SCHEMA_FILE_ERROR,
         "http_method": c.HTTP_GET,
         "pass_text": "Continuous search endpoint appropriately raises error "
-                     + "when studyID not specified",
+                     + "when format not specified",
         "fail_text": "Continuous search endpoint does not raise error when "
-                     + "studyID not specified",
+                     + "format not specified",
         "skip_text": "Continuous search format not specified test skipped",
         "apply_params": "no",
         "expected_status": [400, 404, 422]
-    }, "continuous_search_studyids_match": {
+    }, "continuous_search_formats_match": {
         # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH STUDYIDS MATCH
+        # TEST: CONTINUOUS SEARCH FORMATS MATCH
         # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search_studyids_match",
+        "name": "continuous_search_formats_match",
         "description": "Requests the /continuous/search endpoint with "
-                       + "'studyID' parameter specified. Checks "
+                       + "'format' parameter specified. Checks "
                        + "content type and status code (200). Validates "
                        + "continuous objects in response body contain a "
-                       + "studyID that matches the studyID in the request.",
+                       + "format that matches the format in the request.",
         "uri": c.CONTINUOUS_API + "search",
-        "schema_func": sf.schema_continuous_search_studyids_match,
+        "schema_func": sf.schema_continuous_search_formats_match,
         "http_method": c.HTTP_GET,
         "pass_text": "Continuous search returns objects with "
-                     + "studyID matching request",
+                     + "format matching request",
         "fail_text": "Continuous search does not return objects "
-                     + "with studyID matching request",
-        "skip_text": "Continuous search studyIDs match test skipped",
+                     + "with format matching request",
+        "skip_text": "Continuous search formats match test skipped",
         "apply_params": "some",
-        "specified_params": ["studyID"],
-    }, "continuous_search_no_studyid_mismatches": {
+        "specified_params": ["format"],
+    }, "continuous_search_no_format_mismatches": {
         # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH NO STUDYID MISMATCHES
+        # TEST: CONTINUOUS SEARCH NO FORMAT MISMATCHES
         # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search_no_studyid_mismatches",
+        "name": "continuous_search_no_format_mismatches",
         "description": "Requests the /continuous/search endpoint with "
-                       + "'studyID' parameter that does not match the studyID "
+                       + "'format' parameter that does not match the format "
                        + "specified in config file. Checks content type and "
                        + "status code (200). Validates continuous objects in "
-                       + "response body have a studyID matching the request.",
+                       + "response body have a fileType matching the request.",
         "uri": c.CONTINUOUS_API + "search",
-        "schema_func": sf.schema_continuous_search_no_studyid_mismatches,
+        "schema_func": sf.schema_continuous_search_no_format_mismatches,
         "http_method": c.HTTP_GET,
-        "pass_text": "Continuous search returns objects with studyID matching "
-                     + "requested studyID when modified",
-        "fail_text": "Continuous search does not return objects with studyID"
-                     + "matching requested studyID when modified",
-        "skip_text": "Continuous search no studyID mismatches test skipped",
+        "pass_text": "Continuous search returns objects with fileType matching "
+                     + "requested format when modified",
+        "fail_text": "Continuous search does not return objects with fileType"
+                     + "matching requested format when modified",
+        "skip_text": "Continuous search no format mismatches test skipped",
         "apply_params": "some",
         "replace_params": True,
         "param_replacement": c.NONEXISTENT_ID,
-        "specified_params": ["studyID"],
+        "specified_params": ["format"],
     }, "continuous_search_filters": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS SEARCH FILTERS
@@ -862,9 +862,9 @@ TESTS_BY_OBJECT_TYPE = {
         "continuous_search_url_params_all",
         "continuous_search_url_params_cases",
         "continuous_search_filters_out",
-        "continuous_search_studyid_not_specified",
-        "continuous_search_studyids_match",
-        "continuous_search_no_studyid_mismatches",
+        "continuous_search_format_not_specified",
+        "continuous_search_formats_match",
+        "continuous_search_no_format_mismatches",
         "continuous_search_filters"
     ]
 }

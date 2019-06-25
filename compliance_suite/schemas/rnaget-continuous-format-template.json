@@ -1,12 +1,12 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "$id": "http://json-schema.org/draft-04/schema#",
-    "title": "RNAGetContinuousStudyIdTemplate",
+    "title": "RNAGetContinuousFormatTemplate",
     "type": "object",
-    "$ref": "VAR_FILENAME#/definitions/RNAGetContinuousStudyIdTemplate",
+    "$ref": "VAR_FILENAME#/definitions/RNAGetContinuousFormatTemplate",
   
     "definitions": {
-      "RNAGetContinuousStudyIdTemplate": {
+      "RNAGetContinuousFormatTemplate": {
         "type": "object",
         "allOf": [
           {
@@ -14,13 +14,13 @@
           },
           {
             "properties": {
-              "studyID": {
+              "fileType": {
                 "type": "string",
-                "enum": ["VAR_STUDYIDS"]
+                "enum": ["VAR_FORMATS"]
               }
             },
             "required": [
-              "studyID"
+              "fileType"
             ]
           }
         ]

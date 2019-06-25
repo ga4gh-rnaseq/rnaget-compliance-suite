@@ -1,18 +1,18 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "$id": "http://json-schema.org/draft-04/schema#",
-    "title": "RNAGetContinuousArrayStudyIdTemplate",
+    "title": "RNAGetContinuousArrayFormatTemplate",
     "type": "array",
-    "$ref": "VAR_ARRAY_FILENAME#/definitions/RNAGetContinuousArrayStudyIdTemplate",
+    "$ref": "VAR_ARRAY_FILENAME#/definitions/RNAGetContinuousArrayFormatTemplate",
 
     "definitions": {
-        "RNAGetContinuousArrayStudyIdTemplate": {
+        "RNAGetContinuousArrayFormatTemplate": {
             "type": "array",
             "allOf": [
                 {
                     "items": {
                         "type": "object",
-                        "$ref": "VAR_SINGLE_FILENAME#/definitions/RNAGetContinuousStudyIdTemplate"
+                        "$ref": "VAR_SINGLE_FILENAME#/definitions/RNAGetContinuousFormatTemplate"
                     }                    
                 },
                 {

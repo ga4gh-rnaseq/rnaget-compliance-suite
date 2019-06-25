@@ -72,7 +72,7 @@ class UserConfigParser(object):
         object_req_keys = {"id", "filters"} # required attributes for projects,
         # studies, expressions
         object_req_filters = {"projects": set(), "studies": set(), 
-            "expressions": {"format"}, "continuous": {"studyID"}
+            "expressions": {"format"}, "continuous": {"format"}
         } # required filters that any object of a given type MUST implement.
         # ie. expressions must provide a format that they can be searched under
 
