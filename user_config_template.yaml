@@ -36,7 +36,7 @@ servers:
         projects: true
         studies: true
         expressions: true
-        continuous: false
+        continuous: true
     
     projects:
       - id: E-MTAB-5200
@@ -56,3 +56,10 @@ servers:
         filters:
           tags: cancer
           format: tsv
+
+    continuous:
+      - id: 482580efab4afe180dd0f3caa7b3394c
+        filters:
+          studyID: E-MTAB-5200-ST0
+          format: tsv
+
