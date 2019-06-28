@@ -8,10 +8,12 @@ API routes.
 """
 
 import datetime
+import logging
 import re
 import sys
 
 from compliance_suite.tests import initiate_tests
+from compliance_suite.config.functions import *
 
 def processed_func_descrp(text):
     """Cleanup test function docstring for output to JSON report
@@ -151,11 +153,16 @@ class TestRunner():
                 the child node is passed as the new node/Test to be run
         """
 
+        status_d = {1: "PASSED", -1: "FAILED", 2: "SKIPPED"}
+        longest_testname = get_longest_testname_length()
+
         label = node.label + 1
         for child in node.children:
             if child.label == label:
-                print(str(child), file=sys.stderr)
                 child.run(self)
+                dots = "." * (longest_testname - len(str(child))) + "..."
+                logging.info(str(child) + dots + status_d[child.result])
+                sys.stdout.flush()
         for child in node.children:
             if len(child.children) != 0:
                 self.recurse_run_tests(child)
@@ -198,6 +205,8 @@ class TestRunner():
 
         self.base_tests = initiate_tests(self.server_config)
         for obj_type, obj_id, base_test in self.base_tests:
+            logging.info("starting tests for %s: %s" % (obj_type, obj_id))
+            sys.stdout.flush()
             base_test.run(base_test)
             self.recurse_label_tests(base_test)
             self.recurse_run_tests(base_test)

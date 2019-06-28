@@ -9,6 +9,8 @@ import time
 import http.server
 import socketserver
 import os
+import logging
+import inspect
 import socket
 import webbrowser
 import sys
@@ -47,13 +49,13 @@ class ReportServer(object):
             passed to rendering engine to aid in rendering HTML
     """
 
-    def __init__(self):
+    def __init__(self, web_dir):
         """instantiates a ReportServer object"""
 
         self.port = None
         self.httpd = None
         self.thread = None
-        self.web_dir = os.path.join(os.path.dirname(__file__), 'web')
+        self.web_dir = web_dir
         self.cwd = os.getcwd()
         self.render_helper = {
             "s": { # s: structures
@@ -119,7 +121,7 @@ class ReportServer(object):
         os.chdir(self.web_dir)
         
         data = None
-        with open("temp_result.json", "r") as f:
+        with open("results.json", "r") as f:
             data = json.load(f)
 
         view_loader = j2.FileSystemLoader(searchpath="./")
@@ -130,10 +132,10 @@ class ReportServer(object):
 
         Handler = http.server.SimpleHTTPRequestHandler
         self.httpd = socketserver.TCPServer(("", self.port), Handler)
-        print("serving at http://localhost:" + str(self.port), file=sys.stderr)
+        logging.info("serving at http://localhost:" + str(self.port))
         webbrowser.open("http://localhost:" + str(self.port))
-        print("server will shut down after " + str(uptime) + " seconds, "
-              + "press CTRL+C to shut down manually")
+        logging.info("server will shut down after " + str(uptime) + " seconds, "
+                     + "press CTRL+C to shut down manually")
         self.httpd.serve_forever()
 
     def serve_thread(self, uptime=3600):

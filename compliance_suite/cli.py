@@ -7,14 +7,17 @@ and validated before the TestRunner tests are initiated. JSON report is written
 to file and a local server serving the report can be spun up if user specifies.
 """
 
+import shutil
 import time
 import json
 import os
 import sys
 import tarfile
+import logging
+import inspect
 
 import click
-
+import compliance_suite
 from compliance_suite.report_server import ReportServer
 from compliance_suite.test_runner import TestRunner
 from compliance_suite.user_config_parser import UserConfigParser
@@ -68,16 +71,13 @@ def main():
 
 @main.command(help='run compliance utility report using base urls')
 @click.option('--user-config', '-c', help="path to user config yaml file")
-@click.option('--file_path_name', '-fpn', default='web', 
-              help='to create a tar.gz file')
-@click.option('--json_path', '--json',  
-              help='create a json file report. Setting this to "-" will emit '
-              + 'to standard out')
+@click.option('--output_dir', '-o', default='rnaget-compliance-results', 
+              help='path to output results/web archive directory')
 @click.option('--serve', is_flag=True, help='spin up a server')
 @click.option('--uptime', '-u', default='3600',
               help='time that server will remain up in seconds')
-@click.option('--no-web', is_flag=True, help='skip the creation of a tarball')
-def report(user_config, file_path_name, json_path, serve, uptime, no_web):
+@click.option('--no-tar', is_flag=True, help='skip the creation of a tarball')
+def report(user_config, output_dir, serve, uptime, no_tar):
     """Program entrypoint. Executes compliance tests and generates report
 
     This method parses the CLI command 'report' to execute the report session
@@ -90,11 +90,14 @@ def report(user_config, file_path_name, json_path, serve, uptime, no_web):
             Default is web_<int>.tar.gz
         json_path (str): Optional. Path to dump the final JSON content to
         serve (bool): Optional. If true, spin up a server
-        no_web (bool): Optional. If true, do not dump a webfile
+        no_tar (bool): Optional. If true, do not create .tar.gz of output dir
     """
 
     final_json = []
-
+    logging.basicConfig(format="%(message)s", level=logging.INFO)
+    logging.addLevelName(9, "SUCCESS")
+    logging.info("starting RNAGet compliance testing")
+    
     try:
 
         # check that the user config has been specified, if not, program
@@ -104,6 +107,9 @@ def report(user_config, file_path_name, json_path, serve, uptime, no_web):
                 'No user config file provided. Specify path to yaml file with '
                 + '-c'
             )
+
+        logging.info("parsing config file: " + user_config)
+        sys.stdout.flush()
         
         # check that the server uptime is a valid integer
         if not uptime.isdigit():
@@ -114,7 +120,33 @@ def report(user_config, file_path_name, json_path, serve, uptime, no_web):
         user_config = UserConfigParser(user_config)
         user_config.parse_config_file()
         user_config.validate_config_file()
+
+        # validate the specified archive path is ok to write to
+        output_dirname = os.path.basename(output_dir)
+        output_base_dir = os.path.dirname(output_dir)
+        if output_base_dir == "":
+            output_dir = "./" + output_dirname
+            output_base_dir = "."
+
+        # raise error if base directory does not exist (program will not
+        # create parent directories)
+        if not (os.path.exists(output_base_dir)):
+            raise FileNotFoundError("cannot create output directory at " 
+                                    + output_dir + ", base directory "
+                                    + output_base_dir + " does not exist")
         
+        # raise error if specified archive directory already exists
+        if os.path.exists(output_dir) or \
+            os.path.exists(output_dir + ".tar.gz"):
+            raise ArgumentException("cannot create output directory at " 
+                                    + output_dir + ", directory/archive "
+                                    + "already exists")
+        
+        # create the output archive, and copy the web files there
+        template_web_dir = os.path.join(
+            os.path.dirname(compliance_suite.report_server.__file__), 'web')
+        shutil.copytree(template_web_dir, output_dir)
+
         # for each server in the user config, create a TestRunner
         # run associated tests and add the resulting JSON to the final json
         # report
@@ -127,42 +159,45 @@ def report(user_config, file_path_name, json_path, serve, uptime, no_web):
 
             if token:
                 tr.headers['Authorization'] = 'Bearer ' + str(token)
+            logging.info("starting tests for server: " 
+                         + str(server_config["server_name"]))
+            sys.stdout.flush()
             tr.run_tests()
             final_json.append(tr.generate_final_json())
 
         scan_for_errors(final_json)
 
-        # write final report to output file if specified
-        if json_path is not None:
-            if json_path == '-':
-                json.dump(final_json, sys.stdout)
-            else:
-                with open(json_path, 'w') as outfile:
-                    json.dump(final_json, outfile)
-
-        WEB_DIR = os.path.join(os.path.dirname(__file__), 'web')
+        # write results.json to output directory
+        with open(os.path.join(output_dir, 'results.json'), 'w+') as outfile:
+            json.dump(final_json, outfile)
+        
+        logging.info("all tests complete, results json available at %s/%s" %(
+            output_dir, 'results.json'
+        ))
 
         # write tar.gz archive of report and web files if user specified
-        if not no_web:
-            if file_path_name is not None:
-                with open(os.path.join(WEB_DIR,
-                          'temp_result.json'), 'w+') as outfile:
-                    json.dump(final_json, outfile)
+        if not no_tar:
+            logging.info("creating gzipped tarball of results directory")
 
-                index = 0
-                while(os.path.exists(file_path_name + '_' + str(index) 
-                                     + '.tar.gz')):
-                    index = index + 1
-                with tarfile.open(
-                    file_path_name + '_' + str(index) + '.tar.gz', "w:gz"
-                ) as tar:
-                    tar.add(WEB_DIR, arcname=os.path.basename(WEB_DIR))
+            with tarfile.open(
+                output_dir + '.tar.gz', "w:gz"
+            ) as tar:
+                tar.add(output_dir, arcname=os.path.basename(output_dirname))
+            logging.info("gzipped tarball of results directory available "
+                         + "at " + output_dir + ".tar.gz")
 
         # start server if user specified --serve
         if serve is True:
-            server = ReportServer()
+            logging.info("serving results as HTML report from output " 
+                         + "directory " + output_dir)
+            server = ReportServer(output_dir)
             server.set_free_port()
             server.serve_thread(uptime=int(uptime))
+        else:
+            logging.info("Report results can be served as HTML from results "
+                         + "directory " + output_dir + ". (python3) -> "
+                         + "python -m http.server 8000 OR (python2) -> python "
+                         + "-m SimpleHTTPServer 8000")
             
     # handle various exception classes, each time printing the usage
     # instructions to terminal along with a description of what went wrong
@@ -173,7 +208,7 @@ def report(user_config, file_path_name, json_path, serve, uptime, no_web):
     except UserConfigException as e:
         with click.Context(report) as ctx:
             click.echo(report.get_help(ctx))
-        print("\nError with YAML file: "+ str(e) + "\n")
+        print("Error with YAML file: "+ str(e) + "\n")
     except FileNotFoundError as e:
         with click.Context(report) as ctx:
             click.echo(report.get_help(ctx))
