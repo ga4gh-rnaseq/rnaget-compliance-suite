@@ -93,6 +93,8 @@ class ReportServer(object):
             }
         }
 
+        os.chdir(self.web_dir)
+
     def set_free_port(self):
         """get free port on local machine on which to run the report server
 
@@ -111,15 +113,7 @@ class ReportServer(object):
         s.close()
         self.port = port
 
-    def start_mock_server(self, uptime):
-        """run server to serve final test report
-
-        Args:
-            port (Port): port on which to run the server
-        """
-
-        os.chdir(self.web_dir)
-        
+    def render_html(self):
         data = None
         with open("results.json", "r") as f:
             data = json.load(f)
@@ -129,6 +123,13 @@ class ReportServer(object):
         view_template = view_env.get_template("report_template.html")
         html = view_template.render(data=data, h=self.render_helper)
         open("index.html", "w").write(html)
+
+    def start_mock_server(self, uptime):
+        """run server to serve final test report
+
+        Args:
+            port (Port): port on which to run the server
+        """
 
         Handler = http.server.SimpleHTTPRequestHandler
         self.httpd = socketserver.TCPServer(("", self.port), Handler)

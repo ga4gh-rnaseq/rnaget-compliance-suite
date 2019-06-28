@@ -187,10 +187,12 @@ def report(user_config, output_dir, serve, uptime, no_tar):
                          + "at " + output_dir + ".tar.gz")
 
         # start server if user specified --serve
+        server = ReportServer(output_dir)
+        server.render_html()
+
         if serve is True:
             logging.info("serving results as HTML report from output " 
                          + "directory " + output_dir)
-            server = ReportServer(output_dir)
             server.set_free_port()
             server.serve_thread(uptime=int(uptime))
         else:
@@ -205,11 +207,14 @@ def report(user_config, output_dir, serve, uptime, no_tar):
         with click.Context(report) as ctx:
             click.echo(report.get_help(ctx))
         print("\n"+ str(e) + "\n")
+        sys.exit(1)
     except UserConfigException as e:
         with click.Context(report) as ctx:
             click.echo(report.get_help(ctx))
         print("Error with YAML file: "+ str(e) + "\n")
+        sys.exit(1)
     except FileNotFoundError as e:
         with click.Context(report) as ctx:
             click.echo(report.get_help(ctx))
         print("\n"+ str(e) + "\n")
+        sys.exit(1)
