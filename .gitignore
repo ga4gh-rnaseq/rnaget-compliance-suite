@@ -114,3 +114,4 @@ compliance_suite/schemas/temp.*.json
 rnaget-compliance-results
 unittests/testdata/results/temp_result
 unittests/testdata/results/temp_result.tar.gz
+user_config_caltech.yaml
