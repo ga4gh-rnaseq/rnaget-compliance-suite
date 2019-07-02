@@ -9,10 +9,11 @@ import time
 import signal
 from multiprocessing import Process
 from compliance_suite.report_server import capitalize, ReportServer
+from unittests.constants import OUTPUT_DIR
 
 def spawn_report_server():
     """spawn a sample report server as a subprocess"""
-    rs = ReportServer()
+    rs = ReportServer(OUTPUT_DIR)
     rs.set_free_port()
     rs.serve_thread()
 

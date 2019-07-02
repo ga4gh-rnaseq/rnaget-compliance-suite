@@ -93,8 +93,6 @@ class ReportServer(object):
             }
         }
 
-        os.chdir(self.web_dir)
-
     def set_free_port(self):
         """get free port on local machine on which to run the report server
 
@@ -115,14 +113,15 @@ class ReportServer(object):
 
     def render_html(self):
         data = None
-        with open("results.json", "r") as f:
+        with open(self.web_dir + "/results.json", "r") as f:
             data = json.load(f)
 
         view_loader = j2.FileSystemLoader(searchpath="./")
         view_env = j2.Environment(loader=view_loader)
-        view_template = view_env.get_template("report_template.html")
+        view_template = view_env.get_template(self.web_dir 
+                                              + "/report_template.html")
         html = view_template.render(data=data, h=self.render_helper)
-        open("index.html", "w").write(html)
+        open(self.web_dir + "/index.html", "w").write(html)
 
     def start_mock_server(self, uptime):
         """run server to serve final test report
@@ -131,6 +130,7 @@ class ReportServer(object):
             port (Port): port on which to run the server
         """
 
+        os.chdir(self.web_dir)
         Handler = http.server.SimpleHTTPRequestHandler
         self.httpd = socketserver.TCPServer(("", self.port), Handler)
         logging.info("serving at http://localhost:" + str(self.port))

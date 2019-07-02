@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
-"""Module unittests.test_tests.py
+"""Module unittests.test_node.py
 
-This module contains methods to test the tests module via pytest.
+This module contains methods to test the node module via pytest.
 
 Attributes:
     server_config (dict): represents valid server config as from yaml file
     tr (TestRunner): base test runner object to assign tests to
 """
 
-from unittests.unittests_constants import *
-from unittests.unittests_methods import *
-from compliance_suite.test_runner import TestRunner
-from compliance_suite.tests import Test, initiate_tests
+from unittests.constants import *
+from unittests.methods import *
+from compliance_suite.runner import Runner
+from compliance_suite.node import Node
 
 server_config = copy_dict(SERVER_CONFIG)
-tr = TestRunner(server_config)
+tr = Runner(server_config)
 tr.run_tests()
 
 def test_text():

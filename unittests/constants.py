@@ -5,9 +5,13 @@ This module contains constant data structures to be accessed by multiple
 unit testing modules.
 
 Attributes:
+    OUTPUT_DIR (str): sample output directory to write to for unit tests
     SERVER_CONFIG (dict): complete, correct user config dictionary
     SERVER_CONFIG_NOT_IMPLEMENTED (dict): config without implemented endpoints 
 """
+
+OUTPUT_DIR = "unittests/testdata/results/temp_result"
+OUTPUT_ARCHIVE = OUTPUT_DIR + ".tar.gz"
 
 SERVER_CONFIG = {
     "server_name": "Server A",

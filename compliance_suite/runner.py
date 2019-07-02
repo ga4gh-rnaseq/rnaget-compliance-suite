@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.test_runner.py
+"""Module compliance_suite.runner.py
 
-This module contains TestRunner class, which is responsible for creating and
-running all tests associated with one server outlined in the user config file.
-Tests are created for all object types (projects, studies, expressions) and
-API routes.
+This module contains Runner class, which is responsible for creating and
+running all test nodes associated with one server outlined in the user config 
+file. Tests are created for all object types (projects, studies, expressions) 
+and API routes.
 """
 
 import datetime
@@ -12,23 +12,18 @@ import logging
 import re
 import sys
 
-from compliance_suite.tests import initiate_tests
 from compliance_suite.config.functions import *
+from compliance_suite.config.tests import TESTS_DICT as tests_config_dict
+from compliance_suite.config.tests import TESTS_BY_OBJECT_TYPE as tests_by_obj
+from compliance_suite.config.tests import NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE \
+    as not_impl_tests_by_obj
+from compliance_suite.config.graph import TEST_GRAPH as graph
+from compliance_suite.config.graph import NOT_IMPLEMENTED_TEST_GRAPH as \
+    not_impl_graph
+from compliance_suite.config.constants import ENDPOINTS
+from compliance_suite.node import Node
 
-def processed_func_descrp(text):
-    """Cleanup test function docstring for output to JSON report
-    
-    Args:
-        text (str): docstring/text to cleanup
-    
-    Returns:
-        (str): cleaned docstring/text
-    """
-
-    return re.sub(' +', ' ', text.replace('\n', '')).strip()
-
-
-class TestRunner():
+class Runner():
     """Runs all tests for one server, generates report accordingly
 
     The TestRunner class is used to run tests for a single server in the config
@@ -69,8 +64,21 @@ class TestRunner():
         self.total_tests_skipped = 0
         self.total_tests_warning = 0
         self.server_config = server_config
-        self.results = {"projects": {}, "studies": {}, "expressions": {}, "continuous": {}}
+        self.results = {"projects": {}, "studies": {}, "expressions": {},
+                        "continuous": {}}
         self.headers = {}
+    
+    def processed_func_descrp(self, text):
+        """Cleanup test function docstring for output to JSON report
+        
+        Args:
+            text (str): docstring/text to cleanup
+        
+        Returns:
+            (str): cleaned docstring/text
+        """
+
+        return re.sub(' +', ' ', text.replace('\n', '')).strip()
 
     def recurse_label_tests(self, root):
         """recursively populate label attribute of test objects in graph
@@ -115,7 +123,7 @@ class TestRunner():
                 test_result_object = {
                     'name': str(child),
                     'result': child.result,
-                    'test_description': processed_func_descrp(
+                    'test_description': self.processed_func_descrp(
                         child.kwargs["name"]),
                     'text': child.to_echo(),
                     'full_message': child.full_message,
@@ -153,7 +161,8 @@ class TestRunner():
                 the child node is passed as the new node/Test to be run
         """
 
-        status_d = {1: "PASSED", -1: "FAILED", 2: "SKIPPED"}
+        status_d = {1: "PASSED", -1: "FAILED", 0: "SKIPPED",
+                    2: "UNKNOWN ERROR"}
         longest_testname = get_longest_testname_length()
 
         label = node.label + 1
@@ -191,6 +200,103 @@ class TestRunner():
 
         return report_object
 
+    def initiate_tests(self):
+        """Initiates test objects and generates test graphs for execution
+
+        For each API object instance (a single project, study, or expression), a
+        new test graph with its own base is set up. This graph represents the 
+        full repertoire of tests to be run for the API object.
+        
+        Returns:
+            (list): list of all base nodes/Test objects for all constructed 
+                graphs 
+        """
+
+        # base dictionary, set up to hold all tests, separated by API object
+        # type and then by instance
+        test_obj_dict = {
+            "projects": {},
+            "studies": {},
+            "expressions": {},
+            "continuous": {}
+        }
+        
+        test_bases = []
+
+        # generate test graph from the config file
+        def add_test_children(subtree, parent_key, obj_type, id_key):
+            """recursively generate a test graph from the config file
+
+            This method uses the graph config in 
+            compliance_suite.config.graph.py to recursively assign parent/child
+            relationships to all tests in a set, thereby constructing a graph
+            where each test node can refer to its parent or children.
+
+            Args:
+                subtree (dict): subset of the test graph
+                parent_key (str): key for parent test name at the root of the
+                    subtree
+                obj_type (str): object type (project, study, expression)
+                id_key (str): the unique id for the object instance that this
+                    test is constructed for
+            """
+
+            for child_key in subtree[parent_key].keys():
+                test_obj_dict[obj_type][id_key][parent_key].add_child(
+                    test_obj_dict[obj_type][id_key][child_key]
+                )
+
+                if len(subtree[parent_key][child_key]) > 0:
+                    add_test_children(subtree[parent_key], child_key, obj_type,
+                                    id_key)
+
+        # For each object type and instance, create a test base and the full set
+        # of tests. Assign pass, fail, skip text, then start the recursive 
+        # method to construct the test graph
+        # if an object type is not implemented, then check the endpoint for the
+        # appropriate response code error.
+        server_config = self.server_config
+
+        for obj_type in ENDPOINTS:
+            obj_instances = None
+            test_list = None
+            test_tree = None
+
+            if server_config["implemented"][obj_type]:
+                obj_instances = server_config[obj_type]
+                test_list = tests_by_obj[obj_type]
+                test_tree = graph
+            else:
+                obj_instances = [{"id": "NA", "filters": {"version": "1.0"}}]
+                test_list = not_impl_tests_by_obj[obj_type]
+                test_tree = not_impl_graph
+
+            for obj_instance in obj_instances:
+                test_base = Node(**{"name": "base",
+                                    "obj_type": "base", 
+                                    "obj_instance": "base",
+                                    "description": "root test node on which to "
+                                                + "base test graph"})
+                test_bases.append([obj_type, obj_instance["id"], test_base])
+                test_obj_dict[obj_type][obj_instance["id"]] = \
+                    {"base": test_base}
+
+                for test_key in test_list:
+                    kwargs = tests_config_dict[test_key]
+                    kwargs["obj_type"] = obj_type
+                    kwargs["obj_instance"] = obj_instance
+                    test_obj = Node(**kwargs)
+                    test_obj.set_pass_text(kwargs["pass_text"])
+                    test_obj.set_fail_text(kwargs["fail_text"])
+                    test_obj.set_skip_text(kwargs["skip_text"])
+                    test_obj_dict[obj_type][obj_instance["id"]][kwargs["name"]]\
+                        = test_obj
+            
+                add_test_children(test_tree[obj_type], "base", obj_type,
+                                obj_instance["id"])
+
+        return test_bases
+
     def run_tests(self):
         """Complete pipeline of running tests from bases through the graph
         
@@ -203,7 +309,7 @@ class TestRunner():
         base test for each graph.
         """
 
-        self.base_tests = initiate_tests(self.server_config)
+        self.base_tests = self.initiate_tests()
         for obj_type, obj_id, base_test in self.base_tests:
             logging.info("starting tests for %s: %s" % (obj_type, obj_id))
             sys.stdout.flush()

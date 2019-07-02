@@ -14,12 +14,12 @@ Attributes:
     uri_expression_not_implemented (str): simulates expr endpoint not implement
 """
 
-from unittests.unittests_constants import *
-from unittests.unittests_methods import *
+from unittests.constants import *
+from unittests.methods import *
 from compliance_suite.config.constants import *
 from compliance_suite.config.tests import *
-from compliance_suite.tests import Test
-from compliance_suite.test_runner import TestRunner
+from compliance_suite.node import Node
+from compliance_suite.runner import Runner
 from compliance_suite.single_test_executor import SingleTestExecutor as STE
 
 uri_project_get_success = SERVER_CONFIG["base_url"] \
@@ -56,7 +56,7 @@ uri_study_not_implemented = SERVER_CONFIG["base_url"] + \
 uri_expression_not_implemented = SERVER_CONFIG["base_url"] + \
     "expressions/NA"
 
-def get_ste(uri, test_name, params):
+def get_ste(uri, test_name, params, media_types=None):
     """constructs SingleTestExecutor object based on test and uri
 
     Args:
@@ -70,29 +70,30 @@ def get_ste(uri, test_name, params):
 
     # get the test params from the test dict based on name, then load STE object
     test_config = TESTS_DICT[test_name]
-    test_obj = Test(**test_config)
-    test_runner_obj = TestRunner(copy_dict(SERVER_CONFIG))
+    if media_types:
+        test_config["use_default_media_types"] = False
+        test_config["media_types"] = media_types
+
+    test_obj = Node(**test_config)
+    test_obj.kwargs["obj_instance"] = {"filters": params}
+    test_runner_obj = Runner(copy_dict(SERVER_CONFIG))
     test_runner_obj.headers["Authorization"] = 'Bearer ' \
                                                + str(SERVER_CONFIG["token"])
 
-    ste = STE(uri, test_config["schema"], test_config["http_method"],
-              params, test_obj, test_runner_obj)
+    ste = STE(uri, test_obj, test_runner_obj)
     return ste
 
 def test_constructor():
     """assert STE constructor sets parameters correctly"""
 
     test_config = TESTS_DICT["project_get"]
-    test_obj = Test(**test_config)
-    test_runner_obj = TestRunner(copy_dict(SERVER_CONFIG))
+    test_obj = Node(**test_config)
+    test_runner_obj = Runner(copy_dict(SERVER_CONFIG))
     params = {}
 
     uri = uri_project_get_success
     ste = get_ste(uri, "project_get", params)
     assert ste.uri == uri
-    assert ste.schema_file == test_config["schema"]
-    assert ste.http_method == test_config["http_method"]
-    assert ste.params == params
 
 def test_execute_project_get_success():
     """assert valid project get request has success result"""
@@ -191,12 +192,9 @@ def test_custom_media_types():
     """asserts media type error is raised when accept doesn't match response"""
 
     b = "project_get" # modify parameters from project get test
+    media_types = ["text/plain"]
     uri = uri_project_get_success
-    ste = get_ste(uri, b, {})
-    ste.test.kwargs["use_default_media_types"] = False
-    ste.test.kwargs["test_media_types"] = ["text/plain"]
-    ste.set_media_types()
+    ste = get_ste(uri, b, {}, media_types=media_types)
     ste.execute_test()
-
     assert ste.media_types[0] == "text/plain"
     assert ste.test.result == -1

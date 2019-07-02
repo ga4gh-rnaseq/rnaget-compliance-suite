@@ -5,6 +5,10 @@ This module contains common methods to be accessed by multiple unit testing
 modules.
 """
 
+import os
+import shutil
+from unittests.constants import OUTPUT_DIR, OUTPUT_ARCHIVE
+
 def copy_dict(d):
     """create copy of a dictionary
 
@@ -28,3 +32,9 @@ def copy_list(l):
     """
 
     return [i for i in l]
+
+def remove_output_dir():
+    if os.path.exists(OUTPUT_DIR):
+        shutil.rmtree(OUTPUT_DIR)
+    if os.path.exists(OUTPUT_ARCHIVE):
+        os.remove(OUTPUT_ARCHIVE)

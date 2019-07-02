@@ -19,7 +19,7 @@ import inspect
 import click
 import compliance_suite
 from compliance_suite.report_server import ReportServer
-from compliance_suite.test_runner import TestRunner
+from compliance_suite.runner import Runner
 from compliance_suite.user_config_parser import UserConfigParser
 from compliance_suite.exceptions.argument_exception import ArgumentException
 from compliance_suite.exceptions.user_config_exception import \
@@ -147,11 +147,11 @@ def report(user_config, output_dir, serve, uptime, no_tar):
             os.path.dirname(compliance_suite.report_server.__file__), 'web')
         shutil.copytree(template_web_dir, output_dir)
 
-        # for each server in the user config, create a TestRunner
+        # for each server in the user config, create a Runner
         # run associated tests and add the resulting JSON to the final json
         # report
         for server_config in user_config.d["servers"]:
-            tr = TestRunner(server_config)
+            tr = Runner(server_config)
 
             token = None
             if "token" in server_config.keys():

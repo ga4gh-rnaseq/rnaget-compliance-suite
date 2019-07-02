@@ -14,6 +14,8 @@ import os
 import click
 import signal
 from compliance_suite.cli import main, report
+from unittests.constants import OUTPUT_DIR as od
+from unittests.methods import *
 from click.testing import CliRunner
 from multiprocessing import Process
 
@@ -21,11 +23,6 @@ user_config_dir = "unittests/testdata/user_config/"
 user_config_success = user_config_dir + "config_0.yaml"
 user_config_failure = user_config_dir + "fail_0.yaml"
 json_output_file = "unittest_output.json"
-
-def remove_web_archive():
-    """remove web archives produced by unittests"""
-
-    os.system("rm web_*")
 
 def test_main():
     """asserts that the 'main' method of cli module can be executed"""
@@ -37,59 +34,50 @@ def test_main():
 def test_report():
     """asserts that the 'report' method of cli module executes successfully"""
 
+    remove_output_dir()
     runner = CliRunner()
-    result = runner.invoke(report, ['-c', user_config_success])
+    result = runner.invoke(report, ['-c', user_config_success, 
+                                    '-o', od, '--no-tar'])
+
     assert result.exit_code == 0
+    remove_output_dir()
 
 def test_exceptions():
     """asserts program raises appropriate exceptions with incorrect params"""
 
-    # empty cli, exception should be caught but no error raised
+    remove_output_dir()
+    # empty cli, exception should be caught, program exits with status code "1"
     runner = CliRunner()
     result = runner.invoke(report, [])
-    assert result.exit_code == 0
+    assert result.exit_code == 1
+    remove_output_dir()
 
     # incorrectly formatted user config submitted, exception should be caught
     runner = CliRunner()
-    result = runner.invoke(report, ["-c", user_config_failure])
+    result = runner.invoke(report, ["-c", user_config_failure, "-o", od])
+    assert result.exit_code == 1
+    remove_output_dir()
 
-    # non-existing user config submitted, exception should be caught
+    # non-existing user config submitted, exception should be caught,
+    # program exits with status code "1"
     runner = CliRunner()
-    result = runner.invoke(report, ["-c", "file.yaml"])
-    assert result.exit_code == 0
+    result = runner.invoke(report, ["-c", "file.yaml", "-o", od])
+    assert result.exit_code == 1
+    remove_output_dir()
 
-    # server uptime is a string, not number, exception should be caught
+    # server uptime is a string, not number, exception should be caught,
+    # program exits with status code "1"
     runner = CliRunner()
-    result = runner.invoke(report, ["-c", user_config_failure, 
+    result = runner.invoke(report, ["-c", user_config_failure, "-o", od,
                                     "--uptime", 'String'])
-    assert result.exit_code == 0
-
-    remove_web_archive()
-
-def test_json_path():
-    """asserts correct execution when json path provided"""
-
-    # json output set to file, asserts prog runs to completion
-    runner = CliRunner()
-    result = runner.invoke(report, ["-c", user_config_success, "--json",
-                                    json_output_file])
-    os.system("rm " + json_output_file)
-    assert result.exit_code == 0
-    
-    # json output set to stdout, asserts prog runs to completion
-    runner = CliRunner()
-    result = runner.invoke(report, ["-c", user_config_success, "--json",
-                                    "-"])
-    assert result.exit_code == 0
-
-    remove_web_archive()
+    assert result.exit_code == 1
+    remove_output_dir()
 
 def test_mock_server():
     """asserts mock server is launched and shutdown without error"""
     
+    remove_output_dir()
     runner = CliRunner()
-    result = runner.invoke(report, ["-c", user_config_success, "--serve",
-                                    "--uptime", '1'])
+    result = runner.invoke(report, ["-c", user_config_success, "-o", od, 
+                                    "--serve", "--uptime", '1'])
     assert result.exit_code == 0
-
-    remove_web_archive()

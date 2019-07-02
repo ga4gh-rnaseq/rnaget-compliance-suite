@@ -1,25 +1,17 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.tests.py
+"""Module compliance_suite.node.py
 
-This module contains Test class, which houses information for a single test
-of the API. A single test corresponds to one API route, and one object
-associated with that route. Tests response status and whether the returned
-JSON object matches the required schema.
+This module contains Node class, which represents and houses information for a 
+single test node within the test tree/runner. A single test node corresponds to
+one API route, and one object associated with that route. Tests response status
+and whether the returned JSON object matches the required schema.
 """
 
 import sys
 
 from compliance_suite.single_test_executor import SingleTestExecutor as STE
-from compliance_suite.config.tests import TESTS_DICT as tests_config_dict
-from compliance_suite.config.tests import TESTS_BY_OBJECT_TYPE as tests_by_obj
-from compliance_suite.config.tests import NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE \
-    as not_impl_tests_by_obj
-from compliance_suite.config.graph import TEST_GRAPH as graph
-from compliance_suite.config.graph import NOT_IMPLEMENTED_TEST_GRAPH as \
-    not_impl_graph
-from compliance_suite.config.constants import ENDPOINTS
 
-class Test():
+class Node():
     """Run a single test of the API for one route and one object instance
 
     Test Case class. All the test cases are instances of this class.
@@ -274,102 +266,3 @@ class Test():
         )
 
         return mature_uri
-
-def initiate_tests(server_config):
-    """Initiates test objects and generates test graphs for execution
-
-    For each API object instance (a single project, study, or expression), a
-    new test graph with its own base is set up. This graph represents the full
-    repertoire of tests to be run for the API object.
-
-    Args:
-        server_config (dict): sub dictionary of the user config YAML file,
-            representing all parameters associated with one server
-    
-    Returns:
-        (list): list of all base nodes/Test objects for all constructed graphs 
-    """
-
-    # base dictionary, set up to hold all tests, separated by API object
-    # type and then by instance
-    test_obj_dict = {
-        "projects": {},
-        "studies": {},
-        "expressions": {},
-        "continuous": {}
-    }
-    
-    test_bases = []
-
-    # generate test graph from the config file
-    def add_test_children(subtree, parent_key, obj_type, id_key):
-        """recursively generate a test graph from the config file
-
-        This method uses the graph config in compliance_suite.config.graph.py
-        to recursively assign parent/child relationships to all tests in a set,
-        thereby constructing a graph where each test node can refer to its
-        parent or children.
-
-        Args:
-            subtree (dict): subset of the test graph
-            parent_key (str): key for parent test name at the root of the
-                subtree
-            obj_type (str): object type (project, study, expression)
-            id_key (str): the unique id for the object instance that this test
-                is constructed for
-        """
-
-        for child_key in subtree[parent_key].keys():
-            test_obj_dict[obj_type][id_key][parent_key].add_child(
-                test_obj_dict[obj_type][id_key][child_key]
-            )
-
-            if len(subtree[parent_key][child_key]) > 0:
-                add_test_children(subtree[parent_key], child_key, obj_type,
-                                  id_key)
-
-    # For each object type and instance, create a test base and the full set of
-    # tests. Assign pass, fail, skip text, then start the recursive method to
-    # construct the test graph
-    # if an object type is not implemented, then check the endpoint for the
-    # appropriate response code error.
-
-    for obj_type in ENDPOINTS:
-        obj_instances = None
-        test_list = None
-        test_tree = None
-
-        if server_config["implemented"][obj_type]:
-            obj_instances = server_config[obj_type]
-            test_list = tests_by_obj[obj_type]
-            test_tree = graph
-        else:
-            obj_instances = [{"id": "NA", "filters": {"version": "1.0"}}]
-            test_list = not_impl_tests_by_obj[obj_type]
-            test_tree = not_impl_graph
-
-        for obj_instance in obj_instances:
-            test_base = Test(**{"name": "base",
-                                "obj_type": "base", 
-                                "obj_instance": "base",
-                                "description": "root test node on which to "
-                                               + "base test graph"})
-            test_bases.append([obj_type, obj_instance["id"], test_base])
-            test_obj_dict[obj_type][obj_instance["id"]] = \
-                {"base": test_base}
-
-            for test_key in test_list:
-                kwargs = tests_config_dict[test_key]
-                kwargs["obj_type"] = obj_type
-                kwargs["obj_instance"] = obj_instance
-                test_obj = Test(**kwargs)
-                test_obj.set_pass_text(kwargs["pass_text"])
-                test_obj.set_fail_text(kwargs["fail_text"])
-                test_obj.set_skip_text(kwargs["skip_text"])
-                test_obj_dict[obj_type][obj_instance["id"]][kwargs["name"]]\
-                    = test_obj
-        
-            add_test_children(test_tree[obj_type], "base", obj_type,
-                            obj_instance["id"])
-
-    return test_bases

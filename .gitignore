@@ -110,3 +110,7 @@ ENV/
 
 index.html
 compliance_suite/web/temp_result.json
+compliance_suite/schemas/temp.*.json
+rnaget-compliance-results
+unittests/testdata/results/temp_result
+unittests/testdata/results/temp_result.tar.gz
