@@ -28,7 +28,7 @@ def test_parse_config_file_pass():
     parser = UserConfigParser(user_config_pass)
     parser.parse_config_file()
     assert parser.d != None
-    assert len(parser.d["servers"]) == 2
+    assert len(parser.d["servers"]) == 3
 
     server_a = parser.d["servers"][0]
     assert server_a["server_name"] == "Caltech"
