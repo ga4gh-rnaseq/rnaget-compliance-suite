@@ -9,6 +9,8 @@ before_script:
   - export FLASK_APP=unittests/server.py
   - flask run &
 script:
-  - pytest
+  - pytest --cov=compliance_suite/ --cov-report=term-missing unittests/
+after_success:
+  - coveralls
 after_script:
   - kill %1
