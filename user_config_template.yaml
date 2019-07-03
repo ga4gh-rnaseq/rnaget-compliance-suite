@@ -62,4 +62,33 @@ servers:
         filters:
           studyID: E-MTAB-5200-ST0
           format: tsv
+  
+  - server_name: CanDIG
+    base_url: https://candig.bcgsc.ca/rnaget/
+    token: 5b1ec688b811066e6a964de0cd5ea14fbfbc41ad875fc8a58e46fa2b
+    implemented:
+        projects: true
+        studies: true
+        expressions: true
+        continuous: false
+
+    projects:
+      - id: 68d99e60-7725-11e9-9c42-1402ec895c5c
+        filters:
+          tags: pcawg
+          version: 0.9.2
+
+    studies:
+      - id: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c
+        filters:
+          tags: pcawg
+          version: 0.9.2
+          projectID: 68d99e60-7725-11e9-9c42-1402ec895c5c
+
+    expressions:
+      - id: a3f78632-7dbb-11e9-9a21-1402ec895c5c
+        filters:
+          format: h5
+          tags: pcawg
+          version: 0.9.2
 

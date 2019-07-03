@@ -5,6 +5,7 @@ This module contains class definition of small web server utility. Serves final
 report results as HTML.
 """
 
+import datetime
 import time
 import http.server
 import socketserver
@@ -30,6 +31,26 @@ def capitalize(text):
     """
 
     return text[0].upper() + text[1:]
+
+def get_route_status(route_obj):
+
+    count_d = {"pass": 0, "fail": 0, "skip": 0, "unknown": 0}
+    symbol_d = {"1": "pass", "-1": "fail", "0": "skip", "2": "unknown"}
+    ret = {"btn": "btn-success", "text": "Pass"}
+
+    for obj_key in route_obj.keys():
+        for test in route_obj[obj_key]:
+            count_d[symbol_d[str(test["result"])]] += 1
+
+    if count_d["fail"] > 0 or count_d["skip"] > 0:
+        ret = {
+            "btn": "btn-danger",
+            "text": "%s Failed / %s Skipped" % (str(count_d["fail"]),
+                                                str(count_d["skip"]))
+        }
+    
+    return ret
+
 
 class ReportServer(object):
     """Creates web server, serves test report as HTML
@@ -89,7 +110,13 @@ class ReportServer(object):
                 "format_test_name": lambda text: " ".join(
                     [capitalize(t) for t in text.split("_")]
                 ),
-                "rm_space": lambda text: text.replace(" ", "_")
+                "server_name_url": lambda name: \
+                    "/" + name.lower().replace(" ", "") + ".html",
+                "rm_space": lambda text: text.replace(" ", "_"),
+                "timestamp": lambda: \
+                    datetime.datetime.now(datetime.timezone.utc)\
+                                     .strftime("%B %d, %Y at %l:%M %p (%Z)"),
+                "route_status": get_route_status
             }
         }
 
@@ -116,12 +143,25 @@ class ReportServer(object):
         with open(self.web_dir + "/results.json", "r") as f:
             data = json.load(f)
 
-        view_loader = j2.FileSystemLoader(searchpath="./")
+        # set up jinja2 rendering engine
+        view_loader = j2.FileSystemLoader(searchpath=self.web_dir)
         view_env = j2.Environment(loader=view_loader)
-        view_template = view_env.get_template(self.web_dir 
-                                              + "/report_template.html")
-        html = view_template.render(data=data, h=self.render_helper)
-        open(self.web_dir + "/index.html", "w").write(html)
+
+        # render the index/homepage
+        home_template = view_env.get_template("views/home.html")
+        home_rendered = home_template.render(data=data, h=self.render_helper)
+        home_path = self.web_dir + "/index.html"
+        open(home_path, "w").write(home_rendered)
+
+        for server in data:
+            report_template = view_env.get_template("views/report.html")
+            report_rendered = report_template.render(server=server,
+                                                     h=self.render_helper)
+            report_path = self.web_dir + \
+                self.render_helper["f"]["server_name_url"](server["server_name"])
+            open(report_path, "w").write(report_rendered)
+        
+        
 
     def start_mock_server(self, uptime):
         """run server to serve final test report
