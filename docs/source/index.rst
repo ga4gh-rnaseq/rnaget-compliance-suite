@@ -6,18 +6,22 @@
 Welcome to the documentation for the rnaget compliance suite
 ============================================================
 
+Introduction to the doc
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Usage
 
+   usage/preparation
    usage/installation
-   usage/quickstart
+   usage/usage
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Tests by API Route
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   tests/overview
+   tests/projects
+   tests/studies
+   tests/expressions
+   tests/continuous
