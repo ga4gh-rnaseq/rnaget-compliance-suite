@@ -12,5 +12,10 @@ script:
   - pytest --cov=compliance_suite/ --cov-report=term-missing unittests/
 after_success:
   - coveralls
+  - bash ./scripts/deploy-gh-pages.sh
 after_script:
   - kill %1
+env:
+  global:
+  - GH_USER: ga4gh-rnaseq
+  - GH_REPO: rnaget-compliance-suite

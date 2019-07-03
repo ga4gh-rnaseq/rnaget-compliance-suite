@@ -111,7 +111,7 @@ class ReportServer(object):
                     [capitalize(t) for t in text.split("_")]
                 ),
                 "server_name_url": lambda name: \
-                    "/" + name.lower().replace(" ", "") + ".html",
+                    name.lower().replace(" ", "") + ".html",
                 "rm_space": lambda text: text.replace(" ", "_"),
                 "timestamp": lambda: \
                     datetime.datetime.now(datetime.timezone.utc)\
@@ -157,7 +157,7 @@ class ReportServer(object):
             report_template = view_env.get_template("views/report.html")
             report_rendered = report_template.render(server=server,
                                                      h=self.render_helper)
-            report_path = self.web_dir + \
+            report_path = self.web_dir + "/" + \
                 self.render_helper["f"]["server_name_url"](server["server_name"])
             open(report_path, "w").write(report_rendered)
         
