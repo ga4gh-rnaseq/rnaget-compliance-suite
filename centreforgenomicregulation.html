@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>RNAget API Compliance Report</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="public/jquery.jsonPresenter.css">
+  <link rel="stylesheet" href="public/index.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="public/jquery.jsonPresenter.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+  
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a id="navbar-title" class="navbar-brand" href="#">GA4GH rnaget API v1 Compliance Report</a>    
+</nav>
+
+<div class="container">
+  <p><a href="/"><i class="fa fa-chevron-left"></i> Back</a></p>
+
+  <h1>RNAGet Implementation Compliance Report</h1>
+  <h2>Server: Centre for Genomic Regulation</h2>
+  <h4 class="tab1">Base URL: https://genome.crg.cat/rnaget/</h4>
+  <p class="tab1">Total tests: 43</p>
+  <p class="tab1">Total tests passed: 43</p>
+  <p class="tab1">Total tests failed: 0</p>
+  <p class="tab1">Total tests skipped: 0</p>
+  <p class="tab1">Total warnings generated: 0</p>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
+    <li><a data-toggle="tab" href="#matrix">Matrix</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="text" class="tab-pane fade in active">
+      
+        <section id="projects">
+          <div class="report-endpoint-section">
+            <h3 class="tab1">Projects 
+            
+            </h3>
+
+            
+            <h4 class="tab2">Project #1</h4>
+            <h4 class="tab3">project id: E-MTAB-5200</h4>
+
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Get: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_get" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_get">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_get">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/:id endpoint using project id in config file. Checks content type and status code (200). Validates response body matches project schema in the specification.</p>
+                    <p><strong>Summary:</strong> Project endpoint implemented by the server</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/E-MTAB-5200</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"description":"The Pancancer Analysis of Whole Genomes (PCAWG) study is an international collaboration to identify common patterns of mutation in more than 2,800 cancer whole genomes from the International Cancer Genome Consortium.","id":"E-MTAB-5200","name":"Pancancer Analysis of Whole Genomes","tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"}
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Get Not Found: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_get_not_found" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_get_not_found">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_get_not_found">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/:id endpoint using a project id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification.</p>
+                    <p><strong>Summary:</strong> Project not found endpoint correctly implemented</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/999999999</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"message":"Store error: No data found for this key"}
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/search endpoint without any parameter filters. Checks content type and status code (200). Validates response body matches project array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Projects can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The Pancancer Analysis of Whole Genomes (PCAWG) study is an international collaboration to identify common patterns of mutation in more than 2,800 cancer whole genomes from the International Cancer Genome Consortium.","id":"E-MTAB-5200","name":"Pancancer Analysis of Whole Genomes","tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"},{"description":"Single-Cell Analysis of Human Pancreas Reveals Transcriptional Signatures  of Aging and Somatic Mutation Patterns","id":"E-GEOD-81547","name":"Single cell transcriptome analysis of human pancreas","tags":["single-cell","RNA-seq","human","cancer"],"version":"1.0"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Url Params All: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_url_params_all" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_url_params_all">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_url_params_all">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches project array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Projects can be retrieved using URL parameters through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search</p>
+                    
+                    <p><strong>Params:</strong> {'name': 'Pancancer Analysis of Whole Genomes'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The Pancancer Analysis of Whole Genomes (PCAWG) study is an international collaboration to identify common patterns of mutation in more than 2,800 cancer whole genomes from the International Cancer Genome Consortium.","id":"E-MTAB-5200","name":"Pancancer Analysis of Whole Genomes","tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Url Params Cases: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_url_params_cases" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_url_params_cases">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_url_params_cases">
+                  <div class="well">
+                    <p><strong>Description:</strong> Performs multiple requests of the /projects/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches project array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Projects can be retrieved using URL parameters through the search endpoint for all cases</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search</p>
+                    
+                    <p><strong>Params:</strong> {'name': 'Pancancer Analysis of Whole Genomes'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The Pancancer Analysis of Whole Genomes (PCAWG) study is an international collaboration to identify common patterns of mutation in more than 2,800 cancer whole genomes from the International Cancer Genome Consortium.","id":"E-MTAB-5200","name":"Pancancer Analysis of Whole Genomes","tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Filters Out: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_filters_out" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_filters_out">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_filters_out">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/search endpoint using parameter filters that do not apply to any project. Checks content type and status code (200). Validates response body is an empty array.</p>
+                    <p><strong>Summary:</strong> Project search endpoint successfully filters out non-matching objects</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search</p>
+                    
+                    <p><strong>Params:</strong> {'name': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Filters: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_filters">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-MTAB-5200-project_search_filters">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Project filters can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search/filters</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The name of the project","fieldType":"string","filter":"name","values":[]}]
+</p>
+                    
+                  </div>
+                </div>
+              
+            
+            <h4 class="tab2">Project #2</h4>
+            <h4 class="tab3">project id: E-GEOD-81547</h4>
+
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Get: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_get" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_get">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_get">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/:id endpoint using project id in config file. Checks content type and status code (200). Validates response body matches project schema in the specification.</p>
+                    <p><strong>Summary:</strong> Project endpoint implemented by the server</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/E-GEOD-81547</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"description":"Single-Cell Analysis of Human Pancreas Reveals Transcriptional Signatures  of Aging and Somatic Mutation Patterns","id":"E-GEOD-81547","name":"Single cell transcriptome analysis of human pancreas","tags":["single-cell","RNA-seq","human","cancer"],"version":"1.0"}
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Get Not Found: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_get_not_found" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_get_not_found">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_get_not_found">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/:id endpoint using a project id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification.</p>
+                    <p><strong>Summary:</strong> Project not found endpoint correctly implemented</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/999999999</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"message":"Store error: No data found for this key"}
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/search endpoint without any parameter filters. Checks content type and status code (200). Validates response body matches project array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Projects can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The Pancancer Analysis of Whole Genomes (PCAWG) study is an international collaboration to identify common patterns of mutation in more than 2,800 cancer whole genomes from the International Cancer Genome Consortium.","id":"E-MTAB-5200","name":"Pancancer Analysis of Whole Genomes","tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"},{"description":"Single-Cell Analysis of Human Pancreas Reveals Transcriptional Signatures  of Aging and Somatic Mutation Patterns","id":"E-GEOD-81547","name":"Single cell transcriptome analysis of human pancreas","tags":["single-cell","RNA-seq","human","cancer"],"version":"1.0"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Url Params All: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_url_params_all" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_url_params_all">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_url_params_all">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches project array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Projects can be retrieved using URL parameters through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search</p>
+                    
+                    <p><strong>Params:</strong> {'name': 'Single cell transcriptome analysis of human pancreas'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"Single-Cell Analysis of Human Pancreas Reveals Transcriptional Signatures  of Aging and Somatic Mutation Patterns","id":"E-GEOD-81547","name":"Single cell transcriptome analysis of human pancreas","tags":["single-cell","RNA-seq","human","cancer"],"version":"1.0"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Url Params Cases: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_url_params_cases" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_url_params_cases">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_url_params_cases">
+                  <div class="well">
+                    <p><strong>Description:</strong> Performs multiple requests of the /projects/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches project array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Projects can be retrieved using URL parameters through the search endpoint for all cases</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search</p>
+                    
+                    <p><strong>Params:</strong> {'name': 'Single cell transcriptome analysis of human pancreas'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"Single-Cell Analysis of Human Pancreas Reveals Transcriptional Signatures  of Aging and Somatic Mutation Patterns","id":"E-GEOD-81547","name":"Single cell transcriptome analysis of human pancreas","tags":["single-cell","RNA-seq","human","cancer"],"version":"1.0"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Filters Out: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_filters_out" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_filters_out">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_filters_out">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/search endpoint using parameter filters that do not apply to any project. Checks content type and status code (200). Validates response body is an empty array.</p>
+                    <p><strong>Summary:</strong> Project search endpoint successfully filters out non-matching objects</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search</p>
+                    
+                    <p><strong>Params:</strong> {'name': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Filters: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_filters">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-projects-E-GEOD-81547-project_search_filters">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /projects/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Project filters can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/projects/search/filters</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The name of the project","fieldType":"string","filter":"name","values":[]}]
+</p>
+                    
+                  </div>
+                </div>
+              
+            
+          </div>
+        </section>
+      
+        <section id="studies">
+          <div class="report-endpoint-section">
+            <h3 class="tab1">Studies 
+            
+            </h3>
+
+            
+            <h4 class="tab2">Study #1</h4>
+            <h4 class="tab3">study id: E-MTAB-5200-ST0</h4>
+
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Get: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_get" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_get">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_get">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /studies/:id endpoint using study id in config file. Checks content type and status code (200). Validates response body matches study schema in the specification.</p>
+                    <p><strong>Summary:</strong> Study endpoint implemented by the server</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/studies/E-MTAB-5200-ST0</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"description":"PCAWG study","id":"E-MTAB-5200-ST0","name":"Pancancer Analysis of Whole Genomes","parentProjectID":"E-MTAB-5200","sampleList":[],"tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"}
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Get Not Found: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_get_not_found" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_get_not_found">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_get_not_found">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /studies/:id endpoint using a study id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification.</p>
+                    <p><strong>Summary:</strong> Study not found endpoint correctly implemented</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/studies/999999999</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"message":"Store error: No data found for this key"}
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /studies/search endpoint without any parameter filters. Checks content type and status code (200). Validates response body matches study array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Studies can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/studies/search</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"PCAWG study","id":"E-MTAB-5200-ST0","name":"Pancancer Analysis of Whole Genomes","parentProjectID":"E-MTAB-5200","sampleList":[],"tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search Url Params All: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_url_params_all" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_url_params_all">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_url_params_all">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /studies/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches study array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Studies can be retrieved using URL parameters through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/studies/search</p>
+                    
+                    <p><strong>Params:</strong> {'name': 'Pancancer Analysis of Whole Genomes'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"PCAWG study","id":"E-MTAB-5200-ST0","name":"Pancancer Analysis of Whole Genomes","parentProjectID":"E-MTAB-5200","sampleList":[],"tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search Url Params Cases: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_url_params_cases" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_url_params_cases">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_url_params_cases">
+                  <div class="well">
+                    <p><strong>Description:</strong> Performs multiple requests of the /studies/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches study array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Studies can be retrieved using URL parameters through the search endpoint for all cases</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/studies/search</p>
+                    
+                    <p><strong>Params:</strong> {'name': 'Pancancer Analysis of Whole Genomes'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"PCAWG study","id":"E-MTAB-5200-ST0","name":"Pancancer Analysis of Whole Genomes","parentProjectID":"E-MTAB-5200","sampleList":[],"tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search Filters Out: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_filters_out" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_filters_out">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_filters_out">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /studies/search endpoint using parameter filters that do not apply to any study. Checks content type and status code (200). Validates response body is an empty array.</p>
+                    <p><strong>Summary:</strong> Study search endpoint successfully filters out non-matching objects</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/studies/search</p>
+                    
+                    <p><strong>Params:</strong> {'name': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search Filters: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_filters">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-studies-E-MTAB-5200-ST0-study_search_filters">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /studies/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Study filters can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/studies/search/filters</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The name of the study","fieldType":"string","filter":"name","values":[]}]
+</p>
+                    
+                  </div>
+                </div>
+              
+            
+          </div>
+        </section>
+      
+        <section id="expressions">
+          <div class="report-endpoint-section">
+            <h3 class="tab1">Expressions 
+            
+            </h3>
+
+            
+            <h4 class="tab2">Expression #1</h4>
+            <h4 class="tab3">expression id: 8beada7b93d5e55aa557138b39c6f930</h4>
+
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Get: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/:id endpoint using expression id in config file. Checks content type and status code (200). Validates response body matches project schema in the specification.</p>
+                    <p><strong>Summary:</strong> Expression endpoint implemented by the server</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/8beada7b93d5e55aa557138b39c6f930</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Get Not Found: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get_not_found" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get_not_found">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get_not_found">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/:id endpoint using an expression id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification</p>
+                    <p><strong>Summary:</strong> Expression not found endpoint correctly implemented</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/999999999</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"message":"Store error: No data found for this key"}
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Formats: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_formats" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_formats">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_formats">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/formats endpoint. Checks content type and status code (200). Validates response body is an array of strings.</p>
+                    <p><strong>Summary:</strong> Expression formats endpoint implemented</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/formats</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> ["tsv"]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/search endpoint, only specifying the required 'format' parameter. Checks content type and status code (200). Validates response body matches expression array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Expressions can be retrieved through search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Url Params All: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_all" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_all">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_all">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches expressions array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Expressions can be retrieved using URL parameters through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'tags': 'cancer', 'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Url Params Cases: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_cases" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_cases">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_cases">
+                  <div class="well">
+                    <p><strong>Description:</strong> Performs multiple requests of the /expressions/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches expression array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Expressions can be retrieved using URL parameters through the search endpoint for all cases</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'tags': 'cancer', 'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Filters Out: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters_out" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters_out">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters_out">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/search endpoint using parameter filters that do not apply to any expression. Checks content type and status code (200). Validates response body is an empty array.</p>
+                    <p><strong>Summary:</strong> Expression search endpoint successfully filters out non-matching objects</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'tags': '999999999', 'format': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Format Not Specified: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_format_not_specified" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_format_not_specified">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_format_not_specified">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/search endpoint without specifying the required 'format' parameter. Checks content type and status code (4xx). Validates response body is an error message JSON.</p>
+                    <p><strong>Summary:</strong> Expression search endpoint appropriately raises error when format not specified</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"code":602,"message":"format in query is required"}</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Filetypes Match: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filetypes_match" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filetypes_match">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filetypes_match">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/search endpoint with 'format' parameter specified. Checks content type and status code (200). Validates expression objects in response body contain a fileType that matches the requested format.</p>
+                    <p><strong>Summary:</strong> Expression search returns expression objects with fileType matching specified format</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search No Filetype Mismatches: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_no_filetype_mismatches" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_no_filetype_mismatches">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_no_filetype_mismatches">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/search endpoint with 'format' parameter that does not match the format specified in config file. Checks content type and status code (200). Validates expression objects in response body have a fileType matching the requested format.</p>
+                    <p><strong>Summary:</strong> Expression search returns expression objects with fileType matching specified format when requested format is modified</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': 'loom'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Filters: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /expressions/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Expression filters can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search/filters</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The name of the project","fieldType":"string","filter":"name","values":[]}]
+</p>
+                    
+                  </div>
+                </div>
+              
+            
+          </div>
+        </section>
+      
+        <section id="continuous">
+          <div class="report-endpoint-section">
+            <h3 class="tab1">Continuous 
+            
+            </h3>
+
+            
+            <h4 class="tab2">Continuous #1</h4>
+            <h4 class="tab3">continuous id: 482580efab4afe180dd0f3caa7b3394c</h4>
+
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Get: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_get" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_get">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_get">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/:id endpoint using continuous id in config file. Checks content type and status code (200).</p>
+                    <p><strong>Summary:</strong> Continuous endpoint implemented by the server</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/482580efab4afe180dd0f3caa7b3394c</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Get Not Found: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_get_not_found" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_get_not_found">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_get_not_found">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/:id endpoint using a continuous id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification</p>
+                    <p><strong>Summary:</strong> Continuous not found endpoint correctly implemented</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/999999999</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"message":"Store error: No data found for this key"}
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Formats: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_formats" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_formats">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_formats">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/formats endpoint. Checks content type and status code (200). Validates response body is an array of strings.</p>
+                    <p><strong>Summary:</strong> Continuous formats endpoint implemented</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/formats</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> ["tsv"]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/search endpoint, only specifying the required 'format' parameter. Checks content type and status code (200). Validates response body matches continuous array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Continuous objects can be retrieved through search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.signal.tsv","fileType":"tsv","id":"482580efab4afe180dd0f3caa7b3394c","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"]}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Url Params All: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_all" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_all">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_all">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches continuous object array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Continuous objects can be retrieved using URL parameters through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'studyID': 'E-MTAB-5200-ST0', 'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.signal.tsv","fileType":"tsv","id":"482580efab4afe180dd0f3caa7b3394c","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"]}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Url Params Cases: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_cases" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_cases">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_cases">
+                  <div class="well">
+                    <p><strong>Description:</strong> Performs multiple requests of the /continuous/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches continuous array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Continuous objects can be retrieved using URL parameters through the search endpoint for all cases</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'studyID': 'E-MTAB-5200-ST0', 'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.signal.tsv","fileType":"tsv","id":"482580efab4afe180dd0f3caa7b3394c","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"]}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Filters Out: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters_out" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters_out">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters_out">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/search endpoint using parameter filters that do not apply to any continuous object. Checks content type and status code (200). Validates response body is an empty array.</p>
+                    <p><strong>Summary:</strong> Continuous search endpoint successfully filters out non-matching objects</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'studyID': '999999999', 'format': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Format Not Specified: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_format_not_specified" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_format_not_specified">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_format_not_specified">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/search endpoint without specifying the required 'format' parameter. Checks content type and status code (4xx). Validates response body is an error message JSON.</p>
+                    <p><strong>Summary:</strong> Continuous search endpoint appropriately raises error when format not specified</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"code":602,"message":"format in query is required"}</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Formats Match: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_formats_match" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_formats_match">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_formats_match">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/search endpoint with 'format' parameter specified. Checks content type and status code (200). Validates continuous objects in response body contain a format that matches the format in the request.</p>
+                    <p><strong>Summary:</strong> Continuous search returns objects with format matching request</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.signal.tsv","fileType":"tsv","id":"482580efab4afe180dd0f3caa7b3394c","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"]}]
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search No Format Mismatches: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_no_format_mismatches" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_no_format_mismatches">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_no_format_mismatches">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/search endpoint with 'format' parameter that does not match the format specified in config file. Checks content type and status code (200). Validates continuous objects in response body have a fileType matching the request.</p>
+                    <p><strong>Summary:</strong> Continuous search returns objects with fileType matching requested format when modified</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
+                    
+                  </div>
+                </div>
+              
+                <div class="tr-div tab3">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Filters: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters">
+                      <i class="fa fa-info-circle"></i> Info
+                  </button>
+                </div>
+                
+                <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters">
+                  <div class="well">
+                    <p><strong>Description:</strong> Requests the /continuous/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
+                    <p><strong>Summary:</strong> Continuous filters can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search/filters</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The name of the project","fieldType":"string","filter":"name","values":[]}]
+</p>
+                    
+                  </div>
+                </div>
+              
+            
+          </div>
+        </section>
+      
+    </div>
+
+    <div id="matrix" class="tab-pane fade">
+        <div class="container">
+            <table id="compliance_matrix" class="table">
+              <thead>
+                <th>Server name</th>
+                <th>Object and Id</th>
+                <th>Test case</th>
+                <th>Status</th>
+              </thead>
+              <tbody>
+              
+              
+                
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-MTAB-5200</td>
+                      <td>Project Get</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-MTAB-5200</td>
+                      <td>Project Get Not Found</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-MTAB-5200</td>
+                      <td>Project Search</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-MTAB-5200</td>
+                      <td>Project Search Url Params All</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-MTAB-5200</td>
+                      <td>Project Search Url Params Cases</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-MTAB-5200</td>
+                      <td>Project Search Filters Out</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-MTAB-5200</td>
+                      <td>Project Search Filters</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-GEOD-81547</td>
+                      <td>Project Get</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-GEOD-81547</td>
+                      <td>Project Get Not Found</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-GEOD-81547</td>
+                      <td>Project Search</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-GEOD-81547</td>
+                      <td>Project Search Url Params All</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-GEOD-81547</td>
+                      <td>Project Search Url Params Cases</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-GEOD-81547</td>
+                      <td>Project Search Filters Out</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Projects: E-GEOD-81547</td>
+                      <td>Project Search Filters</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                
+              
+                
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Studies: E-MTAB-5200-ST0</td>
+                      <td>Study Get</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Studies: E-MTAB-5200-ST0</td>
+                      <td>Study Get Not Found</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Studies: E-MTAB-5200-ST0</td>
+                      <td>Study Search</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Studies: E-MTAB-5200-ST0</td>
+                      <td>Study Search Url Params All</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Studies: E-MTAB-5200-ST0</td>
+                      <td>Study Search Url Params Cases</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Studies: E-MTAB-5200-ST0</td>
+                      <td>Study Search Filters Out</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Studies: E-MTAB-5200-ST0</td>
+                      <td>Study Search Filters</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                
+              
+                
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Get</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Get Not Found</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Formats</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Search</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Search Url Params All</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Search Url Params Cases</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Search Filters Out</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Search Format Not Specified</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Search Filetypes Match</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Search No Filetype Mismatches</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
+                      <td>Expression Search Filters</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                
+              
+                
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Get</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Get Not Found</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Formats</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Search</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Search Url Params All</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Search Url Params Cases</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Search Filters Out</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Search Format Not Specified</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Search Formats Match</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Search No Format Mismatches</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>Centre for Genomic Regulation</td>
+                      <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
+                      <td>Continuous Search Filters</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                
+              
+              
+              </tbody>
+            </table>
+        </div>
+    </div>
+    
+  </div>
+</div>
+
+<footer>
+  <div id="footer">
+    <h6>Global Alliance for Genomics and Health</h6>
+  </div>
+</footer>
+
+</body>
+</html>

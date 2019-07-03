@@ -1,4 +1,5 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](https://opensource.org/licenses/Apache-2.0)
+[![Travis (.org) branch](https://img.shields.io/travis/ga4gh-rnaseq/rnaget-compliance-suite/ja_comprehensive_report.svg?style=flat-square)](https://travis-ci.org/ga4gh-rnaseq/rnaget-compliance-suite)
 
 # Rnaget Compliance Suite
 
