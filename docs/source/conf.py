@@ -17,8 +17,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'rnaget-compliance-suite'
-copyright = '2019, Jeremy Adams, Sean Upchurch, Emilio Palumbo'
+project = 'rnaget compliance suite'
+copyright = '2019, Global Alliance for Genomics and Health'
 author = 'Jeremy Adams, Sean Upchurch, Emilio Palumbo'
 
 
@@ -36,7 +36,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = []
 
 
 # -- Options for HTML output -------------------------------------------------

@@ -109,7 +109,7 @@ ENV/
 /.vscode
 
 .DS_Store
-.gitignore/_*
+.docs/build
 compliance_suite/web/temp_result.json
 compliance_suite/schemas/temp.*.json
 rnaget-compliance-results
