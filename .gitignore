@@ -108,6 +108,7 @@ ENV/
 .vstags
 /.vscode
 
+.DS_Store
 index.html
 compliance_suite/web/temp_result.json
 compliance_suite/schemas/temp.*.json

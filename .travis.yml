@@ -2,7 +2,13 @@ language: python
 python:
   - "3.6"
 install:
+  - python -m pip install --upgrade pip
   - python setup.py install
   - python -m pip install -r test_requirements.txt
+before_script:
+  - export FLASK_APP=unittests/server.py
+  - flask run &
 script:
   - pytest
+after_script:
+  - kill %1
