@@ -1,21 +1,22 @@
 language: python
 python:
-  - "3.6"
+- '3.6'
 install:
-  - python -m pip install --upgrade pip
-  - python setup.py install
-  - python -m pip install -r test_requirements.txt
+- python -m pip install --upgrade pip
+- python setup.py install
+- python -m pip install -r test_requirements.txt
 before_script:
-  - export FLASK_APP=unittests/server.py
-  - flask run &
+- export FLASK_APP=unittests/server.py
+- flask run &
 script:
-  - pytest --cov=compliance_suite/ --cov-report=term-missing unittests/
+- pytest --cov=compliance_suite/ --cov-report=term-missing unittests/
 after_success:
-  - coveralls
-  - bash ./scripts/deploy-gh-pages.sh
+- coveralls
+- bash ./scripts/deploy-gh-pages.sh
 after_script:
-  - kill %1
+- kill %1
 env:
   global:
   - GH_USER: ga4gh-rnaseq
   - GH_REPO: rnaget-compliance-suite
+  - secure: J+a6OkJZRU5m/qy9G3AMdmPjtuegdAhCypaoa7lk9Vs8zVoY1+ImEfZEVC1nLZQgaCmmUvYqUHqRj4SZ+0Vv4FaGkqsfX4Ad5/ymVF4WnkkC2mr6si4jzOpZN+7OpHM0z5gY6X3bir3Jlx/WB/I3IDCjysOUfOLw9X3nD9Cfvq108KjMpR5RM76mBn23XNubyZJ8BX36YaowAEVpml83VyEA3QAwd37ejB3tuUigSk1i9PWRnMqKdrY6fbM6DuTnFiI1ZW1KEvvr5AHY61XsatSLFIAg8RH2suBduneLdxbkGPW9jfvGt+l/G73STagIcuv69jOQh/rIPxrlSy8JPt3hbWRS6eaeZOidtoURofTYm2CEFFO8WOsagKCyAirUYBHKCTdN518tuR6t++5gPfQQB97l/n+4C4WdKDhPYP1Lto+YXjyumBE0E/JRSTTsum4kcps8SSjJtHTn86ZeI0jBIfkLEMjNc7/dQog5hCD7viH+b+GTqVuz70CxzrZut5CJdBWGj2hPwSbkbveVi50Ccp/eodh7uUZZO6Mptd1HF4+ad53XBEjaxds8Dm1cVCXH+3gJajAAYb99mPZWjEl1h/Iho6H9r/wwrTlfMHVPGBe42DtQpFfHfOzgz4NOgqR7lyP7sLEEd6quTn7RCMMsdXukJgGIQvMHKaKy3Cc=
