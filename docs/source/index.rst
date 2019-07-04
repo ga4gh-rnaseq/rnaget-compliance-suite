@@ -6,7 +6,17 @@
 Welcome to the documentation for the rnaget compliance suite
 ============================================================
 
-Introduction to the doc
+The rnaget-compliance-suite application determines a server's compliance with
+the `RNAget API specification <https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget.md>`_ for serving RNAseq datasets. The specification,
+developed by the `Global Alliance for Genomics and Health <https://www.ga4gh.org/>`_, serves to provide a
+standardized API framework and data structure to allow for interoperability of datasets
+hosted at different institutions. The compliance application can test new 
+services for compliance to the specification, and can diagnose where a 
+non-compliant service falls short of the specficiation.
+
+If you have an RNAseq dataset that you would like to serve in an 
+RNAGet-compliant manner, click `here to get started <usage/preparation.html>`_.
+
 
 .. toctree::
    :maxdepth: 2
@@ -15,6 +25,7 @@ Introduction to the doc
    usage/preparation
    usage/installation
    usage/usage
+   usage/report
 
 .. toctree::
    :maxdepth: 2
