@@ -43,8 +43,6 @@ a project object according to the spec.
 If a test case passes these 3 checks (content type, status code, schema validation), 
 the test passes.
 
-Image
-
 To ensure an API is compliant according to the specification and testing suite,
 the API must respond with the correct content type, status code, and JSON 
 object/message schema for each route. The following table gives an overview of
