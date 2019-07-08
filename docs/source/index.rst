@@ -3,36 +3,79 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the documentation for the rnaget compliance suite
+Preamble
 ============================================================
 
-The rnaget-compliance-suite application determines a server's compliance with
-the `RNAget API specification <https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget.md>`_ for serving RNAseq datasets. The specification,
+Welcome to the RNAget Server Compliance documentation.
+
+This documentation (and associated `compliance testing application <https://github.com/ga4gh-rnaseq/rnaget-compliance-suite>`_) determines a
+server's compliance with the 
+`RNAget API specification <https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget.md>`_
+for serving RNAseq datasets. The specification,
 developed by the `Global Alliance for Genomics and Health <https://www.ga4gh.org/>`_, serves to provide a
 standardized API framework and data structure to allow for interoperability of datasets
-hosted at different institutions. The compliance application can test new 
-services for compliance to the specification, and can diagnose where a 
-non-compliant service falls short of the specficiation.
+hosted at different institutions.
 
-If you have an RNAseq dataset that you would like to serve in an 
-RNAGet-compliant manner, click `here to get started <usage/preparation.html>`_.
+RNAget Servers
+--------------
 
+RNAget Servers enable access to RNAseq datasets and their metadata using unique 
+identifiers for each object in a hierarchical data model. Servers can be queried
+for expression matrices, as well as project and study information associated 
+with the raw RNAseq data. Servers support the slicing of expression matrices by
+gene, sample, and/or genomic coordinate, so that only subsets of a large matrix 
+need to be transferred.
+
+Compliance Document
+-------------------
+
+This documentation is for implementers of RNAget servers. Implementers **MUST**
+adhere to this documentation during development of RNAget-compliant servers, as 
+the compliance tests outlined herein conform with the 
+`RNAget specification <https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget.md>`_. 
+The testing suite performs API testing on all routes discussed in the specification. 
+Reference server responses **MUST** comply with the correct responses in this document
+for requests made to each route/endpoint.
+
+Click `here <api_specification.html>`_ to learn more about the `API Specification <api_specification.html>`_
+
+Table of Contents
+------------------
 
 .. toctree::
    :maxdepth: 2
-   :caption: Usage
+   
+   api_specification
+   example_dataset
 
-   usage/preparation
-   usage/installation
-   usage/usage
-   usage/report
+.. toctree::
+    :maxdepth: 2
+    :caption: GET Project API
+
+    get_project_api/project_tests
+
+.. toctree::
+    :maxdepth: 2
+    :caption: GET Study API
+    
+    get_study_api/study_tests
+
+.. toctree::
+    :maxdepth: 2
+    :caption: GET Expression API
+    
+    get_expression_api/expression_tests
+
+.. toctree::
+    :maxdepth: 2
+    :caption: GET Continuous API
+    
+    get_continuous_api/continuous_tests
 
 .. toctree::
    :maxdepth: 2
-   :caption: Tests by API Route
+   :caption: Compliance Utility
 
-   tests/overview
-   tests/projects
-   tests/studies
-   tests/expressions
-   tests/continuous
+   utility/installation
+   utility/usage
+   utility/report

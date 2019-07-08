@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'rnaget compliance suite'
+project = 'RNAget Compliance Documentation'
 copyright = '2019, Global Alliance for Genomics and Health'
 author = 'Jeremy Adams, Sean Upchurch, Emilio Palumbo'
 

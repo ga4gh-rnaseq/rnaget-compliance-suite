@@ -1,0 +1,10 @@
+{
+  "tags": [
+      "PCAWG",
+      "cancer"
+  ],
+  "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423",
+  "id": "43378a5d48364f9d8cf3c3d5104df560",
+  "name": "PCAWG",
+  "version": "1.0"
+}
