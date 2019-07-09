@@ -19,12 +19,21 @@ git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/${GH_USER}/${
 
 #go into directory and copy data we're interested in to that directory
 cd gh-pages
-cp -Rf $HOME/ga4gh-rnaseq/rnaget-compliance-suite/report .
+# cp -Rf $HOME/ga4gh-rnaseq/rnaget-compliance-suite/report .
+
+# debugging github pages push
+echo "Current Working Directory"
+pwd
+echo "Github Branch"
+git branch
+echo "Finding Report Directory"
+find / -name rnaget-compliance-suite
+find / -name report
 
 #add, commit and push files
-git add -f report
-git commit -m "Travis build $TRAVIS_BUILD_NUMBER"
-git push -fq origin gh-pages > /dev/null
+# git add -f report
+# git commit -m "Travis build $TRAVIS_BUILD_NUMBER"
+# git push -fq origin gh-pages > /dev/null
 
 echo "Done updating gh-pages"
 
