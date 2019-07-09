@@ -1,8 +1,10 @@
-Using the compliance suite
+Usage
 ==========================
 
 The application can be run from the command line with the following command:
-::
+
+.. code-block:: bash
+
     rnaget-compliance report
 
 Command line parameters are as follows:
@@ -23,7 +25,9 @@ User Config YAML File
 The compliance application requires configurations to be written to a YAML file,
 which is specified on the command line. The following is a template of the config
 file, which can be modified to query different servers, projects, studies, etc.
-::
+
+.. code-block:: bash
+
     servers:
       - server_name: Caltech
         base_url: https://felcat.caltech.edu/rnaget/
@@ -63,11 +67,12 @@ taken into consideration when modifying it for a different server:
     
     * server_name: a string uniquely identifying the server 
     * base_url: the base URL at which the RNAGet API can be reached
+
 3. A server's *implemented* property indicates which routes (projects, studies, expressions, continuous) have been implemented. This property can be removed if all routes are implemented, as routes are expected to be implemented by default. Use :code:`${ROUTENAME}: false` to indicate non-implemented routes.
-4. All implemented routes must have their own property (ie servers implementing 
-*projects* must contain an object with the :code:`projects` property). Each 
-property contains a list of object definitions.
-::
+4. All implemented routes must have their own property (ie servers implementing *projects* must contain an object with the :code:`projects` property). Each property contains a list of object definitions.
+
+.. code-block:: bash
+
     projects:
       - id: 43378a5d48364f9d8cf3c3d5104df560
         filters:
@@ -91,13 +96,17 @@ Basic Usage
 
 The program requires, at minimum, a YAML config file to be specified in order 
 to execute:
-::
+
+.. code-block:: bash
+
     rnaget-compliance report -c user_config_template.yaml
 
 The user can also specify the location at which to create the output report
 directory. The program will only run if the output directory does not already
 exist (will not overwrite existing files):
-::
+
+.. code-block:: bash
+
     rnaget-compliance report -c user_config_template.yaml -o ./results/output
 
 The program creates a series of web files at the output directory, which can be
@@ -105,7 +114,9 @@ used to view the compliance results as an HTML report. A web server can be
 started manually at the output directory to serve the report. By specifying the
 :code:`--serve` option, the report server will be started automatically upon
 completion of the compliance tests:
-::
+
+.. code-block:: bash
+
     rnaget-compliance report -c user_config_template.yaml -o ./results/output --serve
 
 The `next article <report.html>`_ explains how to view the compliance report, 

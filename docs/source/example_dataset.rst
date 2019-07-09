@@ -33,17 +33,26 @@ testing.
 
     * :download:`Download <data/expression.json>`
     * Format: json
-    * MD5: ed1188fe712bfb1bb774432aef627f85
+    * MD5: 6fcb61aa19d2d925e17c1ac078449a62
     * Used for Routes:
 
         * :code:`/expressions/:id` - response **MUST** be Expression json
         * :code:`/expressions/search` - each element in response body array **MUST** be Expression json
 
+* Expression loom
+
+    * :download:`Download <data/expression.loom>`
+    * Format: loom
+    * MD5: 7c6b3eecd28cf19c8724f36208fa33c1
+    * Used for Routes:  
+
+        * :code:`/expressions/:id` - response **MUST** contain a URL to download an expression matrix file as an attachment. File **MAY** be in one of several formats (in this case, loom).
+
 * Continuous json
 
     * :download:`Download <data/continuous.json>`
     * Format: json
-    * MD5: eb9aa0c53c5f115cf47590ac5ae707b1
+    * MD5: e82610293e3184da7f15b38a258cabdd
     * Used for Routes:  
 
         * :code:`/continuous/search` - each element in response body array **MUST** be Continuous json
@@ -52,12 +61,12 @@ testing.
 
     * :download:`Download <data/continuous.loom>`
     * Format: loom
-    * MD5: X
+    * MD5: caaedb61eb0d8bdb7e28c5acc3d699d1
     * Used for Routes:  
 
-        * :code:`/continuous/:id` - each element in response body array **MUST** be Continuous json
+        * :code:`/continuous/:id` - response **MUST** provide a Continuous signal intensity file as an attachment. File **MAY** be in one of several formats (in this case, loom).
 
-* Search Filter
+* Search Filter json
 
     * :download:`Download <data/search_filter.json>`
     * Format: json
@@ -68,3 +77,15 @@ testing.
         * :code:`/studies/search/filters` - each element in response body array **MUST** be Search Filter json
         * :code:`/expressions/search/filters` - each element in response body array **MUST** be Search Filter json
         * :code:`/continuous/search/filters` - each element in response body array **MUST** be Search Filter json
+
+* Error json
+
+    * :download:`Download <data/error.json>`
+    * Format: json
+    * MD5: 4d353dcbe39e41fee522485e3f965a16
+    * Used for Routes:  
+
+        * :code:`/projects/:id` - if a project could not be found, the response body **MUST** be Error json, which specifies an error message
+        * :code:`/studies/:id` - if a study could not be found, the response body **MUST** be Error json, which specifies an error message
+        * :code:`/expressions/:id` - if an expression could not be found, the response body **MUST** be Error json, which specifies an error message
+        * :code:`/continuous/:id` - if a continuous object could not be found, the response body **MUST** be Error json, which specifies an error message

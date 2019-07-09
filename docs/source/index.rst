@@ -37,6 +37,10 @@ The testing suite performs API testing on all routes discussed in the specificat
 Reference server responses **MUST** comply with the correct responses in this document
 for requests made to each route/endpoint.
 
+RNAget maintains an up-to-date report of the compliance status of its reference
+implementers. `Click here to view the latest report. <https://ga4gh-rnaseq.github.io/rnaget-compliance-suite/report/>`_
+
+
 Click `here <api_specification.html>`_ to learn more about the `API Specification <api_specification.html>`_
 
 Table of Contents
@@ -76,6 +80,7 @@ Table of Contents
    :maxdepth: 2
    :caption: Compliance Utility
 
+   utility/getting_started
    utility/installation
    utility/usage
    utility/report
