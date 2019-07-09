@@ -40,7 +40,6 @@ for requests made to each route/endpoint.
 RNAget maintains an up-to-date report of the compliance status of its reference
 implementers. `Click here to view the latest report. <https://ga4gh-rnaseq.github.io/rnaget-compliance-suite/report/>`_
 
-
 Click `here <api_specification.html>`_ to learn more about the `API Specification <api_specification.html>`_
 
 Table of Contents
