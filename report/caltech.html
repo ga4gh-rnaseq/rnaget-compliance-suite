@@ -132,7 +132,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0}</p>
                     
-                    <p><strong>Response Body:</strong> [{"id": "43378a5d48364f9d8cf3c3d5104df560", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "tags": ["PCAWG", "cancer"], "version": "1.0", "name": "PCAWG"}]
+                    <p><strong>Response Body:</strong> [{"tags": ["PCAWG", "cancer"], "version": "1.0", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "id": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG"}]
 </p>
                     
                   </div>
@@ -198,7 +198,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"filter": "version", "fieldType": "string", "description": "version to search for", "values": ["1.0"]}]
+                    <p><strong>Response Body:</strong> [{"description": "version to search for", "fieldType": "string", "values": ["1.0"], "filter": "version"}]
 </p>
                     
                   </div>
@@ -235,7 +235,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> {"id": "6cccbbd76b9c4837bd7342dd616d0fec", "description": "PCAWG study", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG", "tags": ["PCAWG", "cancer"], "version": "1.0"}
+                    <p><strong>Response Body:</strong> {"description": "PCAWG study", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "name": "PCAWG", "tags": ["PCAWG", "cancer"], "version": "1.0"}
 </p>
                     
                   </div>
@@ -279,7 +279,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "description": "PCAWG study", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG", "tags": ["PCAWG", "cancer"], "version": "1.0"}]
+                    <p><strong>Response Body:</strong> [{"description": "PCAWG study", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "name": "PCAWG", "tags": ["PCAWG", "cancer"], "version": "1.0"}]
 </p>
                     
                   </div>
@@ -323,7 +323,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0}</p>
                     
-                    <p><strong>Response Body:</strong> [{"description": "PCAWG study", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "name": "PCAWG", "tags": ["PCAWG", "cancer"], "version": "1.0"}]
+                    <p><strong>Response Body:</strong> [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "description": "PCAWG study", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG", "tags": ["PCAWG", "cancer"], "version": "1.0"}]
 </p>
                     
                   </div>
@@ -470,7 +470,7 @@
                     
                     <p><strong>Params:</strong> {'format': 'loom'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"units": "TPM", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "fileType": "loom", "id": "2a7ab5533ef941eaa59edbfe887b58c4", "URL": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom"}]
+                    <p><strong>Response Body:</strong> [{"id": "2a7ab5533ef941eaa59edbfe887b58c4", "fileType": "loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "URL": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "units": "TPM"}]
 </p>
                     
                   </div>
@@ -558,7 +558,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> {"message": "Input payload validation failed", "errors": {"format": "format of data to return"}}
+                    <p><strong>Response Body:</strong> {"errors": {"format": "format of data to return"}, "message": "Input payload validation failed"}
 </p>
                     
                   </div>
@@ -724,7 +724,7 @@
                     
                     <p><strong>Params:</strong> {'format': 'loom'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "id": "fa057c6d18c44960a1b8b49d065b3889", "fileType": "loom", "URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "tags": ["cancer"], "version": "1.0"}]
+                    <p><strong>Response Body:</strong> [{"id": "fa057c6d18c44960a1b8b49d065b3889", "fileType": "loom", "version": "1.0", "tags": ["cancer"], "URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec"}]
 </p>
                     
                   </div>
@@ -746,7 +746,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0, 'format': 'loom'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "id": "fa057c6d18c44960a1b8b49d065b3889", "fileType": "loom", "URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "tags": ["cancer"], "version": "1.0"}]
+                    <p><strong>Response Body:</strong> [{"id": "fa057c6d18c44960a1b8b49d065b3889", "fileType": "loom", "version": "1.0", "tags": ["cancer"], "URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec"}]
 </p>
                     
                   </div>
@@ -768,7 +768,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0, 'format': 'loom'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "id": "fa057c6d18c44960a1b8b49d065b3889", "fileType": "loom", "URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "tags": ["cancer"], "version": "1.0"}]
+                    <p><strong>Response Body:</strong> [{"id": "fa057c6d18c44960a1b8b49d065b3889", "fileType": "loom", "version": "1.0", "tags": ["cancer"], "URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec"}]
 </p>
                     
                   </div>
@@ -812,7 +812,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> {"errors": {"format": "format of data to return"}, "message": "Input payload validation failed"}
+                    <p><strong>Response Body:</strong> {"message": "Input payload validation failed", "errors": {"format": "format of data to return"}}
 </p>
                     
                   </div>
@@ -834,7 +834,7 @@
                     
                     <p><strong>Params:</strong> {'format': 'loom'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "id": "fa057c6d18c44960a1b8b49d065b3889", "fileType": "loom", "URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "tags": ["cancer"], "version": "1.0"}]
+                    <p><strong>Response Body:</strong> [{"id": "fa057c6d18c44960a1b8b49d065b3889", "fileType": "loom", "version": "1.0", "tags": ["cancer"], "URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec"}]
 </p>
                     
                   </div>
@@ -878,7 +878,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"description": "version to search for", "fieldType": "string", "values": ["1.0"], "filter": "version"}]
+                    <p><strong>Response Body:</strong> [{"filter": "version", "fieldType": "string", "description": "version to search for", "values": ["1.0"]}]
 </p>
                     
                   </div>
