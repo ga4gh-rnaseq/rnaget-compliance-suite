@@ -68,8 +68,24 @@ taken into consideration when modifying it for a different server:
     * server_name: a string uniquely identifying the server 
     * base_url: the base URL at which the RNAGet API can be reached
 
-3. A server's *implemented* property indicates which routes (projects, studies, expressions, continuous) have been implemented. This property can be removed if all routes are implemented, as routes are expected to be implemented by default. Use :code:`${ROUTENAME}: false` to indicate non-implemented routes.
-4. All implemented routes must have their own property (ie servers implementing *projects* must contain an object with the :code:`projects` property). Each property contains a list of object definitions.
+3. If a server requires client authentication, then a server definition can include the OAuth 2.0 bearer access token under the "token" property:
+
+.. code-block:: bash
+
+   servers:
+      - server_name: Caltech
+        base_url: https://felcat.caltech.edu/rnaget/
+        token: abcdefghijklmnop
+        implemented:
+          projects: true
+          studies: true
+          expressions: true
+          continuous: true
+
+The token will be used for all API tests executed by the compliance suite.
+
+4. A server's *implemented* property indicates which routes (projects, studies, expressions, continuous) have been implemented. This property can be removed if all routes are implemented, as routes are expected to be implemented by default. Use :code:`${ROUTENAME}: false` to indicate non-implemented routes.
+5. All implemented routes must have their own property (ie servers implementing *projects* must contain an object with the :code:`projects` property). Each property contains a list of object definitions.
 
 .. code-block:: bash
 
@@ -85,7 +101,7 @@ as well as a key:value map of filter names and values under the :code:`filters`
 property. Filters will be applied to test the :code:`/${OBJECT}/search` route with
 query/search parameters.
 
-5. If :code:`expressions` or :code:`continuous` endpoints are implemented, each 
+6. If :code:`expressions` or :code:`continuous` endpoints are implemented, each 
 expression and continuous object must contain the :code:`format` property as 
 one of their :code:`filters`. The specification requires that :code:`format` be
 specified for search requests to the :code:`/expressions/search` and 
