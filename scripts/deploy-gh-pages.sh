@@ -6,8 +6,20 @@ set -e # exit with non-zero exit code if anything fails
 # and this is NOT a PR
 if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then
 
+# takes the reference implementation yaml file, and replaces placeholder tokens
+# with the real token stored in secured travis settings 
+CONFIG=`cat config_ref_implementations.yaml`
+for TOKEN_VAR in `compgen -A variable | grep ^SERVER_API_KEY`; do
+  REPLACE_FROM="$TOKEN_VAR"
+  REPLACE_TO="${!TOKEN_VAR}"
+  CONFIG=`echo -e "${CONFIG}" | sed -e "s/${REPLACE_FROM}/${REPLACE_TO}/"`
+done
+echo -e "$CONFIG" > config.yaml
+
 # run the compliance suite, saving results to the "report" directory
-rnaget-compliance report -c user_config_template.yaml -o report
+# then remove the config file with api tokens
+rnaget-compliance report -c config.yaml -o report
+rm config.yaml
 
 # go to home and set up git
 cd $HOME
