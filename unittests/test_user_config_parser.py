@@ -12,7 +12,7 @@ Attributes:
 from compliance_suite.user_config_parser import UserConfigParser
 
 yaml_dir = "unittests/testdata/user_config/"
-user_config_pass = "user_config_template.yaml"
+user_config_pass = "config_template.yaml"
 user_config_file_not_found = "file_not_found.yaml"
 
 def test_constructor():
@@ -28,7 +28,7 @@ def test_parse_config_file_pass():
     parser = UserConfigParser(user_config_pass)
     parser.parse_config_file()
     assert parser.d != None
-    assert len(parser.d["servers"]) == 3
+    assert len(parser.d["servers"]) == 2
 
     server_a = parser.d["servers"][0]
     assert server_a["server_name"] == "Caltech"
