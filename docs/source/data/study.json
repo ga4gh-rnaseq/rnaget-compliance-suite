@@ -1,11 +1,10 @@
 {
+  "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
   "version": "1.0",
-  "id": "6cccbbd76b9c4837bd7342dd616d0fec",
-  "name": "PCAWG",
-  "description": "PCAWG study",
+  "name": "RNAgetTestStudy0",
+  "description": "Test study object used by RNAget compliance testing suite.",
   "tags": [
-      "PCAWG",
-      "cancer"
+    "RNAgetCompliance"
   ],
-  "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560"
+  "parentProjectID": "9c0eba51095d3939437e220db196e27b"
 }

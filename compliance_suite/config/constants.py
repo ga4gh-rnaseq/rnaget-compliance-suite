@@ -85,5 +85,47 @@ EXPRESSION_API = "expressions/"
 CONTINUOUS_API = "continuous/"
 
 ENDPOINTS = ["projects", "studies", "expressions", "continuous"]
+TEST_RESOURCES = {
+    "projects": [
+        {
+            "id": "9c0eba51095d3939437e220db196e27b",
+            "filters": {
+                "version": "1.0",
+                "tags": "RNAgetCompliance",
+                "name": "RNAgetTestProject0"
+            }
+        }
+    ],
+    "studies": [
+        {
+            "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
+            "filters": {
+                "version": "1.0",
+                "tags": "RNAgetCompliance",
+                "name": "RNAgetTestStudy0"
+            }
+        }
+    ],
+    "expressions": [
+        {
+            "id": "ac3e9279efd02f1c98de4ed3d335b98e",
+            "filters": {
+                "version": "1.0",
+                "tags": "RNAgetCompliance",
+                "format": "FROM_SERVER"
+            }
+        }
+    ],
+    "continuous": [
+        {
+            "id": "5e22e009f41fc53cbea094a41de8798f",
+            "filters": {
+                "version": "1.0",
+                "tags": "RNAgetCompliance",
+                "format": "FROM_SERVER"
+            }
+        }
+    ]
+}
 
-NONEXISTENT_ID = "999999999"
+NONEXISTENT_ID = "nonexistentid9999999999999999999"

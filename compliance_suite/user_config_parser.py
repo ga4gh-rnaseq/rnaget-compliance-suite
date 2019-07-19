@@ -64,18 +64,11 @@ class UserConfigParser(object):
             UserConfigException
         """
 
-        server_req_keys_template = {"server_name", "base_url", "projects", 
-            "studies", "expressions", "continuous"} 
+        server_req_keys_template = {"server_name", "base_url"} 
             # required attributes for server def,
             # can change if implemented set to false
             # for one or more endpoints
-        object_req_keys = {"id", "filters"} # required attributes for projects,
-        # studies, expressions
-        object_req_filters = {"projects": set(), "studies": set(), 
-            "expressions": {"format"}, "continuous": {"format"}
-        } # required filters that any object of a given type MUST implement.
-        # ie. expressions must provide a format that they can be searched under
-
+        
         try:
             # validate the root element is "servers" and that there is only
             # one root element
@@ -116,10 +109,6 @@ class UserConfigParser(object):
                 self.d["servers"][server_count]["implemented"] = obj_implemented
                 
                 server_req_keys = server_req_keys_template.copy()
-                for obj_type in ENDPOINTS:
-                    if not obj_implemented[obj_type]:
-                        server_req_keys.remove(obj_type)
-
                 server_keys_diff = server_req_keys.difference(server_keys)
                 if len(server_keys_diff) > 0:
                     raise UserConfigException(
@@ -127,43 +116,6 @@ class UserConfigParser(object):
                         + str(server_count + 1) + ": " 
                         + ", ".join(sorted(list(server_keys_diff))))
 
-                obj_type_d = {"projects": "project", "studies": "study",
-                    "expressions": "expression", "continuous": "continuous"}
-                # for each project, study, and expression, validate that there
-                # are no missing attributes given the list of required keys
-                # above
-                for object_string in ENDPOINTS:
-                    if obj_implemented[object_string]:
-                        obj_count = 1 
-                        for object_instance in server[object_string]:
-                            object_keys = set(list(object_instance.keys()))
-                            object_keys_diff = object_req_keys.difference(
-                                object_keys)
-                            if len(object_keys_diff) > 0:
-                                raise UserConfigException(
-                                    "missing attribute(s) from " 
-                                    + obj_type_d[object_string] + " " 
-                                    + str(obj_count) + " of server "
-                                    + server["server_name"] + ": "
-                                    + ", ".join(sorted(list(object_keys_diff)))
-                                )
-                            # check the 'filters' attribute of an object
-                            # to ensure it implements the required params
-                            filt_req_keys = object_req_filters[object_string]
-                            filt_keys = set(
-                                list(object_instance["filters"]))
-                            filt_key_diff = filt_req_keys.difference(filt_keys)
-                            if len(filt_key_diff) > 0:
-                                raise UserConfigException(
-                                    "missing required filter(s) from 'filter' "
-                                    + "attribute in " 
-                                    + obj_type_d[object_string] + " "
-                                    + str(obj_count) + " of server " 
-                                    + server["server_name"] + ": "
-                                    + ", ".join(sorted(list(filt_key_diff)))
-                                )
-                            
-                        obj_count += 1
                 server_count += 1
         
         # AttributeError converted to UserConfigException

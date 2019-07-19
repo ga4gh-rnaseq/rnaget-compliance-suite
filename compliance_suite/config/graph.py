@@ -28,10 +28,11 @@ TEST_GRAPH = {
             },
 
             "project_search": {
+                "project_search_filters": {},
                 "project_search_url_params_all": {},
                 "project_search_url_params_cases": {},
-                "project_search_filters_out": {},
-                "project_search_filters": {}
+                "project_search_filters_out": {}
+                
             }
         }
     },
@@ -42,45 +43,46 @@ TEST_GRAPH = {
             },
 
             "study_search": {
+                "study_search_filters": {},
                 "study_search_url_params_all": {},
                 "study_search_url_params_cases": {},
-                "study_search_filters_out": {},
-                "study_search_filters": {}
+                "study_search_filters_out": {}
             }
         }
     },
     "expressions": {
         "base": {
             "expression_get": {
-                "expression_get_not_found": {}
-            },
-            "expression_formats": {},
-            "expression_search": {
-                "expression_search_url_params_all": {},
-                "expression_search_url_params_cases": {},
-                "expression_search_filters_out": {},
-                "expression_search_format_not_specified": {},
-                "expression_search_filetypes_match": {},
-                "expression_search_no_filetype_mismatches": {},
-                "expression_search_filters": {}
+                "expression_get_not_found": {},
+                "expression_get_content": {},
+                "expression_formats": {},
+                "expression_search": {
+                    "expression_search_filters": {},
+                    "expression_search_url_params_all": {},
+                    "expression_search_url_params_cases": {},
+                    "expression_search_filters_out": {},
+                    "expression_search_format_not_specified": {},
+                    "expression_search_filetypes_match": {},
+                    "expression_search_no_filetype_mismatches": {}
+                }
             }
         }
     },
     "continuous": {
         "base": {
             "continuous_get": {
-                "continuous_get_not_found": {}
-            },
-            "continuous_formats": {},
-            "continuous_search": {
-                "continuous_search_url_params_all": {},
-                "continuous_search_url_params_cases": {},
-                "continuous_search_filters_out": {},
-                "continuous_search_format_not_specified": {},
-                "continuous_search_formats_match": {},
-                "continuous_search_no_format_mismatches": {},
-                "continuous_search_filters": {}
-            },
+                "continuous_get_not_found": {},
+                "continuous_formats": {},
+                "continuous_search": {
+                    "continuous_search_filters": {},
+                    "continuous_search_url_params_all": {},
+                    "continuous_search_url_params_cases": {},
+                    "continuous_search_filters_out": {},
+                    "continuous_search_format_not_specified": {},
+                    "continuous_search_formats_match": {},
+                    "continuous_search_no_format_mismatches": {}
+                }
+            }
         }
     }
 }

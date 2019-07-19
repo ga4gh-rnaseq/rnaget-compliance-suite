@@ -12,7 +12,7 @@ except LookupError:
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
-install_requires = ['requests', 'click', 'jsonschema', 'PyYAML', "Jinja2"]
+install_requires = ['requests', 'click', 'jsonschema', 'PyYAML', "Jinja2", "loompy"]
 
 
 setuptools.setup(

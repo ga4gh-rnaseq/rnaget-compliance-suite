@@ -12,7 +12,7 @@ import logging
 import re
 import sys
 
-from compliance_suite.config.functions import *
+import compliance_suite.config.functions.general as gf
 from compliance_suite.config.tests import TESTS_DICT as tests_config_dict
 from compliance_suite.config.tests import TESTS_BY_OBJECT_TYPE as tests_by_obj
 from compliance_suite.config.tests import NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE \
@@ -20,7 +20,7 @@ from compliance_suite.config.tests import NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE \
 from compliance_suite.config.graph import TEST_GRAPH as graph
 from compliance_suite.config.graph import NOT_IMPLEMENTED_TEST_GRAPH as \
     not_impl_graph
-from compliance_suite.config.constants import ENDPOINTS
+import compliance_suite.config.constants as c
 from compliance_suite.node import Node
 
 class Runner():
@@ -67,6 +67,10 @@ class Runner():
         self.results = {"projects": {}, "studies": {}, "expressions": {},
                         "continuous": {}}
         self.headers = {}
+        self.retrieved_server_settings = {
+            resource: {"supp_filters": [], "exp_format": None} 
+            for resource in c.ENDPOINTS
+        }
     
     def processed_func_descrp(self, text):
         """Cleanup test function docstring for output to JSON report
@@ -163,7 +167,7 @@ class Runner():
 
         status_d = {1: "PASSED", -1: "FAILED", 0: "SKIPPED",
                     2: "UNKNOWN ERROR"}
-        longest_testname = get_longest_testname_length()
+        longest_testname = gf.get_longest_testname_length()
 
         label = node.label + 1
         for child in node.children:
@@ -257,13 +261,13 @@ class Runner():
         # appropriate response code error.
         server_config = self.server_config
 
-        for obj_type in ENDPOINTS:
+        for obj_type in c.ENDPOINTS:
             obj_instances = None
             test_list = None
             test_tree = None
 
             if server_config["implemented"][obj_type]:
-                obj_instances = server_config[obj_type]
+                obj_instances = c.TEST_RESOURCES[obj_type]
                 test_list = tests_by_obj[obj_type]
                 test_tree = graph
             else:

@@ -85,12 +85,18 @@ class SingleTestExecutor(object):
             case_params_keys = list(set(self.params.keys()).difference(
                 set(constant_params.keys())))
 
-            for key in list(case_params_keys):
-                param_case = {key: self.params[key]}
-                param_case.update(constant_params)
+            if len(list(case_params_keys)) > 0:
+                for key in list(case_params_keys):
+                    param_case = {key: self.params[key]}
+                    param_case.update(constant_params)
+                    response = request_method(self.uri, headers=self.headers, 
+                                        params=param_case)
+                    self.set_test_status(self.uri, param_case, response)
+            else:
                 response = request_method(self.uri, headers=self.headers, 
-                                      params=param_case)
-                self.set_test_status(self.uri, param_case, response)
+                                        params=self.params)
+                self.set_test_status(self.uri, self.params, response)
+
     
     def set_test_status(self, uri, params, response):
         """Sets test status and messages based on response
@@ -108,6 +114,8 @@ class SingleTestExecutor(object):
             response (Response): response object from the request
         """
 
+        apply_params = self.test.kwargs["apply_params"]
+        
         if self.test.result != -1:
             self.full_message.append(["Request", uri])
             self.full_message.append(["Params", str(params)])
@@ -163,6 +171,33 @@ class SingleTestExecutor(object):
                 else:
                     self.test.result = 1
 
+                # Validation 4, 
+                if apply_params != "no" and len(self.params) < 1:
+                    raise tse.ContentTestException(
+                        "Not enough supported " + self.test.kwargs["obj_type"]
+                        + " search filters. Add at least one of: "
+                        + str(list(
+                            self.test.kwargs["obj_instance"]["filters"].keys()
+                        ))
+                    )
+        
+                # Validation 5, Content Testing
+                if self.content_test:
+                    content_test_result = self.content_test(response)
+                    if content_test_result["status"] == -1:
+                        raise tse.ContentTestException(
+                            content_test_result["message"]
+                        )
+                
+                # update the test runner with settings (supported filters,
+                # supported formats) retrieved from the server in the response
+                if self.server_settings_update_func:
+                    self.server_settings_update_func(
+                        self.runner,
+                        self.test.kwargs["obj_type"],
+                        response_json
+                    )
+
             except tse.TestStatusException as e:
                 self.test.result = -1
                 self.full_message.append(["Exception", 
@@ -183,6 +218,8 @@ class SingleTestExecutor(object):
         self.__set_media_types()
         self.__set_params()
         self.__set_schema()
+        self.__set_server_settings_update_func()
+        self.__set_content_test_func()
 
     def __set_expected_status_code(self):
         
@@ -212,8 +249,19 @@ class SingleTestExecutor(object):
         self.headers = {"Accept": ", ".join(self.media_types) + ";"}
 
     def __set_params(self):
+        self.params = {}
         params = self.test.kwargs["obj_instance"]["filters"]
-        self.params = {k: params[k] for k in params.keys()}
+        supported_filters = self.runner.retrieved_server_settings\
+            [self.test.kwargs["obj_type"]]["supp_filters"]
+        exp_format = self.runner.retrieved_server_settings\
+            [self.test.kwargs["obj_type"]]["exp_format"]
+        print(exp_format)
+        
+        for k in params.keys():
+            if k in set(supported_filters):
+                self.params[k] = params[k]
+            elif k == "format":
+                self.params[k] = exp_format
 
         # check if request params need to be changed for this test type
         # if so, replace params with the replace value
@@ -240,3 +288,14 @@ class SingleTestExecutor(object):
         
         if "is_json" in self.test.kwargs.keys():
             self.is_json = self.test.kwargs["is_json"]
+    
+    def __set_server_settings_update_func(self):
+        self.server_settings_update_func = None
+        if "server_settings_update_func" in self.test.kwargs.keys():
+            self.server_settings_update_func = \
+                self.test.kwargs["server_settings_update_func"]
+
+    def __set_content_test_func(self):
+        self.content_test = None
+        if "content_test" in self.test.kwargs.keys():
+            self.content_test = self.test.kwargs["content_test"]

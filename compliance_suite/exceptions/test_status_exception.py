@@ -34,3 +34,8 @@ class SchemaValidationException(TestStatusException):
     """Raised when response body does not match expected object schema"""
 
     pass
+
+class ContentTestException(TestStatusException):
+    """Raised when a content testing function failed"""
+
+    pass

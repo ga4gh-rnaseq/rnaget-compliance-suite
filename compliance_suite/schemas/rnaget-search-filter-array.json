@@ -11,7 +11,8 @@
             "items": {
                 "type": "object",
                 "$ref": "rnaget-search-filter.json#/definitions/RNAGetSearchFilter"
-            }
+            },
+            "minItems": 1
         }
     }
 }

@@ -72,6 +72,8 @@ Attributes:
 import compliance_suite.config.constants as c
 import compliance_suite.config.schema_functions as sf
 import compliance_suite.config.param_functions as pf
+import compliance_suite.config.content_test_functions as cf
+import compliance_suite.config.functions.update_server_settings as uf
 
 TESTS_DICT = {
     "project_get": {
@@ -79,8 +81,8 @@ TESTS_DICT = {
         # TEST: PROJECT GET
         # # # # # # # # # # # # # # # # # # # # 
         "name": "project_get",
-        "description": "Requests the /projects/:id endpoint using project id "
-                       + "in config file. Checks content type and status code "
+        "description": "Requests the /projects/:id endpoint using test project "
+                       + "id. Checks content type and status code "
                        + "(200). Validates response body matches project " 
                        + "schema in the specification.",
         "uri": c.PROJECT_API + "V_PROJECT_ID",
@@ -198,7 +200,8 @@ TESTS_DICT = {
         "fail_text": "Project filters cannot be retrieved through the search "
                      + "endpoint",
         "skip_text": "Project filters search test skipped",
-        "apply_params": "no"
+        "apply_params": "no",
+        "server_settings_update_func": uf.update_supported_filters
     }, "project_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: PROJECT ENDPOINT NOT IMPLEMENTED
@@ -222,8 +225,8 @@ TESTS_DICT = {
         # TEST: STUDY GET
         # # # # # # # # # # # # # # # # # # # #
         "name": "study_get",
-        "description": "Requests the /studies/:id endpoint using study id "
-                       + "in config file. Checks content type and status code "
+        "description": "Requests the /studies/:id endpoint using test study "
+                       + "id. Checks content type and status code "
                        + "(200). Validates response body matches study " 
                        + "schema in the specification.",
         "uri": c.STUDY_API + "V_STUDY_ID",
@@ -341,7 +344,8 @@ TESTS_DICT = {
         "fail_text": "Study filters cannot be retrieved through the search "
                      + "endpoint",
         "skip_text": "Study filters search test skipped",
-        "apply_params": "no"
+        "apply_params": "no",
+        "server_settings_update_func": uf.update_supported_filters
     }, "study_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY ENDPOINT NOT IMPLEMENTED
@@ -365,8 +369,8 @@ TESTS_DICT = {
         # TEST: EXPRESSION GET
         # # # # # # # # # # # # # # # # # # # #
         "name": "expression_get",
-        "description": "Requests the /expressions/:id endpoint using "
-                       + "expression id in config file. Checks content type "
+        "description": "Requests the /expressions/:id endpoint using test "
+                       + "expression id. Checks content type "
                        + "and status code (200). Validates response body "
                        + "matches project schema in the specification.",
         "uri": c.EXPRESSION_API + "V_EXPRESSION_ID",
@@ -375,7 +379,8 @@ TESTS_DICT = {
         "pass_text": "Expression endpoint implemented by the server",
         "fail_text": "Expression endpoint not implemented by the server",
         "skip_text": "Expression endpoint test skipped",
-        "apply_params": "no"
+        "apply_params": "no",
+        "server_settings_update_func": uf.update_expected_format
     }, "expression_get_not_found": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION GET NOT FOUND
@@ -394,6 +399,26 @@ TESTS_DICT = {
         "skip_text": "Expression not found test skipped",
         "apply_params": "no",
         "expected_status": [400, 404]
+    }, "expression_get_content": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION GET CONTENT
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "expression_get_content",
+        "description": "Requests the /expressions/:id endpoint using "
+                       + "test dataset expression id. Checks content type "
+                       + "and status code (200). Validates response body "
+                       + "matches project schema in the specification. "
+                       + "Downloads attachment and tests that its content "
+                       + "matches expected genes (rows) and experiments "
+                       + "(columns).",
+        "uri": c.EXPRESSION_API + "V_EXPRESSION_ID",
+        "schema_file": c.SCHEMA_FILE_EXPRESSION,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Expression endpoint implemented by the server",
+        "fail_text": "Expression endpoint not implemented by the server",
+        "skip_text": "Expression endpoint test skipped",
+        "apply_params": "no",
+        "content_test": cf.expression_get
     }, "expression_formats": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION FORMATS
@@ -408,7 +433,7 @@ TESTS_DICT = {
         "pass_text": "Expression formats endpoint implemented",
         "fail_text": "Expression formats endpoint not implemented",
         "skip_text": "Expression formats test skipped",
-        "apply_params": "no",
+        "apply_params": "no"
     }, "expression_search": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION SEARCH
@@ -569,7 +594,8 @@ TESTS_DICT = {
         "fail_text": "Expression filters cannot be retrieved through the "
                      + "search endpoint",
         "skip_text": "Expression filters search test skipped",
-        "apply_params": "no"
+        "apply_params": "no",
+        "server_settings_update_func": uf.update_supported_filters
     }, "expression_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION ENDPOINT NOT IMPLEMENTED
@@ -593,8 +619,8 @@ TESTS_DICT = {
         # TEST: CONTINUOUS GET
         # # # # # # # # # # # # # # # # # # # #
         "name": "continuous_get",
-        "description": "Requests the /continuous/:id endpoint using continuous "
-                       + "id in config file. Checks content type and status "
+        "description": "Requests the /continuous/:id endpoint using test "
+                       + "continuous id. Checks content type and status "
                        + "code (200).",
         "uri": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
         "schema_file": c.SCHEMA_FILE_EMPTY,
@@ -638,7 +664,7 @@ TESTS_DICT = {
         "pass_text": "Continuous formats endpoint implemented",
         "fail_text": "Continuous formats endpoint not implemented",
         "skip_text": "Continuous formats test skipped",
-        "apply_params": "no",
+        "apply_params": "no"
     }, "continuous_search": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS SEARCH
@@ -799,7 +825,8 @@ TESTS_DICT = {
         "fail_text": "Continuous filters cannot be retrieved through the "
                      + "search endpoint",
         "skip_text": "Continous filters search test skipped",
-        "apply_params": "no"
+        "apply_params": "no",
+        "server_settings_update_func": uf.update_supported_filters
     }, "continuous_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS ENDPOINT NOT IMPLEMENTED
@@ -827,10 +854,10 @@ TESTS_BY_OBJECT_TYPE = {
         "project_get",
         "project_get_not_found",
         "project_search",
+        "project_search_filters",
         "project_search_url_params_all",
         "project_search_url_params_cases",
-        "project_search_filters_out",
-        "project_search_filters"
+        "project_search_filters_out"
     ],
     "studies": [
         "study_get",
@@ -844,6 +871,7 @@ TESTS_BY_OBJECT_TYPE = {
     "expressions": [
         "expression_get",
         "expression_get_not_found",
+        "expression_get_content",
         "expression_formats",
         "expression_search",
         "expression_search_url_params_all",
