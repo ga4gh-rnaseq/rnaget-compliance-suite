@@ -23,51 +23,40 @@ Attributes:
 TEST_GRAPH = {
     "projects": {
         "base": {
-            "project_get": {
-                "project_get_not_found": {}
-            },
-
-            "project_search": {
-                "project_search_filters": {},
-                "project_search_url_params_all": {},
-                "project_search_url_params_cases": {},
-                "project_search_filters_out": {}
-                
+            "project_get": {},
+            "project_search_filters": {
+                "project_search": {}
             }
         }
     },
     "studies": {
         "base": {
-            "study_get": {
-                "study_get_not_found": {}
-            },
-
-            "study_search": {
-                "study_search_filters": {},
-                "study_search_url_params_all": {},
-                "study_search_url_params_cases": {},
-                "study_search_filters_out": {}
+            "study_get": {},
+            "study_search_filters": {
+                "study_search": {}
             }
         }
     },
     "expressions": {
         "base": {
-            "expression_get": {
-                "expression_get_not_found": {},
-                "expression_get_content": {},
-                "expression_formats": {},
-                "expression_search": {
-                    "expression_search_filters": {},
-                    "expression_search_url_params_all": {},
-                    "expression_search_url_params_cases": {},
-                    "expression_search_filters_out": {},
-                    "expression_search_format_not_specified": {},
-                    "expression_search_filetypes_match": {},
-                    "expression_search_no_filetype_mismatches": {}
-                }
-            }
+            "expression_get": {}
+            # "expression_get": {
+            #     "expression_get_not_found": {},
+            #     "expression_get_content": {},
+            #     "expression_formats": {},
+            #     "expression_search": {
+            #         "expression_search_filters": {},
+            #         "expression_search_url_params_all": {},
+            #         "expression_search_url_params_cases": {},
+            #         "expression_search_filters_out": {},
+            #         "expression_search_format_not_specified": {},
+            #         "expression_search_filetypes_match": {},
+            #         "expression_search_no_filetype_mismatches": {}
+            #     }
         }
     },
+}
+'''
     "continuous": {
         "base": {
             "continuous_get": {
@@ -87,6 +76,7 @@ TEST_GRAPH = {
     }
 }
 """dict: hierarchical graph of parent-child test relationships"""
+'''
 
 NOT_IMPLEMENTED_TEST_GRAPH = {
     "projects": {

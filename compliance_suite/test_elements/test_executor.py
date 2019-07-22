@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.single_test_executor.py
+"""Module compliance_suite.test_components.test_executor.py
 
 This module contains class definition for generalized model of testing an api
 route. The SingleTestExecutor executes a request, checks status code of the
@@ -13,11 +13,13 @@ Todo:
 
 import requests
 
+from compliance_suite.test_elements.api_component import APIComponent
+from compliance_suite.test_elements.content_component import ContentComponent
 from compliance_suite.schema_validator import SchemaValidator
 from compliance_suite.config.constants import *
 import compliance_suite.exceptions.test_status_exception as tse
 
-class SingleTestExecutor(object):
+class TestExecutor(object):
     """Executes API request, validates response and sets result to pass/fail
 
     The SingleTestExecutor is a generalized model for executing tests against
@@ -37,7 +39,7 @@ class SingleTestExecutor(object):
             to be assigned to Test object and displayed in report under case
     """
 
-    def __init__(self, uri, test, runner):
+    def __init__(self, test, runner):
         """instantiates a SingleTestExecutor object
         
         Args:
@@ -46,13 +48,53 @@ class SingleTestExecutor(object):
             runner (TestRunner): reference to TestRunner object
         """
 
-        self.uri = uri
+        self.status = 2
         self.test = test
         self.runner = runner
-        self.http_method = self.test.kwargs["http_method"]
         self.full_message = []
-        self.__set_test_properties()
+
+        self.api_component = None
+        if "api" in test.kwargs.keys():
+            self.api_component = APIComponent(test.kwargs["api"], self.test, self.runner)
+        
+        self.content_component = None
+        if "content" in test.kwargs.keys():
+            self.content_component = ContentComponent(test.kwargs["content"], self.test, self.runner)
+        
+        # self.__set_test_properties()
     
+    def execute_tests(self):
+        if self.api_component:
+            self.api_component.execute_cases()
+        if self.content_component:
+            self.content_component.execute_cases()
+        self.set_status_by_components()
+        self.update_full_message()
+    
+    def update_full_message(self):
+        self.full_message = []
+
+        if self.api_component:
+            self.full_message.append(["API Tests"])
+            self.full_message += self.api_component.get_full_message()
+    
+    def set_status_by_components(self):
+        status = 1
+
+        if self.api_component:
+            if self.api_component.status != 1:
+                status = -1
+        
+        if self.content_component:
+            if self.content_component.status != 1:
+                status = -1
+
+        self.status = status
+    
+    def get_full_message(self):
+        return self.full_message
+
+'''
     def execute_test(self):
         """Test API URI, validate response and set test to pass/fail"""
         
@@ -299,3 +341,4 @@ class SingleTestExecutor(object):
         self.content_test = None
         if "content_test" in self.test.kwargs.keys():
             self.content_test = self.test.kwargs["content_test"]
+'''

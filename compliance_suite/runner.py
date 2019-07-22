@@ -267,7 +267,8 @@ class Runner():
             test_tree = None
 
             if server_config["implemented"][obj_type]:
-                obj_instances = c.TEST_RESOURCES[obj_type]
+                obj_instance_keys = c.TEST_RESOURCES[obj_type].keys()
+                obj_instances = [c.TEST_RESOURCES[obj_type][k] for k in obj_instance_keys]
                 test_list = tests_by_obj[obj_type]
                 test_tree = graph
             else:

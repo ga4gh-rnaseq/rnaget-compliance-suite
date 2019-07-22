@@ -81,289 +81,564 @@ TESTS_DICT = {
         # TEST: PROJECT GET
         # # # # # # # # # # # # # # # # # # # # 
         "name": "project_get",
-        "description": "Requests the /projects/:id endpoint using test project "
-                       + "id. Checks content type and status code "
-                       + "(200). Validates response body matches project " 
-                       + "schema in the specification.",
-        "uri": c.PROJECT_API + "V_PROJECT_ID",
-        "schema_file": c.SCHEMA_FILE_PROJECT,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Project endpoint implemented by the server",
-        "fail_text": "Project endpoint not implemented by the server",
-        "skip_text": "Project endpoint test skipped",
-        "apply_params": "no"
-    }, "project_get_not_found": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: PROJECT GET NOT FOUND
-        # # # # # # # # # # # # # # # # # # # # 
-        "name": "project_get_not_found",
-        "description": "Requests the /projects/:id endpoint using a project id "
-                       + "that is known to not exist. Checks content type and "
-                       + "status code (4xx). Validates response body matches "
-                       + "error schema in the specification.",
-        "uri": c.PROJECT_API + c.NONEXISTENT_ID,
-        "schema_file": c.SCHEMA_FILE_ERROR,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Project not found endpoint correctly implemented",
-        "fail_text": "Project not found endpoint not correctly implemented",
-        "skip_text": "Project not found test skipped",
-        "apply_params": "no",
-        "expected_status": [400, 404]
-    }, "project_search": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: PROJECT SEARCH
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "project_search",
-        "description": "Requests the /projects/search endpoint without any "
-                       + "parameter filters. Checks content type and status "
-                       + "code (200). Validates response body matches project "
-                       + "array schema in the specification.",
-        "uri": c.PROJECT_API + "search",
-        "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Projects can be retrieved through the search endpoint",
-        "fail_text": "Projects cannot be retrieved through the search endpoint",
-        "skip_text": "Project search test skipped",
-        "apply_params": "no"
-    }, "project_search_url_params_all": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: PROJECT SEARCH URL PARAMS ALL
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "project_search_url_params_all",
-        "description": "Requests the /projects/search endpoint using all "
-                       + "parameter filters in config file. Checks content "
-                       + "type and status code (200). Validates response body "
-                       + "matches project array schema in the specification.",
-        "uri": c.PROJECT_API + "search",
-        "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Projects can be retrieved using URL parameters through"
-                     + " the search endpoint",
-        "fail_text": "Projects cannot be retrieved using URL parameters through"
-                     + " the search endpoint",
-        "skip_text": "Project search with URL parameters test skipped",
-        "apply_params": "all"
-    }, "project_search_url_params_cases": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: PROJECT SEARCH URL PARAMS CASES
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "project_search_url_params_cases",
-        "description": "Performs multiple requests of the /projects/search "
-                       + "endpoint, each time using a different parameter "
-                       + "filter in config file. Checks content type and "
-                       + "status code (200). Validates response body matches "
-                       + "project array schema in the specification.",
-        "uri": c.PROJECT_API + "search",
-        "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Projects can be retrieved using URL parameters through"
-                     + " the search endpoint for all cases",
-        "fail_text": "Projects cannot be retrieved using URL parameters through"
-                     + " the search endpoint for all cases",
-        "skip_text": "Project search with multiple URL parameters cases test"
-                     + " skipped",
-        "apply_params": "cases"
-    }, "project_search_filters_out": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: PROJECT SEARCH FILTERS OUT
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "project_search_filters_out",
-        "description": "Requests the /projects/search endpoint using "
-                       + "parameter filters that do not apply to any project. "
-                       + "Checks content type and status code (200). Validates "
-                       + "response body is an empty array.",
-        "uri": c.PROJECT_API + "search",
-        "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Project search endpoint successfully filters out "
-                     + "non-matching objects",
-        "fail_text": "Project search endpoint does not filter out non-matching "
-                     + "objects",
-        "skip_text": "Project search filters out test skipped",
-        "apply_params": "cases",
-        "replace_params": True,
-        "param_replacement": c.NONEXISTENT_ID
+        "description": "Requests the /projects/:id endpoint",
+        "pass_text": "'Get Project by Id' endpoint correctly implemented",
+        "fail_text": "'Get Project by Id' endpoint NOT correctly implemented",
+        "skip_text": "'Get Project by Id' test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "request_params": {}
+            },
+
+            "cases": [
+                {
+                    "name": "Get Test Project",
+                    "description": "request /projects/:id using test project id. "
+                                + "checks content type and status code (200). "
+                                + "validates response body matches Project "
+                                + "object schema.",
+                    "url": c.PROJECT_API + "V_PROJECT_ID",
+                    "schema_file": c.SCHEMA_FILE_PROJECT
+                },
+
+                {
+                    "name": "Project Not Found",
+                    "description": "request /projects/:id using a project id known "
+                        + "to not exist. Checks content type and status code "
+                        + "(4xx). Validates response body matches Error schema.",
+                    "url": c.PROJECT_API + c.NONEXISTENT_ID,
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "expected_status": [400, 404]
+                }
+
+            ]
+        }
     }, "project_search_filters": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: PROJECT SEARCH FILTERS
         # # # # # # # # # # # # # # # # # # # #
         "name": "project_search_filters",
-        "description": "Requests the /projects/search/filters endpoint. " 
-                       + "Checks content type and status code (200). Validates "
-                       + "response body matches search filter array schema "
-                       + "in the specification.",
-        "uri": c.PROJECT_API + "search/filters",
-        "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Project filters can be retrieved through the search "
-                     + "endpoint",
-        "fail_text": "Project filters cannot be retrieved through the search "
-                     + "endpoint",
-        "skip_text": "Project filters search test skipped",
-        "apply_params": "no",
-        "server_settings_update_func": uf.update_supported_filters
+        "description": "requests the /projects/search/filters endpoint",
+        "pass_text": "'Project Search Filters' endpoint correctly implemented",
+        "fail_text": "'Project Search Filters' endpoint NOT correctly implemented",
+        "skip_text": "'Project Search Filters' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.PROJECT_API + "search/filters",
+                "http_method": c.HTTP_GET,
+                "request_params": {},
+                "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
+                "server_settings_update_func": uf.update_supported_filters
+            },
+
+            "cases": [
+                {
+                    "name": "Project Search Filters",
+                    "description": "request /projects/search/filters. checks "
+                                   + "content type and status code (200). "
+                                   + "validates response body matches search "
+                                   + "filter array schema."
+                }
+            ]
+        }
+    }, "project_search": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: PROJECT SEARCH
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "project_search",
+        "description": "Requests the /projects/search endpoint",
+        "pass_text": "'Project Search' endpoint correctly implemented",
+        "fail_text": "'Project Search' endpoint NOT correctly implemented",
+        "skip_text": "'Project Search' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.PROJECT_API + "search",
+                "http_method": c.HTTP_GET
+            },
+
+            "cases": [
+                {
+                    "name": "Search Projects Without Filters",
+                    "description": "request /projects/search without any "
+                                   + "parameter filters. checks content type "
+                                   + "and status code (200). validates "
+                                   + "response body matches project array "
+                                   + "schema.",
+                    "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
+                    "request_params": {}
+                },
+
+                {
+                    "name": "Search Projects With All Filters",
+                    "description": "request /projects/search using all "
+                       + "server-supported project filters. checks content "
+                       + "type and status code (200). validates response body "
+                       + "matches project array schema.",
+                    "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
+                    "request_params_func": pf.all_supported_filters
+                },
+
+                {
+                    "name": "Search Projects With Single Filter, 1",
+                    "description": "request /projects/search using the first "
+                       + "parameter filter supported by server. checks "
+                       + "type and status code (200). validates response body "
+                       + "matches project array schema",
+                    "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
+                    "request_params_func": pf.first_supported_filter
+                },
+
+                {
+                    "name": "Search Projects With Single Filter, 2",
+                    "description": "request /projects/search using the second "
+                       + "parameter filter supported by server. checks "
+                       + "type and status code (200). validates response body "
+                       + "matches project array schema",
+                    "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
+                    "request_params_func": pf.second_supported_filter
+                },
+
+                {
+                    "name": "Project Search Filters Non-Matching Resources",
+                    "description": "request /projects/search using filters "
+                       + "that do not apply to any project. "
+                       + "checks content type and status code (200). validates "
+                       + "response body is an empty array.",
+                    "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
+                    "request_params_func": pf.incorrect_filter_values
+                }
+            ]
+        }
     }, "project_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: PROJECT ENDPOINT NOT IMPLEMENTED
         # # # # # # # # # # # # # # # # # # # # 
         "name": "project_endpoint_not_implemented",
-        "description": "Requests the /projects/:id endpoint, expecting the "
-                       + "endpoint to respond with a 'Not Implemented' status "
-                       + "code. Checks content type and status code (501).",
-        "uri": c.PROJECT_API + c.NONEXISTENT_ID,
-        "schema_file": c.SCHEMA_FILE_EMPTY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Project endpoint correctly not implemented, yields 501 " +
-            "status code",
-        "fail_text": "Project endpoint incorrectly not implemented, does not " +
-            "yield 501 status code",
-        "skip_text": "Project endpoint not implemented test skipped",
-        "apply_params": "no",
-        "expected_status": [501]
+        "description": "Requests various /projects routes, expecting the "
+                       + "service to respond with a 'Not Implemented' status "
+                       + "code",
+        "pass_text": "Project endpoints correctly non-implemented",
+        "fail_text": "Project endpoints NOT correctly non-implemented",
+        "skip_text": "Project endpoints not implemented test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "request_params": {},
+                "expected_status": [501],
+                "schema_file": c.SCHEMA_FILE_EMPTY
+            },
+
+            "cases": [
+                {
+                    "name": "Project Get Not Implemented",
+                    "description": "request /projects/:id, expecting "
+                                   + "501 status code",
+                    "url": c.PROJECT_API + c.NONEXISTENT_ID
+                },
+
+                {
+                    "name": "Project Search Not Implemented",
+                    "description": "request /projects/search, expecting 501 "
+                                   + "status code",
+                    "url": c.PROJECT_API + "search"
+                },
+
+                {
+                    "name": "Project Search Filters Not Implemented",
+                    "description": "request /projects/search/filters, "
+                                   + "expecting 501 status code",
+                    "url": c.PROJECT_API + "search/filters"
+                }
+            ]
+        }
     }, "study_get": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY GET
         # # # # # # # # # # # # # # # # # # # #
         "name": "study_get",
-        "description": "Requests the /studies/:id endpoint using test study "
-                       + "id. Checks content type and status code "
-                       + "(200). Validates response body matches study " 
-                       + "schema in the specification.",
-        "uri": c.STUDY_API + "V_STUDY_ID",
-        "schema_file": c.SCHEMA_FILE_STUDY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Study endpoint implemented by the server",
-        "fail_text": "Study endpoint not implemented by the server",
-        "skip_text": "Study endpoint test skipped",
-        "apply_params": "no"
-    }, "study_get_not_found": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: STUDY GET NOT FOUND
-        # # # # # # # # # # # # # # # # # # # # 
-        "name": "study_get_not_found",
-        "description": "Requests the /studies/:id endpoint using a study id "
-                       + "that is known to not exist. Checks content type and "
-                       + "status code (4xx). Validates response body matches "
-                       + "error schema in the specification.",
-        "uri": c.STUDY_API + c.NONEXISTENT_ID,
-        "schema_file": c.SCHEMA_FILE_ERROR,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Study not found endpoint correctly implemented",
-        "fail_text": "Study not found endpoint not correctly implemented",
-        "skip_text": "Study not found test skipped",
-        "apply_params": "no",
-        "expected_status": [400, 404]
-    }, "study_search": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: STUDY SEARCH
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "study_search",
-        "description": "Requests the /studies/search endpoint without any "
-                       + "parameter filters. Checks content type and status "
-                       + "code (200). Validates response body matches study "
-                       + "array schema in the specification.",
-        "uri": c.STUDY_API + "search",
-        "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Studies can be retrieved through the search endpoint",
-        "fail_text": "Studies cannot be retrieved through the search endpoint",
-        "skip_text": "Study search test skipped",
-        "apply_params": "no"
-    }, "study_search_url_params_all": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: STUDY SEARCH URL PARAMS ALL
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "study_search_url_params_all",
-        "description": "Requests the /studies/search endpoint using all "
-                       + "parameter filters in config file. Checks content "
-                       + "type and status code (200). Validates response body "
-                       + "matches study array schema in the specification.",
-        "uri": c.STUDY_API + "search",
-        "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Studies can be retrieved using URL parameters through"
-                     + " the search endpoint",
-        "fail_text": "Studies cannot be retrieved using URL parameters through"
-                     + " the search endpoint",
-        "skip_text": "Study search with URL parameters test skipped",
-        "apply_params": "all"
-    }, "study_search_url_params_cases": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: STUDY SEARCH URL PARAMS CASES
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "study_search_url_params_cases",
-        "description": "Performs multiple requests of the /studies/search "
-                       + "endpoint, each time using a different parameter "
-                       + "filter in config file. Checks content type and "
-                       + "status code (200). Validates response body matches "
-                       + "study array schema in the specification.",
-        "uri": c.STUDY_API + "search",
-        "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Studies can be retrieved using URL parameters through"
-                     + " the search endpoint for all cases",
-        "fail_text": "Studies cannot be retrieved using URL parameters through"
-                     + " the search endpoint for all cases",
-        "skip_text": "Study search with multiple URL parameters cases test "
-                     + "skipped",
-        "apply_params": "cases"
-    }, "study_search_filters_out": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: STUDY SEARCH FILTERS OUT
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "study_search_filters_out",
-        "description": "Requests the /studies/search endpoint using "
-                       + "parameter filters that do not apply to any study. "
-                       + "Checks content type and status code (200). Validates "
-                       + "response body is an empty array.",
-        "uri": c.STUDY_API + "search",
-        "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Study search endpoint successfully filters out "
-                     + "non-matching objects",
-        "fail_text": "Study search endpoint does not filter out non-matching "
-                     + "objects",
-        "skip_text": "Study search filters out test skipped",
-        "apply_params": "cases",
-        "replace_params": True,
-        "param_replacement": c.NONEXISTENT_ID
+        "description": "Requests the /studies/id endpoint",
+        "pass_text": "'Get Study by Id' endpoint correctly implemented",
+        "fail_text": "'Get Study by Id' endpoint NOT correctly implemented",
+        "skip_text": "'Get Study by Id' test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "request_params": {}
+            },
+
+            "cases": [
+                {
+                    "name": "Get Test Study",
+                    "description": "request /studies/:id using test study id. "
+                                + "checks content type and status code (200). "
+                                + "validates response body matches Study "
+                                + "object schema.",
+                    "url": c.STUDY_API + "V_STUDY_ID",
+                    "schema_file": c.SCHEMA_FILE_STUDY
+                },
+
+                {
+                    "name": "Study Not Found",
+                    "description": "request /studies/:id using a study id known "
+                        + "to not exist. Checks content type and status code "
+                        + "(4xx). Validates response body matches Error schema.",
+                    "url": c.STUDY_API + c.NONEXISTENT_ID,
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "expected_status": [400, 404]
+                }
+            ]
+        }
     }, "study_search_filters": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY SEARCH FILTERS
         # # # # # # # # # # # # # # # # # # # #
         "name": "study_search_filters",
-        "description": "Requests the /studies/search/filters endpoint. " 
-                       + "Checks content type and status code (200). Validates "
-                       + "response body matches search filter array schema "
-                       + "in the specification.",
-        "uri": c.STUDY_API + "search/filters",
-        "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Study filters can be retrieved through the search "
-                     + "endpoint",
-        "fail_text": "Study filters cannot be retrieved through the search "
-                     + "endpoint",
-        "skip_text": "Study filters search test skipped",
-        "apply_params": "no",
-        "server_settings_update_func": uf.update_supported_filters
+        "description": "requests the /studies/search/filters endpoint",
+        "pass_text": "'Study Search Filters' endpoint correctly implemented",
+        "fail_text": "'Study Search Filters' endpoint NOT correctly implemented",
+        "skip_text": "'Study Search Filters' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.STUDY_API + "search/filters",
+                "http_method": c.HTTP_GET,
+                "request_params": {},
+                "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
+                "server_settings_update_func": uf.update_supported_filters
+            },
+
+            "cases": [
+                {
+                    "name": "Study Search Filters",
+                    "description": "request /studies/search/filters. checks "
+                                   + "content type and status code (200). "
+                                   + "validates response body matches search "
+                                   + "filter array schema."
+                }
+            ]
+        }
+    }, "study_search": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: STUDY SEARCH
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "study_search",
+        "description": "Requests the /studies/search endpoint",
+        "pass_text": "'Study Search' endpoint correctly implemented",
+        "fail_text": "'Study Search' endpoint NOT correctly implemented",
+        "skip_text": "'Study Search' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.STUDY_API + "search",
+                "http_method": c.HTTP_GET
+            },
+
+            "cases": [
+                {
+                    "name": "Search Studies Without Filters",
+                    "description": "request /studies/search without any "
+                                   + "parameter filters. checks content type "
+                                   + "and status code (200). validates "
+                                   + "response body matches study array "
+                                   + "schema.",
+                    "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
+                    "request_params": {}
+                },
+
+                {
+                    "name": "Search Studies With All Filters",
+                    "description": "request /studies/search using all "
+                       + "server-supported study filters. checks content "
+                       + "type and status code (200). validates response body "
+                       + "matches study array schema.",
+                    "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
+                    "request_params_func": pf.all_supported_filters
+                },
+
+                {
+                    "name": "Search Studies With Single Filter, 1",
+                    "description": "request /studies/search using the first "
+                       + "parameter filter supported by server. checks "
+                       + "type and status code (200). validates response body "
+                       + "matches study array schema",
+                    "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
+                    "request_params_func": pf.first_supported_filter
+                },
+
+                {
+                    "name": "Search Studies With Single Filter, 2",
+                    "description": "request /studies/search using the second "
+                       + "parameter filter supported by server. checks "
+                       + "type and status code (200). validates response body "
+                       + "matches study array schema",
+                    "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
+                    "request_params_func": pf.second_supported_filter
+                },
+
+                {
+                    "name": "Study Search Filters Non-Matching Resources",
+                    "description": "request /studies/search using filters "
+                       + "that do not apply to any project. "
+                       + "checks content type and status code (200). validates "
+                       + "response body is an empty array.",
+                    "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
+                    "request_params_func": pf.incorrect_filter_values
+                }
+            ]
+        }
     }, "study_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: STUDY ENDPOINT NOT IMPLEMENTED
         # # # # # # # # # # # # # # # # # # # # 
         "name": "study_endpoint_not_implemented",
-        "description": "Requests the /studies/:id endpoint, expecting the "
-                       + "endpoint to respond with a 'Not Implemented' status "
-                       + "code. Checks content type and status code (501).",
-        "uri": c.STUDY_API + c.NONEXISTENT_ID,
-        "schema_file": c.SCHEMA_FILE_EMPTY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Study endpoint correctly not implemented, yields 501 " +
-            "status code",
-        "fail_text": "Study endpoint incorrectly not implemented, does not " +
-            "yield 501 status code",
-        "skip_text": "Study endpoint not implemented test skipped",
-        "apply_params": "no",
-        "expected_status": [501]
+        "description": "Requests various /studies routes, expecting the "
+                       + "service to respond with a 'Not Implemented' status "
+                       + "code",
+        "pass_text": "Study endpoints correctly non-implemented",
+        "fail_text": "Study endpoints NOT correctly non-implemented",
+        "skip_text": "Study endpoints not implemented test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "request_params": {},
+                "expected_status": [501],
+                "schema_file": c.SCHEMA_FILE_EMPTY
+            },
+
+            "cases": [
+                {
+                    "name": "Study Get Not Implemented",
+                    "description": "request /studies/:id, expecting "
+                                   + "501 status code",
+                    "url": c.STUDY_API + c.NONEXISTENT_ID
+                },
+
+                {
+                    "name": "Study Search Not Implemented",
+                    "description": "request /studies/search, expecting 501 "
+                                   + "status code",
+                    "url": c.STUDY_API + "search"
+                },
+
+                {
+                    "name": "Study Search Filters Not Implemented",
+                    "description": "request /studies/search/filters, "
+                                   + "expecting 501 status code",
+                    "url": c.STUDY_API + "search/filters"
+                }
+            ]
+        }
+    }, "expression_get": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION GET
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "expression_get",
+        "description": "Requests the /expressions/:id endpoint",
+        "pass_text": "'Get Expression by Id' endpoint correctly implemented",
+        "fail_text": "'Get Expression by Id' endpoint NOT correctly implemented",
+        "skip_text": "'Get Expression by Id' test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "request_params": {}
+            },
+
+            "cases": [
+                {
+                    "name": "Get Test Expression",
+                    "description": "request /expressions/:id using test expression id. "
+                                + "checks content type and status code (200). "
+                                + "validates response body matches Expression "
+                                + "object schema.",
+                    "url": c.EXPRESSION_API + "V_EXPRESSION_ID",
+                    "schema_file": c.SCHEMA_FILE_EXPRESSION
+                },
+
+                {
+                    "name": "Expression Not Found",
+                    "description": "request /expressions/:id using an expression id known "
+                        + "to not exist. Checks content type and status code "
+                        + "(4xx). validates response body matches Error schema.",
+                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID,
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "expected_status": [400, 404]
+                }
+            ]
+        },
+    
+        "content": {
+            "global_properties": {
+                "function": cf.expression_get_case,
+                "tempfile": "expression_get_content_test.loom",
+                "url": c.EXPRESSION_API + "V_EXPRESSION_ID",
+                "description": "Asserts correct content of expression "
+                               + "matrix columns/rows",
+            },
+            "cases": [
+                {
+                    "name": "Expression Get Content 1",
+                    "i": {
+                        "r": 38,
+                        "c": 8
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000206549",
+                        "GeneName": "PRSS50",
+                        "Condition": "bladder transitional cell carcinoma",
+                        "Tissue": "urinary bladder",
+                        "Sample": "DO472 - primary tumour",
+                        "Value": 0.0
+                    }
+                },
+                {
+                    "name": "Expression Get Content 2",
+                    "i": {
+                        "r": 68,
+                        "c": 15
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000239589",
+                        "GeneName": "LINC00879",
+                        "Condition": "breast adenocarcinoma",
+                        "Tissue": "breast",
+                        "Sample": "DO44273 - primary tumour",
+                        "Value": 0.0
+                    }
+                },
+                {
+                    "name": "Expression Get Content 3",
+                    "i": {
+                        "r": 47,
+                        "c": 70
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000223273",
+                        "GeneName": "RN7SKP172",
+                        "Condition": "melanoma",
+                        "Tissue": "skin",
+                        "Sample": "DO37946 - metastatic tumour",
+                        "Value": 0.0
+                    }
+                },
+                {
+                    "name": "Expression Get Content 4",
+                    "i": {
+                        "r": 3,
+                        "c": 38
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000084693",
+                        "GeneName": "AGBL5",
+                        "Condition": "endometrial adenocarcinoma",
+                        "Tissue": "uterus",
+                        "Sample": "DO43811 - primary tumour",
+                        "Value": 50.0
+                    }
+                },
+                {
+                    "name": "Expression Get Content 5",
+                    "i": {
+                        "r": 30,
+                        "c": 92
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000186501",
+                        "GeneName": "TMEM222",
+                        "Condition": "renal cell carcinoma",
+                        "Tissue": "kidney",
+                        "Sample": "DO46856 - normal",
+                        "Value": 16.0
+                    }
+                },
+                {
+                    "name": "Expression Get Content 6",
+                    "i": {
+                        "r": 83,
+                        "c": 74
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000255543",
+                        "GeneName": "AP005597.4",
+                        "Condition": "ovarian adenocarcinoma",
+                        "Tissue": "ovary",
+                        "Sample": "DO46366 - primary tumour",
+                        "Value": 0.0
+                    }
+                },
+                {
+                    "name": "Expression Get Content 7",
+                    "i": {
+                        "r": 52,
+                        "c": 9
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000227172",
+                        "GeneName": "AC011290.1",
+                        "Condition": "bladder transitional cell carcinoma",
+                        "Tissue": "urinary bladder",
+                        "Sample": "DO561 - primary tumour",
+                        "Value": 0.7
+                    }
+                },
+                {
+                    "name": "Expression Get Content 8",
+                    "i": {
+                        "r": 31,
+                        "c": 89
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000188763",
+                        "GeneName": "FZD9",
+                        "Condition": "renal cell carcinoma",
+                        "Tissue": "kidney",
+                        "Sample": "DO20604 - primary tumour",
+                        "Value": 0.4
+                    }
+                },
+                {
+                    "name": "Expression Get Content 9",
+                    "i": {
+                        "r": 82,
+                        "c": 13
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000254946",
+                        "GeneName": "AC073172.2",
+                        "Condition": "breast adenocarcinoma",
+                        "Tissue": "breast",
+                        "Sample": "DO2995 - primary tumour",
+                        "Value": 0.0
+                    }
+                },
+                {
+                    "name": "Expression Get Content 10",
+                    "i": {
+                        "r": 95,
+                        "c": 93
+                    },
+                    "o": {
+                        "GeneID": "ENSG00000266172",
+                        "GeneName": "ENSG00000266172",
+                        "Condition": "renal cell carcinoma",
+                        "Tissue": "kidney",
+                        "Sample": "DO46909 - primary tumour",
+                        "Value": 0.0
+                    }
+                }
+            ]
+        }
+    }
+}
+        
+'''
     }, "expression_get": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION GET
@@ -492,6 +767,26 @@ TESTS_DICT = {
                      + " test skipped",
         "apply_params": "cases",
         "specified_params": ["format"]
+    }, "expression_search_content": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION SEARCH CONTENT
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "expression_search_content",
+        "description": "Requests the /expressions/search endpoint using all "
+                       + "filters. Checks content type and status code (200)."
+                       + "Validates response body matches expressions array "
+                       + "schema in the specification. Each test case requests "
+                       + "a different slice of the dataset, the returned "
+                       + "expression matrix is checked for correct slicing.",
+        "uri": c.EXPRESSION_API + "search",
+        "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
+        "http_method": c.HTTP_GET,
+        "pass_text": "Expressions can be retrieved using URL parameters through"
+                     + " the search endpoint",
+        "fail_text": "Expressions cannot be retrieved using URL parameters "
+                     + " through the search endpoint",
+        "skip_text": "Expression search with URL parameters test skipped",
+        "apply_params": "all"
     }, "expression_search_filters_out": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION SEARCH FILTERS OUT
@@ -847,41 +1142,38 @@ TESTS_DICT = {
         "expected_status": [501]
     }
 }
+'''
 """dict: dictionary of dicts, each representing a test scenario"""
+
 
 TESTS_BY_OBJECT_TYPE = {
     "projects": [
         "project_get",
-        "project_get_not_found",
-        "project_search",
         "project_search_filters",
-        "project_search_url_params_all",
-        "project_search_url_params_cases",
-        "project_search_filters_out"
+        "project_search"
+        
     ],
     "studies": [
         "study_get",
-        "study_get_not_found",
-        "study_search",
-        "study_search_url_params_all",
-        "study_search_url_params_cases",
-        "study_search_filters_out",
-        "study_search_filters"
+        "study_search_filters",
+        "study_search"
     ],
     "expressions": [
         "expression_get",
-        "expression_get_not_found",
-        "expression_get_content",
-        "expression_formats",
-        "expression_search",
-        "expression_search_url_params_all",
-        "expression_search_url_params_cases",
-        "expression_search_filters_out",
-        "expression_search_format_not_specified",
-        "expression_search_filetypes_match",
-        "expression_search_no_filetype_mismatches",
-        "expression_search_filters"
+        # "expression_get_not_found",
+        # "expression_get_content",
+        # "expression_formats",
+        # "expression_search",
+        # "expression_search_url_params_all",
+        # "expression_search_url_params_cases",
+        # "expression_search_filters_out",
+        # "expression_search_format_not_specified",
+        # "expression_search_filetypes_match",
+        # "expression_search_no_filetype_mismatches",
+        # "expression_search_filters"
     ],
+}
+'''
     "continuous": [
         "continuous_get",
         "continuous_get_not_found",
@@ -897,6 +1189,7 @@ TESTS_BY_OBJECT_TYPE = {
     ]
 }
 """dict: names of tests by project, study, expression object types"""
+'''
 
 NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE = {
     "projects": [

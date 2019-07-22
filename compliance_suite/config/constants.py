@@ -84,10 +84,10 @@ STUDY_API = 'studies/'
 EXPRESSION_API = "expressions/"
 CONTINUOUS_API = "continuous/"
 
-ENDPOINTS = ["projects", "studies", "expressions", "continuous"]
+ENDPOINTS = ["projects", "studies", "expressions"]#, "continuous"]
 TEST_RESOURCES = {
-    "projects": [
-        {
+    "projects": {
+        "9c0eba51095d3939437e220db196e27b": {
             "id": "9c0eba51095d3939437e220db196e27b",
             "filters": {
                 "version": "1.0",
@@ -95,9 +95,9 @@ TEST_RESOURCES = {
                 "name": "RNAgetTestProject0"
             }
         }
-    ],
-    "studies": [
-        {
+    },
+    "studies": {
+        "f3ba0b59bed0fa2f1030e7cb508324d1": {
             "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
             "filters": {
                 "version": "1.0",
@@ -105,9 +105,9 @@ TEST_RESOURCES = {
                 "name": "RNAgetTestStudy0"
             }
         }
-    ],
-    "expressions": [
-        {
+    },
+    "expressions": {
+        "ac3e9279efd02f1c98de4ed3d335b98e": {
             "id": "ac3e9279efd02f1c98de4ed3d335b98e",
             "filters": {
                 "version": "1.0",
@@ -115,9 +115,9 @@ TEST_RESOURCES = {
                 "format": "FROM_SERVER"
             }
         }
-    ],
-    "continuous": [
-        {
+    },
+    "continuous": {
+        "5e22e009f41fc53cbea094a41de8798f": {
             "id": "5e22e009f41fc53cbea094a41de8798f",
             "filters": {
                 "version": "1.0",
@@ -125,7 +125,14 @@ TEST_RESOURCES = {
                 "format": "FROM_SERVER"
             }
         }
-    ]
+    }
+}
+
+TEST_STATUS_DICT = {
+    1: "PASSED",
+    0: "SKIPPED",
+    -1: "FAILED",
+    2: "UNKNOWN ERROR"
 }
 
 NONEXISTENT_ID = "nonexistentid9999999999999999999"

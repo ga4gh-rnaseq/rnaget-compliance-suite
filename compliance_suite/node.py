@@ -9,7 +9,7 @@ and whether the returned JSON object matches the required schema.
 
 import sys
 
-from compliance_suite.single_test_executor import SingleTestExecutor as STE
+from compliance_suite.test_elements.test_executor import TestExecutor as TE
 
 class Node():
     """Run a single test of the API for one route and one object instance
@@ -80,9 +80,10 @@ class Node():
             self.result = 1
         # all true tests run through the SingleTestExecution class
         else:
-            ste = STE(self.get_mature_uri(runner, self.kwargs["uri"]), test, 
-                      runner)
-            ste.execute_test()
+            te = TE(test, runner)
+            te.execute_tests()
+            self.result = te.status
+            self.full_message = te.get_full_message()
 
     def __str__(self):
         """String representation of the test case
@@ -235,6 +236,7 @@ class Node():
             self.skip_text = self.generate_skip_text()
         return self.skip_text
     
+'''
     def get_mature_uri(self, runner, immature_uri):
         """Returns full uri for an API route, replacing placeholders with ids
 
@@ -266,3 +268,4 @@ class Node():
         )
 
         return mature_uri
+'''
