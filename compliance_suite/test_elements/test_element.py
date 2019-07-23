@@ -1,2 +1,4 @@
 class TestElement(object):
-    pass
+    
+    def as_json(self):
+        pass

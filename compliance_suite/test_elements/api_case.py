@@ -8,34 +8,11 @@ from compliance_suite.test_elements.case import Case
 class APICase(Case):
 
     def __init__(self, case_params, test, runner):
-        self.status = 2
-        self.headers = {}
-        self.case_params = {}
-        self.test = test
-        self.runner = runner
-        self.set_case_parameters(case_params)
-
-        self.full_message = [
-            ["Case", self.case_params["name"]],
-            ["Desc", self.case_params["description"]]
-        ]
-
+        super(APICase, self).__init__(case_params, test, runner)
         self.__set_test_properties()
-
-    def set_status(self, status):
-        self.status = status
-
-    def set_case_parameters(self, case_params):
-        for k in case_params.keys():
-            self.case_params[k] = case_params[k]
-    
-    def get_full_message(self):
-        return self.full_message
 
     def execute_test_case(self):
         """Test API URI, validate response and set test to pass/fail"""
-
-        print(self.runner.retrieved_server_settings)
         
         # set request headers
         for header_name, header_value in self.runner.headers.items():
@@ -43,7 +20,6 @@ class APICase(Case):
 
         # make GET/POST request
         url = self.get_mature_url()
-        print("Mature URL: " + url)
         request_method = REQUEST_METHOD[self.case_params["http_method"]]
         response = request_method(
             url,
@@ -72,9 +48,12 @@ class APICase(Case):
         if self.status != -1:
             self.full_message.append(["Request", url])
             self.full_message.append(["Params", str(self.params)])
+            self.append_audit("Request: " + url)
+            self.append_audit("Params: " + str(self.params))
             # only add response body if JSON format is expected
             if self.is_json:
                 self.full_message.append(["Response Body", response.text])
+                self.append_audit("Response Body: " + response.text)
 
             try:
                 # Validation 1, Content-Type, Media Type validation
@@ -136,6 +115,7 @@ class APICase(Case):
 
             except tse.TestStatusException as e:
                 self.set_status(-1)
+                self.set_error_message(str(e))
                 self.full_message.append(["Exception", 
                     str(e.__class__.__name__)])
                 self.full_message.append(["Exception Message", str(e)])
@@ -190,33 +170,6 @@ class APICase(Case):
             self.params = self.case_params["request_params"]
         if "request_params_func" in self.case_params.keys():
             self.params = self.case_params["request_params_func"](self.test, self.runner)
-
-        # params = self.test.kwargs["obj_instance"]["filters"]
-        # supported_filters = self.runner.retrieved_server_settings\
-        #     [self.test.kwargs["obj_type"]]["supp_filters"]
-        # exp_format = self.runner.retrieved_server_settings\
-        #     [self.test.kwargs["obj_type"]]["exp_format"]
-        # print(exp_format)
-        
-        # for k in params.keys():
-        #     if k in set(supported_filters):
-        #         self.params[k] = params[k]
-        #     elif k == "format":
-        #         self.params[k] = exp_format
-
-        # check if request params need to be changed for this test type
-        # if so, replace params with the replace value
-        # replace_params = False
-        # replace_value = None
-        # if "replace_params" in self.test.kwargs.keys():
-        #     replace_params = self.test.kwargs["replace_params"]
-        # if replace_params:
-        #     if "param_replacement" in self.test.kwargs.keys():
-        #         for param_key in self.params.keys():
-        #             self.params[param_key] = \
-        #                 self.test.kwargs["param_replacement"]
-        #     elif "param_func" in self.test.kwargs.keys():
-        #         self.test.kwargs["param_func"](self.params)
     
     def __set_schema(self):
         self.schema_file = None

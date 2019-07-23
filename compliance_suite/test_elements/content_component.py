@@ -1,7 +1,8 @@
+from compliance_suite.test_elements.component import Component
 from compliance_suite.test_elements.content_case import ContentCase
 from compliance_suite.config.constants import *
 
-class ContentComponent(object):
+class ContentComponent(Component):
 
     def __init__(self, test_params, test, runner):
         self.status = 2

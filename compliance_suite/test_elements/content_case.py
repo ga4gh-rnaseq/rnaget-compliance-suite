@@ -7,17 +7,7 @@ from compliance_suite.test_elements.case import Case
 
 class ContentCase(Case):
     def __init__(self, case_params, test, runner):
-        self.status = 2
-        self.headers = {}
-        self.case_params = {}
-        self.test = test
-        self.runner = runner
-        self.set_case_parameters(case_params)
-
-        self.full_message = [
-            ["Case", self.case_params["name"]],
-            ["Desc", self.case_params["description"]]
-        ]
+        super(ContentCase, self).__init__(case_params, test, runner)
 
     def set_status(self, status):
         self.status = status
@@ -30,4 +20,7 @@ class ContentCase(Case):
         return self.full_message
 
     def execute_test_case(self):
-        return self.case_params["function"](self)
+        case_result = self.case_params["function"](self)
+        self.status = case_result["status"]
+        self.full_message.append(case_result["message"])
+        return case_result

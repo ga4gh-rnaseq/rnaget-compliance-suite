@@ -1,7 +1,8 @@
+from compliance_suite.test_elements.component import Component
 from compliance_suite.test_elements.api_case import APICase
 from compliance_suite.config.constants import *
 
-class APIComponent(object):
+class APIComponent(Component):
     def __init__(self, test_params, test, runner):
         self.status = 2
         self.test_params = test_params
@@ -48,6 +49,7 @@ class APIComponent(object):
 
     def get_full_message(self):
         return self.full_message
+
 
         
 

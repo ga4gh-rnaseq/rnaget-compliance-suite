@@ -83,7 +83,8 @@ class Node():
             te = TE(test, runner)
             te.execute_tests()
             self.result = te.status
-            self.full_message = te.get_full_message()
+            # self.full_message = te.get_full_message()
+            self.full_message = te.as_json()
 
     def __str__(self):
         """String representation of the test case

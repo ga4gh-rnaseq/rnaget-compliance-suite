@@ -71,6 +71,8 @@ class Runner():
             resource: {"supp_filters": [], "exp_format": None} 
             for resource in c.ENDPOINTS
         }
+        #TODO remove hardcoding
+        self.retrieved_server_settings["expressions"]["exp_format"] = "loom"
     
     def processed_func_descrp(self, text):
         """Cleanup test function docstring for output to JSON report

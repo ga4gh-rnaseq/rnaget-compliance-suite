@@ -459,7 +459,8 @@ TESTS_DICT = {
                                 + "validates response body matches Expression "
                                 + "object schema.",
                     "url": c.EXPRESSION_API + "V_EXPRESSION_ID",
-                    "schema_file": c.SCHEMA_FILE_EXPRESSION
+                    "schema_file": c.SCHEMA_FILE_EXPRESSION,
+                    "server_settings_update_func": uf.update_expected_format
                 },
 
                 {
@@ -481,6 +482,7 @@ TESTS_DICT = {
                 "url": c.EXPRESSION_API + "V_EXPRESSION_ID",
                 "description": "Asserts correct content of expression "
                                + "matrix columns/rows",
+                "download_url": lambda response_json: response_json["URL"]
             },
             "cases": [
                 {
@@ -635,280 +637,301 @@ TESTS_DICT = {
                 }
             ]
         }
-    }
-}
-        
-'''
-    }, "expression_get": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION GET
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_get",
-        "description": "Requests the /expressions/:id endpoint using test "
-                       + "expression id. Checks content type "
-                       + "and status code (200). Validates response body "
-                       + "matches project schema in the specification.",
-        "uri": c.EXPRESSION_API + "V_EXPRESSION_ID",
-        "schema_file": c.SCHEMA_FILE_EXPRESSION,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression endpoint implemented by the server",
-        "fail_text": "Expression endpoint not implemented by the server",
-        "skip_text": "Expression endpoint test skipped",
-        "apply_params": "no",
-        "server_settings_update_func": uf.update_expected_format
-    }, "expression_get_not_found": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION GET NOT FOUND
-        # # # # # # # # # # # # # # # # # # # # 
-        "name": "expression_get_not_found",
-        "description": "Requests the /expressions/:id endpoint using an "
-                       + "expression id that is known to not exist. Checks "
-                       + "content type and status code (4xx). Validates "
-                       + "response body matches error schema in the "
-                       + "specification",
-        "uri": c.EXPRESSION_API + c.NONEXISTENT_ID,
-        "schema_file": c.SCHEMA_FILE_ERROR,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression not found endpoint correctly implemented",
-        "fail_text": "Expression not found endpoint not correctly implemented",
-        "skip_text": "Expression not found test skipped",
-        "apply_params": "no",
-        "expected_status": [400, 404]
-    }, "expression_get_content": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION GET CONTENT
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_get_content",
-        "description": "Requests the /expressions/:id endpoint using "
-                       + "test dataset expression id. Checks content type "
-                       + "and status code (200). Validates response body "
-                       + "matches project schema in the specification. "
-                       + "Downloads attachment and tests that its content "
-                       + "matches expected genes (rows) and experiments "
-                       + "(columns).",
-        "uri": c.EXPRESSION_API + "V_EXPRESSION_ID",
-        "schema_file": c.SCHEMA_FILE_EXPRESSION,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression endpoint implemented by the server",
-        "fail_text": "Expression endpoint not implemented by the server",
-        "skip_text": "Expression endpoint test skipped",
-        "apply_params": "no",
-        "content_test": cf.expression_get
     }, "expression_formats": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION FORMATS
         # # # # # # # # # # # # # # # # # # # # 
         "name": "expression_formats",
-        "description": "Requests the /expressions/formats endpoint. Checks "
-                       + "content type and status code (200). Validates "
+        "description": "Requests the /expressions/formats endpoint",
+        "pass_text": "'Expression Formats' endpoint correctly implemented",
+        "fail_text": "'Expression Formats' endpoint NOT correctly implemented",
+        "skip_text": "'Expression formats' test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "url": c.EXPRESSION_API + "formats",
+                "schema_file": c.SCHEMA_FILE_STRING_ARRAY,
+            },
+
+            "cases": [
+                {
+                    "name": "Get Supported Expression Formats",
+                    "description": "request /expressions/formats. checks "
+                       + "content type and status code (200). validates "
                        + "response body is an array of strings.",
-        "uri": c.EXPRESSION_API + "formats",
-        "schema_file": c.SCHEMA_FILE_STRING_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression formats endpoint implemented",
-        "fail_text": "Expression formats endpoint not implemented",
-        "skip_text": "Expression formats test skipped",
-        "apply_params": "no"
-    }, "expression_search": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION SEARCH
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_search",
-        "description": "Requests the /expressions/search endpoint, only "
-                       + "specifying the required 'format' parameter. Checks "
-                       + "content type and status code (200). Validates "
-                       + "response body matches expression array schema in the "
-                       + "specification.",
-        "uri": c.EXPRESSION_API + "search",
-        "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expressions can be retrieved through search endpoint",
-        "fail_text": "Expressions cannot be retrieved through search endpoint",
-        "skip_text": "Expression search test skipped",
-        "apply_params": "some",
-        "specified_params": ["format"]
-    }, "expression_search_url_params_all": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION SEARCH URL PARAMS ALL
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_search_url_params_all",
-        "description": "Requests the /expressions/search endpoint using all "
-                       + "parameter filters in config file. Checks content "
-                       + "type and status code (200). Validates response body "
-                       + "matches expressions array schema in the "
-                       + "specification.",
-        "uri": c.EXPRESSION_API + "search",
-        "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expressions can be retrieved using URL parameters through"
-                     + " the search endpoint",
-        "fail_text": "Expressions cannot be retrieved using URL parameters "
-                     + " through the search endpoint",
-        "skip_text": "Expression search with URL parameters test skipped",
-        "apply_params": "all"
-    }, "expression_search_url_params_cases": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION SEARCH URL PARAMS CASES
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_search_url_params_cases",
-        "description": "Performs multiple requests of the /expressions/search "
-                       + "endpoint, each time using a different parameter "
-                       + "filter in config file. Checks content type and "
-                       + "status code (200). Validates response body matches "
-                       + "expression array schema in the specification.",
-        "uri": c.EXPRESSION_API + "search",
-        "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expressions can be retrieved using URL parameters through"
-                     + " the search endpoint for all cases",
-        "fail_text": "Expressions cannot be retrieved using URL parameters "
-                     + " through the search endpoint for all cases",
-        "skip_text": "Expressions search with multiple URL parameters cases "
-                     + " test skipped",
-        "apply_params": "cases",
-        "specified_params": ["format"]
-    }, "expression_search_content": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION SEARCH CONTENT
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_search_content",
-        "description": "Requests the /expressions/search endpoint using all "
-                       + "filters. Checks content type and status code (200)."
-                       + "Validates response body matches expressions array "
-                       + "schema in the specification. Each test case requests "
-                       + "a different slice of the dataset, the returned "
-                       + "expression matrix is checked for correct slicing.",
-        "uri": c.EXPRESSION_API + "search",
-        "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expressions can be retrieved using URL parameters through"
-                     + " the search endpoint",
-        "fail_text": "Expressions cannot be retrieved using URL parameters "
-                     + " through the search endpoint",
-        "skip_text": "Expression search with URL parameters test skipped",
-        "apply_params": "all"
-    }, "expression_search_filters_out": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION SEARCH FILTERS OUT
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_search_filters_out",
-        "description": "Requests the /expressions/search endpoint using "
-                       + "parameter filters that do not apply to any "
-                       + "expression. Checks content type and status code "
-                       + "(200). Validates response body is an empty array.",
-        "uri": c.EXPRESSION_API + "search",
-        "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression search endpoint successfully filters out "
-                     + "non-matching objects",
-        "fail_text": "Expression search endpoint does not filter out "
-                     + "non-matching objects",
-        "skip_text": "Expression search filters out test skipped",
-        "apply_params": "cases",
-        "specified_params": ["format"],
-        "replace_params": True,
-        "param_replacement": c.NONEXISTENT_ID
-    }, "expression_search_format_not_specified": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION SEARCH FORMAT NOT SPECIFIED
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_search_format_not_specified",
-        "description": "Requests the /expressions/search endpoint without "
-                       + "specifying the required 'format' parameter. Checks "
-                       + "content type and status code (4xx). Validates "
-                       + "response body is an error message JSON.",
-        "uri": c.EXPRESSION_API + "search",
-        "schema_file": c.SCHEMA_FILE_ERROR,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression search endpoint appropriately raises error "
-                     + "when format not specified",
-        "fail_text": "Expression search endpoint does not raise error when "
-                     + "format not specified",
-        "skip_text": "Expression search format not specified test skipped",
-        "apply_params": "no",
-        "expected_status": [400, 404, 422]
-    }, "expression_search_filetypes_match": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION SEARCH FILETYPES MATCH
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_search_filetypes_match",
-        "description": "Requests the /expressions/search endpoint with "
-                       + "'format' parameter specified. Checks "
-                       + "content type and status code (200). Validates "
-                       + "expression objects in response body contain a "
-                       + "fileType that matches the requested format.",
-        "uri": c.EXPRESSION_API + "search",
-        "schema_func": sf.schema_expression_search_filetypes_match,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression search returns expression objects with "
-                     + "fileType matching specified format",
-        "fail_text": "Expression search does not return expression objects "
-                     + "with fileType matching specified format",
-        "skip_text": "Expression search filetypes match test skipped",
-        "apply_params": "some",
-        "specified_params": ["format"],
-    }, "expression_search_no_filetype_mismatches": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: EXPRESSION SEARCH NO FILETYPE MISMATCHES
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "expression_search_no_filetype_mismatches",
-        "description": "Requests the /expressions/search endpoint with "
-                       + "'format' parameter that does not match the format "
-                       + "specified in config file. Checks content type and "
-                       + "status code (200). Validates expression objects in "
-                       + "response body have a fileType matching the requested "
-                       + "format.",
-        "uri": c.EXPRESSION_API + "search",
-        "schema_func": sf.schema_expression_search_no_filetype_mismatches,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression search returns expression objects with "
-                     + "fileType matching specified format when requested "
-                     + "format is modified",
-        "fail_text": "Expression search does not return expression objects "
-                     + "with fileType matching specified format when "
-                     + "requested formate is modified",
-        "skip_text": "Expression search no filetype mismatches test skipped",
-        "apply_params": "some",
-        "replace_params": True,
-        "param_func": pf.switch_format_param,
-        "specified_params": ["format"],
+                }
+            ]
+        }
     }, "expression_search_filters": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION SEARCH FILTERS
         # # # # # # # # # # # # # # # # # # # #
         "name": "expression_search_filters",
-        "description": "Requests the /expressions/search/filters endpoint. " 
-                       + "Checks content type and status code (200). Validates "
-                       + "response body matches search filter array schema "
-                       + "in the specification.",
-        "uri": c.EXPRESSION_API + "search/filters",
-        "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression filters can be retrieved through the search "
-                     + "endpoint",
-        "fail_text": "Expression filters cannot be retrieved through the "
-                     + "search endpoint",
-        "skip_text": "Expression filters search test skipped",
-        "apply_params": "no",
-        "server_settings_update_func": uf.update_supported_filters
+        "description": "Requests the /expressions/search/filters endpoint.",
+        "pass_text": "'Expression Search Filters' endpoint correctly implemented",
+        "fail_text": "'Expression Search Filters' endpoint NOT correctly implemented",
+        "skip_text": "'Expression Search Filters' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.EXPRESSION_API + "search/filters",
+                "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
+                "http_method": c.HTTP_GET,
+                "request_params": {},
+                "server_settings_update_func": uf.update_supported_filters
+            },
+
+            "cases": [
+                {
+                    "name": "Expression Search Filters",
+                    "description": "request /expressions/search/filters. checks "
+                                   + "content type and status code (200). "
+                                   + "validates response body matches search "
+                                   + "filter array schema."
+                }
+            ]
+        }
+    }, "expression_search": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: EXPRESSION SEARCH
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "expression_search",
+        "description": "Requests the /expressions/search endpoint.",
+        "pass_text": "'Expression Search' endpoint correctly implemented",
+        "fail_text": "'Expression Search' endpoint NOT correctly implemented",
+        "skip_text": "'Expression Search' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.EXPRESSION_API + "search",
+                "http_method": c.HTTP_GET
+            },
+
+            "cases": [
+                {
+                    "name": "Search Expressions by Format",
+                    "description": "requests /expressions/search, only "
+                       + "specifying the required 'format' parameter. checks "
+                       + "content type and status code (200). validates "
+                       + "response body matches expression array schema",
+                    "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
+                    "request_params_func": pf.add_format_from_retrieved_settings
+                },
+
+                {
+                    "name": "Search Expressions With All Filters",
+                    "description": "request /expressions/search using all "
+                       + "server-supported expression filters. checks content "
+                       + "type and status code (200). validates response body "
+                       + "matches expression array schema.",
+                    "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
+                    "request_params_func": pf.all_supported_filters_and_format_from_retrieved_settings
+                },
+
+                {
+                    "name": "Search Expressions With Single Filter, 1",
+                    "description": "request /expressions/search using the first "
+                       + "parameter filter supported by server "
+                       + "(in addition to format). checks "
+                       + "type and status code (200). validates response body "
+                       + "matches expression array schema",
+                    "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
+                    "request_params_func": pf.first_supported_filter_and_format
+                },
+
+                {
+                    "name": "Search Expressions With Single Filter, 2",
+                    "description": "request /expressions/search using the second "
+                       + "parameter filter supported by server "
+                       + "(in addition to format). checks "
+                       + "type and status code (200). validates response body "
+                       + "matches expression array schema",
+                    "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
+                    "request_params_func": pf.second_supported_filter_and_format
+                },
+
+                {
+                    "name": "Expression Search Filters Out",
+                    "description": "request /expressions/search using "
+                       + "parameter filters that do not apply to any "
+                       + "expression. checks content type and status code "
+                       + "(200). validates response body is an empty array.",
+                    "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
+                    "request_params_func": pf.incorrect_filters_and_format
+                },
+
+                {
+                    "name": "Expression Search Format Not Specified",
+                    "description": "request /expressions/search endpoint without "
+                       + "specifying the required 'format' parameter. checks "
+                       + "content type and status code (4xx). validates "
+                       + "response body is an error message JSON.",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "request_params": {},
+                    "expected_status": [400, 404, 422]
+                },
+
+                {
+                    "name": "Expression Search Filetypes Match",
+                    "description": "request /expressions/search endpoint with "
+                       + "'format' parameter specified. checks "
+                       + "content type and status code (200). validates "
+                       + "expression objects in response body contain a "
+                       + "fileType that matches the requested format.",
+                    "schema_func": sf.schema_expression_search_filetypes_match,
+                    "request_params_func": pf.add_format_from_retrieved_settings
+                },
+
+                {
+                    "name": "Expression Search No Filetype Mismatches",
+                    "description": "request /expressions/search with "
+                       + "'format' parameter that does not match the format "
+                       + "of the expression in test dataset. checks content type and "
+                       + "status code (200). validates expression objects in "
+                       + "response body have a fileType matching the requested "
+                       + "format.",
+                    "schema_func": sf.schema_expression_search_no_filetype_mismatches,
+                    "request_params_func": pf.switch_format_param
+                },
+            ]
+        },
+
+        "content": {
+            "global_properties": {
+                "function": cf.expression_search_case,
+                "tempfile": "expression_search_content_test.loom",
+                "url": c.EXPRESSION_API + "search",
+                "description": "Asserts correct slicing/subsetting of "
+                    + "expression matrix when slice parameters are passed to "
+                    + "search endpoint",
+                "request_params_func": pf.all_supported_filters_format_and_slice_params,
+                "download_url": lambda response_json: response_json[0]["URL"]
+            },
+            "cases": [
+                # {
+                #     "name": "Slice by featureIDList",
+                #     "featureIDList": ["ENSG00000037965", "ENSG00000243503", "ENSG00000259285"],
+                # },
+
+                {
+                    "name": "Slice by featureNameList",
+                    "featureNameList": [
+                        "PGLYRP3", "PRSS50", "SNRPFP1", "OR5AC4P",
+                        "CLIC1", "RF00092", "AC100827.4"
+                    ],
+                },
+
+                {
+                    "name": "Slice by sampleIDList",
+                    "sampleIDList": [
+                        "DO22935 - primary tumour", "DO20604 - primary tumour",
+                        "DO48516 - primary tumour", "DO42881 - primary tumour",
+                        "DO6144 - primary tumour", "DO40948 - primary tumour",
+                        "DO472 - primary tumour", "DO48505 - primary tumour"
+                    ]
+                },
+
+                # {
+                #     "name": "Slice by minExpression",
+                #     "minExpression": []
+                # },
+
+                # {
+                #     "name": "Slice by maxExpression",
+                #     "maxExpression": []
+                # },
+
+                # {
+                #     "name": "slice by featureIDList and sampleIDList",
+                #     "featureIDList": [],
+                #     "sampleIDList": []
+                # },
+
+                # {
+                #     "name": "slice by featureNameList and sampleIDList",
+                #     "featureNameList": [],
+                #     "sampleIDList": []
+                # },
+
+                # {
+                #     "name": "slice by featureIDList, sampleIDList, and minExpression",
+                #     "featureIDList": [],
+                #     "sampleIDList": [],
+                #     "minExpression": []
+                # },
+
+                # {
+                #     "name": "slice by featureIDList, sampleIDList, and maxExpression",
+                #     "featureIDList": [],
+                #     "sampleIDList": [],
+                #     "maxExpression": []
+                # },
+
+                # {
+                #     "name": "slice by featureIDList, sampleIDList, minExpression, and maxExpression",
+                #     "featureIDList": [],
+                #     "sampleIDList": [],
+                #     "maxExpression": []
+                # }
+
+
+            ]
+        }
     }, "expression_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: EXPRESSION ENDPOINT NOT IMPLEMENTED
         # # # # # # # # # # # # # # # # # # # # 
         "name": "expression_endpoint_not_implemented",
-        "description": "Requests the /expressions/:id endpoint, expecting the "
-                       + "endpoint to respond with a 'Not Implemented' status "
-                       + "code. Checks content type and status code (501).",
-        "uri": c.EXPRESSION_API + c.NONEXISTENT_ID,
-        "schema_file": c.SCHEMA_FILE_EMPTY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Expression endpoint correctly not implemented, " +
-            "yields 501 status code",
-        "fail_text": "Expression endpoint incorrectly not implemented, does " +
-            "not yield 501 status code",
-        "skip_text": "Expression endpoint not implemented test skipped",
-        "apply_params": "no",
-        "expected_status": [501]
+        "description": "Requests various /expressions routes, expecting the "
+                       + "service to respond with a 'Not Implemented' status "
+                       + "code",
+        "pass_text": "Expression endpoints correctly non-implemented",
+        "fail_text": "Expression endpoints NOT correctly non-implemented",
+        "skip_text": "Expression endpoints not implemented test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "request_params": {},
+                "expected_status": [501],
+                "schema_file": c.SCHEMA_FILE_EMPTY
+            },
+
+            "cases": [
+                {
+                    "name": "Expression Get Not Implemented",
+                    "description": "request /expressions/:id, expecting "
+                                   + "501 status code",
+                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID
+                },
+
+                {
+                    "name": "Expression Search Not Implemented",
+                    "description": "request /expressions/search, expecting 501 "
+                                   + "status code",
+                    "url": c.EXPRESSION_API + "search"
+                },
+
+                {
+                    "name": "Expression Search Filters Not Implemented",
+                    "description": "request /expressions/search/filters, "
+                                   + "expecting 501 status code",
+                    "url": c.EXPRESSION_API + "search/filters"
+                },
+
+                {
+                    "name": "Expression Formats Not Implemented",
+                    "description": "request /expressions/formats, "
+                                   + "expecting 501 status code",
+                    "url": c.EXPRESSION_API + "formats",
+                }
+            ]
+        }
+    }
+}
+        
+'''
     }, "continuous_get": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS GET
@@ -1160,17 +1183,20 @@ TESTS_BY_OBJECT_TYPE = {
     ],
     "expressions": [
         "expression_get",
+        "expression_formats",
+        "expression_search_filters",
+        "expression_search"
         # "expression_get_not_found",
         # "expression_get_content",
-        # "expression_formats",
-        # "expression_search",
+        
+        
         # "expression_search_url_params_all",
         # "expression_search_url_params_cases",
         # "expression_search_filters_out",
         # "expression_search_format_not_specified",
         # "expression_search_filetypes_match",
         # "expression_search_no_filetype_mismatches",
-        # "expression_search_filters"
+        
     ],
 }
 '''
