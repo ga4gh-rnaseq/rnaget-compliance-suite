@@ -11,8 +11,13 @@ body {
   min-height: 100%;
 }
 
-.audit_logs {
+.audit-logs {
   font-family: "Courier New", Courier, monospace;
+}
+
+.audit-message {
+  margin: 0;
+  word-break: break-all;
 }
 
 .report-endpoint-section {

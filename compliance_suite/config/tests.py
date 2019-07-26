@@ -809,10 +809,12 @@ TESTS_DICT = {
                 "download_url": lambda response_json: response_json[0]["URL"]
             },
             "cases": [
-                # {
-                #     "name": "Slice by featureIDList",
-                #     "featureIDList": ["ENSG00000037965", "ENSG00000243503", "ENSG00000259285"],
-                # },
+                {
+                    "name": "Slice by featureIDList",
+                    "featureIDList": [
+                        "ENSG00000037965", "ENSG00000243503", "ENSG00000259285"
+                    ],
+                },
 
                 {
                     "name": "Slice by featureNameList",
@@ -842,17 +844,30 @@ TESTS_DICT = {
                 #     "maxExpression": []
                 # },
 
-                # {
-                #     "name": "slice by featureIDList and sampleIDList",
-                #     "featureIDList": [],
-                #     "sampleIDList": []
-                # },
+                {
+                    "name": "slice by featureIDList and sampleIDList",
+                    "featureIDList": [
+                        "ENSG00000106278", "ENSG00000142025", "ENSG00000171487",
+                        "ENSG00000184471", "ENSG00000213719", "ENSG00000239589"
+                    ],
+                    "sampleIDList": [
+                        "DO52655 - primary tumour", "DO52685 - primary tumour",
+                        "DO25887 - primary tumour",
+                    ]
+                },
 
-                # {
-                #     "name": "slice by featureNameList and sampleIDList",
-                #     "featureNameList": [],
-                #     "sampleIDList": []
-                # },
+                {
+                    "name": "slice by featureNameList and sampleIDList",
+                    "featureNameList": [
+                        "SH3BP1", "APOL5", "RN7SL592P"
+                    ],
+                    "sampleIDList": [
+                        "DO1249 - primary tumour", "DO28763 - primary tumour", 
+                        "DO33408 - primary tumour", "DO219961 - primary tumour",
+                        "DO2995 - primary tumour", "DO18671 - primary tumour",
+                        "DO219106 - primary tumour"
+                    ]
+                },
 
                 # {
                 #     "name": "slice by featureIDList, sampleIDList, and minExpression",
@@ -874,8 +889,6 @@ TESTS_DICT = {
                 #     "sampleIDList": [],
                 #     "maxExpression": []
                 # }
-
-
             ]
         }
     }, "expression_endpoint_not_implemented": {
@@ -925,6 +938,37 @@ TESTS_DICT = {
                     "description": "request /expressions/formats, "
                                    + "expecting 501 status code",
                     "url": c.EXPRESSION_API + "formats",
+                }
+            ]
+        }
+    }, "continuous_get": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS GET
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_get",
+        "description": "Requests the /continuous/:id endpoint",
+        "pass_text": "'Get Continuous by Id' endpoint correctly implemented",
+        "fail_text": "'Get Continuous by Id' endpoint NOT correctly implemented",
+        "skip_text": "'Get Continuous by Id' test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "request_params": {}
+            },
+
+            "cases": [
+                {
+                    "name": "Get Test Continuous",
+                    "description": "request /continous/:id using test "
+                        + "continuous id. checks content type and status code "
+                        + "(200).",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+                    "schema_file": c.SCHEMA_FILE_EMPTY,
+                    "use_default_media_types": False,
+                    "media_types": ["application/vnd.loom", 
+                                    "text/tab-separated-values"],
+                    "is_json": False
                 }
             ]
         }
@@ -1186,36 +1230,22 @@ TESTS_BY_OBJECT_TYPE = {
         "expression_formats",
         "expression_search_filters",
         "expression_search"
-        # "expression_get_not_found",
-        # "expression_get_content",
-        
-        
-        # "expression_search_url_params_all",
-        # "expression_search_url_params_cases",
-        # "expression_search_filters_out",
-        # "expression_search_format_not_specified",
-        # "expression_search_filetypes_match",
-        # "expression_search_no_filetype_mismatches",
-        
     ],
-}
-'''
     "continuous": [
         "continuous_get",
-        "continuous_get_not_found",
-        "continuous_formats",
-        "continuous_search",
-        "continuous_search_url_params_all",
-        "continuous_search_url_params_cases",
-        "continuous_search_filters_out",
-        "continuous_search_format_not_specified",
-        "continuous_search_formats_match",
-        "continuous_search_no_format_mismatches",
-        "continuous_search_filters"
+        # "continuous_get_not_found",
+        # "continuous_formats",
+        # "continuous_search",
+        # "continuous_search_url_params_all",
+        # "continuous_search_url_params_cases",
+        # "continuous_search_filters_out",
+        # "continuous_search_format_not_specified",
+        # "continuous_search_formats_match",
+        # "continuous_search_no_format_mismatches",
+        # "continuous_search_filters"
     ]
 }
 """dict: names of tests by project, study, expression object types"""
-'''
 
 NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE = {
     "projects": [

@@ -5,10 +5,15 @@ class Case(TestElement):
 
     def __init__(self, case_params, test, runner):
         self.status = 2
-        self.headers = {}
+
         self.case_params = {}
         self.test = test
         self.runner = runner
+
+        self.headers = {}
+        # set request headers
+        for header_name, header_value in self.runner.headers.items():
+            self.headers[header_name] = header_value
 
         self.summary = ""
         self.summary_pass = ""

@@ -84,7 +84,7 @@ STUDY_API = 'studies/'
 EXPRESSION_API = "expressions/"
 CONTINUOUS_API = "continuous/"
 
-ENDPOINTS = ["projects", "studies", "expressions"]#, "continuous"]
+ENDPOINTS = ["projects", "studies", "expressions", "continuous"]
 TEST_RESOURCES = {
     "projects": {
         "9c0eba51095d3939437e220db196e27b": {
@@ -112,6 +112,7 @@ TEST_RESOURCES = {
             "filters": {
                 "version": "1.0",
                 "tags": "RNAgetCompliance",
+                "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
                 "format": "FROM_SERVER"
             }
         }

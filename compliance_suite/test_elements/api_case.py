@@ -13,10 +13,6 @@ class APICase(Case):
 
     def execute_test_case(self):
         """Test API URI, validate response and set test to pass/fail"""
-        
-        # set request headers
-        for header_name, header_value in self.runner.headers.items():
-            self.headers[header_name] = header_value
 
         # make GET/POST request
         url = self.get_mature_url()
@@ -46,13 +42,11 @@ class APICase(Case):
         # apply_params = self.test.kwargs["apply_params"]
         
         if self.status != -1:
-            self.full_message.append(["Request", url])
-            self.full_message.append(["Params", str(self.params)])
             self.append_audit("Request: " + url)
             self.append_audit("Params: " + str(self.params))
+            self.append_audit("Headers: " + str(self.headers))
             # only add response body if JSON format is expected
             if self.is_json:
-                self.full_message.append(["Response Body", response.text])
                 self.append_audit("Response Body: " + response.text)
 
             try:
@@ -116,12 +110,10 @@ class APICase(Case):
             except tse.TestStatusException as e:
                 self.set_status(-1)
                 self.set_error_message(str(e))
-                self.full_message.append(["Exception", 
-                    str(e.__class__.__name__)])
-                self.full_message.append(["Exception Message", str(e)])
-                    
-            finally:
-                self.test.full_message = self.full_message
+                self.append_audit(
+                    "Exception of class %s encountered" % (
+                        str(e.__class__.__name__)))
+                self.append_audit("Exception Message: " + str(e))
 
     def __get_response_media_type(self, response):
         """Get media type from 'Content-Type' field of response header"""
@@ -162,7 +154,7 @@ class APICase(Case):
         if add_test_specific:
             self.media_types += \
                 [a for a in self.case_params["media_types"]]
-        self.headers = {"Accept": ", ".join(self.media_types) + ";"}
+        self.headers["Accept"] = ", ".join(self.media_types) + ";"
 
     def __set_params(self):
         self.params = {}
@@ -181,7 +173,7 @@ class APICase(Case):
             self.schema_file = self.case_params["schema_func"](self.params)
         
         if "is_json" in self.case_params.keys():
-            self.is_json = self.test.kwargs["is_json"]
+            self.is_json = self.case_params["is_json"]
     
     def __set_server_settings_update_func(self):
         self.server_settings_update_func = None

@@ -2,7 +2,61 @@ import json
 import requests
 import loompy
 import os
+import numpy
 
+def loom_attribute_handler(input_file):
+    ds = loompy.connect(input_file)
+    return {
+        "GeneID": ds.ra.GeneID,
+        "GeneName": ds.ra.GeneName,
+        "Condition": ds.ca.Condition,
+        "Tissue": ds.ca.Tissue,
+        "Sample": ds.ca.Sample,
+        "Value": ds
+    }
+
+def tsv_attribute_handler(input_file):
+    gene_ids = []
+    gene_names = []
+    conditions = []
+    tissues = []
+    samples = []
+    values = []
+
+    inc = 0
+    for l in open(input_file, "r"):
+        ls = l.rstrip().split("\t")
+
+        if not l.startswith("#"):
+            if inc == 0: # column header line
+                columns = ls[2:]
+                samples = [column.split(", ")[0] for column in columns]
+
+                n_col_split = len(columns[0].split(", "))
+                if n_col_split > 1:
+                    conditions = [column.split(", ")[1] for column in columns]
+                    if n_col_split > 2:
+                        tissues = [column.split(", ")[2] for column in columns]
+            else:
+                gene_ids.append(ls[0])
+                gene_names.append(ls[1])
+                values.append([float(v) for v in ls[2:]])
+
+            inc += 1
+    
+    return {
+        "GeneID": gene_ids,
+        "GeneName": gene_names,
+        "Condition": conditions,
+        "Tissue": tissues,
+        "Sample": samples,
+        "Value": numpy.matrix(values)
+    }
+
+ATTRIBUTE_HANDLER_BY_FORMAT = {
+    "loom": loom_attribute_handler,
+    "tsv": tsv_attribute_handler
+}
 
 def expression_content_test(function):
     def wrapper(content_case):
@@ -14,23 +68,27 @@ def expression_content_test(function):
             request_params = c["request_params_func"](content_case)
 
         try:
-
-            print(url)
-            print(request_params)
-            print("***")
+            content_case.append_audit("Request URL: " + url)
+            content_case.append_audit("Request Headers:" + str(content_case.headers))
+            content_case.append_audit("Request Params: " + str(request_params))
 
             response = requests.get(url, headers=content_case.headers, params=request_params)
+            content_case.append_audit("Response Body: " + str(response.text))
             response_json = response.json()
             download_url = c["download_url"](response_json)
-            r = requests.get(download_url, allow_redirects=True)
+            content_case.append_audit("Matrix Download URL: " + download_url)
+            r = requests.get(download_url, headers=content_case.headers, allow_redirects=True)
             file_write = open(c["tempfile"], 'wb')
             file_write.write(r.content)
             file_write.close()
-
             result = function(content_case)
+
         except Exception as e:
             result["status"] = -1
             result["message"] = ["Message", "Error parsing expression json and download url"]
+            content_case.set_error_message("Error parsing expression json and download url: "
+                + str(e))
+            content_case.append_audit(str(e))
 
         return result
 
@@ -43,26 +101,30 @@ def expression_get_case(content_case):
     result = {"status": 1, "message": message}
 
     try: 
-        ds = loompy.connect(c["tempfile"])
+        fmt = content_case.runner.retrieved_server_settings["expressions"]["exp_format"]
+        ah = ATTRIBUTE_HANDLER_BY_FORMAT[fmt](c["tempfile"]) # attribute handler
+        
         et = "observed %s: %s doesn't match expected: %s" # error message template
         attr_checks = [
-            ["GeneName", ds.ra.GeneName[c["i"]["r"]], c["o"]["GeneName"]],
-            ["GeneID", ds.ra.GeneID[[c["i"]["r"]]], c["o"]["GeneID"]],
-            ["Condition", ds.ca.Condition[[c["i"]["c"]]], c["o"]["Condition"]],
-            ["Tissue", ds.ca.Tissue[[c["i"]["c"]]], c["o"]["Tissue"]],
-            ["Sample", ds.ca.Sample[[c["i"]["c"]]], c["o"]["Sample"]],
-            ["Value", ds[c["i"]["r"],c["i"]["c"]], c["o"]["Value"]]
+            ["GeneName", ah["GeneName"][c["i"]["r"]], c["o"]["GeneName"]],
+            ["GeneID", ah["GeneID"][c["i"]["r"]], c["o"]["GeneID"]],
+            ["Condition", ah["Condition"][c["i"]["c"]], c["o"]["Condition"]],
+            ["Tissue", ah["Tissue"][c["i"]["c"]], c["o"]["Tissue"]],
+            ["Sample", ah["Sample"][c["i"]["c"]], c["o"]["Sample"]],
+            ["Value", ah["Value"][c["i"]["r"],c["i"]["c"]], c["o"]["Value"]]
         ]
 
         for attr_l in attr_checks:
+            content_case.append_audit("Asserting observed %s(s) match expected" % (attr_l[0]))
             if attr_l[1] != attr_l[2]:
                 raise Exception(et % (attr_l[0], attr_l[1], attr_l[2]))
     
     except Exception as e:
         result["status"] = -1
         result["message"] = ["Message", str(e)]
+        content_case.set_error_message(str(e))
     finally:
-        ds.close()
+        # ds.close()
         os.remove(c["tempfile"])
     
     return result
@@ -70,52 +132,74 @@ def expression_get_case(content_case):
 @expression_content_test
 def expression_search_case(content_case):
     c = content_case.case_params
-    params = c["request_params_func"](content_case.test, content_case.runner)
+    fmt = content_case.runner.retrieved_server_settings["expressions"]["exp_format"]
+    print("Starting Parse:")
+    ah = ATTRIBUTE_HANDLER_BY_FORMAT[fmt](c["tempfile"]) # attribute handler
+    print("Finished parse")
+    
+    attr_d = {
+        "featureIDList": {
+            "tbl_attr": "GeneID",
+            "row/col": "row"
 
-    slice_params = ["featureNameList", "sampleIDList"]
+        },
+        "featureNameList": {
+            "tbl_attr": "GeneName",
+            "row/col": "row"
 
-    for slice_param in slice_params:
-        if slice_param in c.keys():
-            params[slice_param] = ",".join(c[slice_param])
+        },
+        "sampleIDList": {
+            "tbl_attr": "Sample",
+            "row/col": "column"
 
-    message = ["Message", str(params)]
-    result = {"status": 1, "message": message}
-    filename = c["tempfile"]
-    ds = None
+        }
+
+    }
+
+    result = {"status": 1, "message": ""}
 
     try:
-        ds = loompy.connect(filename)    
-        genenames = ds.ra.GeneName
-        geneids = ds.ra.GeneID
-        conditions = ds.ca.Condition
-        samples = ds.ca.Sample
-        tissues = ds.ca.Tissue
-        print("From temp loom:")
-        print(genenames)
-        print(geneids)
-        print(conditions)
-        print(samples)
-        print(tissues)
-        
-        if "featureNameList" in c.keys():
-            if len(genenames) != len(c["featureNameList"]):
-                raise Exception("# of rows in matrix: %s does not equal featureNameList length: %s" % (len(genenames), len(c["featureNameList"])))
-            if "-".join(sorted(genenames)) != "-".join(sorted(c["featureNameList"])):
-                raise Exception("Matrix gene names do not match featureNameList")
-        
-        if "sampleIDList" in c.keys():
-            if len(samples) != len(c["sampleIDList"]):
-                raise Exception("# of columns in matrix: %s does not equal sampleIDList length: %s" % (len(genenames), len(c["sampleIDList"])))
-            if "-".join(sorted(samples)) != "-".join(sorted(c["sampleIDList"])):
-                raise Exception("Matrix sample IDs do not match sampleIDList")
+
+        for slice_key in sorted(attr_d.keys()):
+            if slice_key in c.keys():
+                content_case.append_audit(
+                    "asserting number of %ss matches number of supplied %ss" % (
+                        attr_d[slice_key]["row/col"],
+                        attr_d[slice_key]["tbl_attr"]
+                    )
+                )
+                    
+                if len(ah[attr_d[slice_key]["tbl_attr"]]) != len(c[slice_key]):
+                    exc_message = "" \
+                      + "# of matrix %ss: %s" % (attr_d[slice_key["row/col"]]) \
+                      + str(len(ah[attr_d[slice_key]["tbl_attr"]])) \
+                      + " does not equal %s length: " % slice_key \
+                      + str(len(c[slice_key])) + ". Matrix rows: " \
+                      + str(ah[attr_d[slice_key]["tbl_attr"]]) + " " \
+                      + slice_key + ": " + str(c[slice_key])
+                    
+                    raise Exception(exc_message)
+                
+                content_case.append_audit(
+                    "asserting returned %ss match supplied %ss" % (
+                        attr_d[slice_key]["tbl_attr"],
+                        attr_d[slice_key]["tbl_attr"]
+                    )
+                )
+                if "-".join(sorted(ah[attr_d[slice_key]["tbl_attr"]])) != \
+                   "-".join(sorted(c[slice_key])):
+                    exc_message = "Matrix %ss do not match %s" % (
+                        attr_d[slice_key]["tbl_attr"], slice_key
+                    )
+                    raise Exception(exc_message)
 
     except Exception as e:
+        print("Expression Search Exception Encountered")
         result["status"] = -1
         result["message"] = ["Message", str(e)]
+        content_case.set_error_message(str(e))
     finally:
-        if ds:
-            ds.close()
-        if os.path.exists(filename):
-            os.remove(filename)
+        if os.path.exists(c["tempfile"]):
+            os.remove(c["tempfile"])
 
     return result

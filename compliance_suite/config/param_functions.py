@@ -89,7 +89,7 @@ def all_supported_filters_format_and_slice_params(content_case):
     c = content_case.case_params
     filters = all_supported_filters_and_format_from_retrieved_settings(test, runner)
 
-    slice_params = ["featureNameList", "sampleIDList"]
+    slice_params = ["featureIDList", "featureNameList", "sampleIDList"]
     for slice_param in slice_params:
         if slice_param in c.keys():
             filters[slice_param] = ",".join(c[slice_param])

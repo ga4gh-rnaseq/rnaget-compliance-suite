@@ -47,6 +47,11 @@ TEST_GRAPH = {
             }
         }
     },
+    "continuous": {
+        "base": {
+            "continuous_get": {}
+        }
+    }
 }
 '''
     "continuous": {
