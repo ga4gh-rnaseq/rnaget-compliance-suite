@@ -49,31 +49,16 @@ TEST_GRAPH = {
     },
     "continuous": {
         "base": {
-            "continuous_get": {}
-        }
-    }
-}
-'''
-    "continuous": {
-        "base": {
-            "continuous_get": {
-                "continuous_get_not_found": {},
-                "continuous_formats": {},
-                "continuous_search": {
-                    "continuous_search_filters": {},
-                    "continuous_search_url_params_all": {},
-                    "continuous_search_url_params_cases": {},
-                    "continuous_search_filters_out": {},
-                    "continuous_search_format_not_specified": {},
-                    "continuous_search_formats_match": {},
-                    "continuous_search_no_format_mismatches": {}
+            "continuous_get": {},
+            "continuous_formats": {
+                "continuous_search_filters": {
+                    "continuous_search": {}
                 }
             }
         }
     }
 }
 """dict: hierarchical graph of parent-child test relationships"""
-'''
 
 NOT_IMPLEMENTED_TEST_GRAPH = {
     "projects": {

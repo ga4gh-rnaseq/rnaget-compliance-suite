@@ -7,6 +7,7 @@ class Case(TestElement):
         self.status = 2
 
         self.case_params = {}
+        self.set_case_parameters(case_params)
         self.test = test
         self.runner = runner
 
@@ -16,13 +17,16 @@ class Case(TestElement):
             self.headers[header_name] = header_value
 
         self.summary = ""
-        self.summary_pass = ""
-        self.summary_fail = ""
-        self.summary_unknown = "An unhandled exception occurred"
+        self.potential_summaries = {
+            1: self.case_params["summary_pass"] if "summary_pass" in self.case_params.keys() else "",
+            -1: self.case_params["summary_fail"] if "summary_fail" in self.case_params.keys() else "",
+            0: self.case_params["summary_skip"] if "summary_skip" in self.case_params.keys() else "",
+            2: "An unhandled exception occurred"
+        }
+        self.summary = self.set_summary()
 
         self.error_message = None
         self.audit = []
-        self.set_case_parameters(case_params)
 
         self.full_message = [
             ["Case", self.case_params["name"]],
@@ -72,6 +76,8 @@ class Case(TestElement):
         return self.full_message
     
     def as_json(self):
+        self.set_summary()
+
         return {
             "status": self.status,
             "name": self.case_params["name"],
@@ -82,12 +88,7 @@ class Case(TestElement):
         }
 
     def set_summary(self):
-        if self.status == 1:
-            self.summary = self.summary_pass
-        elif self.status == -1:
-            self.summary = self.summary_fail
-        elif self.status == 2:
-            self.summary = self.summary_unknown
+        self.summary = self.potential_summaries[self.status]
     
     def set_error_message(self, error_message):
         self.error_message = error_message

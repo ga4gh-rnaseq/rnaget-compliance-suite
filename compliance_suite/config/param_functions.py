@@ -1,3 +1,4 @@
+import json
 import compliance_suite.config.constants as c
 
 def all_supported_filters(test, runner):
@@ -93,5 +94,10 @@ def all_supported_filters_format_and_slice_params(content_case):
     for slice_param in slice_params:
         if slice_param in c.keys():
             filters[slice_param] = ",".join(c[slice_param])
+    
+    expression_params = ["minExpression", "maxExpression"]
+    for expression_param in expression_params:
+        if expression_param in c.keys():
+            filters[expression_param] = json.dumps(c[expression_param])
             
     return filters

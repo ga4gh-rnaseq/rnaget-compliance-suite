@@ -99,6 +99,9 @@ TESTS_DICT = {
                                 + "checks content type and status code (200). "
                                 + "validates response body matches Project "
                                 + "object schema.",
+                    "summary_pass": "Test project successfully retrieved",
+                    "summary_fail": "Test project NOT retrieved",
+                    "summary_skip": "'Get Test Project' skipped",
                     "url": c.PROJECT_API + "V_PROJECT_ID",
                     "schema_file": c.SCHEMA_FILE_PROJECT
                 },
@@ -108,6 +111,9 @@ TESTS_DICT = {
                     "description": "request /projects/:id using a project id known "
                         + "to not exist. Checks content type and status code "
                         + "(4xx). Validates response body matches Error schema.",
+                    "summary_pass": "Server sends correct response when requested project not found",
+                    "summary_fail": "Server DOES NOT send correct response when requested project not found",
+                    "summary_skip": "'Project Not Found' skipped",
                     "url": c.PROJECT_API + c.NONEXISTENT_ID,
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400, 404]
@@ -140,7 +146,10 @@ TESTS_DICT = {
                     "description": "request /projects/search/filters. checks "
                                    + "content type and status code (200). "
                                    + "validates response body matches search "
-                                   + "filter array schema."
+                                   + "filter array schema.",
+                    "summary_pass": "Project search filters successfully retrieved",
+                    "summary_fail": "Project search filters NOT retrieved",
+                    "summary_skip": "'Project Search Filters' skipped",
                 }
             ]
         }
@@ -168,6 +177,9 @@ TESTS_DICT = {
                                    + "and status code (200). validates "
                                    + "response body matches project array "
                                    + "schema.",
+                    "summary_pass": "Projects can be searched without filters",
+                    "summary_fail": "Projects CANNOT be searched without filters",
+                    "summary_skip": "'Search Projects Without Filters' skipped",
                     "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
                     "request_params": {}
                 },
@@ -178,6 +190,9 @@ TESTS_DICT = {
                        + "server-supported project filters. checks content "
                        + "type and status code (200). validates response body "
                        + "matches project array schema.",
+                    "summary_pass": "Projects can be searched with all filters specified",
+                    "summary_fail": "Projects CANNOT be searched with all filters specified",
+                    "summary_skip": "'Search Projects With All Filters' skipped",
                     "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
                     "request_params_func": pf.all_supported_filters
                 },
@@ -188,6 +203,9 @@ TESTS_DICT = {
                        + "parameter filter supported by server. checks "
                        + "type and status code (200). validates response body "
                        + "matches project array schema",
+                    "summary_pass": "Projects can be searched when first filter parameter is supplied",
+                    "summary_fail": "Projects CANNOT be searched when first filter parameter is supplied",
+                    "summary_skip": "'Search Projects With Single Filter, 1' skipped",
                     "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
                     "request_params_func": pf.first_supported_filter
                 },
@@ -198,6 +216,9 @@ TESTS_DICT = {
                        + "parameter filter supported by server. checks "
                        + "type and status code (200). validates response body "
                        + "matches project array schema",
+                    "summary_pass": "Projects can be searched when second filter parameter is supplied",
+                    "summary_fail": "Projects CANNOT be searched when second filter parameter is supplied",
+                    "summary_skip": "'Search Projects With Single Filter, 2' skipped",
                     "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
                     "request_params_func": pf.second_supported_filter
                 },
@@ -208,6 +229,9 @@ TESTS_DICT = {
                        + "that do not apply to any project. "
                        + "checks content type and status code (200). validates "
                        + "response body is an empty array.",
+                    "summary_pass": "Project search endpoint filters non-matching resources",
+                    "summary_fail": "Project search endpoint DOES NOT filter non-matching resources",
+                    "summary_skip": "'Project Search Filters Non-Matching Resources' skipped",
                     "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
                     "request_params_func": pf.incorrect_filter_values
                 }
@@ -238,6 +262,9 @@ TESTS_DICT = {
                     "name": "Project Get Not Implemented",
                     "description": "request /projects/:id, expecting "
                                    + "501 status code",
+                    "summary_pass": "Project Get correctly non-implemented",
+                    "summary_fail": "Project Get NOT correctly non-implemented",
+                    "summary_skip": "'Project Get Not Implemented' skipped",
                     "url": c.PROJECT_API + c.NONEXISTENT_ID
                 },
 
@@ -245,6 +272,9 @@ TESTS_DICT = {
                     "name": "Project Search Not Implemented",
                     "description": "request /projects/search, expecting 501 "
                                    + "status code",
+                    "summary_pass": "Project Search correctly non-implemented",
+                    "summary_fail": "Project Search NOT correctly non-implemented",
+                    "summary_skip": "'Project Search Not Implemented' skipped",
                     "url": c.PROJECT_API + "search"
                 },
 
@@ -252,6 +282,9 @@ TESTS_DICT = {
                     "name": "Project Search Filters Not Implemented",
                     "description": "request /projects/search/filters, "
                                    + "expecting 501 status code",
+                    "summary_pass": "Project Search Filters correctly non-implemented",
+                    "summary_fail": "Project Search Filters NOT correctly non-implemented",
+                    "summary_skip": "'Project Search Filters Not Implemented' skipped",
                     "url": c.PROJECT_API + "search/filters"
                 }
             ]
@@ -279,6 +312,9 @@ TESTS_DICT = {
                                 + "checks content type and status code (200). "
                                 + "validates response body matches Study "
                                 + "object schema.",
+                    "summary_pass": "Test study successfully retrieved",
+                    "summary_fail": "Test study NOT retrieved",
+                    "summary_skip": "'Get Test Study' skipped",
                     "url": c.STUDY_API + "V_STUDY_ID",
                     "schema_file": c.SCHEMA_FILE_STUDY
                 },
@@ -288,6 +324,9 @@ TESTS_DICT = {
                     "description": "request /studies/:id using a study id known "
                         + "to not exist. Checks content type and status code "
                         + "(4xx). Validates response body matches Error schema.",
+                    "summary_pass": "Server sends correct response when requested study not found",
+                    "summary_fail": "Server DOES NOT send correct response when requested study not found",
+                    "summary_skip": "'Study Not Found' skipped",
                     "url": c.STUDY_API + c.NONEXISTENT_ID,
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400, 404]
@@ -319,7 +358,10 @@ TESTS_DICT = {
                     "description": "request /studies/search/filters. checks "
                                    + "content type and status code (200). "
                                    + "validates response body matches search "
-                                   + "filter array schema."
+                                   + "filter array schema.",
+                    "summary_pass": "Study search filters successfully retrieved",
+                    "summary_fail": "Study search filters NOT retrieved",
+                    "summary_skip": "'Study Search Filters' skipped",
                 }
             ]
         }
@@ -347,6 +389,9 @@ TESTS_DICT = {
                                    + "and status code (200). validates "
                                    + "response body matches study array "
                                    + "schema.",
+                    "summary_pass": "Studies can be searched without filters",
+                    "summary_fail": "Studies CANNOT be searched without filters",
+                    "summary_skip": "'Search Studies Without Filters' skipped",
                     "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
                     "request_params": {}
                 },
@@ -357,6 +402,9 @@ TESTS_DICT = {
                        + "server-supported study filters. checks content "
                        + "type and status code (200). validates response body "
                        + "matches study array schema.",
+                    "summary_pass": "Studies can be searched with all filters specified",
+                    "summary_fail": "Studies CANNOT be searched with all filters specified",
+                    "summary_skip": "'Search Studies With All Filters' skipped",
                     "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
                     "request_params_func": pf.all_supported_filters
                 },
@@ -367,6 +415,9 @@ TESTS_DICT = {
                        + "parameter filter supported by server. checks "
                        + "type and status code (200). validates response body "
                        + "matches study array schema",
+                    "summary_pass": "Studies can be searched when first filter parameter is supplied",
+                    "summary_fail": "Studies CANNOT be searched when first filter parameter is supplied",
+                    "summary_skip": "'Search Studies With Single Filter, 1' skipped",
                     "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
                     "request_params_func": pf.first_supported_filter
                 },
@@ -377,6 +428,9 @@ TESTS_DICT = {
                        + "parameter filter supported by server. checks "
                        + "type and status code (200). validates response body "
                        + "matches study array schema",
+                    "summary_pass": "Studies can be searched when second filter parameter is supplied",
+                    "summary_fail": "Studies CANNOT be searched when second filter parameter is supplied",
+                    "summary_skip": "'Search Studies With Single Filter, 2' skipped",
                     "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
                     "request_params_func": pf.second_supported_filter
                 },
@@ -387,6 +441,9 @@ TESTS_DICT = {
                        + "that do not apply to any project. "
                        + "checks content type and status code (200). validates "
                        + "response body is an empty array.",
+                    "summary_pass": "Study search endpoint filters non-matching resources",
+                    "summary_fail": "Study search endpoint DOES NOT filter non-matching resources",
+                    "summary_skip": "'Study Search Filters Non-Matching Resources' skipped",
                     "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
                     "request_params_func": pf.incorrect_filter_values
                 }
@@ -417,6 +474,9 @@ TESTS_DICT = {
                     "name": "Study Get Not Implemented",
                     "description": "request /studies/:id, expecting "
                                    + "501 status code",
+                    "summary_pass": "Study Get correctly non-implemented",
+                    "summary_fail": "Study Get NOT correctly non-implemented",
+                    "summary_skip": "'Study Get Not Implemented' skipped",
                     "url": c.STUDY_API + c.NONEXISTENT_ID
                 },
 
@@ -424,6 +484,9 @@ TESTS_DICT = {
                     "name": "Study Search Not Implemented",
                     "description": "request /studies/search, expecting 501 "
                                    + "status code",
+                    "summary_pass": "Study Search correctly non-implemented",
+                    "summary_fail": "Study Search NOT correctly non-implemented",
+                    "summary_skip": "'Study Search Not Implemented' skipped",
                     "url": c.STUDY_API + "search"
                 },
 
@@ -431,6 +494,9 @@ TESTS_DICT = {
                     "name": "Study Search Filters Not Implemented",
                     "description": "request /studies/search/filters, "
                                    + "expecting 501 status code",
+                    "summary_pass": "Study Search Filters correctly non-implemented",
+                    "summary_fail": "Study Search Filters NOT correctly non-implemented",
+                    "summary_skip": "'Study Search Filters Not Implemented' skipped",
                     "url": c.STUDY_API + "search/filters"
                 }
             ]
@@ -458,6 +524,9 @@ TESTS_DICT = {
                                 + "checks content type and status code (200). "
                                 + "validates response body matches Expression "
                                 + "object schema.",
+                    "summary_pass": "Test expression successfully retrieved",
+                    "summary_fail": "Test expression NOT retrieved",
+                    "summary_skip": "'Get Test Expression' skipped",
                     "url": c.EXPRESSION_API + "V_EXPRESSION_ID",
                     "schema_file": c.SCHEMA_FILE_EXPRESSION,
                     "server_settings_update_func": uf.update_expected_format
@@ -468,6 +537,9 @@ TESTS_DICT = {
                     "description": "request /expressions/:id using an expression id known "
                         + "to not exist. Checks content type and status code "
                         + "(4xx). validates response body matches Error schema.",
+                    "summary_pass": "Server sends correct response when requested expression not found",
+                    "summary_fail": "Server DOES NOT send correct response when requested expression not found",
+                    "summary_skip": "'Expression Not Found' skipped",
                     "url": c.EXPRESSION_API + c.NONEXISTENT_ID,
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400, 404]
@@ -482,6 +554,9 @@ TESTS_DICT = {
                 "url": c.EXPRESSION_API + "V_EXPRESSION_ID",
                 "description": "Asserts correct content of expression "
                                + "matrix columns/rows",
+                "summary_pass": "Expression matrix content matches expected",
+                "summary_fail": "Expression matrix content DOES NOT match expected",
+                "summary_skip": "'Expression Get Content' skipped",
                 "download_url": lambda response_json: response_json["URL"]
             },
             "cases": [
@@ -660,6 +735,9 @@ TESTS_DICT = {
                     "description": "request /expressions/formats. checks "
                        + "content type and status code (200). validates "
                        + "response body is an array of strings.",
+                    "summary_pass": "Expression formats successfully retrieved",
+                    "summary_fail": "Expression formats NOT retrieved",
+                    "summary_skip": "'Get Supported Expression Formats' skipped",
                 }
             ]
         }
@@ -688,7 +766,10 @@ TESTS_DICT = {
                     "description": "request /expressions/search/filters. checks "
                                    + "content type and status code (200). "
                                    + "validates response body matches search "
-                                   + "filter array schema."
+                                   + "filter array schema.",
+                    "summary_pass": "Expression search filters successfully retrieved",
+                    "summary_fail": "Expression search filters NOT retrieved",
+                    "summary_skip": "'Expression Search Filters' skipped",
                 }
             ]
         }
@@ -715,6 +796,9 @@ TESTS_DICT = {
                        + "specifying the required 'format' parameter. checks "
                        + "content type and status code (200). validates "
                        + "response body matches expression array schema",
+                    "summary_pass": "Expressions can be searched by format",
+                    "summary_fail": "Expressions CANNOT be searched by format",
+                    "summary_skip": "'Search Expressions by Format' skipped",
                     "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
                     "request_params_func": pf.add_format_from_retrieved_settings
                 },
@@ -725,6 +809,9 @@ TESTS_DICT = {
                        + "server-supported expression filters. checks content "
                        + "type and status code (200). validates response body "
                        + "matches expression array schema.",
+                    "summary_pass": "Expressions can be searched with all filters specified",
+                    "summary_fail": "Expressions CANNOT be searched with all filters specified",
+                    "summary_skip": "'Search Expressions With All Filters' skipped",
                     "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
                     "request_params_func": pf.all_supported_filters_and_format_from_retrieved_settings
                 },
@@ -736,6 +823,9 @@ TESTS_DICT = {
                        + "(in addition to format). checks "
                        + "type and status code (200). validates response body "
                        + "matches expression array schema",
+                    "summary_pass": "Expressions can be searched when first filter parameter is supplied",
+                    "summary_fail": "Expressions CANNOT be searched when first filter parameter is supplied",
+                    "summary_skip": "'Search Expressions With Single Filter, 1' skipped",
                     "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
                     "request_params_func": pf.first_supported_filter_and_format
                 },
@@ -747,16 +837,22 @@ TESTS_DICT = {
                        + "(in addition to format). checks "
                        + "type and status code (200). validates response body "
                        + "matches expression array schema",
+                    "summary_pass": "Expressions can be searched when second filter parameter is supplied",
+                    "summary_fail": "Expressions CANNOT be searched when second filter parameter is supplied",
+                    "summary_skip": "'Search Expressions With Single Filter, 2' skipped",
                     "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
                     "request_params_func": pf.second_supported_filter_and_format
                 },
 
                 {
-                    "name": "Expression Search Filters Out",
+                    "name": "Expression Search Filters Non-Matching Resources",
                     "description": "request /expressions/search using "
                        + "parameter filters that do not apply to any "
                        + "expression. checks content type and status code "
                        + "(200). validates response body is an empty array.",
+                    "summary_pass": "Expression search endpoint filters non-matching resources",
+                    "summary_fail": "Expression search endpoint DOES NOT filter non-matching resources",
+                    "summary_skip": "'Expression Search Filters Non-Matching Resources' skipped",
                     "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
                     "request_params_func": pf.incorrect_filters_and_format
                 },
@@ -767,6 +863,9 @@ TESTS_DICT = {
                        + "specifying the required 'format' parameter. checks "
                        + "content type and status code (4xx). validates "
                        + "response body is an error message JSON.",
+                    "summary_pass": "Server returns error when format not specified",
+                    "summary_fail": "Server DOES NOT return error when format not specified",
+                    "summary_skip": "'Expression Search Format Not Specified' skipped",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "request_params": {},
                     "expected_status": [400, 404, 422]
@@ -779,6 +878,9 @@ TESTS_DICT = {
                        + "content type and status code (200). validates "
                        + "expression objects in response body contain a "
                        + "fileType that matches the requested format.",
+                    "summary_pass": "Expression fileTypes match requested format",
+                    "summary_fail": "Expression fileTypes DO NOT match requested format",
+                    "summary_skip": "'Expression Search Filetypes Match' skipped",
                     "schema_func": sf.schema_expression_search_filetypes_match,
                     "request_params_func": pf.add_format_from_retrieved_settings
                 },
@@ -791,6 +893,9 @@ TESTS_DICT = {
                        + "status code (200). validates expression objects in "
                        + "response body have a fileType matching the requested "
                        + "format.",
+                    "summary_pass": "Expression fileTypes match requested format",
+                    "summary_fail": "Expression fileTypes DO NOT match requested format",
+                    "summary_skip": "'Expression Search No Filetype Mismatches' skipped",
                     "schema_func": sf.schema_expression_search_no_filetype_mismatches,
                     "request_params_func": pf.switch_format_param
                 },
@@ -805,6 +910,9 @@ TESTS_DICT = {
                 "description": "Asserts correct slicing/subsetting of "
                     + "expression matrix when slice parameters are passed to "
                     + "search endpoint",
+                "summary_pass": "Sliced expression matrix rows, columns, and values match expected",
+                "summary_fail": "Sliced expression matrix rows, columns, and values DO NOT match expected",
+                "summary_skip": "'Expression Search Slice' skipped",
                 "request_params_func": pf.all_supported_filters_format_and_slice_params,
                 "download_url": lambda response_json: response_json[0]["URL"]
             },
@@ -834,15 +942,49 @@ TESTS_DICT = {
                     ]
                 },
 
-                # {
-                #     "name": "Slice by minExpression",
-                #     "minExpression": []
-                # },
+                {
+                    "name": "Slice by minExpression",
+                    "minExpression": [
+                        {
+                            "threshold": 50,
+                            "featureName": "TSPAN6"
+                        },
+                        {
+                            "threshold": 75,
+                            "featureName": "HOXC8"
+                        },
+                        {
+                            "threshold": 100,
+                            "featureName": "RAB27A"
+                        }
+                    ]
+                },
 
-                # {
-                #     "name": "Slice by maxExpression",
-                #     "maxExpression": []
-                # },
+                {
+                    "name": "Slice by maxExpression",
+                    "maxExpression": [
+                        {
+                            "threshold": 0.1,
+                            "featureName": "TSPAN6"
+                        },
+                        {
+                            "threshold": 0.2,
+                            "featureName": "AC090453.1"
+                        },
+                        {
+                            "threshold": 0.1,
+                            "featureName": "RF00322"
+                        },
+                        {
+                            "threshold": 0.2,
+                            "featureName": "HSPE1P5"
+                        },
+                        {
+                            "threshold": 0.1,
+                            "featureName": "RN7SL592P"
+                        }
+                    ]
+                },
 
                 {
                     "name": "slice by featureIDList and sampleIDList",
@@ -869,26 +1011,113 @@ TESTS_DICT = {
                     ]
                 },
 
-                # {
-                #     "name": "slice by featureIDList, sampleIDList, and minExpression",
-                #     "featureIDList": [],
-                #     "sampleIDList": [],
-                #     "minExpression": []
-                # },
+                {
+                    "name": "slice by featureIDList, sampleIDList, and minExpression",
+                    "featureIDList": ["ENSG00000100092", "ENSG00000000003"],
+                    "sampleIDList": [
+                        "DO9042 - primary tumour", "DO41951 - primary tumour",
+                        "DO40664 - primary tumour", "DO25887 - primary tumour",
+                        "DO47132 - primary tumour"
+                    ],
+                    "minExpression": [
+                        {
+                            "threshold": 20,
+                            "featureName": "SH3BP1"
+                        },
+                        {
+                            "threshold": 100,
+                            "featureName": "TSPAN6"
+                        }
+                    ]
+                },
 
-                # {
-                #     "name": "slice by featureIDList, sampleIDList, and maxExpression",
-                #     "featureIDList": [],
-                #     "sampleIDList": [],
-                #     "maxExpression": []
-                # },
+                {
+                    "name": "slice by featureIDList, sampleIDList, and maxExpression",
+                    "featureIDList": [
+                        "ENSG00000000003", "ENSG00000237269", "ENSG00000250286",
+                        "ENSG00000255543"
+                    ],
+                    "sampleIDList": [
+                        "DO561 - primary tumour", "DO220525 - primary tumour",
+                        "DO38903 - primary tumour", "DO46856 - normal",
+                        "DO46961 - normal"
+                    ],
+                    "maxExpression": [
+                        {
+                            "threshold": 0.1,
+                            "featureName": "TSPAN6"
+                        },
+                        {
+                            "threshold": 0.2,
+                            "featureName": "RBMY2TP"
+                        },
+                        {
+                            "threshold": 0.1,
+                            "featureName": "AC021491.2"
+                        },
+                        {
+                            "threshold": 0.2,
+                            "featureName": "AP005597.4"
+                        }
+                    ]
+                },
 
-                # {
-                #     "name": "slice by featureIDList, sampleIDList, minExpression, and maxExpression",
-                #     "featureIDList": [],
-                #     "sampleIDList": [],
-                #     "maxExpression": []
-                # }
+                {
+                    "name": "slice by featureIDList, sampleIDList, minExpression, and maxExpression",
+                    "featureIDList": [
+                        "ENSG00000000003", "ENSG00000201184", "ENSG00000238013",
+                        "ENSG00000248585", "ENSG00000251090"
+                    ],
+                    "sampleIDList": [
+                        "DO2995 - primary tumour", "DO220342 - primary tumour",
+                        "DO39841 - primary tumour", "DO12352 - primary tumour",
+                        "DO15503 - primary tumour"
+                    ],
+                    "minExpression": [
+                        {
+                            "threshold": 10,
+                            "featureName": "TSPAN6"
+                        },
+                        {
+                            "threshold": 5,
+                            "featureName": "RNU4-68P"
+                        },
+                        {
+                            "threshold": 10,
+                            "featureName": "AC109583.1"
+                        },
+                        {
+                            "threshold": 5,
+                            "featureName": "AC084024.2"
+                        },
+                        {
+                            "threshold": 10,
+                            "featureName": "OR5AC4P"
+                        }
+                    ],
+                    "maxExpression": [
+                        {
+                            "threshold": 50,
+                            "featureName": "TSPAN6"
+                        },
+                        {
+                            "threshold": 100,
+                            "featureName": "RNU4-68P"
+                        },
+                        {
+                            "threshold": 50,
+                            "featureName": "AC109583.1"
+                        },
+                        {
+                            "threshold": 100,
+                            "featureName": "AC084024.2"
+                        },
+                        {
+                            "threshold": 50,
+                            "featureName": "OR5AC4P"
+                        }
+                    ]
+                }
             ]
         }
     }, "expression_endpoint_not_implemented": {
@@ -916,6 +1145,9 @@ TESTS_DICT = {
                     "name": "Expression Get Not Implemented",
                     "description": "request /expressions/:id, expecting "
                                    + "501 status code",
+                    "summary_pass": "Expression Get correctly non-implemented",
+                    "summary_fail": "Expression Get NOT correctly non-implemented",
+                    "summary_skip": "'Expression Get Not Implemented' skipped",
                     "url": c.EXPRESSION_API + c.NONEXISTENT_ID
                 },
 
@@ -923,6 +1155,9 @@ TESTS_DICT = {
                     "name": "Expression Search Not Implemented",
                     "description": "request /expressions/search, expecting 501 "
                                    + "status code",
+                    "summary_pass": "Expression Search correctly non-implemented",
+                    "summary_fail": "Expression Search NOT correctly non-implemented",
+                    "summary_skip": "'Expression Search Not Implemented' skipped",
                     "url": c.EXPRESSION_API + "search"
                 },
 
@@ -930,6 +1165,9 @@ TESTS_DICT = {
                     "name": "Expression Search Filters Not Implemented",
                     "description": "request /expressions/search/filters, "
                                    + "expecting 501 status code",
+                    "summary_pass": "Expression Search Filters correctly non-implemented",
+                    "summary_fail": "Expression Search Filters NOT correctly non-implemented",
+                    "summary_skip": "'Expression Search Filters Not Implemented' skipped",
                     "url": c.EXPRESSION_API + "search/filters"
                 },
 
@@ -937,6 +1175,9 @@ TESTS_DICT = {
                     "name": "Expression Formats Not Implemented",
                     "description": "request /expressions/formats, "
                                    + "expecting 501 status code",
+                    "summary_pass": "Expression Formats correctly non-implemented",
+                    "summary_fail": "Expression Formats NOT correctly non-implemented",
+                    "summary_skip": "'Expression Formats Not Implemented' skipped",
                     "url": c.EXPRESSION_API + "formats",
                 }
             ]
@@ -963,253 +1204,286 @@ TESTS_DICT = {
                     "description": "request /continous/:id using test "
                         + "continuous id. checks content type and status code "
                         + "(200).",
+                    "summary_pass": "Test continuous successfully retrieved",
+                    "summary_fail": "Test continuous NOT retrieved",
+                    "summary_skip": "'Get Test Continuous' skipped",
                     "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
                     "schema_file": c.SCHEMA_FILE_EMPTY,
                     "use_default_media_types": False,
                     "media_types": ["application/vnd.loom", 
                                     "text/tab-separated-values"],
                     "is_json": False
+                },
+
+                {
+                    "name": "Continuous Not Found",
+                    "description": "request /continuous/:id using a " 
+                       + "continuous id known to not exist. checks "
+                       + "content type and status code (4xx). validates "
+                       + "response body matches error schema in the "
+                       + "specification",
+                    "summary_pass": "Server sends correct response when requested continuous not found",
+                    "summary_fail": "Server DOES NOT send correct response when requested continuous not found",
+                    "summary_skip": "'Continuous Not Found' skipped",
+                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID,
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "expected_status": [400, 404]
                 }
             ]
         }
-    }
-}
-        
-'''
-    }, "continuous_get": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS GET
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_get",
-        "description": "Requests the /continuous/:id endpoint using test "
-                       + "continuous id. Checks content type and status "
-                       + "code (200).",
-        "uri": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
-        "schema_file": c.SCHEMA_FILE_EMPTY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous endpoint implemented by the server",
-        "fail_text": "Continuous endpoint not implemented by the server",
-        "skip_text": "Continuous endpoint test skipped",
-        "apply_params": "no",
-        "use_default_media_types": False,
-        "media_types": ["application/vnd.loom", "text/tab-separated-values"],
-        "is_json": False
-    }, "continuous_get_not_found": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS GET NOT FOUND
-        # # # # # # # # # # # # # # # # # # # # 
-        "name": "continuous_get_not_found",
-        "description": "Requests the /continuous/:id endpoint using a " 
-                       + "continuous id that is known to not exist. Checks "
-                       + "content type and status code (4xx). Validates "
-                       + "response body matches error schema in the "
-                       + "specification",
-        "uri": c.CONTINUOUS_API + c.NONEXISTENT_ID,
-        "schema_file": c.SCHEMA_FILE_ERROR,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous not found endpoint correctly implemented",
-        "fail_text": "Continuous not found endpoint not correctly implemented",
-        "skip_text": "Continuous not found test skipped",
-        "apply_params": "no",
-        "expected_status": [400, 404]
     }, "continuous_formats": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS FORMATS
         # # # # # # # # # # # # # # # # # # # # 
         "name": "continuous_formats",
-        "description": "Requests the /continuous/formats endpoint. Checks "
-                       + "content type and status code (200). Validates "
+        "description": "Requests the /continuous/formats endpoint",
+        "pass_text": "'Continuous Formats' endpoint correctly implemented",
+        "fail_text": "'Continuous Formats' endpoint NOT correctly implemented",
+        "skip_text": "'Continuous formats' test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "url": c.CONTINUOUS_API + "formats",
+                "schema_file": c.SCHEMA_FILE_STRING_ARRAY,
+            },
+
+            "cases": [
+                {
+                    "name": "Get Supported Continuous Formats",
+                    "description": "request /continuous/formats. checks "
+                       + "content type and status code (200). validates "
                        + "response body is an array of strings.",
-        "uri": c.CONTINUOUS_API + "formats",
-        "schema_file": c.SCHEMA_FILE_STRING_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous formats endpoint implemented",
-        "fail_text": "Continuous formats endpoint not implemented",
-        "skip_text": "Continuous formats test skipped",
-        "apply_params": "no"
-    }, "continuous_search": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search",
-        "description": "Requests the /continuous/search endpoint, only "
-                       + "specifying the required 'format' parameter. Checks "
-                       + "content type and status code (200). Validates "
-                       + "response body matches continuous array schema in the "
-                       + "specification.",
-        "uri": c.CONTINUOUS_API + "search",
-        "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous objects can be retrieved through search "
-            + "endpoint",
-        "fail_text": "Continuous objects cannot be retrieved through search "
-            + "endpoint",
-        "skip_text": "Continuous search test skipped",
-        "apply_params": "some",
-        "specified_params": ["format"]
-    }, "continuous_search_url_params_all": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH URL PARAMS ALL
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search_url_params_all",
-        "description": "Requests the /continuous/search endpoint using all "
-                       + "parameter filters in config file. Checks content "
-                       + "type and status code (200). Validates response body "
-                       + "matches continuous object array schema in the "
-                       + "specification.",
-        "uri": c.CONTINUOUS_API + "search",
-        "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous objects can be retrieved using URL parameters "
-                     + "through the search endpoint",
-        "fail_text": "Continuous objects cannot be retrieved using URL " 
-                     + "parameters through the search endpoint",
-        "skip_text": "Continuous search with URL parameters test skipped",
-        "apply_params": "all"
-    }, "continuous_search_url_params_cases": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH URL PARAMS CASES
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search_url_params_cases",
-        "description": "Performs multiple requests of the /continuous/search "
-                       + "endpoint, each time using a different parameter "
-                       + "filter in config file. Checks content type and "
-                       + "status code (200). Validates response body matches "
-                       + "continuous array schema in the specification.",
-        "uri": c.CONTINUOUS_API + "search",
-        "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous objects can be retrieved using URL parameters "
-                     + "through the search endpoint for all cases",
-        "fail_text": "Continuous objects cannot be retrieved using URL "
-                     + "parameters through the search endpoint for all cases",
-        "skip_text": "Continuous search with multiple URL parameters cases "
-                     + " test skipped",
-        "apply_params": "cases",
-        "specified_params": ["format"]
-    }, "continuous_search_filters_out": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH FILTERS OUT
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search_filters_out",
-        "description": "Requests the /continuous/search endpoint using "
-                       + "parameter filters that do not apply to any "
-                       + "continuous object. Checks content type and status "
-                       + "code (200). Validates response body is an empty "
-                       + "array.",
-        "uri": c.CONTINUOUS_API + "search",
-        "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous search endpoint successfully filters out "
-                     + "non-matching objects",
-        "fail_text": "Continuous search endpoint does not filter out "
-                     + "non-matching objects",
-        "skip_text": "Continuous search filters out test skipped",
-        "apply_params": "cases",
-        "specified_params": ["format"],
-        "replace_params": True,
-        "param_replacement": c.NONEXISTENT_ID
-    }, "continuous_search_format_not_specified": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH FORMAT NOT SPECIFIED
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search_format_not_specified",
-        "description": "Requests the /continuous/search endpoint without "
-                       + "specifying the required 'format' parameter. Checks "
-                       + "content type and status code (4xx). Validates "
-                       + "response body is an error message JSON.",
-        "uri": c.CONTINUOUS_API + "search",
-        "schema_file": c.SCHEMA_FILE_ERROR,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous search endpoint appropriately raises error "
-                     + "when format not specified",
-        "fail_text": "Continuous search endpoint does not raise error when "
-                     + "format not specified",
-        "skip_text": "Continuous search format not specified test skipped",
-        "apply_params": "no",
-        "expected_status": [400, 404, 422]
-    }, "continuous_search_formats_match": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH FORMATS MATCH
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search_formats_match",
-        "description": "Requests the /continuous/search endpoint with "
-                       + "'format' parameter specified. Checks "
-                       + "content type and status code (200). Validates "
-                       + "continuous objects in response body contain a "
-                       + "format that matches the format in the request.",
-        "uri": c.CONTINUOUS_API + "search",
-        "schema_func": sf.schema_continuous_search_formats_match,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous search returns objects with "
-                     + "format matching request",
-        "fail_text": "Continuous search does not return objects "
-                     + "with format matching request",
-        "skip_text": "Continuous search formats match test skipped",
-        "apply_params": "some",
-        "specified_params": ["format"],
-    }, "continuous_search_no_format_mismatches": {
-        # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH NO FORMAT MISMATCHES
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search_no_format_mismatches",
-        "description": "Requests the /continuous/search endpoint with "
-                       + "'format' parameter that does not match the format "
-                       + "specified in config file. Checks content type and "
-                       + "status code (200). Validates continuous objects in "
-                       + "response body have a fileType matching the request.",
-        "uri": c.CONTINUOUS_API + "search",
-        "schema_func": sf.schema_continuous_search_no_format_mismatches,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous search returns objects with fileType matching "
-                     + "requested format when modified",
-        "fail_text": "Continuous search does not return objects with fileType"
-                     + "matching requested format when modified",
-        "skip_text": "Continuous search no format mismatches test skipped",
-        "apply_params": "some",
-        "replace_params": True,
-        "param_replacement": c.NONEXISTENT_ID,
-        "specified_params": ["format"],
+                    "summary_pass": "Continuous formats successfully retrieved",
+                    "summary_fail": "Continuous formats NOT retrieved",
+                    "summary_skip": "'Get Supported Continuous Formats' skipped",
+                }
+            ]
+        }
     }, "continuous_search_filters": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS SEARCH FILTERS
         # # # # # # # # # # # # # # # # # # # #
         "name": "continuous_search_filters",
-        "description": "Requests the /continuous/search/filters endpoint. " 
-                       + "Checks content type and status code (200). Validates "
-                       + "response body matches search filter array schema "
-                       + "in the specification.",
-        "uri": c.CONTINUOUS_API + "search/filters",
-        "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous filters can be retrieved through the search "
-                     + "endpoint",
-        "fail_text": "Continuous filters cannot be retrieved through the "
-                     + "search endpoint",
-        "skip_text": "Continous filters search test skipped",
-        "apply_params": "no",
-        "server_settings_update_func": uf.update_supported_filters
+        "description": "Requests the /continuous/search/filters endpoint.",
+        "pass_text": "'Continuous Search Filters' endpoint correctly implemented",
+        "fail_text": "'Continuous Search Filters' endpoint NOT correctly implemented",
+        "skip_text": "'Continuous Search Filters' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.CONTINUOUS_API + "search/filters",
+                "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
+                "http_method": c.HTTP_GET,
+                "request_params": {},
+                "server_settings_update_func": uf.update_supported_filters
+            },
+
+            "cases": [
+                {
+                    "name": "Continuous Search Filters",
+                    "description": "request /continuous/search/filters. checks "
+                                   + "content type and status code (200). "
+                                   + "validates response body matches search "
+                                   + "filter array schema.",
+                    "summary_pass": "Continuous search filters successfully retrieved",
+                    "summary_fail": "Continuous search filters NOT retrieved",
+                    "summary_skip": "'Continuous Search Filters' skipped",
+                }
+            ]
+        }
+    }, "continuous_search": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: CONTINUOUS SEARCH
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "continuous_search",
+        "description": "Requests the /continuous/search endpoint.",
+        "pass_text": "'Continuous Search' endpoint correctly implemented",
+        "fail_text": "'Continuous Search' endpoint NOT correctly implemented",
+        "skip_text": "'Continuous Search' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.EXPRESSION_API + "search",
+                "http_method": c.HTTP_GET
+            },
+
+            "cases": [
+                {
+                    "name": "Search Continuous by Format",
+                    "description": "requests /continuous/search, only "
+                       + "specifying the required 'format' parameter. checks "
+                       + "content type and status code (200). validates "
+                       + "response body matches continuous array schema",
+                    "summary_pass": "Continuous can be searched by format",
+                    "summary_fail": "Continuous CANNOT be searched by format",
+                    "summary_skip": "'Search Continuous by Format' skipped",
+                    "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+                    "request_params_func": pf.add_format_from_retrieved_settings
+                },
+
+                {
+                    "name": "Search Continuous With All Filters",
+                    "description": "request /continuous/search using all "
+                       + "server-supported continuous filters. checks content "
+                       + "type and status code (200). validates response body "
+                       + "matches continuous array schema.",
+                    "summary_pass": "Continuous can be searched with all filters specified",
+                    "summary_fail": "Continuous CANNOT be searched with all filters specified",
+                    "summary_skip": "'Search Continuous With All Filters' skipped",
+                    "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+                    "request_params_func": pf.all_supported_filters_and_format_from_retrieved_settings
+                },
+
+                {
+                    "name": "Search Continuous With Single Filter, 1",
+                    "description": "request /continuous/search using the first "
+                       + "parameter filter supported by server "
+                       + "(in addition to format). checks "
+                       + "type and status code (200). validates response body "
+                       + "matches continuous array schema",
+                    "summary_pass": "Continuous can be searched when first filter parameter is supplied",
+                    "summary_fail": "Continuous CANNOT be searched when first filter parameter is supplied",
+                    "summary_skip": "'Search Continuous With Single Filter, 1' skipped",
+                    "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+                    "request_params_func": pf.first_supported_filter_and_format
+                },
+
+                {
+                    "name": "Search Continuous With Single Filter, 2",
+                    "description": "request /continuous/search using the second "
+                       + "parameter filter supported by server "
+                       + "(in addition to format). checks "
+                       + "type and status code (200). validates response body "
+                       + "matches continuous array schema",
+                    "summary_pass": "Continuous can be searched when second filter parameter is supplied",
+                    "summary_fail": "Continuous CANNOT be searched when second filter parameter is supplied",
+                    "summary_skip": "'Search Continuous With Single Filter, 2' skipped",
+                    "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+                    "request_params_func": pf.second_supported_filter_and_format
+                },
+
+                {
+                    "name": "Continuous Search Filters Non-Matching Resources",
+                    "description": "request /continuous/search using "
+                       + "parameter filters that do not apply to any "
+                       + "continuous. checks content type and status code "
+                       + "(200). validates response body is an empty array.",
+                    "summary_pass": "Continuous search endpoint filters non-matching resources",
+                    "summary_fail": "Continuous search endpoint DOES NOT filter non-matching resources",
+                    "summary_skip": "'Continuous Search Filters Non-Matching Resources' skipped",
+                    "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
+                    "request_params_func": pf.incorrect_filters_and_format
+                },
+
+                {
+                    "name": "Continuous Search Format Not Specified",
+                    "description": "request /continuous/search endpoint without "
+                       + "specifying the required 'format' parameter. checks "
+                       + "content type and status code (4xx). validates "
+                       + "response body is an error message JSON.",
+                    "summary_pass": "Server returns error when format not specified",
+                    "summary_fail": "Server DOES NOT return error when format not specified",
+                    "summary_skip": "'Continuous Search Format Not Specified' skipped",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "request_params": {},
+                    "expected_status": [400, 404, 422]
+                },
+
+                {
+                    "name": "Continuous Search Filetypes Match",
+                    "description": "request /continuous/search endpoint with "
+                       + "'format' parameter specified. checks "
+                       + "content type and status code (200). validates "
+                       + "continuous objects in response body contain a "
+                       + "fileType that matches the requested format.",
+                    "summary_pass": "Continuous fileTypes match requested format",
+                    "summary_fail": "Continuous fileTypes DO NOT match requested format",
+                    "summary_skip": "'Continuous Search Filetypes Match' skipped",
+                    "schema_func": sf.schema_continuous_search_filetypes_match,
+                    "request_params_func": pf.add_format_from_retrieved_settings
+                },
+
+                {
+                    "name": "Continuous Search No Filetype Mismatches",
+                    "description": "request /continuous/search with "
+                       + "'format' parameter that does not match the format "
+                       + "of the continuous in test dataset. checks content type and "
+                       + "status code (200). validates continuous objects in "
+                       + "response body have a fileType matching the requested "
+                       + "format.",
+                    "summary_pass": "Continuous fileTypes match requested format",
+                    "summary_fail": "Continuous fileTypes DO NOT match requested format",
+                    "summary_skip": "'Continuous Search No Filetype Mismatches' skipped",
+                    "schema_func": sf.schema_continuous_search_no_filetype_mismatches,
+                    "request_params_func": pf.switch_format_param
+                }
+            ]
+        }
     }, "continuous_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS ENDPOINT NOT IMPLEMENTED
         # # # # # # # # # # # # # # # # # # # # 
         "name": "continuous_endpoint_not_implemented",
-        "description": "Requests the /continuous/:id endpoint, expecting the "
-                       + "endpoint to respond with a 'Not Implemented' status "
-                       + "code. Checks content type and status code (501).",
-        "uri": c.CONTINUOUS_API + c.NONEXISTENT_ID,
-        "schema_file": c.SCHEMA_FILE_EMPTY,
-        "http_method": c.HTTP_GET,
-        "pass_text": "Continuous endpoint correctly not implemented, " +
-            "yields 501 status code",
-        "fail_text": "Continuous endpoint incorrectly not implemented, does " +
-            "not yield 501 status code",
-        "skip_text": "Continuous endpoint not implemented test skipped",
-        "apply_params": "no",
-        "expected_status": [501]
+        "description": "Requests various /continuous routes, expecting the "
+                       + "service to respond with a 'Not Implemented' status "
+                       + "code",
+        "pass_text": "Continuous endpoints correctly non-implemented",
+        "fail_text": "Continuous endpoints NOT correctly non-implemented",
+        "skip_text": "Continuous endpoints not implemented test skipped",
+
+        "api": {
+            "global_properties": {
+                "http_method": c.HTTP_GET,
+                "request_params": {},
+                "expected_status": [501],
+                "schema_file": c.SCHEMA_FILE_EMPTY
+            },
+
+            "cases": [
+                {
+                    "name": "Continuous Get Not Implemented",
+                    "description": "request /continuous/:id, expecting "
+                                   + "501 status code",
+                    "summary_pass": "Continuous Get correctly non-implemented",
+                    "summary_fail": "Continuous Get NOT correctly non-implemented",
+                    "summary_skip": "'Continuous Get Not Implemented' skipped",
+                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID
+                },
+
+                {
+                    "name": "Continuous Search Not Implemented",
+                    "description": "request /continuous/search, expecting 501 "
+                                   + "status code",
+                    "summary_pass": "Continuous Search correctly non-implemented",
+                    "summary_fail": "Continuous Search NOT correctly non-implemented",
+                    "summary_skip": "'Continuous Search Not Implemented' skipped",
+                    "url": c.CONTINUOUS_API + "search"
+                },
+
+                {
+                    "name": "Continuous Search Filters Not Implemented",
+                    "description": "request /continuous/search/filters, "
+                                   + "expecting 501 status code",
+                    "summary_pass": "Continuous Search Filters correctly non-implemented",
+                    "summary_fail": "Continuous Search Filters NOT correctly non-implemented",
+                    "summary_skip": "'Continuous Search Filters Not Implemented' skipped",
+                    "url": c.CONTINUOUS_API + "search/filters"
+                },
+
+                {
+                    "name": "Continuous Formats Not Implemented",
+                    "description": "request /continuous/formats, "
+                                   + "expecting 501 status code",
+                    "summary_pass": "Continuous Formats correctly non-implemented",
+                    "summary_fail": "Continuous Formats NOT correctly non-implemented",
+                    "summary_skip": "'Continuous Formats Not Implemented' skipped",
+                    "url": c.CONTINUOUS_API + "formats",
+                }
+            ]
+        }
     }
 }
-'''
 """dict: dictionary of dicts, each representing a test scenario"""
 
 
@@ -1233,16 +1507,9 @@ TESTS_BY_OBJECT_TYPE = {
     ],
     "continuous": [
         "continuous_get",
-        # "continuous_get_not_found",
-        # "continuous_formats",
-        # "continuous_search",
-        # "continuous_search_url_params_all",
-        # "continuous_search_url_params_cases",
-        # "continuous_search_filters_out",
-        # "continuous_search_format_not_specified",
-        # "continuous_search_formats_match",
-        # "continuous_search_no_format_mismatches",
-        # "continuous_search_filters"
+        "continuous_formats",
+        "continuous_search_filters",
+        "continuous_search"
     ]
 }
 """dict: names of tests by project, study, expression object types"""

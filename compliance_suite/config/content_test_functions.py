@@ -133,9 +133,7 @@ def expression_get_case(content_case):
 def expression_search_case(content_case):
     c = content_case.case_params
     fmt = content_case.runner.retrieved_server_settings["expressions"]["exp_format"]
-    print("Starting Parse:")
     ah = ATTRIBUTE_HANDLER_BY_FORMAT[fmt](c["tempfile"]) # attribute handler
-    print("Finished parse")
     
     attr_d = {
         "featureIDList": {
@@ -153,7 +151,17 @@ def expression_search_case(content_case):
             "row/col": "column"
 
         }
+    }
 
+    expr_d = {
+        "minExpression": {
+            "cmp_func": lambda value, threshold: value > threshold,
+            "s": "above"
+        },
+        "maxExpression": {
+            "cmp_func": lambda value, threshold: value < threshold,
+            "s": "below"
+        }
     }
 
     result = {"status": 1, "message": ""}
@@ -192,6 +200,41 @@ def expression_search_case(content_case):
                         attr_d[slice_key]["tbl_attr"], slice_key
                     )
                     raise Exception(exc_message)
+        
+        for e_key in sorted(expr_d.keys()):
+            if e_key in c.keys():
+                s, cmp_func = expr_d[e_key]["s"], expr_d[e_key]["cmp_func"]
+
+                content_case.append_audit(
+                    "asserting expression values are %s %s threshold" % (
+                        s, e_key))
+
+                genes = [elem["featureName"] for elem in c[e_key]]
+                gene_row_d = {ah["GeneName"][i]: i 
+                              for i in range(0, len(ah["GeneName"]))
+                              if ah["GeneName"][i] in set(genes)}
+                gene_thresholds_d = {elem["featureName"]: elem["threshold"] \
+                                     for elem in c[e_key]}
+                
+                # each column of the matrix must have AT LEAST ONE gene that
+                # satisfies minExpression/maxExpression threshold. Not all genes
+                # must satisfy the threshold, as multiple genes provided to
+                # minExpression/maxExpression will return the UNION of columns
+                for col in range(0, len(ah["Sample"])):
+                    status = -1
+
+                    for gene in genes:
+                        row = gene_row_d[gene]
+                        threshold = float(gene_thresholds_d[gene])
+                        value = float(ah["Value"][row, col])
+                        if cmp_func(value, threshold):
+                            status = 1
+                    
+                    if status != 1:
+                        exc_message = \
+                            "No gene with expression value %s %s" % (s, e_key) \
+                            + " threshold at column %s" % (str(col))
+                        raise Exception(exc_message)
 
     except Exception as e:
         print("Expression Search Exception Encountered")

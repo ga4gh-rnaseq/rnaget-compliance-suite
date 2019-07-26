@@ -77,8 +77,8 @@ def schema_continuous_search_format(params, full=False):
 
      return arr_filename
 
-def schema_continuous_search_formats_match(params):
+def schema_continuous_search_filetypes_match(params):
      return schema_continuous_search_format(params, full=True)
 
-def schema_continuous_search_no_format_mismatches(params):
+def schema_continuous_search_no_filetype_mismatches(params):
      return schema_continuous_search_format(params)

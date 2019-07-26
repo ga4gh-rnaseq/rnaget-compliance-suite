@@ -117,7 +117,8 @@ class ReportServer(object):
                 ),
                 "server_name_url": lambda name: \
                     name.lower().replace(" ", "") + ".html",
-                "rm_space": lambda text: text.replace(" ", "_"),
+                "rm_space": lambda text: text.replace(" ", "_")\
+                                             .replace(",", ""),
                 "timestamp": lambda: \
                     datetime.datetime.now(datetime.timezone.utc)\
                                      .strftime("%B %d, %Y at %l:%M %p (%Z)"),
