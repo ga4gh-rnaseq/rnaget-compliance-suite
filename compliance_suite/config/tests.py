@@ -1021,7 +1021,7 @@ TESTS_DICT = {
                     ],
                     "minExpression": [
                         {
-                            "threshold": 20,
+                            "threshold": 10,
                             "featureName": "SH3BP1"
                         },
                         {
