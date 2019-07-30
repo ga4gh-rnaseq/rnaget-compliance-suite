@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.test_components.test_executor.py
+"""Module compliance_suite.test_executor.py
 
-This module contains class definition for generalized model of testing an api
-route. The SingleTestExecutor executes a request, checks status code of the
-response, validates the schema of the returned JSON object against the
-corresponding schema, and sets the test result to 1 (success) or -1 (fail)
-
-Todo:
-    * handle query parameters
-    * handle tests for not OK (!=200) response codes
+This module contains the TestExecutor class, which executes all components
+and cases for a single test. One TestExecutor is associated with one Node. 
+Launches all test cases and stores results as JSON/dict
 """
 
 import requests
@@ -21,68 +16,63 @@ from compliance_suite.config.constants import *
 import compliance_suite.exceptions.test_status_exception as tse
 
 class TestExecutor(object):
-    """Executes API request, validates response and sets result to pass/fail
+    """Executes all Test Components and Cases for a single Test/Node
 
-    The SingleTestExecutor is a generalized model for executing tests against
-    the API. It executes a request, checks for response code, and validates
-    the returned object against a schema.
+    The TestExecutor is a generalized model for executing all components and
+    cases of a single test (API route testing and file content testing).
 
     Attributes:
-        uri (str): uri to be requested
-        schema_file (str): JSON schema file to validate response against
-        http_method (int): GET or POST request
-        params (dict): parameters/filters to submit with query
-        test (Test): reference to Test object
-        runner (TestRunner): reference to TestRunner object
-        media_types (list): all accepted media types
-        headers (dict): key, value mapping of request header
-        full_message (list): lists associated information with the api test,
-            to be assigned to Test object and displayed in report under case
+        status (int): indicates pass/fail of Test/Node
+        test (Node): reference to Node object
+        runner (Runner): reference to Runner object
     """
 
     def __init__(self, test, runner):
-        """instantiates a SingleTestExecutor object
+        """instantiates a TestExecutor object
         
         Args:
-            uri (str): uri to be requested
-            test (Test): reference to Test object
-            runner (TestRunner): reference to TestRunner object
+            status (int): indicates if test components passed/failed
+            test (Node): reference to Node object
+            runner (Runner): reference to Runner object
         """
 
         self.status = 2
         self.test = test
         self.runner = runner
-        self.full_message = []
 
+        # TestExecutor only has an API Component if "api" property exists
+        # in Node kwargs
         self.api_component = None
         if "api" in test.kwargs.keys():
-            self.api_component = APIComponent(test.kwargs["api"], self.test, self.runner)
+            self.api_component = APIComponent(
+                test.kwargs["api"], self.test, self.runner)
         
+        # TestExecutor only has a Content Component if "content" property exists
+        # in Node kwargs
         self.content_component = None
         if "content" in test.kwargs.keys():
-            self.content_component = ContentComponent(test.kwargs["content"], self.test, self.runner)
-        
-        # self.__set_test_properties()
+            self.content_component = ContentComponent(
+                test.kwargs["content"], self.test, self.runner)
     
     def execute_tests(self):
+        """Execute all test cases for each existing component
+        
+        Executes api cases if api component exists, and content cases if 
+        content component exists. Sets its own status according to the statuses
+        of all existing components
+        """
+
         if self.api_component:
             self.api_component.execute_cases()
         if self.content_component:
             self.content_component.execute_cases()
         self.set_status_by_components()
-        self.update_full_message()
-    
-    def update_full_message(self):
-        self.full_message = []
-
-        if self.api_component:
-            self.full_message.append(["API Tests"])
-            self.full_message += self.api_component.get_full_message()
-        if self.content_component:
-            self.full_message.append(["Content Tests"])
-            self.full_message += self.content_component.get_full_message()
     
     def set_status_by_components(self):
+        """Set status according to the status of all components"""
+
+        # status is ONLY 1 (success) if all existing components also have a
+        # status of 1. If any component fails, the overall test fails
         status = 1
 
         if self.api_component:
@@ -95,14 +85,19 @@ class TestExecutor(object):
 
         self.status = status
     
-    def get_full_message(self):
-        return self.full_message
-    
     def as_json(self):
+        """Get all test and component information as JSON/dict
+
+        Returns:
+            (dict): JSON object/dict of test and component information
+        """
+
         return {
             "status": self.status,
             "has_api_component": True if self.api_component else False,
             "has_content_component": True if self.content_component else False,
-            "api_component": self.api_component.as_json() if self.api_component else False,
-            "content_component": self.content_component.as_json() if self.content_component else False
+            "api_component": self.api_component.as_json() \
+                             if self.api_component else False,
+            "content_component": self.content_component.as_json() \
+                                 if self.content_component else False
         }

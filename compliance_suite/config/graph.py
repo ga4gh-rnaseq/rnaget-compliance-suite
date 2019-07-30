@@ -39,22 +39,24 @@ TEST_GRAPH = {
     },
     "expressions": {
         "base": {
-            "expression_get": {},
-            "expression_formats": {
-                "expression_search_filters": {
-                    "expression_search": {}
+            "expression_get": {
+                "expression_formats": {
+                    "expression_search_filters": {
+                        "expression_search": {}
+                    }
                 }
-            }
+            },
         }
     },
     "continuous": {
         "base": {
-            "continuous_get": {},
-            "continuous_formats": {
-                "continuous_search_filters": {
-                    "continuous_search": {}
+            "continuous_get": {
+                "continuous_formats": {
+                    "continuous_search_filters": {
+                        "continuous_search": {}
+                    }
                 }
-            }
+            },
         }
     }
 }

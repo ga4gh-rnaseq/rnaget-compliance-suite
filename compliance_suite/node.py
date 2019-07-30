@@ -27,14 +27,14 @@ class Node():
         pass_text (str): text in the report when test case is passed
         fail_text (str): text in the report when test case is failed
         skip_text (str): text in the report when test case is skipped
-        full_message (list): lists associated information with the api test,
-            to be displayed in report under case
+        message (dict): json representation of test information, to be 
+            displayed in report under case
+        description (str): description of the test at this node
         parents (list): Test nodes that are higher in the test graph than this.
             ie. Dependencies for this Test
         children (list): Test nodes which have this Test as dependency
         warning (bool): if the result of this test case is warning for the
             server implementation
-        cases (list): multiple edge cases of same test object
     """
 
     def __init__(self, **kwargs):
@@ -52,12 +52,12 @@ class Node():
         self.pass_text = ''
         self.fail_text = ''
         self.skip_text = ''
-        self.full_message = []
-        self.full_description = kwargs["description"]
+        self.message = {}
+        self.description = kwargs["description"]
         self.parents = []
         self.children = []
         self.warning = False
-        self.cases = []
+
         self.case_outputs = []
 
     def test_algorithm(self, test, runner):
@@ -70,21 +70,20 @@ class Node():
         expected responses, and schemas for returned data.
 
         Args:
-            test (Test): this test object
-            runner (TestRunner): reference to TestRunner object that this test
+            test (Node): this Node object
+            runner (Runner): reference to Runner object that this test
                 belongs to
         """
 
         # base tests automatically pass, but do not figure in the end report
         if self.kwargs["name"] == "base":
             self.result = 1
-        # all true tests run through the SingleTestExecution class
+        # all true tests run through the TestExecutor class
         else:
             te = TE(test, runner)
             te.execute_tests()
             self.result = te.status
-            # self.full_message = te.get_full_message()
-            self.full_message = te.as_json()
+            self.message = te.as_json()
 
     def __str__(self):
         """String representation of the test case
@@ -200,7 +199,7 @@ class Node():
         set for this test
 
         Args:
-            test_runner (TestRunner): TestRunner instance associated with this
+            test_runner (Runner): Runner instance associated with this
                 test
         """
 
@@ -236,37 +235,3 @@ class Node():
         elif self.skip_text == '':
             self.skip_text = self.generate_skip_text()
         return self.skip_text
-    
-'''
-    def get_mature_uri(self, runner, immature_uri):
-        """Returns full uri for an API route, replacing placeholders with ids
-
-        This method constructs a true API route given server and object
-        parameters in the user config file. The base url is added to the
-        beginning of the route, and placeholders for project, study, and
-        expression ids are replaced with true ids provided.
-
-        Args:
-            runner (TestRunner): TestRunner instance associated with this test
-            immature_uri (str): uri without base url or placeholders replaced
-
-        Returns:
-            (str): mature uri with base url added and placeholders replaced
-        """
-
-        mature_uri = runner.server_config["base_url"]
-
-        obj_type_placeholders = {
-            "projects": "V_PROJECT_ID",
-            "studies": "V_STUDY_ID",
-            "expressions": "V_EXPRESSION_ID",
-            "continuous": "V_CONTINUOUS_ID"
-        }
-
-        mature_uri += immature_uri.replace(
-            obj_type_placeholders[self.kwargs["obj_type"]],
-            self.kwargs["obj_instance"]["id"]
-        )
-
-        return mature_uri
-'''

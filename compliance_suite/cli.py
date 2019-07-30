@@ -88,11 +88,11 @@ def report(user_config, output_dir, serve, uptime, no_tar, force):
 
     Arguments:
         user_config (str): Required. Path to user config YAML file
-        file_path_name (str): Optional. File name for w:gz file of web folder.
-            Default is web_<int>.tar.gz
-        json_path (str): Optional. Path to dump the final JSON content to
+        output_dir (str): Optional. Path to output directory
         serve (bool): Optional. If true, spin up a server
+        uptime (int): Optional. How long report server remains up in seconds
         no_tar (bool): Optional. If true, do not create .tar.gz of output dir
+        force (bool): Optional. If true, overwrite output dir if it exists 
     """
 
     final_json = []
@@ -145,6 +145,7 @@ def report(user_config, output_dir, serve, uptime, no_tar, force):
                                         + output_dir + ", directory/archive "
                                         + "already exists")
         
+        # if force, delete the output directory so it can be overwritten 
         if force:
             shutil.rmtree(output_dir)
         

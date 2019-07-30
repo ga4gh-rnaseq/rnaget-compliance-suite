@@ -3,30 +3,13 @@
 
 This module contains definitions of project-wide constants for schema file
 pointers, API routes, headers, and http request methods
-
-Attributes:
-    HTTP_GET (int): integer corresponding to get request method
-    HTTP_POST (int): integer corresponding to post request method
-    REQUEST_METHOD (list): references to request library methods get and post
-    DEFAULT_MEDIA_TYPES (list): media types in request header "Accept"
-    SCHEMA_RELATIVE_DIR (str): path to schema directory
-    SCHEMA_FILE_PROJECT (str): filename for project schema
-    SCHEMA_FILE_STUDY (str): filename for study schema
-    SCHEMA_FILE_EXPRESSION (str): filename for expression schema
-    SCHEMA_FILE_SEARCH_FILTER (str): filename for search filter schema
-    SCHEMA_FILE_PROJECT_ARRAY (str): filename for project array schema
-    SCHEMA_FILE_STUDY_ARRAY (str): filename for study array schema
-    SCHEMA_FILE_EXPRESSION_ARRAY (str): filename for expression array schema
-    SCHEMA_FILE_SEARCH_FILTER_ARRAY (str): filename for filter array schema
-    PROJECT_API (str): api route for project-related requests
-    STUDY_API (str): api route for study-related requests
-    EXPRESSION_API (str): api route for expression-related requests
-    ENDPOINTS (list): all endpoints/object types
-    NONEXISTENT_ID (str): id for requesting api objects that do not exist
-        on the host server
 """
 
 import requests
+
+##################################################
+# HTTP METHODS
+##################################################
 
 HTTP_GET = 0
 HTTP_POST = 1
@@ -36,10 +19,18 @@ REQUEST_METHOD = [
     requests.post
 ]
 
+##################################################
+# MEDIA TYPES
+##################################################
+
 DEFAULT_MEDIA_TYPES = [
     'application/vnd.ga4gh.rnaget.v1.0.0+json',
     'application/json'
 ]
+
+##################################################
+# JSON SCHEMAS
+##################################################
 
 SCHEMA_RELATIVE_DIR = "schemas"
 SCHEMA_FILE_EMPTY = "rnaget-empty.json"
@@ -79,12 +70,16 @@ SCHEMA_FILE_CONTINUOUS_ARRAY_FORMAT_TEMPLATE = \
 SCHEMA_FILE_SEARCH_FILTER_ARRAY = "rnaget-search-filter-array.json"
 SCHEMA_FILE_STRING_ARRAY = "rnaget-string-array.json"
 
+##################################################
+# API RESOURCES
+##################################################
+
 PROJECT_API = 'projects/'
 STUDY_API = 'studies/'
 EXPRESSION_API = "expressions/"
 CONTINUOUS_API = "continuous/"
-
 ENDPOINTS = ["projects", "studies", "expressions", "continuous"]
+
 TEST_RESOURCES = {
     "projects": {
         "9c0eba51095d3939437e220db196e27b": {
@@ -129,11 +124,19 @@ TEST_RESOURCES = {
     }
 }
 
+##################################################
+# STATUS
+##################################################
+
 TEST_STATUS_DICT = {
     1: "PASSED",
     0: "SKIPPED",
     -1: "FAILED",
     2: "UNKNOWN ERROR"
 }
+
+##################################################
+# OTHER
+##################################################
 
 NONEXISTENT_ID = "nonexistentid9999999999999999999"

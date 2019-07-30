@@ -12,7 +12,7 @@ import logging
 import re
 import sys
 
-import compliance_suite.config.functions.general as gf
+import compliance_suite.functions.general as gf
 from compliance_suite.config.tests import TESTS_DICT as tests_config_dict
 from compliance_suite.config.tests import TESTS_BY_OBJECT_TYPE as tests_by_obj
 from compliance_suite.config.tests import NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE \
@@ -32,7 +32,6 @@ class Runner():
 
     Attributes:
         root (Test): Test instance at the base/root of test graph
-        session_params (dict): variables used to run conditional tests
         total_tests (int): total number of tests, regardless of status
         total_tests_passed (int): total number of tests passed
         total_tests_failed (int): total number of tests failed
@@ -44,6 +43,8 @@ class Runner():
         results (dict): dictionary of tests results for all object types
             (project, study, expression) and instances of those objects
         headers (dict): Additional HTTP headers for the requests
+        retrieved_server_settings (dict): holds information about server-side
+            supported filters/formats to inform subsequent test cases
         
     """
 
@@ -56,16 +57,13 @@ class Runner():
         """
 
         self.root = None
-        # TODO: remove session_params if we don't need
-        self.session_params = {}
         self.total_tests = 0
         self.total_tests_passed = 0
         self.total_tests_failed = 0
         self.total_tests_skipped = 0
         self.total_tests_warning = 0
         self.server_config = server_config
-        self.results = {"projects": {}, "studies": {}, "expressions": {},
-                        "continuous": {}}
+        self.results = {endpoint: {} for endpoint in c.ENDPOINTS}
         self.headers = {}
         self.retrieved_server_settings = {
             resource: {"supp_filters": [], "exp_format": None} 
@@ -130,12 +128,11 @@ class Runner():
                     'test_description': self.processed_func_descrp(
                         child.kwargs["name"]),
                     'text': child.to_echo(),
-                    'full_message': child.full_message,
-                    'full_description': child.full_description,
+                    'message': child.message,
+                    'description': child.description,
                     'parents': [str(parent) for parent in child.parents],
                     'children': [str(child) for child in child.children],
-                    'warning': child.warning,
-                    'edge_cases': child.case_outputs
+                    'warning': child.warning
                 }
                 if child.result == 1:
                     self.total_tests_passed = self.total_tests_passed + 1
@@ -268,7 +265,8 @@ class Runner():
 
             if server_config["implemented"][obj_type]:
                 obj_instance_keys = c.TEST_RESOURCES[obj_type].keys()
-                obj_instances = [c.TEST_RESOURCES[obj_type][k] for k in obj_instance_keys]
+                obj_instances = [c.TEST_RESOURCES[obj_type][k] \
+                                 for k in obj_instance_keys]
                 test_list = tests_by_obj[obj_type]
                 test_tree = graph
             else:

@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""Module compliance_suite.api_case.py
+
+This module contains the APICase class, which executes a single test case 
+against the API/service. An API test case makes a single request to the service,
+then checks the response for status code, content type, response body, etc
+to assert whether the test case passes requirements.
+"""
+
 import requests
 
 import compliance_suite.exceptions.test_status_exception as tse
@@ -6,13 +15,22 @@ from compliance_suite.config.constants import *
 from compliance_suite.test_elements.case import Case
 
 class APICase(Case):
+    """Executes a single API-based test case against the service"""
 
     def __init__(self, case_params, test, runner):
+        """instantiates an APICase object
+
+        Args:
+            case_params (dict): all parameters/properties for the test case
+            test (Node): reference to Node object
+            runner (Runner): reference to Runner object
+        """
+
         super(APICase, self).__init__(case_params, test, runner)
         self.__set_test_properties()
 
     def execute_test_case(self):
-        """Test API URI, validate response and set test to pass/fail"""
+        """Test API url, validate response and set test to pass/fail"""
 
         # make GET/POST request
         url = self.get_mature_url()
@@ -34,7 +52,7 @@ class APICase(Case):
         3) validate response body matches correct JSON schema
 
         Args:
-            uri (str): requested uri
+            url (str): requested url
             params (dict): key-value mapping of supplied parameters
             response (Response): response object from the request
         """
@@ -97,7 +115,6 @@ class APICase(Case):
                 else:
                     self.set_status(1)
 
-                
                 # update the test runner with settings (supported filters,
                 # supported formats) retrieved from the server in the response
                 if self.server_settings_update_func:
@@ -122,14 +139,16 @@ class APICase(Case):
         return ct
     
     def __set_test_properties(self):
+        """Set all test case properties"""
+
         self.__set_expected_status_code()
         self.__set_media_types()
         self.__set_params()
         self.__set_schema()
         self.__set_server_settings_update_func()
-        # self.__set_content_test_func()
 
     def __set_expected_status_code(self):
+        """Set the expected status code for this test case"""
         
         k = "expected_status"
         self.exp_status = \
@@ -137,7 +156,7 @@ class APICase(Case):
                        else set(self.case_params[k])
     
     def __set_media_types(self):
-        """sets accepted media types and accept header from passed params"""
+        """Set accepted media types and accept header from passed params"""
 
         self.media_types = []
         # assign accepted media types
@@ -157,13 +176,18 @@ class APICase(Case):
         self.headers["Accept"] = ", ".join(self.media_types) + ";"
 
     def __set_params(self):
+        """Set request parameters for this test case"""
+
         self.params = {}
         if "request_params" in self.case_params.keys():
             self.params = self.case_params["request_params"]
         if "request_params_func" in self.case_params.keys():
-            self.params = self.case_params["request_params_func"](self.test, self.runner)
+            self.params = self.case_params["request_params_func"](
+                self.test, self.runner)
     
     def __set_schema(self):
+        """Set JSON schema file to check against response body for this case"""
+
         self.schema_file = None
         self.is_json = True
 
@@ -176,6 +200,8 @@ class APICase(Case):
             self.is_json = self.case_params["is_json"]
     
     def __set_server_settings_update_func(self):
+        """Set function to update server settings from response data"""
+
         self.server_settings_update_func = None
         if "server_settings_update_func" in self.case_params.keys():
             self.server_settings_update_func = \

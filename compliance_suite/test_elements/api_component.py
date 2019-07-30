@@ -1,56 +1,25 @@
+# -*- coding: utf-8 -*-
+"""Module compliance_suite.api_component.py
+
+This module contains the APIComponent class, which executes APICase objects and
+informs the TestExecutor of their statuses
+"""
+
 from compliance_suite.test_elements.component import Component
 from compliance_suite.test_elements.api_case import APICase
-from compliance_suite.config.constants import *
 
 class APIComponent(Component):
+    """Executes API Test Cases and informs the TestExecutor of their statuses"""
+
     def __init__(self, test_params, test, runner):
-        self.status = 2
-        self.test_params = test_params
-        self.test = test
-        self.runner = runner
-        self.test_cases = self.__create_test_cases()
-        self.full_message = []
+        """instantiates an APIComponent object
 
-    def __create_test_cases(self):
-        test_cases = []
-        
-        for case_params in self.test_params["cases"]:
+        Args:
+            test_params (dict): global properties and properties for each case
+            test (Node): reference to Node object
+            runner (Runner): reference to Runner object
+        """
 
-            all_parameters = {k: case_params[k] for k in case_params.keys()}
-            all_parameters.update(self.test_params["global_properties"])
-                
-            test_case = APICase(all_parameters, self.test, self.runner)
-            test_cases.append(test_case)
-        
-        return test_cases
-    
-    def execute_cases(self):
-        for test_case in self.test_cases:
-            test_case.execute_test_case()
-        self.set_status_by_cases()
-        self.update_full_message()
-    
-    def update_full_message(self):
-        self.full_message = []
-        self.full_message.append(["# API Test Cases", str(len(self.test_cases))])
-
-        for i in range(0, len(self.test_cases)):
-            test_case = self.test_cases[i]
-            self.full_message.append(["API Test Case " + str(i), TEST_STATUS_DICT[test_case.status]])
-            self.full_message += test_case.get_full_message()
-    
-    def set_status_by_cases(self):
-        status = 1
-        for test_case in self.test_cases:
-            if test_case.status != 1:
-                status = -1
-        
-        self.status = status
-
-    def get_full_message(self):
-        return self.full_message
-
-
-        
-
-
+        super(APIComponent, self).__init__(test_params, test, runner)
+        self.case_class = APICase
+        self.test_cases = self.create_test_cases() 
