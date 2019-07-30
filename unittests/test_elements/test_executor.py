@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module unittests.test_single_test_executor.py
+"""Module unittests.test_elements.test_executor.py
 
 This module contains methods to test the single_test_executor module via pytest.
 
@@ -20,7 +20,7 @@ from compliance_suite.config.constants import *
 from compliance_suite.config.tests import *
 from compliance_suite.node import Node
 from compliance_suite.runner import Runner
-from compliance_suite.single_test_executor import SingleTestExecutor as STE
+from compliance_suite.elements.executor import Executor 
 
 uri_project_get_success = SERVER_CONFIG["base_url"] \
     + TESTS_DICT["project_get"]["uri"].replace(

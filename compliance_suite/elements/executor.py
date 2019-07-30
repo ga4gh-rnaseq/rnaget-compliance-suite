@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.test_executor.py
+"""Module compliance_suite.elements.executor.py
 
-This module contains the TestExecutor class, which executes all components
-and cases for a single test. One TestExecutor is associated with one Node. 
+This module contains the Executor class, which executes all components
+and cases for a single test. One Executor is associated with one Node. 
 Launches all test cases and stores results as JSON/dict
 """
 
 import requests
 import json
 
-from compliance_suite.test_elements.api_component import APIComponent
-from compliance_suite.test_elements.content_component import ContentComponent
+from compliance_suite.elements.api_component import APIComponent
+from compliance_suite.elements.content_component import ContentComponent
+from compliance_suite.elements.element import Element
 from compliance_suite.schema_validator import SchemaValidator
 from compliance_suite.config.constants import *
 import compliance_suite.exceptions.test_status_exception as tse
 
-class TestExecutor(object):
+class Executor(Element):
     """Executes all Test Components and Cases for a single Test/Node
 
-    The TestExecutor is a generalized model for executing all components and
+    The Executor is a generalized model for executing all components and
     cases of a single test (API route testing and file content testing).
 
     Attributes:
@@ -28,7 +29,7 @@ class TestExecutor(object):
     """
 
     def __init__(self, test, runner):
-        """instantiates a TestExecutor object
+        """instantiates a Executor object
         
         Args:
             status (int): indicates if test components passed/failed
@@ -40,14 +41,14 @@ class TestExecutor(object):
         self.test = test
         self.runner = runner
 
-        # TestExecutor only has an API Component if "api" property exists
+        # Executor only has an API Component if "api" property exists
         # in Node kwargs
         self.api_component = None
         if "api" in test.kwargs.keys():
             self.api_component = APIComponent(
                 test.kwargs["api"], self.test, self.runner)
         
-        # TestExecutor only has a Content Component if "content" property exists
+        # Executor only has a Content Component if "content" property exists
         # in Node kwargs
         self.content_component = None
         if "content" in test.kwargs.keys():

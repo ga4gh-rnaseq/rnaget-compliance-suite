@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.case.py
+"""Module compliance_suite.elements.case.py
 
 This module contains the Case class, an abstract representation of a 
 Test Case. A Component holds many Cases, cases are generally distinguished as
@@ -8,9 +8,9 @@ expected outcome.
 """
 
 import json
-from compliance_suite.test_elements.test_element import TestElement
+from compliance_suite.elements.element import Element
 
-class Case(TestElement):
+class Case(Element):
     """Abstract representation of a test case
 
     Attributes:

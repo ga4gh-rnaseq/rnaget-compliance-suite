@@ -9,7 +9,7 @@ and whether the returned JSON object matches the required schema.
 
 import sys
 
-from compliance_suite.test_elements.test_executor import TestExecutor as TE
+from compliance_suite.elements.executor import Executor
 
 class Node():
     """Run a single test of the API for one route and one object instance
@@ -78,12 +78,12 @@ class Node():
         # base tests automatically pass, but do not figure in the end report
         if self.kwargs["name"] == "base":
             self.result = 1
-        # all true tests run through the TestExecutor class
+        # all true tests run through the Executor class
         else:
-            te = TE(test, runner)
-            te.execute_tests()
-            self.result = te.status
-            self.message = te.as_json()
+            executor = Executor(test, runner)
+            executor.execute_tests()
+            self.result = executor.status
+            self.message = executor.as_json()
 
     def __str__(self):
         """String representation of the test case

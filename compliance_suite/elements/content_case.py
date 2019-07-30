@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.content_case.py
+"""Module compliance_suite.elements.content_case.py
 
 This module contains the ContentCase class, which asserts that file attachments
 returned by the API match expected output. A Content test case generally 
@@ -12,7 +12,7 @@ import compliance_suite.exceptions.test_status_exception as tse
 
 from compliance_suite.schema_validator import SchemaValidator
 from compliance_suite.config.constants import *
-from compliance_suite.test_elements.case import Case
+from compliance_suite.elements.case import Case
 
 class ContentCase(Case):
     """A single test case to assert file attachment matches expected output"""

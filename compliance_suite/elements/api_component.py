@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.api_component.py
+"""Module compliance_suite.elements.api_component.py
 
 This module contains the APIComponent class, which executes APICase objects and
-informs the TestExecutor of their statuses
+informs the Executor of their statuses
 """
 
-from compliance_suite.test_elements.component import Component
-from compliance_suite.test_elements.api_case import APICase
+from compliance_suite.elements.component import Component
+from compliance_suite.elements.api_case import APICase
 
 class APIComponent(Component):
     """Executes API Test Cases and informs the TestExecutor of their statuses"""

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.component.py
+"""Module compliance_suite.elements.component.py
 
 This module contains the Component class, an abstract representation of a 
 Test Component. A Test can hold one or more Components, components are 
@@ -8,10 +8,10 @@ response body), whereas another component tests the contents of file
 attachments. A component holds multiple Cases.
 """
 
-from compliance_suite.test_elements.test_element import TestElement
+from compliance_suite.elements.element import Element
 import json
 
-class Component(TestElement):
+class Component(Element):
     """Abstract representation of a test component
     
     Attributes:

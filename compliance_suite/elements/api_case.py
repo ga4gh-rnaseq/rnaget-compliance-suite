@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.api_case.py
+"""Module compliance_suite.elements.api_case.py
 
 This module contains the APICase class, which executes a single test case 
 against the API/service. An API test case makes a single request to the service,
@@ -12,7 +12,7 @@ import requests
 import compliance_suite.exceptions.test_status_exception as tse
 from compliance_suite.schema_validator import SchemaValidator
 from compliance_suite.config.constants import *
-from compliance_suite.test_elements.case import Case
+from compliance_suite.elements.case import Case
 
 class APICase(Case):
     """Executes a single API-based test case against the service"""

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.content_component.py
+"""Module compliance_suite.elements.content_component.py
 
 This module contains the ContentComponent class, which executes ContentCase
-objects and informs the TestExecutor of their statuses
+objects and informs the Executor of their statuses
 """
 
-from compliance_suite.test_elements.component import Component
-from compliance_suite.test_elements.content_case import ContentCase
+from compliance_suite.elements.component import Component
+from compliance_suite.elements.content_case import ContentCase
 
 class ContentComponent(Component):
     """Executes Content Cases and informs the TestExecutor of their statuses"""
