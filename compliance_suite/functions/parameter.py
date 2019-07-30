@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module compliance_suite.functions.general.py
+"""Module compliance_suite.functions.parameter.py
 
 Functions to assign request parameters according to test case. Each function
 in this module should return a dictionary of key,value parameters to pass to 
