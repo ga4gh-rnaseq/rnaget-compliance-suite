@@ -52,10 +52,14 @@ class Component(Element):
         
         for case_params in self.test_params["cases"]:
 
-            all_parameters = {k: case_params[k] for k in case_params.keys()}
-            all_parameters.update(self.test_params["global_properties"])
+            global_params = self.test_params["global_properties"].copy()
+            case_params = case_params.copy()
+
+            all_params = {}
+            all_params.update(global_params)
+            all_params.update(case_params)
                 
-            test_case = self.case_class(all_parameters, self.test, self.runner)
+            test_case = self.case_class(all_params, self.test, self.runner)
             test_cases.append(test_case)
         
         return test_cases

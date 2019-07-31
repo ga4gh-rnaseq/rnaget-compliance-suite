@@ -50,13 +50,12 @@ TEST_GRAPH = {
     },
     "continuous": {
         "base": {
-            "continuous_get": {
-                "continuous_formats": {
-                    "continuous_search_filters": {
-                        "continuous_search": {}
-                    }
+            "continuous_get": {},
+            "continuous_formats": {
+                "continuous_search_filters": {
+                    "continuous_search": {}
                 }
-            },
+            }
         }
     }
 }

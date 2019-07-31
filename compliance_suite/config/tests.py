@@ -556,7 +556,7 @@ TESTS_DICT = {
                 "summary_fail": "Expression matrix content DOES NOT match "
                     + "expected",
                 "summary_skip": "'Expression Get Content' skipped",
-                "download_url": lambda response_json: response_json["URL"]
+                "download_url": lambda response: response.json()["URL"]
             },
             "cases": [
                 {
@@ -943,7 +943,7 @@ TESTS_DICT = {
                 "summary_skip": "'Expression Search Slice' skipped",
                 "request_params_func": \
                     pf.all_supported_filters_format_and_slice_params,
-                "download_url": lambda response_json: response_json[0]["URL"]
+                "download_url": lambda response: response.json()[0]["URL"]
             },
             "cases": [
                 {
@@ -1274,8 +1274,193 @@ TESTS_DICT = {
                     "url": c.CONTINUOUS_API + c.NONEXISTENT_ID,
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400, 404]
+                },
+
+                {
+                    "name": "Continuous Get Start Specified Without Chr",
+                    "description": "request /continuous/:id, specifying start " 
+                        + "parameter without chr. checks content type and "
+                        + "status code (400). validates response body matches "
+                        + "error schema",
+                    "request_params": {"start": "5"},
+                    "summary_pass": "Server sends correct response when "
+                        + "start is specified without chr",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when start is specified without chr",
+                    "summary_skip": "'Continuous Get Start Specified Without "
+                        + "Chr' skipped",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "use_default_media_types": True,
+                    "media_types": ["application/vnd.loom", 
+                                    "text/tab-separated-values"],
+                    "expected_status": [400]
+                },
+
+                {
+                    "name": "Continuous Get End Specified Without Chr",
+                    "description": "request /continuous/:id, specifying end " 
+                        + "parameter without chr. checks content type and "
+                        + "status code (400). validates response body matches "
+                        + "error schema",
+                    "request_params": {"end": "1000"},
+                    "summary_pass": "Server sends correct response when "
+                        + "end is specified without chr",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when end is specified without chr",
+                    "summary_skip": "'Continuous Get End Specified Without "
+                        + "Chr' skipped",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "use_default_media_types": True,
+                    "media_types": ["application/vnd.loom", 
+                                    "text/tab-separated-values"],
+                    "expected_status": [400]
+                },
+
+                {
+                    "name": "Continuous Get Start Greater Than End",
+                    "description": "request /continuous/:id, specifying chr, " 
+                        + "start, and end parameters, but start is greater " 
+                        + "than end. checks content type and status code "
+                        + "(501). validates response body matches error schema",
+                    "request_params": {
+                        "chr": "1", "start": "200", "end": "100"
+                    },
+                    "summary_pass": "Server sends correct response when "
+                        + "start is greater than end",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when start is greater than end",
+                    "summary_skip": "'Continuous Get Start Greater Than End' "
+                        + "skipped",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "use_default_media_types": True,
+                    "media_types": ["application/vnd.loom", 
+                                    "text/tab-separated-values"],
+                    "expected_status": [501]
                 }
             ]
+        },
+
+        "content": {
+            "global_properties": {
+                "function": cf.continuous_get_case,
+                "tempfile": "continuous_get_content_test.loom",
+                "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+                "download_url": lambda response: response.url,
+                "request_params_func": \
+                    pf.chr_start_end,
+                "summary_pass": "Continuous matrix content matches expected",
+                "summary_fail": "Continuous matrix content DOES NOT match "
+                    + "expected",
+                "summary_skip": "'Continuous Get Content' test case skipped",
+            },
+
+            "cases": [
+
+                # Value assertion case 1
+                {
+                    "name": "Continuous Get Content, Assert Correct Values, 1",
+                    "description": "Assert continuous rows, columns, and cell "
+                        + "values match expected",
+                    "assert_values": [
+                        {
+                            "i": { # input to assertion function,
+                                   # ie attribute values from downloaded matrix
+                                "r": 0, # row
+                                "c": 20 # col
+                            },
+                            "o": { # output, or expected values
+                                "Track": ",", # expected val at row 0
+                                "Position": "5:20",
+                                "Value": 9.982
+                            }
+                        },
+
+                        {
+                            "i": {
+                                "r": 0,
+                                "c": 5
+                            },
+                            "o": {
+                                "Track": ",",
+                                "Position": "5:5",
+                                "Value": 6.688
+                            } 
+                        }
+                    ]
+                },
+
+                # Chromosome assertion cases 1 and 2
+                {
+                    "name": "Continuous Get Content, chr, 1",
+                    "description": "Assert positions in continuous matrix "
+                        + "are all of same chromosome as requested",
+                    "chr": "1"
+                },
+
+                {
+                    "name": "Continuous Get Content, chr, 2",
+                    "description": "Assert positions in continuous matrix "
+                        + "are all of same chromosome as requested",
+                    "chr": "5"
+                },
+
+                # Chromosome and start assertion cases 1 and 2
+                {
+                    "name": "Continuous Get Content, chr and start, 1",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "1",
+                    "start": "244860360"
+                },
+
+                {
+                    "name": "Continuous Get Content, chr and start, 2",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "5",
+                    "start": "15"
+                },
+
+                # Chromosome and end assertion cases 1 and 2
+                {
+                    "name": "Continuous Get Content, chr and end, 1",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "1",
+                    "end": "244860384"
+                },
+
+                {
+                    "name": "Continuous Get Content, chr and end, 2",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "5",
+                    "end": "12"
+                },
+                
+                # Chromosome, start, and end assertion cases 1 and 2
+                {
+                    "name": "Continuous Get Content, chr, start, and end, 1",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "1",
+                    "start": "244860360",
+                    "end": "244860380"
+                },
+
+                {
+                    "name": "Continuous Get Content, chr, start, and end, 2",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "5",
+                    "start": "4",
+                    "end": "12"
+                }
+            ]
+            
         }
     }, "continuous_formats": {
         # # # # # # # # # # # # # # # # # # # #
@@ -1354,7 +1539,7 @@ TESTS_DICT = {
 
         "api": {
             "global_properties": {
-                "url": c.EXPRESSION_API + "search",
+                "url": c.CONTINUOUS_API + "search",
                 "http_method": c.HTTP_GET
             },
 
@@ -1490,7 +1675,104 @@ TESTS_DICT = {
                     "schema_func": \
                         sf.schema_continuous_search_no_filetype_mismatches,
                     "request_params_func": pf.switch_format_param
+                },
+
+                {
+                    "name": "Continuous Search Start Specified Without Chr",
+                    "description": "request /continuous/search, specifying " 
+                        + "start parameter without chr. checks content type "
+                        + "and status code (400). validates response body "
+                        + "matches error schema",
+                    "summary_pass": "Server sends correct response when "
+                        + "start is specified without chr",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when start is specified without chr",
+                    "summary_skip": "'Continuous Get Start Specified Without "
+                        + "Chr' skipped",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "request_params": {"start": "5"},
+                    "request_params_func": \
+                    pf.all_supported_filters_and_format_from_retrieved_settings,
+                    "expected_status": [400]
+                },
+
+                {
+                    "name": "Continuous Search End Specified Without Chr",
+                    "description": "request /continuous/search, specifying end " 
+                        + "parameter without chr. checks content type and "
+                        + "status code (400). validates response body matches "
+                        + "error schema",
+                    "summary_pass": "Server sends correct response when "
+                        + "end is specified without chr",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when end is specified without chr",
+                    "summary_skip": "'Continuous Get End Specified Without "
+                        + "Chr' skipped",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "request_params": {"end": "1000"},
+                    "request_params_func": \
+                    pf.all_supported_filters_and_format_from_retrieved_settings,
+                    "expected_status": [400]
+                },
+
+                {
+                    "name": "Continuous Search Start Greater Than End",
+                    "description": "request /continuous/search, specifying " 
+                        + "chr, start, and end parameters, but start is " 
+                        + "greater than end. checks content type and status "
+                        + "code (501). validates response body matches error "
+                        + "schema",
+                    "summary_pass": "Server sends correct response when "
+                        + "start is greater than end",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when start is greater than end",
+                    "summary_skip": "'Continuous Get Start Greater Than End' "
+                        + "skipped",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "request_params": {
+                        "chr": "1", "start": "200", "end": "100"
+                    },
+                    "request_params_func": \
+                    pf.all_supported_filters_and_format_from_retrieved_settings,
+                    "expected_status": [501]
                 }
+            ]
+        },
+
+        "content": {
+            "global_properties": {
+                "function": cf.continuous_get_case,
+                "tempfile": "continuous_search_content_test.loom",
+                "url": c.CONTINUOUS_API + "search",
+                "download_url": lambda response: response.json()[0]["URL"],
+                "request_params_func": \
+                    pf.all_supported_filters_format_chr_start_end,
+                "description": "Asserts correct subsetting of continuous"
+                    + "matrix when parameters (chr, start, end) are passed to "
+                    + "search endpoint",
+                "summary_pass": "Continuous matrix tracks, positions, and "
+                    + "values match expected",
+                "summary_fail": "Continuous matrix tracks, positions and "
+                    + "values DO NOT match expected",
+                "summary_skip": "'Continuous Search Content' test case skipped",
+            },
+
+            "cases": [
+
+                # Chromosome assertion cases 1 and 2
+                {
+                    "name": "Continuous Search Content, chr, 1",
+                    "description": "Assert positions in continuous matrix "
+                        + "are all of same chromosome as requested",
+                    "chr": "1"
+                },
+
+                {
+                    "name": "Continuous Search Content, chr, 2",
+                    "description": "Assert positions in continuous matrix "
+                        + "are all of same chromosome as requested",
+                    "chr": "5"
+                },
             ]
         }
     }, "continuous_endpoint_not_implemented": {

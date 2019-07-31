@@ -118,6 +118,7 @@ TEST_RESOURCES = {
             "filters": {
                 "version": "1.0",
                 "tags": "RNAgetCompliance",
+                "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
                 "format": "FROM_SERVER"
             }
         }

@@ -12,103 +12,17 @@ import json
 import requests
 import loompy
 import os
+import re
 import numpy
 
-def loom_attribute_handler(input_file):
-    """Attribute handler for loom files
+from compliance_suite.functions.attribute_handlers import ATTRIBUTE_HANDLERS
 
-    Supported file format may be different for each server, this function maps
-    loom-specific attributes to a general data structure that can be used by
-    all content testing functions regardless of file format
-
-    Arguments:
-        input_file (str): input loom file
-    
-    Returns:
-        (dict): attribute handler, consistent structure regardless of file type 
-    """
-
-    # connects to the loom file, then remaps loom specific attributes to general
-    # attribute names which are used in the content testing functions
-    # eg. the loom-specific ds.ra.GeneID is mapped to dict["GeneID"]
-    ds = loompy.connect(input_file)
-    return {
-        "GeneID": ds.ra.GeneID,
-        "GeneName": ds.ra.GeneName,
-        "Condition": ds.ca.Condition,
-        "Tissue": ds.ca.Tissue,
-        "Sample": ds.ca.Sample,
-        "Value": ds
-    }
-
-def tsv_attribute_handler(input_file):
-    """Attribute handler for tsv files
-
-    Parses a tsv expression matrix, maps its attributes to a dictionary with
-    consistent keys that can be used by all content testing functions
-    
-    Arguments:
-        input_file (str): input tsv file
-    
-    Returns:
-        (dict): attribute handler, consistent structure regardless of file type
-    """
-
-    gene_ids = []
-    gene_names = []
-    conditions = []
-    tissues = []
-    samples = []
-    values = []
-
-    inc = 0
-    # open the tsv file
-    for l in open(input_file, "r"):
-        ls = l.rstrip().split("\t")
-
-        if not l.startswith("#"): # ignore any starting comment lines if any
-            if inc == 0: # column header line
-
-                # using the column header line, assign the conditions, samples,
-                # and tissues lists
-                columns = ls[2:]
-                samples = [column.split(", ")[0] for column in columns]
-                n_col_split = len(columns[0].split(", "))
-                if n_col_split > 1:
-                    conditions = [column.split(", ")[1] for column in columns]
-                    if n_col_split > 2:
-                        tissues = [column.split(", ")[2] for column in columns]
-
-            else: # data lines
-                # each data line contains the gene id, gene name, and all 
-                # expression values
-                gene_ids.append(ls[0])
-                gene_names.append(ls[1])
-                values.append([float(v) for v in ls[2:]])
-
-            inc += 1
-    
-    # return the populated values and attribute names under consistent keys
-    return {
-        "GeneID": gene_ids,
-        "GeneName": gene_names,
-        "Condition": conditions,
-        "Tissue": tissues,
-        "Sample": samples,
-        "Value": numpy.matrix(values)
-    }
-
-ATTRIBUTE_HANDLER_BY_FORMAT = {
-    "loom": loom_attribute_handler,
-    "tsv": tsv_attribute_handler
-}
-"""maps format keywords to their attribute handler functions"""
-
-def expression_content_test(function):
-    """Decorator function for expressions-related content tests
+def download_attachment(function):
+    """Decorator for content tests that involve file attachment dload
 
     Decorates a content test function with preliminary workup steps 
-    (initial request for expression object, downloading file attachment, etc.)
+    (initial request for expression/continuous object, downloading file 
+    attachment, etc.)
 
     Arguments:
         function (function): inner function
@@ -147,15 +61,24 @@ def expression_content_test(function):
             # content checking
             response = requests.get(url, headers=content_case.headers,
                 params=request_params)
-            content_case.append_audit("Response Body: " + str(response.text))
-            response_json = response.json()
-            download_url = c["download_url"](response_json)
+            
+            if re.compile("json").search(response.headers["Content-Type"]):
+                content_case.append_audit("Response Body: " 
+                    + str(response.text))
+            download_url = c["download_url"](response)
             content_case.append_audit("Matrix Download URL: " + download_url)
             r = requests.get(download_url, headers=content_case.headers,
                 allow_redirects=True)
             file_write = open(c["tempfile"], 'wb')
             file_write.write(r.content)
             file_write.close()
+
+            # get the attribute handler based on object type and file format
+            obj_type = content_case.test.kwargs["obj_type"]
+            server_settings = content_case.runner.retrieved_server_settings
+            fmt = server_settings[obj_type]["exp_format"]
+            attribute_handler = ATTRIBUTE_HANDLERS[obj_type][fmt](c["tempfile"])
+            content_case.set_attribute_handler(attribute_handler)
 
             # execute the inner function
             result = function(content_case)
@@ -172,7 +95,7 @@ def expression_content_test(function):
 
     return wrapper
 
-@expression_content_test
+@download_attachment
 def expression_get_case(content_case):
     """Assertion function for 'Expression Get' Content test cases
 
@@ -184,14 +107,10 @@ def expression_get_case(content_case):
     """
 
     c = content_case.case_params
-    server_settings = content_case.runner.retrieved_server_settings
+    ah = content_case.attribute_handler
     result = {"status": 1, "message": ""}
 
     try:
-        # parse expression matrix file and get the attribute handler based on
-        # format
-        fmt = server_settings["expressions"]["exp_format"]
-        ah = ATTRIBUTE_HANDLER_BY_FORMAT[fmt](c["tempfile"])
         et = "observed %s: %s doesn't match expected: %s" # error template
 
         # six checks: GeneName, GeneID, Condition, Tissue, Sample, Value
@@ -224,7 +143,7 @@ def expression_get_case(content_case):
     
     return result
 
-@expression_content_test
+@download_attachment
 def expression_search_case(content_case):
     """Assertion function for 'Expression Search' Content test cases
 
@@ -236,11 +155,7 @@ def expression_search_case(content_case):
     """
 
     c = content_case.case_params
-    server_settings = content_case.runner.retrieved_server_settings
-    # parse input file and get attribute handler according to 
-    # expected file format
-    fmt = server_settings["expressions"]["exp_format"]
-    ah = ATTRIBUTE_HANDLER_BY_FORMAT[fmt](c["tempfile"]) # attribute handler
+    ah = content_case.attribute_handler
     
     # map search filters to the attributes they affect in the downloaded matrix
     # eg. the featureIDList filter affects what GeneIDs will be returned 
@@ -357,7 +272,6 @@ def expression_search_case(content_case):
                 # provided to minExpression/maxExpression will return 
                 # the INTERSECTION of columns
                 for col in range(0, len(ah["Sample"])):
-                    status = 1
 
                     # check all genes with thresholds to see if the value
                     # is greater than the threshold. If any gene is not within
@@ -374,18 +288,122 @@ def expression_search_case(content_case):
 
                         if not cmp_func(value, threshold):
                             fail_gene = gene
-                            status = -1
-                    
-                    if status != 1:
-                        exc_message = \
-                            "Gene %s NOT %s %s" % (fail_gene, s, e_key) \
-                            + " threshold at column %s" % (str(col))
-                        raise Exception(exc_message)
+                            exc_message = \
+                                "Gene %s NOT %s %s" % (fail_gene, s, e_key) \
+                                + " threshold at column %s" % (str(col))
+                            raise Exception(exc_message)
 
     except Exception as e:
-        print("Expression Search Exception Encountered")
         result["status"] = -1
         result["message"] = ["Message", str(e)]
+        content_case.set_error_message(str(e))
+    finally:
+        if os.path.exists(c["tempfile"]):
+            os.remove(c["tempfile"])
+    return result
+
+@download_attachment
+def continuous_get_case(content_case):
+    """Assertion function for Continuous Get and Search Content test cases
+
+    Arguments:
+        content_case (ContentCase): content case object for test case
+    
+    Returns:
+        (dict): test case result
+    """
+
+    c = content_case.case_params
+    ah = content_case.attribute_handler
+    result = {"status": 1, "message": ""}
+
+    try:
+        # there are 3 sub-assertions to continuous get content testing
+        # 1. assert_values: observed track, position, values MUST match expected
+        # 2. chr: if chr parameter is specified, all positions MUST have the 
+        #         same chr
+        # 3. start/end: if start and/or end is specified, all positions MUST
+        #               fall within the start/end range (first position must)
+        #               greater than or equal to request start, last position
+        #               must be less than request end)
+
+        # sub-assertion 1: assert_values
+        if "assert_values" in c.keys():
+            for assert_obj in c["assert_values"]: # assert the correct val
+                                                  # of multiple row/col/cells
+                a = assert_obj
+                row, col = [a["i"]["r"], a["i"]["c"]]
+
+                # assert correct track (row), position (column), cell value
+                assertions_l = [
+                    ["Track", ah["Track"][row], a["o"]["Track"]],
+                    ["Position", ah["Position"][col], a["o"]["Position"]],
+                    ["Value", round(ah["Value"][row, col], 3), a["o"]["Value"]]
+                ]
+
+                for asst in assertions_l: # assertion
+                    content_case.append_audit(
+                        "asserting observed %s: %s " % (asst[0], str(asst[1]))
+                        +  "equals expected: %s" % str(asst[2])
+                    )
+                    if asst[1] != asst[2]:
+                        exc_message = \
+                            "observed %s: %s " % (asst[0], str(asst[1])) \
+                            + "DOES NOT equal expected: %s" % str(asst[2])
+                        raise Exception(exc_message)
+        
+        # sub-assertion 2: chr
+        if "chr" in c.keys():
+            content_case.append_audit("asserting returned chromosome matches "
+                + "request")
+
+            # get a set of unique chromosomes from the matrix
+            # there MUST be 1 chr in the set, and it must match the request
+            base_chr_set = set([p.split(":")[0] for p in ah["Position"]])
+            obs_chr = list(base_chr_set)[0]
+
+            if len(base_chr_set) != 1:
+                raise Exception("More than 1 chromosome in continuous file")
+            
+            if obs_chr != c["chr"]:
+                raise Exception("chr in continuous file: %s " % obs_chr
+                    + "DOES NOT match request 'chr' parameter: %s" % c["chr"])
+        
+        # sub-assertion 3: start/end
+        if "start" in c.keys() or "end" in c.keys():
+            bases_range = [int(p.split(":")[1]) for p in ah["Position"]]
+            start_base = min(bases_range)
+            end_base = max(bases_range)
+
+            assertions = {
+                "start": {
+                    "observed": start_base,
+                    "function": lambda observed, limit: observed >= limit,
+                    "desc": "greater than or equal to"
+
+                }, "end": {
+                    "observed": end_base,
+                    "function": lambda observed, limit: observed < limit,
+                    "desc": "less than"
+                }
+            }
+
+            for akey in ["start", "end"]: # assertion key
+                if akey in c.keys():
+                    obs, func, desc = [assertions[akey][k] for k in \
+                                      ["observed", "function", "desc"]]
+                    lim = int(c[akey]) # limit/threshold ie value in the request
+                    
+                    content_case.append_audit("asserting %s position is " % akey
+                        + "%s request '%s' parameter" % (desc, akey))
+                    
+                    if not func(obs, lim):
+                        exc_message = "observed %s: %s is " % (akey, str(obs)) \
+                            + "NOT %s requested %s: %s" % (desc, akey, str(lim))
+                        raise Exception(exc_message)
+    
+    except Exception as e:
+        result["status"] = -1
         content_case.set_error_message(str(e))
     finally:
         if os.path.exists(c["tempfile"]):

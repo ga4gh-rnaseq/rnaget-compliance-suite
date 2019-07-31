@@ -7,6 +7,7 @@ then checks the response for status code, content type, response body, etc
 to assert whether the test case passes requirements.
 """
 
+import re
 import requests
 
 import compliance_suite.exceptions.test_status_exception as tse
@@ -65,7 +66,8 @@ class APICase(Case):
             self.append_audit("Headers: " + str(self.headers))
             # only add response body if JSON format is expected
             if self.is_json:
-                self.append_audit("Response Body: " + response.text)
+                if re.compile("json").search(response.headers["Content-Type"]):
+                    self.append_audit("Response Body: " + response.text)
 
             try:
                 # Validation 1, Content-Type, Media Type validation
@@ -180,10 +182,10 @@ class APICase(Case):
 
         self.params = {}
         if "request_params" in self.case_params.keys():
-            self.params = self.case_params["request_params"]
+            self.params.update(self.case_params["request_params"])
         if "request_params_func" in self.case_params.keys():
-            self.params = self.case_params["request_params_func"](
-                self.test, self.runner)
+            self.params.update(self.case_params["request_params_func"](
+                self.test, self.runner))
     
     def __set_schema(self):
         """Set JSON schema file to check against response body for this case"""

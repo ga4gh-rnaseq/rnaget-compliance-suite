@@ -66,7 +66,7 @@ class Runner():
         self.results = {endpoint: {} for endpoint in c.ENDPOINTS}
         self.headers = {}
         self.retrieved_server_settings = {
-            resource: {"supp_filters": [], "exp_format": None} 
+            resource: {"supp_filters": [], "exp_format": ""} 
             for resource in c.ENDPOINTS
         }
     

@@ -255,3 +255,50 @@ def all_supported_filters_format_and_slice_params(content_case):
             filters[expression_param] = json.dumps(c[expression_param])
             
     return filters
+
+def chr_start_end(content_case):
+    """Get chr, start, end continuous matrix slicing parameters
+
+    Arguments:
+        test (Node): reference to Node object
+        runner (Runner): reference to Runner object
+    
+    Returns:
+        (dict): filters for continuous subsetting
+    """
+
+    test = content_case.test
+    runner = content_case.runner
+    c = content_case.case_params
+    filters = {}
+
+    # for the 3 slice params, convert the list outlined in the tests dict
+    # to a comma-separated list
+    continuous_params = ["chr", "start", "end"]
+    for continuous_param in continuous_params:
+        if continuous_param in c.keys():
+            filters[continuous_param] = c[continuous_param]
+            
+    return filters
+
+def all_supported_filters_format_chr_start_end(content_case):
+    """Get supported filters, format, and continuous matrix slicing parameters
+
+    Arguments:
+        test (Node): reference to Node object
+        runner (Runner): reference to Runner object
+    
+    Returns:
+        (dict): supported filters, format, and continuous slice parameters
+    """
+    
+    test = content_case.test
+    runner = content_case.runner
+    c = content_case.case_params
+    
+    filters_a = all_supported_filters_and_format_from_retrieved_settings(
+        test, runner)
+    filters_b = chr_start_end(content_case)
+    filters_a.update(filters_b)
+
+    return filters_a
