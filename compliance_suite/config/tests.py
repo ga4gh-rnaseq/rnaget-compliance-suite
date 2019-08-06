@@ -1368,13 +1368,13 @@ TESTS_DICT = {
                         {
                             "i": { # input to assertion function,
                                    # ie attribute values from downloaded matrix
-                                "r": 0, # row
+                                "r": 1, # row
                                 "c": 20 # col
                             },
                             "o": { # output, or expected values
-                                "Track": ",", # expected val at row 0
-                                "Position": "5:20",
-                                "Value": 9.982
+                                "Track": "61729_test", # expected val at row 1
+                                "Position": "chr1:20",
+                                "Value": 8.904
                             }
                         },
 
@@ -1384,9 +1384,45 @@ TESTS_DICT = {
                                 "c": 5
                             },
                             "o": {
-                                "Track": ",",
-                                "Position": "5:5",
-                                "Value": 6.688
+                                "Track": "61721_test",
+                                "Position": "chr1:5",
+                                "Value": 6.205
+                            } 
+                        },
+
+                        {
+                            "i": {
+                                "r": 2,
+                                "c": 212
+                            },
+                            "o": {
+                                "Track": "61733_test",
+                                "Position": "chr5:143",
+                                "Value": 8.779
+                            } 
+                        },
+
+                        {
+                            "i": {
+                                "r": 3,
+                                "c": 159
+                            },
+                            "o": {
+                                "Track": "61737_test",
+                                "Position": "chr5:90",
+                                "Value": 24.704
+                            } 
+                        },
+
+                        {
+                            "i": {
+                                "r": 1,
+                                "c": 66
+                            },
+                            "o": {
+                                "Track": "61729_test",
+                                "Position": "chr1:66",
+                                "Value": 6.975
                             } 
                         }
                     ]
@@ -1397,14 +1433,14 @@ TESTS_DICT = {
                     "name": "Continuous Get Content, chr, 1",
                     "description": "Assert positions in continuous matrix "
                         + "are all of same chromosome as requested",
-                    "chr": "1"
+                    "chr": "chr1"
                 },
 
                 {
                     "name": "Continuous Get Content, chr, 2",
                     "description": "Assert positions in continuous matrix "
                         + "are all of same chromosome as requested",
-                    "chr": "5"
+                    "chr": "chr5"
                 },
 
                 # Chromosome and start assertion cases 1 and 2
@@ -1412,16 +1448,16 @@ TESTS_DICT = {
                     "name": "Continuous Get Content, chr and start, 1",
                     "description": "Assert positions in continuous matrix "
                         + "are within specified range",
-                    "chr": "1",
-                    "start": "244860360"
+                    "chr": "chr1",
+                    "start": "32"
                 },
 
                 {
                     "name": "Continuous Get Content, chr and start, 2",
                     "description": "Assert positions in continuous matrix "
                         + "are within specified range",
-                    "chr": "5",
-                    "start": "15"
+                    "chr": "chr5",
+                    "start": "100"
                 },
 
                 # Chromosome and end assertion cases 1 and 2
@@ -1429,16 +1465,16 @@ TESTS_DICT = {
                     "name": "Continuous Get Content, chr and end, 1",
                     "description": "Assert positions in continuous matrix "
                         + "are within specified range",
-                    "chr": "1",
-                    "end": "244860384"
+                    "chr": "chr1",
+                    "end": "22"
                 },
 
                 {
                     "name": "Continuous Get Content, chr and end, 2",
                     "description": "Assert positions in continuous matrix "
                         + "are within specified range",
-                    "chr": "5",
-                    "end": "12"
+                    "chr": "chr5",
+                    "end": "49"
                 },
                 
                 # Chromosome, start, and end assertion cases 1 and 2
@@ -1446,18 +1482,18 @@ TESTS_DICT = {
                     "name": "Continuous Get Content, chr, start, and end, 1",
                     "description": "Assert positions in continuous matrix "
                         + "are within specified range",
-                    "chr": "1",
-                    "start": "244860360",
-                    "end": "244860380"
+                    "chr": "chr1",
+                    "start": "30",
+                    "end": "50"
                 },
 
                 {
                     "name": "Continuous Get Content, chr, start, and end, 2",
                     "description": "Assert positions in continuous matrix "
                         + "are within specified range",
-                    "chr": "5",
-                    "start": "4",
-                    "end": "12"
+                    "chr": "chr5",
+                    "start": "69",
+                    "end": "117"
                 }
             ]
             
@@ -1764,15 +1800,68 @@ TESTS_DICT = {
                     "name": "Continuous Search Content, chr, 1",
                     "description": "Assert positions in continuous matrix "
                         + "are all of same chromosome as requested",
-                    "chr": "1"
+                    "chr": "chr1"
                 },
 
                 {
                     "name": "Continuous Search Content, chr, 2",
                     "description": "Assert positions in continuous matrix "
                         + "are all of same chromosome as requested",
-                    "chr": "5"
+                    "chr": "chr5"
                 },
+
+                # Chromosome and start assertion cases 1 and 2
+                {
+                    "name": "Continuous Search Content, chr and start, 1",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "chr1",
+                    "start": "55"
+                },
+
+                {
+                    "name": "Continuous Search Content, chr and start, 2",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "chr5",
+                    "start": "16"
+                },
+
+                # Chromosome and end assertion cases 1 and 2
+                {
+                    "name": "Continuous Search Content, chr and end, 1",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "chr1",
+                    "end": "41"
+                },
+
+                {
+                    "name": "Continuous Search Content, chr and end, 2",
+                    "description": "Assert positions in continuous matrix "
+                        + "are within specified range",
+                    "chr": "chr5",
+                    "end": "73"
+                },
+
+                # Chromosome, start, and end assertion cases 1 and 2
+                {
+                    "name": "Continuous Search Content, chr, start, and end, 1",
+                    "description": "Assert positions in continuous matrix are "
+                        + "within specified range",
+                    "chr": "chr1",
+                    "start": "51",
+                    "end": "66"
+                },
+
+                {
+                    "name": "Continuous Search Content, chr, start, and end, 2",
+                    "description": "Assert positions in continuous matrix are "
+                        + "within specified range",
+                    "chr": "chr5",
+                    "start": "102",
+                    "end": "115"
+                }
             ]
         }
     }, "continuous_endpoint_not_implemented": {

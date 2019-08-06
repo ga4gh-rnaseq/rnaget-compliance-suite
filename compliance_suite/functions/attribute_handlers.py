@@ -25,7 +25,8 @@ def expression_loom(input_file):
         "Condition": ds.ca.Condition,
         "Tissue": ds.ca.Tissue,
         "Sample": ds.ca.Sample,
-        "Value": ds
+        "Value": ds,
+        "FH": ds # loom file handle, closed after content testing
     }
 
 def expression_tsv(input_file):
@@ -82,7 +83,8 @@ def expression_tsv(input_file):
         "Condition": conditions,
         "Tissue": tissues,
         "Sample": samples,
-        "Value": numpy.matrix(values)
+        "Value": numpy.matrix(values),
+        "FH": None
     }
 
 def continuous_loom(input_file):
@@ -105,7 +107,8 @@ def continuous_loom(input_file):
     return {
         "Track": ds.ra.tracks,
         "Position": ds.ca.position,
-        "Value": ds
+        "Value": ds,
+        "FH": ds # loom file handle, should be closed after content testing
     }
 
 def continuous_tsv(input_file):

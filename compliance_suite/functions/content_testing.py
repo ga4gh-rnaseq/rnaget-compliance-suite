@@ -69,6 +69,10 @@ def download_attachment(function):
             content_case.append_audit("Matrix Download URL: " + download_url)
             r = requests.get(download_url, headers=content_case.headers,
                 allow_redirects=True)
+
+            if os.path.exists(c["tempfile"]):
+                os.remove(c["tempfile"])
+
             file_write = open(c["tempfile"], 'wb')
             file_write.write(r.content)
             file_write.close()
@@ -139,7 +143,10 @@ def expression_get_case(content_case):
         result["message"] = ["Message", str(e)]
         content_case.set_error_message(str(e))
     finally:
-        os.remove(c["tempfile"])
+        if ah["FH"]:
+            ah["FH"].close()
+        if os.path.exists(c["tempfile"]):
+            os.remove(c["tempfile"])
     
     return result
 
@@ -298,6 +305,8 @@ def expression_search_case(content_case):
         result["message"] = ["Message", str(e)]
         content_case.set_error_message(str(e))
     finally:
+        if ah["FH"]:
+            ah["FH"].close()
         if os.path.exists(c["tempfile"]):
             os.remove(c["tempfile"])
     return result
@@ -338,7 +347,8 @@ def continuous_get_case(content_case):
                 assertions_l = [
                     ["Track", ah["Track"][row], a["o"]["Track"]],
                     ["Position", ah["Position"][col], a["o"]["Position"]],
-                    ["Value", round(ah["Value"][row, col], 3), a["o"]["Value"]]
+                    ["Value", round(float(ah["Value"][row, col]), 3),
+                              round(float(a["o"]["Value"]), 3)]
                 ]
 
                 for asst in assertions_l: # assertion
@@ -406,6 +416,8 @@ def continuous_get_case(content_case):
         result["status"] = -1
         content_case.set_error_message(str(e))
     finally:
+        if ah["FH"]:
+            ah["FH"].close()
         if os.path.exists(c["tempfile"]):
             os.remove(c["tempfile"])
 
