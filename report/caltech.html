@@ -26,10 +26,10 @@
   <h2>Server: Caltech</h2>
   <h4 class="tab1">Base URL: https://felcat.caltech.edu/rnaget/</h4>
   <p class="tab1">Total tests: 36</p>
-  <p class="tab1">Total tests passed: 36</p>
-  <p class="tab1">Total tests failed: 0</p>
-  <p class="tab1">Total tests skipped: 0</p>
-  <p class="tab1">Total warnings generated: 0</p>
+  <p class="tab1">Total tests passed: 18</p>
+  <p class="tab1">Total tests failed: 3</p>
+  <p class="tab1">Total tests skipped: 15</p>
+  <p class="tab1">Total warnings generated: 18</p>
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
@@ -66,7 +66,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> {"tags": ["PCAWG", "cancer"], "name": "PCAWG", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "studies": [{"tags": ["PCAWG", "cancer"], "name": "PCAWG", "description": "PCAWG study", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "version": "1.0", "id": "6cccbbd76b9c4837bd7342dd616d0fec"}], "version": "1.0", "id": "43378a5d48364f9d8cf3c3d5104df560"}
+                    <p><strong>Response Body:</strong> {"id": "43378a5d48364f9d8cf3c3d5104df560", "tags": ["PCAWG", "cancer"], "name": "PCAWG", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "version": "1.0", "studies": [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "version": "1.0", "name": "PCAWG", "description": "PCAWG study", "tags": ["PCAWG", "cancer"]}]}
 </p>
                     
                   </div>
@@ -110,7 +110,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"version": "1.0", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "id": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG", "tags": ["PCAWG", "cancer"]}, {"version": "1.0", "description": "Test project object used by RNAget compliance testing suite.", "id": "9c0eba51095d3939437e220db196e27b", "name": "RNAgetTestProject0", "tags": ["RNAgetCompliance"]}]
+                    <p><strong>Response Body:</strong> [{"name": "PCAWG", "version": "1.0", "id": "43378a5d48364f9d8cf3c3d5104df560", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "tags": ["PCAWG", "cancer"]}, {"name": "RNAgetTestProject0", "version": "1.0", "id": "9c0eba51095d3939437e220db196e27b", "description": "Test project object used by RNAget compliance testing suite.", "tags": ["RNAgetCompliance"]}]
 </p>
                     
                   </div>
@@ -132,7 +132,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0}</p>
                     
-                    <p><strong>Response Body:</strong> [{"id": "43378a5d48364f9d8cf3c3d5104df560", "tags": ["PCAWG", "cancer"], "name": "PCAWG", "version": "1.0", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423"}, {"id": "9c0eba51095d3939437e220db196e27b", "tags": ["RNAgetCompliance"], "name": "RNAgetTestProject0", "version": "1.0", "description": "Test project object used by RNAget compliance testing suite."}]
+                    <p><strong>Response Body:</strong> [{"description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "id": "43378a5d48364f9d8cf3c3d5104df560", "version": "1.0", "tags": ["PCAWG", "cancer"], "name": "PCAWG"}, {"description": "Test project object used by RNAget compliance testing suite.", "id": "9c0eba51095d3939437e220db196e27b", "version": "1.0", "tags": ["RNAgetCompliance"], "name": "RNAgetTestProject0"}]
 </p>
                     
                   </div>
@@ -154,7 +154,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0}</p>
                     
-                    <p><strong>Response Body:</strong> [{"id": "43378a5d48364f9d8cf3c3d5104df560", "tags": ["PCAWG", "cancer"], "name": "PCAWG", "version": "1.0", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423"}, {"id": "9c0eba51095d3939437e220db196e27b", "tags": ["RNAgetCompliance"], "name": "RNAgetTestProject0", "version": "1.0", "description": "Test project object used by RNAget compliance testing suite."}]
+                    <p><strong>Response Body:</strong> [{"description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "id": "43378a5d48364f9d8cf3c3d5104df560", "version": "1.0", "tags": ["PCAWG", "cancer"], "name": "PCAWG"}, {"description": "Test project object used by RNAget compliance testing suite.", "id": "9c0eba51095d3939437e220db196e27b", "version": "1.0", "tags": ["RNAgetCompliance"], "name": "RNAgetTestProject0"}]
 </p>
                     
                   </div>
@@ -198,7 +198,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"values": ["1.0"], "fieldType": "string", "filter": "version", "description": "version to search for"}]
+                    <p><strong>Response Body:</strong> [{"description": "version to search for", "filter": "version", "fieldType": "string", "values": ["1.0"]}]
 </p>
                     
                   </div>
@@ -235,7 +235,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> {"tags": ["PCAWG", "cancer"], "name": "PCAWG", "description": "PCAWG study", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "version": "1.0", "id": "6cccbbd76b9c4837bd7342dd616d0fec"}
+                    <p><strong>Response Body:</strong> {"id": "6cccbbd76b9c4837bd7342dd616d0fec", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "version": "1.0", "name": "PCAWG", "description": "PCAWG study", "tags": ["PCAWG", "cancer"]}
 </p>
                     
                   </div>
@@ -279,7 +279,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "version": "1.0", "description": "PCAWG study", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "name": "PCAWG", "tags": ["PCAWG", "cancer"]}, {"parentProjectID": "9c0eba51095d3939437e220db196e27b", "version": "1.0", "description": "Test study object used by RNAget compliance testing suite.", "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "name": "RNAgetTestStudy0", "tags": ["RNAgetCompliance"]}]
+                    <p><strong>Response Body:</strong> [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "tags": ["PCAWG", "cancer"], "name": "PCAWG", "description": "PCAWG study", "version": "1.0"}, {"id": "f3ba0b59bed0fa2f1030e7cb508324d1", "parentProjectID": "9c0eba51095d3939437e220db196e27b", "tags": ["RNAgetCompliance"], "name": "RNAgetTestStudy0", "description": "Test study object used by RNAget compliance testing suite.", "version": "1.0"}]
 </p>
                     
                   </div>
@@ -301,7 +301,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0}</p>
                     
-                    <p><strong>Response Body:</strong> [{"parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "version": "1.0", "description": "PCAWG study", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "name": "PCAWG", "tags": ["PCAWG", "cancer"]}, {"parentProjectID": "9c0eba51095d3939437e220db196e27b", "version": "1.0", "description": "Test study object used by RNAget compliance testing suite.", "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "name": "RNAgetTestStudy0", "tags": ["RNAgetCompliance"]}]
+                    <p><strong>Response Body:</strong> [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "tags": ["PCAWG", "cancer"], "name": "PCAWG", "description": "PCAWG study", "version": "1.0"}, {"id": "f3ba0b59bed0fa2f1030e7cb508324d1", "parentProjectID": "9c0eba51095d3939437e220db196e27b", "tags": ["RNAgetCompliance"], "name": "RNAgetTestStudy0", "description": "Test study object used by RNAget compliance testing suite.", "version": "1.0"}]
 </p>
                     
                   </div>
@@ -323,7 +323,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0}</p>
                     
-                    <p><strong>Response Body:</strong> [{"tags": ["PCAWG", "cancer"], "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "description": "PCAWG study", "name": "PCAWG", "version": "1.0", "id": "6cccbbd76b9c4837bd7342dd616d0fec"}, {"tags": ["RNAgetCompliance"], "parentProjectID": "9c0eba51095d3939437e220db196e27b", "description": "Test study object used by RNAget compliance testing suite.", "name": "RNAgetTestStudy0", "version": "1.0", "id": "f3ba0b59bed0fa2f1030e7cb508324d1"}]
+                    <p><strong>Response Body:</strong> [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "tags": ["PCAWG", "cancer"], "name": "PCAWG", "description": "PCAWG study", "version": "1.0"}, {"id": "f3ba0b59bed0fa2f1030e7cb508324d1", "parentProjectID": "9c0eba51095d3939437e220db196e27b", "tags": ["RNAgetCompliance"], "name": "RNAgetTestStudy0", "description": "Test study object used by RNAget compliance testing suite.", "version": "1.0"}]
 </p>
                     
                   </div>
@@ -367,7 +367,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"filter": "version", "description": "version to search for", "fieldType": "string", "values": ["1.0"]}]
+                    <p><strong>Response Body:</strong> [{"description": "version to search for", "filter": "version", "fieldType": "string", "values": ["1.0"]}]
 </p>
                     
                   </div>
@@ -389,7 +389,7 @@
 
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Get: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Expression Get: FAILED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_get" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_get">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -398,20 +398,24 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_get">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/:id endpoint using expression id in config file. Checks content type and status code (200). Validates response body matches project schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expression endpoint implemented by the server</p>
+                    <p><strong>Summary:</strong> Expression endpoint not implemented by the server</p>
                     
                     <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/2a7ab5533ef941eaa59edbfe887b58c4</p>
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> {"URL": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "tags": [], "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "units": "TPM", "fileType": "loom", "version": "1.0", "id": "2a7ab5533ef941eaa59edbfe887b58c4"}
+                    <p><strong>Response Body:</strong> {"version": "1.0", "units": "TPM", "fileType": "loom", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "id": "2a7ab5533ef941eaa59edbfe887b58c4", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "tags": []}
 </p>
+                    
+                    <p><strong>Exception:</strong> SchemaValidationException</p>
+                    
+                    <p><strong>Exception Message:</strong> 'URL' is a required property</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Get Not Found: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Get Not Found: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_get_not_found" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_get_not_found">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -420,14 +424,7 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_get_not_found">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/:id endpoint using an expression id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification</p>
-                    <p><strong>Summary:</strong> Expression not found endpoint correctly implemented</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/999999999</p>
-                    
-                    <p><strong>Params:</strong> {}</p>
-                    
-                    <p><strong>Response Body:</strong> {"message": "Entry not found in database."}
-</p>
+                    <p><strong>Summary:</strong> Expression not found test skipped</p>
                     
                   </div>
                 </div>
@@ -455,7 +452,7 @@
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Expression Search: FAILED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -464,20 +461,24 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint, only specifying the required 'format' parameter. Checks content type and status code (200). Validates response body matches expression array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expressions can be retrieved through search endpoint</p>
+                    <p><strong>Summary:</strong> Expressions cannot be retrieved through search endpoint</p>
                     
                     <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/search</p>
                     
                     <p><strong>Params:</strong> {'format': 'loom'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"URL": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "tags": [], "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "units": "TPM", "fileType": "loom", "version": "1.0", "id": "2a7ab5533ef941eaa59edbfe887b58c4"}, {"URL": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "units": "TPM", "fileType": "loom", "version": "1.0", "id": "ac3e9279efd02f1c98de4ed3d335b98e"}]
+                    <p><strong>Response Body:</strong> [{"version": "1.0", "units": "TPM", "fileType": "loom", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "id": "2a7ab5533ef941eaa59edbfe887b58c4", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "tags": []}, {"version": "1.0", "units": "TPM", "fileType": "loom", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "id": "ac3e9279efd02f1c98de4ed3d335b98e", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "tags": ["RNAgetCompliance"]}]
 </p>
+                    
+                    <p><strong>Exception:</strong> SchemaValidationException</p>
+                    
+                    <p><strong>Exception Message:</strong> 'URL' is a required property</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Url Params All: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Url Params All: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_url_params_all" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_url_params_all">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -486,20 +487,13 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_url_params_all">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches expressions array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expressions can be retrieved using URL parameters through the search endpoint</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/search</p>
-                    
-                    <p><strong>Params:</strong> {'studyID': '6cccbbd76b9c4837bd7342dd616d0fec', 'format': 'loom'}</p>
-                    
-                    <p><strong>Response Body:</strong> [{"URL": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "tags": [], "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "units": "TPM", "fileType": "loom", "version": "1.0", "id": "2a7ab5533ef941eaa59edbfe887b58c4"}]
-</p>
+                    <p><strong>Summary:</strong> Expression search with URL parameters test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Url Params Cases: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Url Params Cases: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_url_params_cases" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_url_params_cases">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -508,20 +502,13 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_url_params_cases">
                   <div class="well">
                     <p><strong>Description:</strong> Performs multiple requests of the /expressions/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches expression array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expressions can be retrieved using URL parameters through the search endpoint for all cases</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/search</p>
-                    
-                    <p><strong>Params:</strong> {'studyID': '6cccbbd76b9c4837bd7342dd616d0fec', 'format': 'loom'}</p>
-                    
-                    <p><strong>Response Body:</strong> [{"URL": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "tags": [], "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "units": "TPM", "fileType": "loom", "version": "1.0", "id": "2a7ab5533ef941eaa59edbfe887b58c4"}]
-</p>
+                    <p><strong>Summary:</strong> Expressions search with multiple URL parameters cases  test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Filters Out: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Filters Out: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_filters_out" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_filters_out">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -530,20 +517,13 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_filters_out">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint using parameter filters that do not apply to any expression. Checks content type and status code (200). Validates response body is an empty array.</p>
-                    <p><strong>Summary:</strong> Expression search endpoint successfully filters out non-matching objects</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/search</p>
-                    
-                    <p><strong>Params:</strong> {'studyID': '999999999', 'format': '999999999'}</p>
-                    
-                    <p><strong>Response Body:</strong> []
-</p>
+                    <p><strong>Summary:</strong> Expression search filters out test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Format Not Specified: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Format Not Specified: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_format_not_specified" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_format_not_specified">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -552,20 +532,13 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_format_not_specified">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint without specifying the required 'format' parameter. Checks content type and status code (4xx). Validates response body is an error message JSON.</p>
-                    <p><strong>Summary:</strong> Expression search endpoint appropriately raises error when format not specified</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/search</p>
-                    
-                    <p><strong>Params:</strong> {}</p>
-                    
-                    <p><strong>Response Body:</strong> {"errors": {"format": "format of data to return"}, "message": "Input payload validation failed"}
-</p>
+                    <p><strong>Summary:</strong> Expression search format not specified test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Filetypes Match: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Filetypes Match: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_filetypes_match" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_filetypes_match">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -574,20 +547,13 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_filetypes_match">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint with 'format' parameter specified. Checks content type and status code (200). Validates expression objects in response body contain a fileType that matches the requested format.</p>
-                    <p><strong>Summary:</strong> Expression search returns expression objects with fileType matching specified format</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/search</p>
-                    
-                    <p><strong>Params:</strong> {'format': 'loom'}</p>
-                    
-                    <p><strong>Response Body:</strong> [{"URL": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "fileType": "loom", "version": "1.0", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "id": "2a7ab5533ef941eaa59edbfe887b58c4", "units": "TPM", "tags": []}, {"URL": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "fileType": "loom", "version": "1.0", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "id": "ac3e9279efd02f1c98de4ed3d335b98e", "units": "TPM", "tags": ["RNAgetCompliance"]}]
-</p>
+                    <p><strong>Summary:</strong> Expression search filetypes match test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search No Filetype Mismatches: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search No Filetype Mismatches: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_no_filetype_mismatches" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_no_filetype_mismatches">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -596,20 +562,13 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_no_filetype_mismatches">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint with 'format' parameter that does not match the format specified in config file. Checks content type and status code (200). Validates expression objects in response body have a fileType matching the requested format.</p>
-                    <p><strong>Summary:</strong> Expression search returns expression objects with fileType matching specified format when requested format is modified</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/search</p>
-                    
-                    <p><strong>Params:</strong> {'format': 'tsv'}</p>
-                    
-                    <p><strong>Response Body:</strong> []
-</p>
+                    <p><strong>Summary:</strong> Expression search no filetype mismatches test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Filters: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Filters: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_filters" aria-expanded="false" aria-controls="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_filters">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -618,14 +577,7 @@
                 <div class="collapse" id="collapse-Caltech-expressions-2a7ab5533ef941eaa59edbfe887b58c4-expression_search_filters">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expression filters can be retrieved through the search endpoint</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/expressions/search/filters</p>
-                    
-                    <p><strong>Params:</strong> {}</p>
-                    
-                    <p><strong>Response Body:</strong> [{"filter": "version", "description": "version to search for", "fieldType": "string", "values": ["1.0"]}, {"filter": "studyID", "description": "parent studyID", "fieldType": "string", "values": ["6cccbbd76b9c4837bd7342dd616d0fec", "f3ba0b59bed0fa2f1030e7cb508324d1"]}]
-</p>
+                    <p><strong>Summary:</strong> Expression filters search test skipped</p>
                     
                   </div>
                 </div>
@@ -709,7 +661,7 @@
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Continuous Search: FAILED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search" aria-expanded="false" aria-controls="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -718,20 +670,24 @@
                 <div class="collapse" id="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint, only specifying the required 'format' parameter. Checks content type and status code (200). Validates response body matches continuous array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Continuous objects can be retrieved through search endpoint</p>
+                    <p><strong>Summary:</strong> Continuous objects cannot be retrieved through search endpoint</p>
                     
                     <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/continuous/search</p>
                     
                     <p><strong>Params:</strong> {'format': 'loom'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "tags": ["cancer"], "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "fileType": "loom", "version": "1.0", "id": "fa057c6d18c44960a1b8b49d065b3889"}, {"URL": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom", "version": "1.0", "id": "5e22e009f41fc53cbea094a41de8798f"}]
+                    <p><strong>Response Body:</strong> [{"id": "fa057c6d18c44960a1b8b49d065b3889", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "url": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "version": "1.0", "tags": ["cancer"], "fileType": "loom"}, {"id": "5e22e009f41fc53cbea094a41de8798f", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom", "version": "1.0", "tags": ["RNAgetCompliance"], "fileType": "loom"}]
 </p>
+                    
+                    <p><strong>Exception:</strong> SchemaValidationException</p>
+                    
+                    <p><strong>Exception Message:</strong> 'URL' is a required property</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Url Params All: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Url Params All: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_url_params_all" aria-expanded="false" aria-controls="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_url_params_all">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -740,20 +696,13 @@
                 <div class="collapse" id="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_url_params_all">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches continuous object array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Continuous objects can be retrieved using URL parameters through the search endpoint</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/continuous/search</p>
-                    
-                    <p><strong>Params:</strong> {'version': 1.0, 'format': 'loom'}</p>
-                    
-                    <p><strong>Response Body:</strong> [{"URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "tags": ["cancer"], "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "fileType": "loom", "version": "1.0", "id": "fa057c6d18c44960a1b8b49d065b3889"}, {"URL": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom", "version": "1.0", "id": "5e22e009f41fc53cbea094a41de8798f"}]
-</p>
+                    <p><strong>Summary:</strong> Continuous search with URL parameters test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Url Params Cases: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Url Params Cases: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_url_params_cases" aria-expanded="false" aria-controls="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_url_params_cases">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -762,20 +711,13 @@
                 <div class="collapse" id="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_url_params_cases">
                   <div class="well">
                     <p><strong>Description:</strong> Performs multiple requests of the /continuous/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches continuous array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Continuous objects can be retrieved using URL parameters through the search endpoint for all cases</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/continuous/search</p>
-                    
-                    <p><strong>Params:</strong> {'version': 1.0, 'format': 'loom'}</p>
-                    
-                    <p><strong>Response Body:</strong> [{"URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "fileType": "loom", "version": "1.0", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "id": "fa057c6d18c44960a1b8b49d065b3889", "tags": ["cancer"]}, {"URL": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom", "fileType": "loom", "version": "1.0", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "id": "5e22e009f41fc53cbea094a41de8798f", "tags": ["RNAgetCompliance"]}]
-</p>
+                    <p><strong>Summary:</strong> Continuous search with multiple URL parameters cases  test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Filters Out: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Filters Out: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_filters_out" aria-expanded="false" aria-controls="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_filters_out">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -784,20 +726,13 @@
                 <div class="collapse" id="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_filters_out">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint using parameter filters that do not apply to any continuous object. Checks content type and status code (200). Validates response body is an empty array.</p>
-                    <p><strong>Summary:</strong> Continuous search endpoint successfully filters out non-matching objects</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/continuous/search</p>
-                    
-                    <p><strong>Params:</strong> {'version': '999999999', 'format': '999999999'}</p>
-                    
-                    <p><strong>Response Body:</strong> []
-</p>
+                    <p><strong>Summary:</strong> Continuous search filters out test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Format Not Specified: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Format Not Specified: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_format_not_specified" aria-expanded="false" aria-controls="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_format_not_specified">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -806,20 +741,13 @@
                 <div class="collapse" id="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_format_not_specified">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint without specifying the required 'format' parameter. Checks content type and status code (4xx). Validates response body is an error message JSON.</p>
-                    <p><strong>Summary:</strong> Continuous search endpoint appropriately raises error when format not specified</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/continuous/search</p>
-                    
-                    <p><strong>Params:</strong> {}</p>
-                    
-                    <p><strong>Response Body:</strong> {"errors": {"format": "format of data to return"}, "message": "Input payload validation failed"}
-</p>
+                    <p><strong>Summary:</strong> Continuous search format not specified test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Formats Match: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Formats Match: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_formats_match" aria-expanded="false" aria-controls="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_formats_match">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -828,20 +756,13 @@
                 <div class="collapse" id="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_formats_match">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint with 'format' parameter specified. Checks content type and status code (200). Validates continuous objects in response body contain a format that matches the format in the request.</p>
-                    <p><strong>Summary:</strong> Continuous search returns objects with format matching request</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/continuous/search</p>
-                    
-                    <p><strong>Params:</strong> {'format': 'loom'}</p>
-                    
-                    <p><strong>Response Body:</strong> [{"URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "tags": ["cancer"], "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "fileType": "loom", "version": "1.0", "id": "fa057c6d18c44960a1b8b49d065b3889"}, {"URL": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom", "version": "1.0", "id": "5e22e009f41fc53cbea094a41de8798f"}]
-</p>
+                    <p><strong>Summary:</strong> Continuous search formats match test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search No Format Mismatches: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search No Format Mismatches: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_no_format_mismatches" aria-expanded="false" aria-controls="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_no_format_mismatches">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -850,20 +771,13 @@
                 <div class="collapse" id="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_no_format_mismatches">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint with 'format' parameter that does not match the format specified in config file. Checks content type and status code (200). Validates continuous objects in response body have a fileType matching the request.</p>
-                    <p><strong>Summary:</strong> Continuous search returns objects with fileType matching requested format when modified</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/continuous/search</p>
-                    
-                    <p><strong>Params:</strong> {'format': '999999999'}</p>
-                    
-                    <p><strong>Response Body:</strong> []
-</p>
+                    <p><strong>Summary:</strong> Continuous search no format mismatches test skipped</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Filters: PASSED</p>
+                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Filters: SKIPPED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_filters" aria-expanded="false" aria-controls="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_filters">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -872,14 +786,7 @@
                 <div class="collapse" id="collapse-Caltech-continuous-fa057c6d18c44960a1b8b49d065b3889-continuous_search_filters">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Continuous filters can be retrieved through the search endpoint</p>
-                    
-                    <p><strong>Request:</strong> https://felcat.caltech.edu/rnaget/continuous/search/filters</p>
-                    
-                    <p><strong>Params:</strong> {}</p>
-                    
-                    <p><strong>Response Body:</strong> [{"values": ["1.0"], "fieldType": "string", "filter": "version", "description": "version to search for"}]
-</p>
+                    <p><strong>Summary:</strong> Continous filters search test skipped</p>
                     
                   </div>
                 </div>
@@ -1010,18 +917,18 @@
               
                 
                   
-                    <tr class="text-success">
+                    <tr class="text-danger">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Get</td>
-                      <td>PASSED</td>
+                      <td>FAILED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Get Not Found</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
                     <tr class="text-success">
@@ -1031,60 +938,60 @@
                       <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-danger">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Search</td>
-                      <td>PASSED</td>
+                      <td>FAILED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Search Url Params All</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Search Url Params Cases</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Search Filters Out</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Search Format Not Specified</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Search Filetypes Match</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Search No Filetype Mismatches</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Expressions: 2a7ab5533ef941eaa59edbfe887b58c4</td>
                       <td>Expression Search Filters</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
                 
@@ -1112,60 +1019,60 @@
                       <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-danger">
                       <td>Caltech</td>
                       <td>Continuous: fa057c6d18c44960a1b8b49d065b3889</td>
                       <td>Continuous Search</td>
-                      <td>PASSED</td>
+                      <td>FAILED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Continuous: fa057c6d18c44960a1b8b49d065b3889</td>
                       <td>Continuous Search Url Params All</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Continuous: fa057c6d18c44960a1b8b49d065b3889</td>
                       <td>Continuous Search Url Params Cases</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Continuous: fa057c6d18c44960a1b8b49d065b3889</td>
                       <td>Continuous Search Filters Out</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Continuous: fa057c6d18c44960a1b8b49d065b3889</td>
                       <td>Continuous Search Format Not Specified</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Continuous: fa057c6d18c44960a1b8b49d065b3889</td>
                       <td>Continuous Search Formats Match</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Continuous: fa057c6d18c44960a1b8b49d065b3889</td>
                       <td>Continuous Search No Format Mismatches</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
-                    <tr class="text-success">
+                    <tr class="text-info">
                       <td>Caltech</td>
                       <td>Continuous: fa057c6d18c44960a1b8b49d065b3889</td>
                       <td>Continuous Search Filters</td>
-                      <td>PASSED</td>
+                      <td>SKIPPED</td>
                     </tr>
                   
                 
