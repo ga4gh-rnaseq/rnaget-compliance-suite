@@ -27,14 +27,14 @@
           "studyID": {
             "type": "string"
           },
-          "URL": {
+          "url": {
             "type": "string"
           }
           
         },
       
         "required": [
-          "id", "URL"
+          "id", "url"
         ],
         
         "additionalProperties": true

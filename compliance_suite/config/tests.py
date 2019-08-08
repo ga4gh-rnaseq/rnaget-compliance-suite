@@ -556,7 +556,7 @@ TESTS_DICT = {
                 "summary_fail": "Expression matrix content DOES NOT match "
                     + "expected",
                 "summary_skip": "'Expression Get Content' skipped",
-                "download_url": lambda response: response.json()["URL"]
+                "download_url": lambda response: response.json()["url"]
             },
             "cases": [
                 {
@@ -943,7 +943,7 @@ TESTS_DICT = {
                 "summary_skip": "'Expression Search Slice' skipped",
                 "request_params_func": \
                     pf.all_supported_filters_format_and_slice_params,
-                "download_url": lambda response: response.json()[0]["URL"]
+                "download_url": lambda response: response.json()[0]["url"]
             },
             "cases": [
                 {
@@ -1780,7 +1780,7 @@ TESTS_DICT = {
                 "function": cf.continuous_get_case,
                 "tempfile": "continuous_search_content_test.loom",
                 "url": c.CONTINUOUS_API + "search",
-                "download_url": lambda response: response.json()[0]["URL"],
+                "download_url": lambda response: response.json()[0]["url"],
                 "request_params_func": \
                     pf.all_supported_filters_format_chr_start_end,
                 "description": "Asserts correct subsetting of continuous"

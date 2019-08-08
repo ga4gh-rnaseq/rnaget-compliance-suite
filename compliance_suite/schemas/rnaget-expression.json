@@ -27,7 +27,7 @@
           "studyID": {
             "type": "string"
           },
-          "URL": {
+          "url": {
             "type": "string"
           },
           "units": {
@@ -37,7 +37,7 @@
         },
       
         "required": [
-          "id", "URL", "units" 
+          "id", "url", "units" 
         ],
         
         "additionalProperties": true
