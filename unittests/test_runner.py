@@ -16,7 +16,6 @@ def test_constructor():
     server_config = copy_dict(SERVER_CONFIG)
     tr = Runner(server_config)
     assert tr.root == None
-    assert tr.session_params == {}
     assert tr.total_tests == 0
     assert tr.total_tests_passed == 0
     assert tr.total_tests_failed == 0
@@ -46,7 +45,7 @@ def test_generate_final_json():
     tr.run_tests()
 
     expect_final_json = json.loads(
-        open("unittests/testdata/json_reports/final_json.json", "r").read()
+        open("unittests/data/json_reports/final_json.json", "r").read()
     )
     actual_final_json = tr.generate_final_json()
     actual_final_json["date_time"] = "0"

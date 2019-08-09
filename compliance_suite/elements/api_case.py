@@ -7,6 +7,7 @@ then checks the response for status code, content type, response body, etc
 to assert whether the test case passes requirements.
 """
 
+import os
 import re
 import requests
 
@@ -105,7 +106,12 @@ class APICase(Case):
                     try:
                         response_json = response.json()
                     except ValueError as e:
-                        raise tse.JsonParseException(str(e))
+                        raise tse.JsonParseException(
+                            "Error parsing JSON from response")
+
+                    if self.schema_func:
+                        self.schema_file = self.case_params["schema_func"](
+                            self.runner, self.test, self.params)
 
                     sv = SchemaValidator(self.schema_file)
                     validation_result = sv.validate_instance(response_json)
@@ -191,12 +197,13 @@ class APICase(Case):
         """Set JSON schema file to check against response body for this case"""
 
         self.schema_file = None
+        self.schema_func = None
         self.is_json = True
 
         if "schema_file" in self.case_params.keys():
             self.schema_file = self.case_params["schema_file"]
         else:
-            self.schema_file = self.case_params["schema_func"](self.params)
+            self.schema_func = self.case_params["schema_func"]
         
         if "is_json" in self.case_params.keys():
             self.is_json = self.case_params["is_json"]

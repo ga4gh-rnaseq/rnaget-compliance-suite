@@ -55,7 +55,7 @@ TESTS_DICT = {
                     "summary_fail": "Test project NOT retrieved",
                     "summary_skip": "'Get Test Project' skipped",
                     "url": c.PROJECT_API + "V_PROJECT_ID",
-                    "schema_file": c.SCHEMA_FILE_PROJECT
+                    "schema_func": sf.schema_require_matching_id
                 },
 
                 {
@@ -137,7 +137,7 @@ TESTS_DICT = {
                     "summary_fail": "Projects CANNOT be searched without "
                         + "filters",
                     "summary_skip": "'Search Projects Without Filters' skipped",
-                    "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params": {}
                 },
 
@@ -153,7 +153,7 @@ TESTS_DICT = {
                         + "filters specified",
                     "summary_skip": "'Search Projects With All Filters' "
                         + "skipped",
-                    "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.all_supported_filters
                 },
 
@@ -169,7 +169,7 @@ TESTS_DICT = {
                         + "filter parameter is supplied",
                     "summary_skip": "'Search Projects With Single Filter, 1' "
                         + "skipped",
-                    "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.first_supported_filter
                 },
 
@@ -185,7 +185,7 @@ TESTS_DICT = {
                         + "filter parameter is supplied",
                     "summary_skip": "'Search Projects With Single Filter, 2' "
                         + "skipped",
-                    "schema_file": c.SCHEMA_FILE_PROJECT_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.second_supported_filter
                 },
 
@@ -289,7 +289,7 @@ TESTS_DICT = {
                     "summary_fail": "Test study NOT retrieved",
                     "summary_skip": "'Get Test Study' skipped",
                     "url": c.STUDY_API + "V_STUDY_ID",
-                    "schema_file": c.SCHEMA_FILE_STUDY
+                    "schema_func": sf.schema_require_matching_id
                 },
 
                 {
@@ -371,7 +371,7 @@ TESTS_DICT = {
                     "summary_fail": "Studies CANNOT be searched without "
                         + "filters",
                     "summary_skip": "'Search Studies Without Filters' skipped",
-                    "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params": {}
                 },
 
@@ -386,7 +386,7 @@ TESTS_DICT = {
                     "summary_fail": "Studies CANNOT be searched with all "
                         + "filters specified",
                     "summary_skip": "'Search Studies With All Filters' skipped",
-                    "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.all_supported_filters
                 },
 
@@ -402,7 +402,7 @@ TESTS_DICT = {
                         + "filter parameter is supplied",
                     "summary_skip": "'Search Studies With Single Filter, 1' "
                         + "skipped",
-                    "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.first_supported_filter
                 },
 
@@ -418,7 +418,7 @@ TESTS_DICT = {
                         + "filter parameter is supplied",
                     "summary_skip": "'Search Studies With Single Filter, 2' "
                         + "skipped",
-                    "schema_file": c.SCHEMA_FILE_STUDY_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.second_supported_filter
                 },
 
@@ -523,7 +523,7 @@ TESTS_DICT = {
                     "summary_fail": "Test expression NOT retrieved",
                     "summary_skip": "'Get Test Expression' skipped",
                     "url": c.EXPRESSION_API + "V_EXPRESSION_ID",
-                    "schema_file": c.SCHEMA_FILE_EXPRESSION,
+                    "schema_func": sf.schema_require_matching_id,
                     "server_settings_update_func": uf.update_expected_format
                 },
 
@@ -802,7 +802,7 @@ TESTS_DICT = {
                     "summary_pass": "Expressions can be searched by format",
                     "summary_fail": "Expressions CANNOT be searched by format",
                     "summary_skip": "'Search Expressions by Format' skipped",
-                    "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.add_format_from_retrieved_settings
                 },
 
@@ -818,7 +818,7 @@ TESTS_DICT = {
                         + "filters specified",
                     "summary_skip": "'Search Expressions With All Filters' "
                         + "skipped",
-                    "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": \
                      pf.all_supported_filters_and_format_from_retrieved_settings
                 },
@@ -836,7 +836,7 @@ TESTS_DICT = {
                         + "filter parameter is supplied",
                     "summary_skip": "'Search Expressions With Single Filter, "
                         + "1' skipped",
-                    "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.first_supported_filter_and_format
                 },
 
@@ -853,7 +853,7 @@ TESTS_DICT = {
                         + "second filter parameter is supplied",
                     "summary_skip": "'Search Expressions With Single Filter, "
                         + "2' skipped",
-                    "schema_file": c.SCHEMA_FILE_EXPRESSION_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.second_supported_filter_and_format
                 },
 
@@ -1589,7 +1589,7 @@ TESTS_DICT = {
                     "summary_pass": "Continuous can be searched by format",
                     "summary_fail": "Continuous CANNOT be searched by format",
                     "summary_skip": "'Search Continuous by Format' skipped",
-                    "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.add_format_from_retrieved_settings
                 },
 
@@ -1605,7 +1605,7 @@ TESTS_DICT = {
                         + "filters specified",
                     "summary_skip": "'Search Continuous With All Filters' "
                         + "skipped",
-                    "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": \
                      pf.all_supported_filters_and_format_from_retrieved_settings
                 },
@@ -1623,7 +1623,7 @@ TESTS_DICT = {
                         + "filter parameter is supplied",
                     "summary_skip": "'Search Continuous With Single Filter, 1' "
                         + "skipped",
-                    "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.first_supported_filter_and_format
                 },
 
@@ -1640,7 +1640,7 @@ TESTS_DICT = {
                         + "filter parameter is supplied",
                     "summary_skip": "'Search Continuous With Single Filter, 2' "
                         + "skipped",
-                    "schema_file": c.SCHEMA_FILE_CONTINUOUS_ARRAY_FULL,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.second_supported_filter_and_format
                 },
 

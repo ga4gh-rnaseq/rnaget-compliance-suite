@@ -8,6 +8,7 @@ validation section of API testing and return its filename
 
 import compliance_suite.config.constants as c
 import compliance_suite.schema_validator as sv
+import json
 import os
 
 def get_temp_filename(template_filename, value):
@@ -113,10 +114,12 @@ def schema_expression_search_format(params, full=False):
 
     return arr_filename
 
-def schema_expression_search_filetypes_match(params):
+def schema_expression_search_filetypes_match(runner, node, params):
     """Generate temp schema for expression search filetypes match test case
 
     Arguments:
+        runner (Runner): reference to Runner object
+        node (Node): reference to Node object
         params (dict): test case parameters
      
     Returns:
@@ -125,10 +128,12 @@ def schema_expression_search_filetypes_match(params):
      
     return schema_expression_search_format(params, full=True)
 
-def schema_expression_search_no_filetype_mismatches(params):
+def schema_expression_search_no_filetype_mismatches(runner, node, params):
     """Generate temp schema for expression search no filetype mismatches case
 
     Arguments:
+    runner (Runner): reference to Runner object
+    node (Node): reference to Node object
     params (dict): test case parameters
      
     Returns:
@@ -171,10 +176,12 @@ def schema_continuous_search_format(params, full=False):
 
     return arr_filename
 
-def schema_continuous_search_filetypes_match(params):
+def schema_continuous_search_filetypes_match(runner, node, params):
     """Generate temp schema for continuous search filetypes match test case
 
     Arguments:
+        runner (Runner): reference to Runner object
+        node (Node): reference to Node object
         params (dict): test case parameters
      
     Returns:
@@ -183,10 +190,12 @@ def schema_continuous_search_filetypes_match(params):
     
     return schema_continuous_search_format(params, full=True)
 
-def schema_continuous_search_no_filetype_mismatches(params):
+def schema_continuous_search_no_filetype_mismatches(runner, node, params):
     """Generate temp schema for continuous search no filetype mismatches case
 
     Arguments:
+        runner (Runner): reference to Runner object
+        node (Node): reference to Node object
         params (dict): test case parameters
      
     Returns:
@@ -194,3 +203,91 @@ def schema_continuous_search_no_filetype_mismatches(params):
     """
 
     return schema_continuous_search_format(params)
+
+def schema_require_matching_id(runner, node, params):
+    """Generate schema that requires request id to match response id
+
+    Arguments:
+        runner (Runner): reference to Runner object
+        node (Node): reference to Node object
+        params (dict): test case parameters
+    
+    Returns:
+        (str): file path for temporary schema
+    """
+
+    template = "rnaget-reqid-template.json"
+    schemas_by_obj_type = {
+        "projects": "rnaget-project.json",
+        "studies": "rnaget-study.json",
+        "expressions": "rnaget-expression.json",
+        "continuous": "rnaget-continuous.json"
+    }
+
+    obj_type = node.kwargs["obj_type"]
+    obj_id = node.kwargs["obj_instance"]["id"]
+    output_filename = "temp." + obj_type + "." + obj_id + ".reqid.json"
+
+    replace_l = [
+        ["VAR_FILENAME", output_filename],
+        ["VAR_REF", schemas_by_obj_type[obj_type]],
+        ["VAR_ID", obj_id]
+    ]
+    render_and_write_temp_schema(output_filename, template, replace_l)
+    return output_filename
+
+def schema_require_matching_search_params(runner, node, params):
+    """Generate schema requiring matching search params and response params
+
+    Arguments:
+        runner (Runner): reference to Runner object
+        node (Node): reference to Node object
+        params (dict): test case parameters
+    
+    Returns:
+        (str): file path for temporary schema
+    """
+
+    schemas_by_obj_type = {
+        "projects": "rnaget-project.json",
+        "studies": "rnaget-study.json",
+        "expressions": "rnaget-expression.json",
+        "continuous": "rnaget-continuous.json"
+    }
+    obj_type = node.kwargs["obj_type"]
+    obj_id = node.kwargs["obj_instance"]["id"]
+
+    obj_template = "rnaget-reqsearchparams-template.json"
+    arr_template = "rnaget-reqsearchparams-array-template.json"
+    obj_filename = "temp." + obj_type + "." + obj_id + ".reqsearchparams.json"
+    arr_filename = "temp." + obj_type + "." + obj_id + \
+        ".reqsearchparams.array.json"
+
+    # format search parameters as JSON schema that can be subbed into the file
+    params_json_schema = []
+    for param_key in params.keys():
+        if param_key != "tags":
+            property_key = "fileType" if param_key == "format" else param_key
+            properties = {
+                "type": "string",
+                "enum": [params[param_key]]
+            }
+
+            params_json_schema.append('"%s": %s' % (
+                property_key, json.dumps(properties)))
+
+    obj_replace_l = [
+        ["VAR_FILENAME", obj_filename],
+        ["VAR_REF", schemas_by_obj_type[obj_type]],
+        ['"VAR_SEARCH_PARAMS": {}', ",".join(params_json_schema)]
+    ]
+    arr_replace_l = [
+        ["VAR_ARRAY_FILENAME", arr_filename],
+        ["VAR_SINGLE_FILENAME", obj_filename]
+    ]
+    value = "1"
+
+    render_endpoint_object_and_array(obj_filename, obj_template, obj_replace_l,
+        arr_filename, arr_template, arr_replace_l, value, full=True)
+    
+    return arr_filename

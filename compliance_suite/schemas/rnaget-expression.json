@@ -37,7 +37,7 @@
         },
       
         "required": [
-          "id", "url", "units" 
+          "id", "url", "units", "fileType"
         ],
         
         "additionalProperties": true

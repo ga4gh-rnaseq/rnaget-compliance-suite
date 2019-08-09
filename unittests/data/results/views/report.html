@@ -1,0 +1,133 @@
+{% include "partials/header.html" %}
+{% include "partials/navbar.html" %}
+
+<div class="container">
+  <p><a href="."><i class="fa fa-chevron-left"></i> Back</a></p>
+
+  <h1>RNAGet Implementation Compliance Report</h1>
+  <h2>Server: {{server.server_name}}</h2>
+  <h4 class="tab1">Base URL: {{server.base_url}}</h4>
+  <p class="tab1">Total tests: {{server.total_tests}}</p>
+  <p class="tab1">Total tests passed: {{server.total_tests_passed}}</p>
+  <p class="tab1">Total tests failed: {{server.total_tests_failed}}</p>
+  <p class="tab1">Total tests skipped: {{server.total_tests_skipped}}</p>
+  <p class="tab1">Total warnings generated: {{server.total_warnings}}</p>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
+    <li><a data-toggle="tab" href="#matrix">Matrix</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="text" class="tab-pane fade in active">
+      {% for endpoint in h.s.endpoints %}
+        <section id="{{endpoint}}">
+          <div class="report-endpoint-section">
+            <h3 class="">{{h.f.capitalize(endpoint)}} 
+            {% if not server.implemented[endpoint] %}
+              not implemented by server
+            {% endif %}
+            </h3>
+
+            {% for ins_key in server.test_results[endpoint].keys() %}
+            <h4 class="tab1">{{h.f.capitalize(h.s.singles[endpoint])}} {{loop.index}} id: {{ins_key}}</h4>
+            <p class="tab1">Tests</p>
+
+              {% for test in server.test_results[endpoint][ins_key] %}
+                
+                <p class='tab2 {{ h.s.status[test.result].css_class }}'><i class="fa {{h.s.status[test.result].fa_class}}"></i> Test: {{h.f.format_test_name(test.name)}} - {{ h.s.status[test.result].status }}</p>
+                <p class="tab3"><strong>description:</strong> {{test.description}}</p>
+                <p class="tab3"><strong>summary:</strong> {{test.text}}</p>
+                
+                <!-- API Testing -->
+                {% if test.message.has_api_component %}
+                <p class="tab3 {{ h.s.status[test.message.api_component.status].css_class }}">API Route Test Cases - {{ h.s.status[test.message.api_component.status].status }}</p>
+                {% for case in test.message.api_component.cases %}
+                  <p class='tab4 {{ h.s.status[case.status].css_class }}'><i class="fa {{h.s.status[case.status].fa_class}}"></i> API Test Case: {{h.f.format_test_name(case.name)}} - {{ h.s.status[case.status].status }}</p>
+                  <p class='tab5'>case description: {{case.description}}</p>
+                  <p class='tab5'>case summary: {{case.summary}}</p>
+                  {% if case.error_message %}
+                    <p class='tab5'>error message: {{case.error_message}}</p>
+                  {% endif %}
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}" aria-expanded="false" aria-controls="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}">
+                    <div class="well audit-logs">
+                        {% for audit_log in case.audit %}
+                          <p class="audit-message">{{audit_log}}</p>
+                        {% endfor %}
+                    </div>
+                  </div>
+                {% endfor %}
+                {% endif %}
+
+                <!-- Content Testing -->
+                {% if test.message.has_content_component %}
+                <p class="tab3 {{ h.s.status[test.message.content_component.status].css_class }}">File Content Test Cases - {{ h.s.status[test.message.content_component.status].status }}</p>
+                {% for case in test.message.content_component.cases %}
+                  <p class='tab4 {{ h.s.status[case.status].css_class }}'><i class="fa {{h.s.status[case.status].fa_class}}"></i> Content Test Case: {{h.f.format_test_name(case.name)}} - {{ h.s.status[case.status].status }}</p>
+                  <p class='tab5'>case description: {{case.description}}</p>
+                  <p class='tab5'>case summary: {{case.summary}}</p>
+                  {% if case.error_message %}
+                    <p class='tab5'>error message: {{case.error_message}}</p>
+                  {% endif %}
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}" aria-expanded="false" aria-controls="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}">
+                    <div class="well audit-logs">
+                        {% for audit_log in case.audit %}
+                          <p class="audit-message">{{audit_log}}</p>
+                        {% endfor %}
+                    </div>
+                  </div>
+                {% endfor %}
+                {% endif %}
+
+              {% endfor %}
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+
+    <div id="matrix" class="tab-pane fade">
+        <div class="container">
+            <table id="compliance_matrix" class="table">
+              <thead>
+                <th>Server name</th>
+                <th>Object and Id</th>
+                <th>Test case</th>
+                <th>Status</th>
+              </thead>
+              <tbody>
+              
+              {% for endpoint in h.s.endpoints %}
+                {% for ins_key in server.test_results[endpoint].keys() %}
+                  {% for test in server.test_results[endpoint][ins_key] %}
+                    <tr class="{{h.s.status[test.result].css_class}}">
+                      <td>{{server.server_name}}</td>
+                      <td>{{h.f.capitalize(endpoint)}}: {{ins_key}}</td>
+                      <td>{{h.f.format_test_name(test.name)}}</td>
+                      <td>{{h.s.status[test.result].status}}</td>
+                    </tr>
+                  {% endfor %}
+                {% endfor %}
+              {% endfor %}
+              
+              </tbody>
+            </table>
+        </div>
+    </div>
+    
+  </div>
+</div>
+
+{% include "partials/footer.html" %}

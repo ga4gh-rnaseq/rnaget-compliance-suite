@@ -1,0 +1,8 @@
+{
+  "version": "1.0",
+  "name": "RNAgetTestProject0",
+  "description": "Test project object used by RNAget compliance testing suite.",
+  "tags": [
+    "RNAgetCompliance"
+  ]
+}

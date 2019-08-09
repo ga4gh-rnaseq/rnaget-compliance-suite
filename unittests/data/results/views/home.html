@@ -1,0 +1,53 @@
+{% include "partials/header.html" %}
+{% include "partials/navbar.html" %}
+
+<div class="container">
+
+  <div id="details-div">
+    <h3>Details</h3>
+    <p>Generated on {{h.f.timestamp()}}</p>
+  </div>
+
+  <div id="table-div">
+    <h3>Results</h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Server</th>
+          <th scope="col">Base URL</th>
+          <th scope="col">Projects</th>
+          <th scope="col">Studies</th>
+          <th scope="col">Expressions</th>
+          <th scope="col">Continuous</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for server in data %}
+        {% set base_ref = h.f.server_name_url(server.server_name) %}
+        <tr>
+          <th scope="row"><a href="{{base_ref}}">{{server.server_name}}</a></th>
+          <td>{{server.base_url}}</td>
+          {% set routes = ["projects", "studies", "expressions", "continuous"] %}
+          {% for route in routes %}
+          {% set r = h.f.route_status(server["test_results"][route]) %}
+          <td><a href="{{base_ref}}#{{route}}" class="btn {{r['btn']}}">{{r["text"]}}</a></td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="links-div">
+    <h3>Links</h3>
+    <ul>
+      <li><a href="https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget.md">rnaget API specification</a></li>
+      <li><a href="https://rnaget-compliance-suite.readthedocs.io/en/latest/">rnaget compliance documentation</a></li>
+      <li><a href="https://github.com/ga4gh-rnaseq/rnaget-compliance-suite">rnaget compliance application</a></li>
+    </ul>
+  </div>
+
+</div>
+
+{% include "partials/footer.html" %}

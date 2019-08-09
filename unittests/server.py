@@ -16,32 +16,55 @@ Attributes:
 
 import os
 import json
-from flask import Flask, Response, request
+from flask import Flask, Response, request, send_file
 
-app = Flask(__name__, root_path='testdata')
+app = Flask(__name__, root_path='unittests/data/matrices')
 
 not_found_json = '{"Message": "resource not found"}'
-project_ids_files = {
-    "43378a5d48364f9d8cf3c3d5104df560": "project_valid_0.json",
-    "38n54mgtogq4nq2s5nfqcoop4160vso7": "project_invalid_0.json"
+
+file_dict = {
+    "projects": {
+        "valid": {
+            "9c0eba51095d3939437e220db196e27b": "project_valid_0.json",
+        }, "invalid": {
+            "b6b3431e95f6cc6dbc69b0f0bbcb73a3": "project_invalid_mismatchedid.json",
+            "251de42306846bffec4290dca8064cb0": "project_invalid_notjson.txt"
+        }
+    },
+    "studies": {
+        "valid": {
+            "f3ba0b59bed0fa2f1030e7cb508324d1": "study_valid_0.json"
+        }, "invalid": {
+        }
+    },
+    "expressions": {
+        "valid": {
+            "ac3e9279efd02f1c98de4ed3d335b98e": "expression_valid_0.json"
+        }, "invalid": {
+        }
+    },
+    "continuous": {
+        "valid": {
+            "5e22e009f41fc53cbea094a41de8798f": "continuous_placeholder.json"
+        }, "invalid": {
+        }
+    }
 }
-study_ids_files = {
-    "6cccbbd76b9c4837bd7342dd616d0fec": "study_valid_0.json"
+
+# get the correct continuous loom file based on the parameters supplied to 
+# request
+continuous_file_by_params = {
+    "": "continuous/continuous.loom",
+    "chr=chr1,start=30,end=50": "continuous/continuous_1.loom"
 }
-expression_ids_files = {
-    "2a7ab5533ef941eaa59edbfe887b58c4": "expression_valid_0.json"
-}
-obj_type_d = {"projects": project_ids_files,
-              "studies": study_ids_files,
-              "expressions": expression_ids_files
-}
+
 filters_d = {"projects": ["version", "name"],
              "studies": ["version", "name"],
              "expressions": ["studyID"]}
-data_dir = "unittests/testdata/json_instances/"
+data_dir = "unittests/data/json_instances/"
 
-def get_response(body, status=200):
-    return Response(body, status=status, mimetype="application/json")
+def get_response(body, status=200, mimetype="application/json"):
+    return Response(body, status=status, mimetype=mimetype)
 
 @app.route("/<obj_type>/<obj_id>")
 def get_project(obj_type, obj_id):
@@ -64,23 +87,42 @@ def get_project(obj_type, obj_id):
     response = None
 
     try:
-        if obj_type not in obj_type_d.keys():
+        if obj_type not in file_dict.keys():
             raise Exception("Invalid object type specified")
 
-        files_d = obj_type_d[obj_type]
+        files_d = {}
+        files_d.update(file_dict[obj_type]["valid"])
+        files_d.update(file_dict[obj_type]["invalid"])
 
         if obj_id in files_d.keys():
             json_file = data_dir + files_d[obj_id]
             if os.path.exists(json_file):
-                response = get_response(open(json_file, "r").read())
+                if obj_type == "continuous":
+
+                    potential_params = ["chr", "start", "end"]
+                    used_params = []
+                    for potential_param in potential_params:
+                        param_val = request.args.get(potential_param)
+                        if param_val:
+                            used_params.append("%s=%s" % (str(potential_param), 
+                                                         str(param_val)))
+                    
+                    param_key = ",".join(used_params)
+                    print(param_key)
+                    path = continuous_file_by_params[param_key]
+                    print(path)
+                    response = send_file(path, mimetype="application/vnd.loom")
+                else:
+                    response = get_response(open(json_file, "r").read())
             else:
                 response = get_response(not_found_json, status=404)
         else:
-            if obj_id == "NA": # endpoint not implemented simultation,
+            if obj_id == "NA": # endpoint not implemented simulation,
                                 # return 501 instead of 404
                 response = get_response(not_found_json, status=501)
             else:    
                 response = get_response(not_found_json, status=404)
+
     except Exception as e:
         response_body = '''{"message": "invalid resource '%s'"}''' % obj_type
         response = get_response(response_body, status=400)
@@ -104,12 +146,12 @@ def search_for_object(obj_type):
     response = None
 
     try:
-        if obj_type not in obj_type_d.keys():
+        if obj_type not in file_dict.keys():
             raise Exception("Invalid object type specified")
 
         possible_filters = filters_d[obj_type]
         
-        for f in obj_type_d[obj_type].values():
+        for f in file_dict[obj_type]["valid"].values():
             json_file = data_dir + f
             json_s = open(json_file, "r").read()
             json_obj = json.loads(json_s)
@@ -128,6 +170,7 @@ def search_for_object(obj_type):
         response = get_response(response_body, status=200)
 
     except Exception as e:
+        print("bad request")
         response_body = '''{"message": "invalid resource '%s'"}''' % obj_type
         response = get_response(response_body, status=400)
 
@@ -138,4 +181,7 @@ def emptyresponse():
     """Returns an empty response body so it can raise JSON parse exception"""
     return get_response("")
 
-
+@app.route("/matrices/<obj_type>/<filename>")
+def get_matrix(obj_type, filename):
+    path = "%s/%s" % (obj_type, filename)
+    return send_file(path, mimetype="application/vnd.loom")

@@ -146,7 +146,7 @@ def report(user_config, output_dir, serve, uptime, no_tar, force):
                                         + "already exists")
         
         # if force, delete the output directory so it can be overwritten 
-        if force:
+        if force and os.path.exists(output_dir):
             shutil.rmtree(output_dir)
         
         # create the output archive, and copy the web files there

@@ -2,16 +2,11 @@
 """Module unittests.test_user_config_parser.py
 
 This module contains methods to test the user_config_parser module via pytest.
-
-Attributes:
-    yaml_dir (str): path to dir containing sample user config files
-    user_config_pass (str): yaml file that should pass config validation
-    user_config_file_not_found (str): yaml file that does not exist, fail
 """
 
 from compliance_suite.user_config_parser import UserConfigParser
 
-yaml_dir = "unittests/testdata/user_config/"
+yaml_dir = "unittests/data/user_config/"
 user_config_pass = "config_template.yaml"
 user_config_file_not_found = "file_not_found.yaml"
 
@@ -58,18 +53,14 @@ def test_validate_config_file_failures():
     messages = [
         '"servers" should be the only root key',
         '"servers" should be the only root key',
-        "missing attribute(s) from server 1: continuous, expressions, " 
-            + "projects, studies",
-        "missing attribute(s) from project 1 of server Server A: filters, id",
         "YAML config file could not be parsed. Please refer to the template "
             + "config file.",
         'value of implemented:expressions must be a boolean',
         'wrongendpoint not a valid endpoint',
-        "missing required filter(s) from 'filter' attribute in expression 1 "
-            + "of server Server A: format"
+        "missing attribute(s) from server 1: server_name"
     ]
 
-    for i in range(0,8):
+    for i in range(0,6):
         config_file = yaml_dir + "fail_" + str(i) + ".yaml"
         message = messages[i]
 
@@ -77,6 +68,8 @@ def test_validate_config_file_failures():
             parser = UserConfigParser(config_file)
             parser.parse_config_file()
             parser.validate_config_file()
+            assert True == False # config parser must raise an error before
+                                 # getting to this line
         except Exception as e:
             assert message == str(e)
 
