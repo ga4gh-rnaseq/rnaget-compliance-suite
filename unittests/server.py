@@ -60,7 +60,7 @@ continuous_file_by_params = {
 
 filters_d = {"projects": ["version", "name"],
              "studies": ["version", "name"],
-             "expressions": ["studyID"]}
+             "expressions": ["studyID", "version"]}
 data_dir = "unittests/data/json_instances/"
 
 def get_response(body, status=200, mimetype="application/json"):
