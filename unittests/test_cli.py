@@ -47,9 +47,10 @@ def test_report():
     assert result.exit_code == 0
     remove_output_dirs()
 
-    runner = CliRunner()
-    result = runner.invoke(report, ['-c', user_config_success, '-o', od, 
-                                    '--no-tar', '-f', '--serve', '-u', '2'])
+    # runner = CliRunner()
+    # result = runner.invoke(report, ['-c', user_config_success, '-o', od, 
+    #                                 '--no-tar', '-f', '--serve', '-u', '2'])
+    # assert result.exit_code == 0
 
 def test_exceptions():
     """asserts program raises appropriate exceptions with incorrect params"""
