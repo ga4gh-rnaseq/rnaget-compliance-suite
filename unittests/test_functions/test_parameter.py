@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Module unittests.test_functions.test_attribte_handlers.py"""
+"""Module unittests.test_functions.test_parameter.py"""
 
 from compliance_suite.functions.parameter import *
+from compliance_suite.elements.content_case import ContentCase
 from unittests.methods import *
 
 import compliance_suite.config.constants as c
@@ -22,6 +23,18 @@ runner_c, node_c, case_params_c = get_runner_node_case_params_by_case(
 runner_e.retrieved_server_settings["continuous"]["supp_filters"] = [
     "studyID", "version"]
 runner_e.retrieved_server_settings["continuous"]["exp_format"] = "tsv"
+
+expression_search = get_runner_node_case_params_by_case(
+    "slice by featureIDList, sampleIDList, minExpression, and maxExpression"
+)
+content_case_expression_search = ContentCase(
+    expression_search[2], expression_search[1], expression_search[0])
+
+continuous_search = get_runner_node_case_params_by_case(
+    "Continuous Search Content, chr, start, and end, 1"
+)
+content_case_continuous_search = ContentCase(
+    continuous_search[2], continuous_search[1], continuous_search[0])
 
 def test_all_supported_filters():
     
@@ -96,4 +109,25 @@ def test_switch_format_param():
     assert filters["format"] == "loom"
 
 def test_all_supported_filters_format_and_slice_params():
-    pass
+
+    filters = all_supported_filters_format_and_slice_params(
+        content_case_expression_search)
+    fk = filters.keys()
+
+    assert "featureIDList" in fk
+    assert "sampleIDList" in fk
+    assert "minExpression" in fk
+    assert "maxExpression" in fk
+
+def test_all_supported_filters_chr_start_end():
+
+    filters = all_supported_filters_format_chr_start_end(
+        content_case_continuous_search)
+    fk = filters.keys()
+    
+    assert "chr" in fk
+    assert "start" in fk
+    assert "end" in fk
+    assert filters["chr"] == "chr1"
+    assert filters["start"] == "51"
+    assert filters["end"] == "66"

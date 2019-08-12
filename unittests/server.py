@@ -41,21 +41,45 @@ file_dict = {
         "valid": {
             "ac3e9279efd02f1c98de4ed3d335b98e": "expression_valid_0.json"
         }, "invalid": {
+            # will fail content testing because of incorrect expression value
+            "ecf875d885658ec8c7f17c9c1377037b": "exp_content_invalid_0.json",
+            # fails expression search content testing, wrong featureIDList
+            "964c54b974cba66cc2cecabf874f2de5": "exp_arr_content_inv_0.json",
+            # fails expression search content testing, wrong featureID names
+            "9d0540df9b867404092bbf9d62d02648": "exp_arr_content_inv_1.json",
+            # fails expression search content testing, too many sampleIDs
+            "af0ab1d31e93a358f552adcc47dd4dc8": "exp_arr_content_inv_2.json",
+            # fails expression search content testing, minExpression error
+            "599ffa32b4a673c48dcf82e1f5ad2126": "exp_arr_content_inv_3.json"
         }
     },
     "continuous": {
         "valid": {
             "5e22e009f41fc53cbea094a41de8798f": "continuous_placeholder.json"
         }, "invalid": {
+            # fails continuous get content testing, incorrect intensity value
+            "89c1a7011f8201aeb39d9851bd8b868e": "con_content_invalid_0.json",
+            # fails continuous get content testing, too many chr
+            "de3d2567774ae951f84783c890504104": "con_content_invalid_0.json",
+            # fails continuous get content testing, wrong chr 
+            "e614231a96d9ffefa21384d8f5227cd1": "con_content_invalid_0.json",
+            # fails continuous get content testing, wrong position range
+            "6ccacf344f0f009cbcb19c31543daab2": "con_content_invalid_0.json"
         }
     }
 }
 
 # get the correct continuous loom file based on the parameters supplied to 
 # request
+continuous_file_by_id = {
+    "89c1a7011f8201aeb39d9851bd8b868e": "continuous/con_content_invalid_0.loom",
+    "de3d2567774ae951f84783c890504104": "continuous/continuous.loom",
+    "e614231a96d9ffefa21384d8f5227cd1": "continuous/con_content_invalid_1.loom",
+    "6ccacf344f0f009cbcb19c31543daab2": "continuous/con_content_invalid_2.loom"
+}
 continuous_file_by_params = {
     "": "continuous/continuous.loom",
-    "chr=chr1,start=30,end=50": "continuous/continuous_1.loom"
+    "chr=chr1,start=30,end=50": "continuous/continuous_1.loom",
 }
 
 filters_d = {"projects": ["version", "name"],
@@ -99,19 +123,25 @@ def get_project(obj_type, obj_id):
             if os.path.exists(json_file):
                 if obj_type == "continuous":
 
-                    potential_params = ["chr", "start", "end"]
-                    used_params = []
-                    for potential_param in potential_params:
-                        param_val = request.args.get(potential_param)
-                        if param_val:
-                            used_params.append("%s=%s" % (str(potential_param), 
-                                                         str(param_val)))
-                    
-                    param_key = ",".join(used_params)
-                    print(param_key)
-                    path = continuous_file_by_params[param_key]
-                    print(path)
-                    response = send_file(path, mimetype="application/vnd.loom")
+                    if obj_id in continuous_file_by_id.keys():
+                        path = continuous_file_by_id[obj_id]
+                        response = send_file(path, 
+                                             mimetype="application/vnd.loom")
+
+                    else:
+
+                        potential_params = ["chr", "start", "end"]
+                        used_params = []
+                        for potential_param in potential_params:
+                            param_val = request.args.get(potential_param)
+                            if param_val:
+                                used_params.append("%s=%s" % (
+                                    str(potential_param), str(param_val)))
+                        
+                        param_key = ",".join(used_params)
+                        path = continuous_file_by_params[param_key]
+                        response = send_file(path, 
+                                             mimetype="application/vnd.loom")
                 else:
                     response = get_response(open(json_file, "r").read())
             else:

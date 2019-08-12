@@ -50,3 +50,11 @@ def test_to_echo():
     test_node.result = 0
     test_node.set_skip_text('')
     assert test_node.to_echo() == "project_get is skipped because "
+
+def test_to_echo_passed_test():
+
+    runner, node, case_params = get_runner_node_case_params_by_case(
+        "Get Test Project")
+    node.result = 1
+    echo = node.to_echo()
+    assert echo == "'Get Project by Id' endpoint correctly implemented"

@@ -54,3 +54,14 @@ def test_generate_final_json():
 
     # assert actual_json_s == expect_json_s
 
+def test_recurse_generate_json():
+
+    server_config = copy_dict(SERVER_CONFIG)
+    tr = Runner(server_config)
+    tr.run_tests()
+    
+    obj_type, obj_id, node = tr.base_tests[0]
+    child = node.children[0]
+    child.result = 1
+
+    tr.recurse_generate_json(obj_type, obj_id, node)
