@@ -54,7 +54,7 @@ Get Test Expression
      "id": "ac3e9279efd02f1c98de4ed3d335b98e",
      "version": "1.0",
      "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
-     "URL": "https://url/to/expression/file",
+     "url": "https://url/to/expression/file",
        "tags": [
          "RNAgetCompliance"
        ],
@@ -319,7 +319,7 @@ Search Expressions With Single Filter, 2
 Expression Search Filters Non-Matching Resources
 #################################################
 * **Route:** :code:`/expressions/search`
-* **Description:** Tests that the expression search endpoint correctly filters out non-matching :code:`Expressions` based on URL parameters. Makes a request to the :code:`/expressions/search` endpoint with invalid filters (not matching any :code:`Expression`), and expects an empty array as a response.
+* **Description:** Tests that the expression search endpoint correctly filters out non-matching :code:`Expressions` based on url parameters. Makes a request to the :code:`/expressions/search` endpoint with invalid filters (not matching any :code:`Expression`), and expects an empty array as a response.
 * **Rationale:** Asserts that the endpoint correctly filters out non-matching entities, that the endpoint does not return an arbitrary list of :code:`Expressions` that differ from filters.
 
 * **Request:**

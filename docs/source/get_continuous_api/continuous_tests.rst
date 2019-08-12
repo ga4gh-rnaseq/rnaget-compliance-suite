@@ -402,7 +402,7 @@ Search Continuous With Single Filter, 2
 Continuous Search Filters Non-Matching Resources
 #################################################
 * **Route:** :code:`/continuous/search`
-* **Description:** Tests that the continuous search endpoint correctly filters out non-matching :code:`Continuous` based on URL parameters. Makes a request to the :code:`/continuous/search` endpoint with invalid filters (not matching any :code:`Continuous`), and expects an empty array as a response.
+* **Description:** Tests that the continuous search endpoint correctly filters out non-matching :code:`Continuous` based on url parameters. Makes a request to the :code:`/continuous/search` endpoint with invalid filters (not matching any :code:`Continuous`), and expects an empty array as a response.
 * **Rationale:** Asserts that the endpoint correctly filters out non-matching entities, that the endpoint does not return an arbitrary list of :code:`Continuous` that differ from filters.
 
 * **Request:**

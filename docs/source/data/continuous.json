@@ -2,7 +2,7 @@
   "id": "5e22e009f41fc53cbea094a41de8798f",
   "version": "1.0",
   "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
-  "URL": "https://url/to/continuous/file",
+  "url": "https://url/to/continuous/file",
   "tags": [
     "RNAgetCompliance"
   ],

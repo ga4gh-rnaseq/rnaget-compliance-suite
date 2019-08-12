@@ -282,7 +282,7 @@ Search Projects With Single Filter, 2
 Project Search Filters Non-Matching Resources
 ##############################################
 * **Route:** :code:`/projects/search`
-* **Description:** Tests that the project search endpoint correctly filters out non-matching :code:`Projects` based on URL parameters. Makes a request to the :code:`/projects/search` endpoint with invalid filters (not matching any :code:`Project`), and expects an empty array as a response.
+* **Description:** Tests that the project search endpoint correctly filters out non-matching :code:`Projects` based on url parameters. Makes a request to the :code:`/projects/search` endpoint with invalid filters (not matching any :code:`Project`), and expects an empty array as a response.
 * **Rationale:** Asserts that the endpoint correctly filters out non-matching entities, that the endpoint does not return an arbitrary list of :code:`Projects` that differ from filters.
 
 * **Request:**

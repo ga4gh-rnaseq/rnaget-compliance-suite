@@ -45,7 +45,7 @@ taken into consideration when modifying it for a different server:
 2. Each server definition requires the following parameters:
     
     * server_name: a string uniquely identifying the server 
-    * base_url: the base URL at which the RNAget API can be reached
+    * base_url: the base url at which the RNAget API can be reached
 
 3. If a server requires client authentication, then a server definition can include the OAuth 2.0 bearer access token under the "token" property:
 

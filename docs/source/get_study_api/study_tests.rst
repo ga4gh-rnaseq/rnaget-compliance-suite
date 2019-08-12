@@ -288,7 +288,7 @@ Search Studies With Single Filter, 2
 Study Search Filters Non-Matching Resources
 ##############################################
 * **Route:** :code:`/studies/search`
-* **Description:** Tests that the study search endpoint correctly filters out non-matching :code:`Studies` based on URL parameters. Makes a request to the :code:`/studies/search` endpoint with invalid filters (not matching any :code:`Study`), and expects an empty array as a response.
+* **Description:** Tests that the study search endpoint correctly filters out non-matching :code:`Studies` based on url parameters. Makes a request to the :code:`/studies/search` endpoint with invalid filters (not matching any :code:`Study`), and expects an empty array as a response.
 * **Rationale:** Asserts that the endpoint correctly filters out non-matching entities, that the endpoint does not return an arbitrary list of :code:`Studies` that differ from filters.
 
 * **Request:**
