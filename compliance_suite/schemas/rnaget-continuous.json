@@ -34,7 +34,7 @@
         },
       
         "required": [
-          "id", "URL"
+          "id", "url"
         ],
         
         "additionalProperties": true

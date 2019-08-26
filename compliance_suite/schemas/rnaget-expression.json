@@ -30,16 +30,16 @@
           "URL": {
             "type": "string"
           },
+          "url": {
+            "type": "string"
+          },
           "units": {
             "type": "string"
           }
-          
         },
-      
         "required": [
-          "id", "URL", "units" 
+          "id", "units", "url"
         ],
-        
         "additionalProperties": true
       }
     }
