@@ -73,22 +73,22 @@ servers:
         continuous: false
 
     projects:
-      - id: 68d99e60-7725-11e9-9c42-1402ec895c5c
+      - id: 9c0eba51095d3939437e220db196e27b
         filters:
-          tags: pcawg
-          version: 0.9.2
+          tags: RNAgetCompliance
+          version: 1.0
 
     studies:
-      - id: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c
+      - id: f3ba0b59bed0fa2f1030e7cb508324d1
         filters:
-          tags: pcawg
-          version: 0.9.2
-          projectID: 68d99e60-7725-11e9-9c42-1402ec895c5c
+          tags: RNAgetCompliance
+          version: 1.0
+          projectID: 9c0eba51095d3939437e220db196e27b
 
     expressions:
-      - id: a3f78632-7dbb-11e9-9a21-1402ec895c5c
+      - id: ac3e9279efd02f1c98de4ed3d335b98e
         filters:
           format: h5
-          tags: pcawg
-          version: 0.9.2
+          tags: RNAgetCompliance
+          version: 1.0
 
