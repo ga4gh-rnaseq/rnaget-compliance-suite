@@ -132,7 +132,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0}</p>
                     
-                    <p><strong>Response Body:</strong> [{"tags": ["PCAWG", "cancer"], "version": "1.0", "name": "PCAWG", "id": "43378a5d48364f9d8cf3c3d5104df560", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423"}, {"tags": ["RNAgetCompliance"], "version": "1.0", "name": "RNAgetTestProject0", "id": "9c0eba51095d3939437e220db196e27b", "description": "Test project object used by RNAget compliance testing suite."}]
+                    <p><strong>Response Body:</strong> [{"tags": ["PCAWG", "cancer"], "id": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "version": "1.0"}, {"tags": ["RNAgetCompliance"], "id": "9c0eba51095d3939437e220db196e27b", "name": "RNAgetTestProject0", "description": "Test project object used by RNAget compliance testing suite.", "version": "1.0"}]
 </p>
                     
                   </div>
@@ -279,7 +279,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "version": "1.0", "tags": ["PCAWG", "cancer"], "description": "PCAWG study"}, {"parentProjectID": "9c0eba51095d3939437e220db196e27b", "name": "RNAgetTestStudy0", "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0", "tags": ["RNAgetCompliance"], "description": "Test study object used by RNAget compliance testing suite."}]
+                    <p><strong>Response Body:</strong> [{"parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "description": "PCAWG study", "tags": ["PCAWG", "cancer"], "version": "1.0", "name": "PCAWG", "id": "6cccbbd76b9c4837bd7342dd616d0fec"}, {"parentProjectID": "9c0eba51095d3939437e220db196e27b", "description": "Test study object used by RNAget compliance testing suite.", "tags": ["RNAgetCompliance"], "version": "1.0", "name": "RNAgetTestStudy0", "id": "f3ba0b59bed0fa2f1030e7cb508324d1"}]
 </p>
                     
                   </div>
@@ -323,7 +323,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0}</p>
                     
-                    <p><strong>Response Body:</strong> [{"parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "version": "1.0", "tags": ["PCAWG", "cancer"], "description": "PCAWG study"}, {"parentProjectID": "9c0eba51095d3939437e220db196e27b", "name": "RNAgetTestStudy0", "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0", "tags": ["RNAgetCompliance"], "description": "Test study object used by RNAget compliance testing suite."}]
+                    <p><strong>Response Body:</strong> [{"parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "description": "PCAWG study", "tags": ["PCAWG", "cancer"], "version": "1.0", "name": "PCAWG", "id": "6cccbbd76b9c4837bd7342dd616d0fec"}, {"parentProjectID": "9c0eba51095d3939437e220db196e27b", "description": "Test study object used by RNAget compliance testing suite.", "tags": ["RNAgetCompliance"], "version": "1.0", "name": "RNAgetTestStudy0", "id": "f3ba0b59bed0fa2f1030e7cb508324d1"}]
 </p>
                     
                   </div>
@@ -367,7 +367,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"fieldType": "string", "filter": "version", "description": "version to search for", "values": ["1.0"]}]
+                    <p><strong>Response Body:</strong> [{"filter": "version", "values": ["1.0"], "description": "version to search for", "fieldType": "string"}]
 </p>
                     
                   </div>
@@ -624,7 +624,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"fieldType": "string", "filter": "version", "description": "version to search for", "values": ["1.0"]}, {"fieldType": "string", "filter": "studyID", "description": "parent studyID", "values": ["6cccbbd76b9c4837bd7342dd616d0fec", "f3ba0b59bed0fa2f1030e7cb508324d1"]}]
+                    <p><strong>Response Body:</strong> [{"filter": "version", "values": ["1.0"], "description": "version to search for", "fieldType": "string"}, {"filter": "studyID", "values": ["6cccbbd76b9c4837bd7342dd616d0fec", "f3ba0b59bed0fa2f1030e7cb508324d1"], "description": "parent studyID", "fieldType": "string"}]
 </p>
                     
                   </div>
@@ -768,7 +768,7 @@
                     
                     <p><strong>Params:</strong> {'version': 1.0, 'format': 'loom'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "fileType": "loom", "tags": ["cancer"], "version": "1.0", "id": "fa057c6d18c44960a1b8b49d065b3889", "url": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom"}, {"URL": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom", "tags": ["RNAgetCompliance"], "version": "1.0", "id": "5e22e009f41fc53cbea094a41de8798f", "url": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom"}]
+                    <p><strong>Response Body:</strong> [{"studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "id": "fa057c6d18c44960a1b8b49d065b3889", "version": "1.0", "url": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "tags": ["cancer"], "URL": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom", "fileType": "loom"}, {"studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "id": "5e22e009f41fc53cbea094a41de8798f", "version": "1.0", "url": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom", "tags": ["RNAgetCompliance"], "URL": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom", "fileType": "loom"}]
 </p>
                     
                   </div>
@@ -878,7 +878,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"fieldType": "string", "filter": "version", "description": "version to search for", "values": ["1.0"]}]
+                    <p><strong>Response Body:</strong> [{"filter": "version", "values": ["1.0"], "description": "version to search for", "fieldType": "string"}]
 </p>
                     
                   </div>

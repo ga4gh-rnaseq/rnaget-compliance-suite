@@ -26,10 +26,10 @@
   <h2>Server: CanDIG</h2>
   <h4 class="tab1">Base URL: https://candig.bcgsc.ca/rnaget/</h4>
   <p class="tab1">Total tests: 26</p>
-  <p class="tab1">Total tests passed: 8</p>
-  <p class="tab1">Total tests failed: 8</p>
-  <p class="tab1">Total tests skipped: 10</p>
-  <p class="tab1">Total warnings generated: 18</p>
+  <p class="tab1">Total tests passed: 16</p>
+  <p class="tab1">Total tests failed: 2</p>
+  <p class="tab1">Total tests skipped: 8</p>
+  <p class="tab1">Total warnings generated: 10</p>
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
@@ -47,61 +47,73 @@
 
             
             <h4 class="tab2">Project #1</h4>
-            <h4 class="tab3">project id: 68d99e60-7725-11e9-9c42-1402ec895c5c</h4>
+            <h4 class="tab3">project id: 9c0eba51095d3939437e220db196e27b</h4>
 
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Project Get: FAILED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_get" aria-expanded="false" aria-controls="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_get">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Get: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_get" aria-expanded="false" aria-controls="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_get">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_get">
+                <div class="collapse" id="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_get">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /projects/:id endpoint using project id in config file. Checks content type and status code (200). Validates response body matches project schema in the specification.</p>
-                    <p><strong>Summary:</strong> Project endpoint not implemented by the server</p>
+                    <p><strong>Summary:</strong> Project endpoint implemented by the server</p>
                     
-                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/projects/68d99e60-7725-11e9-9c42-1402ec895c5c</p>
+                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/projects/9c0eba51095d3939437e220db196e27b</p>
                     
                     <p><strong>Params:</strong> {}</p>
                     
                     <p><strong>Response Body:</strong> {
-  "code": 404,
-  "message": "Project not found: 68d99e60-7725-11e9-9c42-1402ec895c5c"
+  "created": "2019-08-22T16:40:52.366284Z",
+  "description": "Test project object used by RNAget compliance testing suite.",
+  "id": "9c0eba51095d3939437e220db196e27b",
+  "name": "RNAgetTestProject0",
+  "tags": [
+    "RNAgetCompliance"
+  ],
+  "version": "1.0"
 }
 </p>
-                    
-                    <p><strong>Exception:</strong> StatusCodeException</p>
-                    
-                    <p><strong>Exception Message:</strong> Response status code: 404 not in expected status code(s): [200]</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Project Get Not Found: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_get_not_found" aria-expanded="false" aria-controls="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_get_not_found">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Get Not Found: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_get_not_found" aria-expanded="false" aria-controls="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_get_not_found">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_get_not_found">
+                <div class="collapse" id="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_get_not_found">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /projects/:id endpoint using a project id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification.</p>
-                    <p><strong>Summary:</strong> Project not found test skipped</p>
+                    <p><strong>Summary:</strong> Project not found endpoint correctly implemented</p>
+                    
+                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/projects/999999999</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {
+  "code": 404,
+  "message": "id parameters must be correctly formatted UUID strings"
+}
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search: PASSED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search" aria-expanded="false" aria-controls="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search" aria-expanded="false" aria-controls="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search">
+                <div class="collapse" id="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /projects/search endpoint without any parameter filters. Checks content type and status code (200). Validates response body matches project array schema in the specification.</p>
                     <p><strong>Summary:</strong> Projects can be retrieved through the search endpoint</p>
@@ -128,79 +140,111 @@
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Project Search Url Params All: FAILED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_url_params_all" aria-expanded="false" aria-controls="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_url_params_all">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Url Params All: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_url_params_all" aria-expanded="false" aria-controls="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_url_params_all">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_url_params_all">
+                <div class="collapse" id="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_url_params_all">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /projects/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches project array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Projects cannot be retrieved using URL parameters through the search endpoint</p>
+                    <p><strong>Summary:</strong> Projects can be retrieved using URL parameters through the search endpoint</p>
                     
                     <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/projects/search</p>
                     
-                    <p><strong>Params:</strong> {'tags': 'pcawg', 'version': '0.9.2'}</p>
+                    <p><strong>Params:</strong> {'tags': 'RNAgetCompliance', 'version': 1.0}</p>
                     
-                    <p><strong>Response Body:</strong> []
+                    <p><strong>Response Body:</strong> [
+  {
+    "created": "2019-08-22T16:40:52.366284Z",
+    "description": "Test project object used by RNAget compliance testing suite.",
+    "id": "9c0eba51095d3939437e220db196e27b",
+    "name": "RNAgetTestProject0",
+    "tags": [
+      "RNAgetCompliance"
+    ],
+    "version": "1.0"
+  }
+]
 </p>
-                    
-                    <p><strong>Exception:</strong> SchemaValidationException</p>
-                    
-                    <p><strong>Exception Message:</strong> [] is too short</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Project Search Url Params Cases: FAILED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_url_params_cases" aria-expanded="false" aria-controls="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_url_params_cases">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Url Params Cases: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_url_params_cases" aria-expanded="false" aria-controls="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_url_params_cases">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_url_params_cases">
+                <div class="collapse" id="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_url_params_cases">
                   <div class="well">
                     <p><strong>Description:</strong> Performs multiple requests of the /projects/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches project array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Projects cannot be retrieved using URL parameters through the search endpoint for all cases</p>
+                    <p><strong>Summary:</strong> Projects can be retrieved using URL parameters through the search endpoint for all cases</p>
                     
                     <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/projects/search</p>
                     
-                    <p><strong>Params:</strong> {'version': '0.9.2'}</p>
+                    <p><strong>Params:</strong> {'tags': 'RNAgetCompliance'}</p>
                     
-                    <p><strong>Response Body:</strong> []
+                    <p><strong>Response Body:</strong> [
+  {
+    "created": "2019-08-22T16:40:52.366284Z",
+    "description": "Test project object used by RNAget compliance testing suite.",
+    "id": "9c0eba51095d3939437e220db196e27b",
+    "name": "RNAgetTestProject0",
+    "tags": [
+      "RNAgetCompliance"
+    ],
+    "version": "1.0"
+  }
+]
 </p>
                     
-                    <p><strong>Exception:</strong> SchemaValidationException</p>
+                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/projects/search</p>
                     
-                    <p><strong>Exception Message:</strong> [] is too short</p>
+                    <p><strong>Params:</strong> {'version': 1.0}</p>
+                    
+                    <p><strong>Response Body:</strong> [
+  {
+    "created": "2019-08-22T16:40:52.366284Z",
+    "description": "Test project object used by RNAget compliance testing suite.",
+    "id": "9c0eba51095d3939437e220db196e27b",
+    "name": "RNAgetTestProject0",
+    "tags": [
+      "RNAgetCompliance"
+    ],
+    "version": "1.0"
+  }
+]
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Filters Out: PASSED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_filters_out" aria-expanded="false" aria-controls="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_filters_out">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_filters_out" aria-expanded="false" aria-controls="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_filters_out">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_filters_out">
+                <div class="collapse" id="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_filters_out">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /projects/search endpoint using parameter filters that do not apply to any project. Checks content type and status code (200). Validates response body is an empty array.</p>
                     <p><strong>Summary:</strong> Project search endpoint successfully filters out non-matching objects</p>
                     
                     <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/projects/search</p>
                     
-                    <p><strong>Params:</strong> {'version': '999999999'}</p>
+                    <p><strong>Params:</strong> {'tags': '999999999'}</p>
                     
                     <p><strong>Response Body:</strong> []
 </p>
                     
                     <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/projects/search</p>
                     
-                    <p><strong>Params:</strong> {'tags': '999999999'}</p>
+                    <p><strong>Params:</strong> {'version': '999999999'}</p>
                     
                     <p><strong>Response Body:</strong> []
 </p>
@@ -210,12 +254,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Project Search Filters: PASSED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_filters" aria-expanded="false" aria-controls="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_filters">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_filters" aria-expanded="false" aria-controls="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_filters">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-projects-68d99e60-7725-11e9-9c42-1402ec895c5c-project_search_filters">
+                <div class="collapse" id="collapse-CanDIG-projects-9c0eba51095d3939437e220db196e27b-project_search_filters">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /projects/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
                     <p><strong>Summary:</strong> Project filters can be retrieved through the search endpoint</p>
@@ -253,61 +297,74 @@
 
             
             <h4 class="tab2">Study #1</h4>
-            <h4 class="tab3">study id: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c</h4>
+            <h4 class="tab3">study id: f3ba0b59bed0fa2f1030e7cb508324d1</h4>
 
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Study Get: FAILED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_get" aria-expanded="false" aria-controls="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_get">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Get: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_get" aria-expanded="false" aria-controls="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_get">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_get">
+                <div class="collapse" id="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_get">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /studies/:id endpoint using study id in config file. Checks content type and status code (200). Validates response body matches study schema in the specification.</p>
-                    <p><strong>Summary:</strong> Study endpoint not implemented by the server</p>
+                    <p><strong>Summary:</strong> Study endpoint implemented by the server</p>
                     
-                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/6b89d5de-7dbb-11e9-9a21-1402ec895c5c</p>
+                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/f3ba0b59bed0fa2f1030e7cb508324d1</p>
                     
                     <p><strong>Params:</strong> {}</p>
                     
                     <p><strong>Response Body:</strong> {
-  "code": 404,
-  "message": "Study not found: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c"
+  "created": "2019-08-22T16:44:17.958554Z",
+  "description": "Test study object used by RNAget compliance testing suite.",
+  "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
+  "name": "RNAgetTestStudy0",
+  "parentProjectID": "9c0eba51095d3939437e220db196e27b",
+  "tags": [
+    "RNAgetCompliance"
+  ],
+  "version": "1.0"
 }
 </p>
-                    
-                    <p><strong>Exception:</strong> StatusCodeException</p>
-                    
-                    <p><strong>Exception Message:</strong> Response status code: 404 not in expected status code(s): [200]</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Study Get Not Found: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_get_not_found" aria-expanded="false" aria-controls="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_get_not_found">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Get Not Found: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_get_not_found" aria-expanded="false" aria-controls="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_get_not_found">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_get_not_found">
+                <div class="collapse" id="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_get_not_found">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /studies/:id endpoint using a study id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification.</p>
-                    <p><strong>Summary:</strong> Study not found test skipped</p>
+                    <p><strong>Summary:</strong> Study not found endpoint correctly implemented</p>
+                    
+                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/999999999</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {
+  "code": 404,
+  "message": "studyID parameters must be correctly formatted UUID strings"
+}
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search: PASSED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search" aria-expanded="false" aria-controls="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search" aria-expanded="false" aria-controls="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search">
+                <div class="collapse" id="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /studies/search endpoint without any parameter filters. Checks content type and status code (200). Validates response body matches study array schema in the specification.</p>
                     <p><strong>Summary:</strong> Studies can be retrieved through the search endpoint</p>
@@ -335,68 +392,129 @@
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Study Search Url Params All: FAILED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_url_params_all" aria-expanded="false" aria-controls="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_url_params_all">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search Url Params All: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_url_params_all" aria-expanded="false" aria-controls="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_url_params_all">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_url_params_all">
+                <div class="collapse" id="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_url_params_all">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /studies/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches study array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Studies cannot be retrieved using URL parameters through the search endpoint</p>
+                    <p><strong>Summary:</strong> Studies can be retrieved using URL parameters through the search endpoint</p>
                     
                     <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/search</p>
                     
-                    <p><strong>Params:</strong> {'tags': 'pcawg', 'version': '0.9.2', 'projectID': '68d99e60-7725-11e9-9c42-1402ec895c5c'}</p>
+                    <p><strong>Params:</strong> {'tags': 'RNAgetCompliance', 'version': 1.0, 'projectID': '9c0eba51095d3939437e220db196e27b'}</p>
                     
-                    <p><strong>Response Body:</strong> []
+                    <p><strong>Response Body:</strong> [
+  {
+    "created": "2019-08-22T16:44:17.958554Z",
+    "description": "Test study object used by RNAget compliance testing suite.",
+    "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
+    "name": "RNAgetTestStudy0",
+    "parentProjectID": "9c0eba51095d3939437e220db196e27b",
+    "tags": [
+      "RNAgetCompliance"
+    ],
+    "version": "1.0"
+  }
+]
 </p>
-                    
-                    <p><strong>Exception:</strong> SchemaValidationException</p>
-                    
-                    <p><strong>Exception Message:</strong> [] is too short</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Study Search Url Params Cases: FAILED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_url_params_cases" aria-expanded="false" aria-controls="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_url_params_cases">
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search Url Params Cases: PASSED</p>
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_url_params_cases" aria-expanded="false" aria-controls="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_url_params_cases">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_url_params_cases">
+                <div class="collapse" id="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_url_params_cases">
                   <div class="well">
                     <p><strong>Description:</strong> Performs multiple requests of the /studies/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches study array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Studies cannot be retrieved using URL parameters through the search endpoint for all cases</p>
+                    <p><strong>Summary:</strong> Studies can be retrieved using URL parameters through the search endpoint for all cases</p>
                     
                     <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/search</p>
                     
-                    <p><strong>Params:</strong> {'version': '0.9.2'}</p>
+                    <p><strong>Params:</strong> {'tags': 'RNAgetCompliance'}</p>
                     
-                    <p><strong>Response Body:</strong> []
+                    <p><strong>Response Body:</strong> [
+  {
+    "created": "2019-08-22T16:44:17.958554Z",
+    "description": "Test study object used by RNAget compliance testing suite.",
+    "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
+    "name": "RNAgetTestStudy0",
+    "parentProjectID": "9c0eba51095d3939437e220db196e27b",
+    "tags": [
+      "RNAgetCompliance"
+    ],
+    "version": "1.0"
+  }
+]
 </p>
                     
-                    <p><strong>Exception:</strong> SchemaValidationException</p>
+                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/search</p>
                     
-                    <p><strong>Exception Message:</strong> [] is too short</p>
+                    <p><strong>Params:</strong> {'version': 1.0}</p>
+                    
+                    <p><strong>Response Body:</strong> [
+  {
+    "created": "2019-08-22T16:44:17.958554Z",
+    "description": "Test study object used by RNAget compliance testing suite.",
+    "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
+    "name": "RNAgetTestStudy0",
+    "parentProjectID": "9c0eba51095d3939437e220db196e27b",
+    "tags": [
+      "RNAgetCompliance"
+    ],
+    "version": "1.0"
+  }
+]
+</p>
+                    
+                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/search</p>
+                    
+                    <p><strong>Params:</strong> {'projectID': '9c0eba51095d3939437e220db196e27b'}</p>
+                    
+                    <p><strong>Response Body:</strong> [
+  {
+    "created": "2019-08-22T16:44:17.958554Z",
+    "description": "Test study object used by RNAget compliance testing suite.",
+    "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
+    "name": "RNAgetTestStudy0",
+    "parentProjectID": "9c0eba51095d3939437e220db196e27b",
+    "tags": [
+      "RNAgetCompliance"
+    ],
+    "version": "1.0"
+  }
+]
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search Filters Out: PASSED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_filters_out" aria-expanded="false" aria-controls="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_filters_out">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_filters_out" aria-expanded="false" aria-controls="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_filters_out">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_filters_out">
+                <div class="collapse" id="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_filters_out">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /studies/search endpoint using parameter filters that do not apply to any study. Checks content type and status code (200). Validates response body is an empty array.</p>
                     <p><strong>Summary:</strong> Study search endpoint successfully filters out non-matching objects</p>
+                    
+                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/search</p>
+                    
+                    <p><strong>Params:</strong> {'tags': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
                     
                     <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/search</p>
                     
@@ -412,24 +530,17 @@
                     <p><strong>Response Body:</strong> []
 </p>
                     
-                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/studies/search</p>
-                    
-                    <p><strong>Params:</strong> {'tags': '999999999'}</p>
-                    
-                    <p><strong>Response Body:</strong> []
-</p>
-                    
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Study Search Filters: PASSED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_filters" aria-expanded="false" aria-controls="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_filters">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_filters" aria-expanded="false" aria-controls="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_filters">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-studies-6b89d5de-7dbb-11e9-9a21-1402ec895c5c-study_search_filters">
+                <div class="collapse" id="collapse-CanDIG-studies-f3ba0b59bed0fa2f1030e7cb508324d1-study_search_filters">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /studies/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
                     <p><strong>Summary:</strong> Study filters can be retrieved through the search endpoint</p>
@@ -472,46 +583,55 @@
 
             
             <h4 class="tab2">Expression #1</h4>
-            <h4 class="tab3">expression id: a3f78632-7dbb-11e9-9a21-1402ec895c5c</h4>
+            <h4 class="tab3">expression id: ac3e9279efd02f1c98de4ed3d335b98e</h4>
 
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Expression Get: FAILED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_get" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_get">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_get" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_get">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_get">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_get">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/:id endpoint using expression id in config file. Checks content type and status code (200). Validates response body matches project schema in the specification.</p>
                     <p><strong>Summary:</strong> Expression endpoint not implemented by the server</p>
                     
-                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/expressions/a3f78632-7dbb-11e9-9a21-1402ec895c5c</p>
+                    <p><strong>Request:</strong> https://candig.bcgsc.ca/rnaget/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
                     
                     <p><strong>Params:</strong> {}</p>
                     
                     <p><strong>Response Body:</strong> {
-  "code": 404,
-  "message": "Expression matrix not found: a3f78632-7dbb-11e9-9a21-1402ec895c5c"
+  "created": "2019-08-22T16:49:45.174886Z",
+  "fileType": "loom",
+  "id": "ac3e9279efd02f1c98de4ed3d335b98e",
+  "md5": "71aa84a6a188e195a0ba6d1c4a920dec",
+  "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
+  "tags": [
+    "RNAgetCompliance"
+  ],
+  "units": "TPM",
+  "url": "https://candig.bcgsc.ca/rnaget/expressions/download/expression.loom",
+  "version": "1.0"
 }
 </p>
                     
-                    <p><strong>Exception:</strong> StatusCodeException</p>
+                    <p><strong>Exception:</strong> SchemaValidationException</p>
                     
-                    <p><strong>Exception Message:</strong> Response status code: 404 not in expected status code(s): [200]</p>
+                    <p><strong>Exception Message:</strong> 'URL' is a required property</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Get Not Found: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_get_not_found" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_get_not_found">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_get_not_found" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_get_not_found">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_get_not_found">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_get_not_found">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/:id endpoint using an expression id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification</p>
                     <p><strong>Summary:</strong> Expression not found test skipped</p>
@@ -521,12 +641,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Formats: PASSED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_formats" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_formats">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_formats" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_formats">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_formats">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_formats">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/formats endpoint. Checks content type and status code (200). Validates response body is an array of strings.</p>
                     <p><strong>Summary:</strong> Expression formats endpoint implemented</p>
@@ -547,12 +667,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Expression Search: FAILED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint, only specifying the required 'format' parameter. Checks content type and status code (200). Validates response body matches expression array schema in the specification.</p>
                     <p><strong>Summary:</strong> Expressions cannot be retrieved through search endpoint</p>
@@ -587,12 +707,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Url Params All: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_url_params_all" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_url_params_all">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_url_params_all" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_url_params_all">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_url_params_all">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_url_params_all">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches expressions array schema in the specification.</p>
                     <p><strong>Summary:</strong> Expression search with URL parameters test skipped</p>
@@ -602,12 +722,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Url Params Cases: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_url_params_cases" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_url_params_cases">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_url_params_cases" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_url_params_cases">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_url_params_cases">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_url_params_cases">
                   <div class="well">
                     <p><strong>Description:</strong> Performs multiple requests of the /expressions/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches expression array schema in the specification.</p>
                     <p><strong>Summary:</strong> Expressions search with multiple URL parameters cases  test skipped</p>
@@ -617,12 +737,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Filters Out: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_filters_out" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_filters_out">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_filters_out" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_filters_out">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_filters_out">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_filters_out">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint using parameter filters that do not apply to any expression. Checks content type and status code (200). Validates response body is an empty array.</p>
                     <p><strong>Summary:</strong> Expression search filters out test skipped</p>
@@ -632,12 +752,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Format Not Specified: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_format_not_specified" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_format_not_specified">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_format_not_specified" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_format_not_specified">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_format_not_specified">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_format_not_specified">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint without specifying the required 'format' parameter. Checks content type and status code (4xx). Validates response body is an error message JSON.</p>
                     <p><strong>Summary:</strong> Expression search format not specified test skipped</p>
@@ -647,12 +767,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Filetypes Match: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_filetypes_match" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_filetypes_match">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_filetypes_match" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_filetypes_match">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_filetypes_match">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_filetypes_match">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint with 'format' parameter specified. Checks content type and status code (200). Validates expression objects in response body contain a fileType that matches the requested format.</p>
                     <p><strong>Summary:</strong> Expression search filetypes match test skipped</p>
@@ -662,12 +782,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search No Filetype Mismatches: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_no_filetype_mismatches" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_no_filetype_mismatches">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_no_filetype_mismatches" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_no_filetype_mismatches">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_no_filetype_mismatches">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_no_filetype_mismatches">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint with 'format' parameter that does not match the format specified in config file. Checks content type and status code (200). Validates expression objects in response body have a fileType matching the requested format.</p>
                     <p><strong>Summary:</strong> Expression search no filetype mismatches test skipped</p>
@@ -677,12 +797,12 @@
               
                 <div class="tr-div tab3">
                   <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Filters: SKIPPED</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_filters" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_filters">
+                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_filters" aria-expanded="false" aria-controls="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_filters">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
                 </div>
                 
-                <div class="collapse" id="collapse-CanDIG-expressions-a3f78632-7dbb-11e9-9a21-1402ec895c5c-expression_search_filters">
+                <div class="collapse" id="collapse-CanDIG-expressions-ac3e9279efd02f1c98de4ed3d335b98e-expression_search_filters">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
                     <p><strong>Summary:</strong> Expression filters search test skipped</p>
@@ -752,51 +872,51 @@
               
                 
                   
-                    <tr class="text-danger">
+                    <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Projects: 68d99e60-7725-11e9-9c42-1402ec895c5c</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
                       <td>Project Get</td>
-                      <td>FAILED</td>
-                    </tr>
-                  
-                    <tr class="text-info">
-                      <td>CanDIG</td>
-                      <td>Projects: 68d99e60-7725-11e9-9c42-1402ec895c5c</td>
-                      <td>Project Get Not Found</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
                     <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Projects: 68d99e60-7725-11e9-9c42-1402ec895c5c</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
+                      <td>Project Get Not Found</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>CanDIG</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
                       <td>Project Search</td>
                       <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-danger">
+                    <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Projects: 68d99e60-7725-11e9-9c42-1402ec895c5c</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
                       <td>Project Search Url Params All</td>
-                      <td>FAILED</td>
-                    </tr>
-                  
-                    <tr class="text-danger">
-                      <td>CanDIG</td>
-                      <td>Projects: 68d99e60-7725-11e9-9c42-1402ec895c5c</td>
-                      <td>Project Search Url Params Cases</td>
-                      <td>FAILED</td>
+                      <td>PASSED</td>
                     </tr>
                   
                     <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Projects: 68d99e60-7725-11e9-9c42-1402ec895c5c</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
+                      <td>Project Search Url Params Cases</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>CanDIG</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
                       <td>Project Search Filters Out</td>
                       <td>PASSED</td>
                     </tr>
                   
                     <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Projects: 68d99e60-7725-11e9-9c42-1402ec895c5c</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
                       <td>Project Search Filters</td>
                       <td>PASSED</td>
                     </tr>
@@ -805,51 +925,51 @@
               
                 
                   
-                    <tr class="text-danger">
+                    <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Studies: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
                       <td>Study Get</td>
-                      <td>FAILED</td>
-                    </tr>
-                  
-                    <tr class="text-info">
-                      <td>CanDIG</td>
-                      <td>Studies: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c</td>
-                      <td>Study Get Not Found</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
                     <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Studies: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
+                      <td>Study Get Not Found</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>CanDIG</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
                       <td>Study Search</td>
                       <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-danger">
+                    <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Studies: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
                       <td>Study Search Url Params All</td>
-                      <td>FAILED</td>
-                    </tr>
-                  
-                    <tr class="text-danger">
-                      <td>CanDIG</td>
-                      <td>Studies: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c</td>
-                      <td>Study Search Url Params Cases</td>
-                      <td>FAILED</td>
+                      <td>PASSED</td>
                     </tr>
                   
                     <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Studies: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
+                      <td>Study Search Url Params Cases</td>
+                      <td>PASSED</td>
+                    </tr>
+                  
+                    <tr class="text-success">
+                      <td>CanDIG</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
                       <td>Study Search Filters Out</td>
                       <td>PASSED</td>
                     </tr>
                   
                     <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Studies: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
                       <td>Study Search Filters</td>
                       <td>PASSED</td>
                     </tr>
@@ -860,77 +980,77 @@
                   
                     <tr class="text-danger">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Get</td>
                       <td>FAILED</td>
                     </tr>
                   
                     <tr class="text-info">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Get Not Found</td>
                       <td>SKIPPED</td>
                     </tr>
                   
                     <tr class="text-success">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Formats</td>
                       <td>PASSED</td>
                     </tr>
                   
                     <tr class="text-danger">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Search</td>
                       <td>FAILED</td>
                     </tr>
                   
                     <tr class="text-info">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Search Url Params All</td>
                       <td>SKIPPED</td>
                     </tr>
                   
                     <tr class="text-info">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Search Url Params Cases</td>
                       <td>SKIPPED</td>
                     </tr>
                   
                     <tr class="text-info">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Search Filters Out</td>
                       <td>SKIPPED</td>
                     </tr>
                   
                     <tr class="text-info">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Search Format Not Specified</td>
                       <td>SKIPPED</td>
                     </tr>
                   
                     <tr class="text-info">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Search Filetypes Match</td>
                       <td>SKIPPED</td>
                     </tr>
                   
                     <tr class="text-info">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Search No Filetype Mismatches</td>
                       <td>SKIPPED</td>
                     </tr>
                   
                     <tr class="text-info">
                       <td>CanDIG</td>
-                      <td>Expressions: a3f78632-7dbb-11e9-9a21-1402ec895c5c</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
                       <td>Expression Search Filters</td>
                       <td>SKIPPED</td>
                     </tr>
