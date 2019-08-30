@@ -26,10 +26,10 @@
   <h2>Server: Centre for Genomic Regulation</h2>
   <h4 class="tab1">Base URL: https://genome.crg.cat/rnaget/</h4>
   <p class="tab1">Total tests: 43</p>
-  <p class="tab1">Total tests passed: 25</p>
-  <p class="tab1">Total tests failed: 3</p>
-  <p class="tab1">Total tests skipped: 15</p>
-  <p class="tab1">Total warnings generated: 18</p>
+  <p class="tab1">Total tests passed: 43</p>
+  <p class="tab1">Total tests failed: 0</p>
+  <p class="tab1">Total tests skipped: 0</p>
+  <p class="tab1">Total warnings generated: 0</p>
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
@@ -110,7 +110,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"description":"The Pancancer Analysis of Whole Genomes (PCAWG) study is an international collaboration to identify common patterns of mutation in more than 2,800 cancer whole genomes from the International Cancer Genome Consortium.","id":"E-MTAB-5200","name":"Pancancer Analysis of Whole Genomes","tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"},{"description":"Single-Cell Analysis of Human Pancreas Reveals Transcriptional Signatures  of Aging and Somatic Mutation Patterns","id":"E-GEOD-81547","name":"Single cell transcriptome analysis of human pancreas","tags":["single-cell","RNA-seq","human","cancer"],"version":"1.0"},{"description":"Test project object used by RNAget compliance testing suite.","id":"9c0eba51095d3939437e220db196e27b","name":"RNAgetTestProject0","tags":["RNAgetCompliance"],"version":"1.0"}]
+                    <p><strong>Response Body:</strong> [{"description":"The Pancancer Analysis of Whole Genomes (PCAWG) study is an international collaboration to identify common patterns of mutation in more than 2,800 cancer whole genomes from the International Cancer Genome Consortium.","id":"E-MTAB-5200","name":"Pancancer Analysis of Whole Genomes","tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"},{"description":"Single-Cell Analysis of Human Pancreas Reveals Transcriptional Signatures  of Aging and Somatic Mutation Patterns","id":"E-GEOD-81547","name":"Single cell transcriptome analysis of human pancreas","tags":["single-cell","RNA-seq","human","cancer"],"version":"1.0"}]
 </p>
                     
                   </div>
@@ -269,7 +269,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"description":"The Pancancer Analysis of Whole Genomes (PCAWG) study is an international collaboration to identify common patterns of mutation in more than 2,800 cancer whole genomes from the International Cancer Genome Consortium.","id":"E-MTAB-5200","name":"Pancancer Analysis of Whole Genomes","tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"},{"description":"Single-Cell Analysis of Human Pancreas Reveals Transcriptional Signatures  of Aging and Somatic Mutation Patterns","id":"E-GEOD-81547","name":"Single cell transcriptome analysis of human pancreas","tags":["single-cell","RNA-seq","human","cancer"],"version":"1.0"},{"description":"Test project object used by RNAget compliance testing suite.","id":"9c0eba51095d3939437e220db196e27b","name":"RNAgetTestProject0","tags":["RNAgetCompliance"],"version":"1.0"}]
+                    <p><strong>Response Body:</strong> [{"description":"The Pancancer Analysis of Whole Genomes (PCAWG) study is an international collaboration to identify common patterns of mutation in more than 2,800 cancer whole genomes from the International Cancer Genome Consortium.","id":"E-MTAB-5200","name":"Pancancer Analysis of Whole Genomes","tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"},{"description":"Single-Cell Analysis of Human Pancreas Reveals Transcriptional Signatures  of Aging and Somatic Mutation Patterns","id":"E-GEOD-81547","name":"Single cell transcriptome analysis of human pancreas","tags":["single-cell","RNA-seq","human","cancer"],"version":"1.0"}]
 </p>
                     
                   </div>
@@ -438,7 +438,7 @@
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> [{"description":"PCAWG study","id":"E-MTAB-5200-ST0","name":"Pancancer Analysis of Whole Genomes","parentProjectID":"E-MTAB-5200","sampleList":[],"tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"},{"description":"Test study object used by RNAget compliance testing suite.","id":"f3ba0b59bed0fa2f1030e7cb508324d1","name":"RNAgetTestStudy0","parentProjectID":"9c0eba51095d3939437e220db196e27b","sampleList":[],"tags":["RNAgetCompliance"],"version":"1.0"}]
+                    <p><strong>Response Body:</strong> [{"description":"PCAWG study","id":"E-MTAB-5200-ST0","name":"Pancancer Analysis of Whole Genomes","parentProjectID":"E-MTAB-5200","sampleList":[],"tags":["bulk","RNA-seq","human","cancer"],"version":"1.0"}]
 </p>
                     
                   </div>
@@ -548,7 +548,7 @@
 
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Expression Get: FAILED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Get: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -557,24 +557,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/:id endpoint using expression id in config file. Checks content type and status code (200). Validates response body matches project schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expression endpoint not implemented by the server</p>
+                    <p><strong>Summary:</strong> Expression endpoint implemented by the server</p>
                     
                     <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/8beada7b93d5e55aa557138b39c6f930</p>
                     
                     <p><strong>Params:</strong> {}</p>
                     
-                    <p><strong>Response Body:</strong> {"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}
+                    <p><strong>Response Body:</strong> {"url":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}
 </p>
-                    
-                    <p><strong>Exception:</strong> SchemaValidationException</p>
-                    
-                    <p><strong>Exception Message:</strong> 'url' is a required property</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Get Not Found: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Get Not Found: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get_not_found" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get_not_found">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -583,7 +579,14 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_get_not_found">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/:id endpoint using an expression id that is known to not exist. Checks content type and status code (4xx). Validates response body matches error schema in the specification</p>
-                    <p><strong>Summary:</strong> Expression not found test skipped</p>
+                    <p><strong>Summary:</strong> Expression not found endpoint correctly implemented</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/999999999</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"message":"Store error: No data found for this key"}
+</p>
                     
                   </div>
                 </div>
@@ -611,7 +614,7 @@
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Expression Search: FAILED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -620,24 +623,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint, only specifying the required 'format' parameter. Checks content type and status code (200). Validates response body matches expression array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expressions cannot be retrieved through search endpoint</p>
+                    <p><strong>Summary:</strong> Expressions can be retrieved through search endpoint</p>
                     
                     <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
                     
                     <p><strong>Params:</strong> {'format': 'tsv'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"},{"URL":"https://genome.crg.cat/rnaget/data/expression.tsv","fileType":"tsv","id":"ac3e9279efd02f1c98de4ed3d335b98e","studyID":"f3ba0b59bed0fa2f1030e7cb508324d1","tags":["RNAgetCompliance"],"units":"TPM","version":"1.0"}]
+                    <p><strong>Response Body:</strong> [{"url":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}]
 </p>
-                    
-                    <p><strong>Exception:</strong> SchemaValidationException</p>
-                    
-                    <p><strong>Exception Message:</strong> 'url' is a required property</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Url Params All: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Url Params All: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_all" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_all">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -646,13 +645,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_all">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches expressions array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expression search with URL parameters test skipped</p>
+                    <p><strong>Summary:</strong> Expressions can be retrieved using URL parameters through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'tags': 'cancer', 'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"url":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}]
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Url Params Cases: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Url Params Cases: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_cases" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_cases">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -661,13 +667,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_url_params_cases">
                   <div class="well">
                     <p><strong>Description:</strong> Performs multiple requests of the /expressions/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches expression array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expressions search with multiple URL parameters cases  test skipped</p>
+                    <p><strong>Summary:</strong> Expressions can be retrieved using URL parameters through the search endpoint for all cases</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'tags': 'cancer', 'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"url":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}]
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Filters Out: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Filters Out: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters_out" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters_out">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -676,13 +689,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters_out">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint using parameter filters that do not apply to any expression. Checks content type and status code (200). Validates response body is an empty array.</p>
-                    <p><strong>Summary:</strong> Expression search filters out test skipped</p>
+                    <p><strong>Summary:</strong> Expression search endpoint successfully filters out non-matching objects</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'tags': '999999999', 'format': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Format Not Specified: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Format Not Specified: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_format_not_specified" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_format_not_specified">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -691,13 +711,19 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_format_not_specified">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint without specifying the required 'format' parameter. Checks content type and status code (4xx). Validates response body is an error message JSON.</p>
-                    <p><strong>Summary:</strong> Expression search format not specified test skipped</p>
+                    <p><strong>Summary:</strong> Expression search endpoint appropriately raises error when format not specified</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"code":602,"message":"format in query is required"}</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Filetypes Match: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Filetypes Match: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filetypes_match" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filetypes_match">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -706,13 +732,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filetypes_match">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint with 'format' parameter specified. Checks content type and status code (200). Validates expression objects in response body contain a fileType that matches the requested format.</p>
-                    <p><strong>Summary:</strong> Expression search filetypes match test skipped</p>
+                    <p><strong>Summary:</strong> Expression search returns expression objects with fileType matching specified format</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"url":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.tpms.tsv","fileType":"tsv","id":"8beada7b93d5e55aa557138b39c6f930","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"],"units":"TPM"}]
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search No Filetype Mismatches: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search No Filetype Mismatches: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_no_filetype_mismatches" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_no_filetype_mismatches">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -721,13 +754,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_no_filetype_mismatches">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search endpoint with 'format' parameter that does not match the format specified in config file. Checks content type and status code (200). Validates expression objects in response body have a fileType matching the requested format.</p>
-                    <p><strong>Summary:</strong> Expression search no filetype mismatches test skipped</p>
+                    <p><strong>Summary:</strong> Expression search returns expression objects with fileType matching specified format when requested format is modified</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': 'loom'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Expression Search Filters: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Expression Search Filters: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -736,7 +776,14 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-8beada7b93d5e55aa557138b39c6f930-expression_search_filters">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /expressions/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Expression filters search test skipped</p>
+                    <p><strong>Summary:</strong> Expression filters can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/expressions/search/filters</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The name of the project","fieldType":"string","filter":"name","values":[]}]
+</p>
                     
                   </div>
                 </div>
@@ -820,7 +867,7 @@
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-danger'><i class="fa fa-times-circle"></i> Continuous Search: FAILED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -829,24 +876,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint, only specifying the required 'format' parameter. Checks content type and status code (200). Validates response body matches continuous array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Continuous objects cannot be retrieved through search endpoint</p>
+                    <p><strong>Summary:</strong> Continuous objects can be retrieved through search endpoint</p>
                     
                     <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
                     
                     <p><strong>Params:</strong> {'format': 'tsv'}</p>
                     
-                    <p><strong>Response Body:</strong> [{"URL":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.signal.tsv","fileType":"tsv","id":"482580efab4afe180dd0f3caa7b3394c","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"]},{"URL":"https://genome.crg.cat/rnaget/data/signal.tsv","fileType":"tsv","id":"5e22e009f41fc53cbea094a41de8798f","studyID":"f3ba0b59bed0fa2f1030e7cb508324d1","tags":["RNAgetCompliance"],"version":"1.0"}]
+                    <p><strong>Response Body:</strong> [{"url":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.signal.tsv","fileType":"tsv","id":"482580efab4afe180dd0f3caa7b3394c","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"]}]
 </p>
-                    
-                    <p><strong>Exception:</strong> SchemaValidationException</p>
-                    
-                    <p><strong>Exception Message:</strong> 'url' is a required property</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Url Params All: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Url Params All: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_all" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_all">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -855,13 +898,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_all">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint using all parameter filters in config file. Checks content type and status code (200). Validates response body matches continuous object array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Continuous search with URL parameters test skipped</p>
+                    <p><strong>Summary:</strong> Continuous objects can be retrieved using URL parameters through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'studyID': 'E-MTAB-5200-ST0', 'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"url":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.signal.tsv","fileType":"tsv","id":"482580efab4afe180dd0f3caa7b3394c","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"]}]
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Url Params Cases: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Url Params Cases: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_cases" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_cases">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -870,13 +920,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_url_params_cases">
                   <div class="well">
                     <p><strong>Description:</strong> Performs multiple requests of the /continuous/search endpoint, each time using a different parameter filter in config file. Checks content type and status code (200). Validates response body matches continuous array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Continuous search with multiple URL parameters cases  test skipped</p>
+                    <p><strong>Summary:</strong> Continuous objects can be retrieved using URL parameters through the search endpoint for all cases</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'studyID': 'E-MTAB-5200-ST0', 'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"url":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.signal.tsv","fileType":"tsv","id":"482580efab4afe180dd0f3caa7b3394c","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"]}]
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Filters Out: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Filters Out: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters_out" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters_out">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -885,13 +942,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters_out">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint using parameter filters that do not apply to any continuous object. Checks content type and status code (200). Validates response body is an empty array.</p>
-                    <p><strong>Summary:</strong> Continuous search filters out test skipped</p>
+                    <p><strong>Summary:</strong> Continuous search endpoint successfully filters out non-matching objects</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'studyID': '999999999', 'format': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Format Not Specified: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Format Not Specified: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_format_not_specified" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_format_not_specified">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -900,13 +964,19 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_format_not_specified">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint without specifying the required 'format' parameter. Checks content type and status code (4xx). Validates response body is an error message JSON.</p>
-                    <p><strong>Summary:</strong> Continuous search format not specified test skipped</p>
+                    <p><strong>Summary:</strong> Continuous search endpoint appropriately raises error when format not specified</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> {"code":602,"message":"format in query is required"}</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Formats Match: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Formats Match: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_formats_match" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_formats_match">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -915,13 +985,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_formats_match">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint with 'format' parameter specified. Checks content type and status code (200). Validates continuous objects in response body contain a format that matches the format in the request.</p>
-                    <p><strong>Summary:</strong> Continuous search formats match test skipped</p>
+                    <p><strong>Summary:</strong> Continuous search returns objects with format matching request</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': 'tsv'}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"url":"https://genome.crg.cat/rnaget/data/E-MTAB-5200.signal.tsv","fileType":"tsv","id":"482580efab4afe180dd0f3caa7b3394c","studyID":"E-MTAB-5200-ST0","tags":["bulk","cancer","human","RNA-seq"]}]
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search No Format Mismatches: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search No Format Mismatches: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_no_format_mismatches" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_no_format_mismatches">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -930,13 +1007,20 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_no_format_mismatches">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search endpoint with 'format' parameter that does not match the format specified in config file. Checks content type and status code (200). Validates continuous objects in response body have a fileType matching the request.</p>
-                    <p><strong>Summary:</strong> Continuous search no format mismatches test skipped</p>
+                    <p><strong>Summary:</strong> Continuous search returns objects with fileType matching requested format when modified</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search</p>
+                    
+                    <p><strong>Params:</strong> {'format': '999999999'}</p>
+                    
+                    <p><strong>Response Body:</strong> []
+</p>
                     
                   </div>
                 </div>
               
                 <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p text-info'><i class="fa fa-ban"></i> Continuous Search Filters: SKIPPED</p>
+                  <p class='tab1 tr-elem tr-p text-success'><i class="fa fa-check-circle"></i> Continuous Search Filters: PASSED</p>
                   <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters">
                       <i class="fa fa-info-circle"></i> Info
                   </button>
@@ -945,7 +1029,14 @@
                 <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-482580efab4afe180dd0f3caa7b3394c-continuous_search_filters">
                   <div class="well">
                     <p><strong>Description:</strong> Requests the /continuous/search/filters endpoint. Checks content type and status code (200). Validates response body matches search filter array schema in the specification.</p>
-                    <p><strong>Summary:</strong> Continous filters search test skipped</p>
+                    <p><strong>Summary:</strong> Continuous filters can be retrieved through the search endpoint</p>
+                    
+                    <p><strong>Request:</strong> https://genome.crg.cat/rnaget/continuous/search/filters</p>
+                    
+                    <p><strong>Params:</strong> {}</p>
+                    
+                    <p><strong>Response Body:</strong> [{"description":"The name of the project","fieldType":"string","filter":"name","values":[]}]
+</p>
                     
                   </div>
                 </div>
@@ -1127,18 +1218,18 @@
               
                 
                   
-                    <tr class="text-danger">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Get</td>
-                      <td>FAILED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Get Not Found</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
                     <tr class="text-success">
@@ -1148,60 +1239,60 @@
                       <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-danger">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Search</td>
-                      <td>FAILED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Search Url Params All</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Search Url Params Cases</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Search Filters Out</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Search Format Not Specified</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Search Filetypes Match</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Search No Filetype Mismatches</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Expressions: 8beada7b93d5e55aa557138b39c6f930</td>
                       <td>Expression Search Filters</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
                 
@@ -1229,60 +1320,60 @@
                       <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-danger">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
                       <td>Continuous Search</td>
-                      <td>FAILED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
                       <td>Continuous Search Url Params All</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
                       <td>Continuous Search Url Params Cases</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
                       <td>Continuous Search Filters Out</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
                       <td>Continuous Search Format Not Specified</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
                       <td>Continuous Search Formats Match</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
                       <td>Continuous Search No Format Mismatches</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 482580efab4afe180dd0f3caa7b3394c</td>
                       <td>Continuous Search Filters</td>
-                      <td>SKIPPED</td>
+                      <td>PASSED</td>
                     </tr>
                   
                 
