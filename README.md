@@ -2,6 +2,8 @@
 [![Travis (.org) branch](https://img.shields.io/travis/ga4gh-rnaseq/rnaget-compliance-suite/master.svg?style=flat-square)](https://travis-ci.org/ga4gh-rnaseq/rnaget-compliance-suite)
 [![Coverage Status](https://img.shields.io/coveralls/github/ga4gh-rnaseq/rnaget-compliance-suite.svg?style=flat-square)](https://coveralls.io/github/ga4gh-rnaseq/rnaget-compliance-suite)
 [![Read the Docs](https://img.shields.io/readthedocs/rnaget-compliance-suite.svg?style=flat-square)](https://rnaget-compliance-suite.readthedocs.io/en/latest/)
+![PyPI](https://img.shields.io/pypi/v/ga4gh-rnaget-compliance?style=flat-square)
+[![Python 3.6](https://img.shields.io/badge/python-3.7-blue.svg?style=flat-square)](https://www.python.org)
 
 # RNAget Compliance Suite
 
@@ -14,11 +16,7 @@ prepare and test an RNAget-compliant server.
 
 RNAget maintains an up-to-date report of the compliance status of its reference implementers. [Click here to view the latest report.](https://ga4gh-rnaseq.github.io/rnaget-compliance-suite/report/)
 
-## Installation
+## Installation and Usage
 
-Please review the [Compliance Documentation](https://rnaget-compliance-suite.readthedocs.io/en/latest/utility/installation.html) for installation instructions.
-
-## Usage
-
-Please review the [Compliance Documentation](https://rnaget-compliance-suite.readthedocs.io/en/latest/utility/usage.html) for instructions on how to configure
-the compliance suite and execute tests against your RNAget implementation.
+Please review the [Compliance Documentation](https://rnaget-compliance-suite.readthedocs.io/en/latest/utility/installation.html) for 
+installation and usage instructions.

@@ -2,8 +2,8 @@ import setuptools
 
 NAME = "ga4gh-rnaget-compliance"
 VERSION = "0.1.0"
-AUTHOR = "Sean Upchurch"
-EMAIL = "sau@caltech.edu"
+AUTHOR = "Jeremy Adams"
+EMAIL = "jeremy.adams@ga4gh.org"
 
 # Work around mbcs bug in distutils.
 # http://bugs.python.org/issue10945
