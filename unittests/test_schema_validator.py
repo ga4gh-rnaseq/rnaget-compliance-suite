@@ -96,7 +96,7 @@ def test_study_invalid():
 def test_expression_valid():
     """asserts valid expression instance passes schema validation"""
 
-    schema_pass_template(1, "expression_valid", c.SCHEMA_FILE_EXPRESSION)
+    schema_pass_template(0, "expression_valid", c.SCHEMA_FILE_EXPRESSION)
 
 def test_expression_invalid():
     """asserts invalid expression instances fail with correct message"""
@@ -104,6 +104,6 @@ def test_expression_invalid():
     m = [
         "'url' is a required property",
         "'units' is a required property",
-        "1 is not of type 'string'"
+        "'url' is a required property"
     ]
     schema_fail_template(m, "expression_invalid", c.SCHEMA_FILE_EXPRESSION)

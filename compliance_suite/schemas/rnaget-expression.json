@@ -27,16 +27,16 @@
           "url": {
             "type": "string"
           },
+          "url": {
+            "type": "string"
+          },
           "units": {
             "type": "string"
           }
-          
         },
-      
         "required": [
           "url", "units", "fileType"
         ],
-        
         "additionalProperties": true
       }
     }
