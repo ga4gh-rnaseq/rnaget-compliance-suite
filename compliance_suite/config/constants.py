@@ -39,34 +39,8 @@ SCHEMA_FILE_ERROR = "rnaget-error.json"
 SCHEMA_FILE_PROJECT = "rnaget-project.json"
 SCHEMA_FILE_STUDY = "rnaget-study.json"
 SCHEMA_FILE_EXPRESSION = "rnaget-expression.json"
-SCHEMA_FILE_EXPRESSION_LOOM = "rnaget-expression-loom.json"
-SCHEMA_FILE_EXPRESSION_TSV = "rnaget-expression-tsv.json"
 SCHEMA_FILE_CONTINUOUS = "rnaget-continuous.json"
 SCHEMA_FILE_SEARCH_FILTER = "rnaget-search-filter.json"
-SCHEMA_FILE_PROJECT_ARRAY = "rnaget-project-array.json"
-SCHEMA_FILE_PROJECT_ARRAY_FULL = "rnaget-project-array-full.json"
-SCHEMA_FILE_STUDY_ARRAY = "rnaget-study-array.json"
-SCHEMA_FILE_STUDY_ARRAY_FULL = "rnaget-study-array-full.json"
-SCHEMA_FILE_EXPRESSION_ARRAY = "rnaget-expression-array.json"
-SCHEMA_FILE_EXPRESSION_ARRAY_FULL = "rnaget-expression-array-full.json"
-SCHEMA_FILE_EXPRESSION_LOOM_ARRAY = "rnaget-expression-loom-array.json"
-SCHEMA_FILE_EXPRESSION_LOOM_ARRAY_FULL = "rnaget-expression-loom-array-full" \
-                                         + ".json"
-SCHEMA_FILE_EXPRESSION_TSV_ARRAY = "rnaget-expression-tsv-array.json"
-SCHEMA_FILE_EXPRESSION_TSV_ARRAY_FULL = "rnaget-expression-tsv-array-full.json"
-
-SCHEMA_FILE_EXPRESSION_FORMAT_TEMPLATE = \
-    "rnaget-expression-format-template.json"
-SCHEMA_FILE_EXPRESSION_ARRAY_FORMAT_TEMPLATE = \
-    "rnaget-expression-array-format-template.json"
-
-SCHEMA_FILE_CONTINUOUS_ARRAY = "rnaget-continuous-array.json"
-SCHEMA_FILE_CONTINUOUS_ARRAY_FULL = "rnaget-continuous-array-full.json"
-SCHEMA_FILE_CONTINUOUS_FORMAT_TEMPLATE = \
-    "rnaget-continuous-format-template.json"
-SCHEMA_FILE_CONTINUOUS_ARRAY_FORMAT_TEMPLATE = \
-    "rnaget-continuous-array-format-template.json"
-
 SCHEMA_FILE_SEARCH_FILTER_ARRAY = "rnaget-search-filter-array.json"
 SCHEMA_FILE_STRING_ARRAY = "rnaget-string-array.json"
 

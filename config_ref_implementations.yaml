@@ -7,28 +7,6 @@ servers:
       expressions: true
       continuous: true
     
-    projects:
-      - id: 43378a5d48364f9d8cf3c3d5104df560
-        filters:
-          version: 1.0
-    
-    studies:
-      - id: 6cccbbd76b9c4837bd7342dd616d0fec
-        filters:
-          version: 1.0
-    
-    expressions:
-      - id: 2a7ab5533ef941eaa59edbfe887b58c4
-        filters:
-          studyID: 6cccbbd76b9c4837bd7342dd616d0fec
-          format: loom
-    
-    continuous:
-      - id: fa057c6d18c44960a1b8b49d065b3889
-        filters:
-          version: 1.0
-          format: loom
-
   - server_name: Centre for Genomic Regulation
     base_url: https://genome.crg.cat/rnaget/
     token: SERVER_API_KEY_CRG
@@ -38,31 +16,6 @@ servers:
         expressions: true
         continuous: true
     
-    projects:
-      - id: E-MTAB-5200
-        filters:
-          name: Pancancer Analysis of Whole Genomes
-      - id: E-GEOD-81547
-        filters:
-          name: Single cell transcriptome analysis of human pancreas
-    
-    studies:
-      - id: E-MTAB-5200-ST0
-        filters:
-          name: Pancancer Analysis of Whole Genomes
-    
-    expressions:
-      - id: 8beada7b93d5e55aa557138b39c6f930
-        filters:
-          tags: cancer
-          format: tsv
-
-    continuous:
-      - id: 482580efab4afe180dd0f3caa7b3394c
-        filters:
-          studyID: E-MTAB-5200-ST0
-          format: tsv
-  
   - server_name: CanDIG
     base_url: https://candig.bcgsc.ca/rnaget/
     token: SERVER_API_KEY_CANDIG
@@ -71,24 +24,4 @@ servers:
         studies: true
         expressions: true
         continuous: false
-
-    projects:
-      - id: 68d99e60-7725-11e9-9c42-1402ec895c5c
-        filters:
-          tags: pcawg
-          version: 0.9.2
-
-    studies:
-      - id: 6b89d5de-7dbb-11e9-9a21-1402ec895c5c
-        filters:
-          tags: pcawg
-          version: 0.9.2
-          projectID: 68d99e60-7725-11e9-9c42-1402ec895c5c
-
-    expressions:
-      - id: a3f78632-7dbb-11e9-9a21-1402ec895c5c
-        filters:
-          format: h5
-          tags: pcawg
-          version: 0.9.2
 

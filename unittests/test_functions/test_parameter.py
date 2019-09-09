@@ -24,11 +24,11 @@ runner_e.retrieved_server_settings["continuous"]["supp_filters"] = [
     "studyID", "version"]
 runner_e.retrieved_server_settings["continuous"]["exp_format"] = "tsv"
 
-expression_search = get_runner_node_case_params_by_case(
-    "slice by featureIDList, sampleIDList, minExpression, and maxExpression"
-)
-content_case_expression_search = ContentCase(
-    expression_search[2], expression_search[1], expression_search[0])
+# expression_search = get_runner_node_case_params_by_case(
+#     "slice by featureIDList, sampleIDList, minExpression, and maxExpression"
+# )
+# content_case_expression_search = ContentCase(
+#     expression_search[2], expression_search[1], expression_search[0])
 
 continuous_search = get_runner_node_case_params_by_case(
     "Continuous Search Content, chr, start, and end, 1"
@@ -108,16 +108,17 @@ def test_switch_format_param():
     filters = switch_format_param(node_c, runner_c)
     assert filters["format"] == "loom"
 
-def test_all_supported_filters_format_and_slice_params():
-
-    filters = all_supported_filters_format_and_slice_params(
-        content_case_expression_search)
-    fk = filters.keys()
-
-    assert "featureIDList" in fk
-    assert "sampleIDList" in fk
-    assert "minExpression" in fk
-    assert "maxExpression" in fk
+#TODO: restore once minExpression/maxExpression slicing is re-added
+# def test_all_supported_filters_format_and_slice_params():
+# 
+#     filters = all_supported_filters_format_and_slice_params(
+#         content_case_expression_search)
+#     fk = filters.keys()
+# 
+#     assert "featureIDList" in fk
+#     assert "sampleIDList" in fk
+#     assert "minExpression" in fk
+#     assert "maxExpression" in fk
 
 def test_all_supported_filters_chr_start_end():
 

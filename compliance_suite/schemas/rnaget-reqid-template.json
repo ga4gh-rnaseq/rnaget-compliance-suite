@@ -18,10 +18,7 @@
               "type": "string",
               "enum": ["VAR_ID"]
             }
-          },
-          "required": [
-            "id"
-          ]
+          }
         }
       ]
     }

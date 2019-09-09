@@ -112,7 +112,49 @@ def continuous_loom(input_file):
     }
 
 def continuous_tsv(input_file):
-    pass
+    """Continuous matrix attribute handler for tsv files
+
+    Parses a tsv continuous matrix, maps its attributes to a dictionary with
+    consistent keys that can be used by all content testing functions
+    
+    Arguments:
+        input_file (str): input tsv file
+    
+    Returns:
+        (dict): attribute handler, consistent structure regardless of file type
+    """
+
+    tracks = []
+    positions = []
+    values = []
+
+    inc = 0
+    # open the tsv file
+    for l in open(input_file, "r"):
+        ls = l.rstrip().split("\t")
+
+        if not l.startswith("#"): # ignore any starting comment lines if any
+            if inc == 0: # column header line
+
+                # using the column header line, assign the conditions, samples,
+                # and tissues lists
+                positions = ls[1:]
+
+            else: # data lines
+                # each data line contains the gene id, gene name, and all 
+                # expression values
+                tracks.append(ls[0])
+                values.append([float(v) for v in ls[1:]])
+
+            inc += 1
+    
+    # return the populated values and attribute names under consistent keys
+    return {
+        "Track": tracks,
+        "Position": positions,
+        "Value": numpy.matrix(values),
+        "FH": None
+    }
 
 ATTRIBUTE_HANDLERS = {
     "expressions": {

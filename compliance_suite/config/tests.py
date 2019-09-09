@@ -903,7 +903,7 @@ TESTS_DICT = {
                         + "requested format",
                     "summary_skip": "'Expression Search Filetypes Match' "
                         + "skipped",
-                    "schema_func": sf.schema_expression_search_filetypes_match,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.add_format_from_retrieved_settings
                 },
 
@@ -922,7 +922,7 @@ TESTS_DICT = {
                     "summary_skip": "'Expression Search No Filetype "
                         + "Mismatches' skipped",
                     "schema_func": \
-                        sf.schema_expression_search_no_filetype_mismatches,
+                        sf.schema_require_matching_search_params_allow_empty,
                     "request_params_func": pf.switch_format_param
                 },
             ]
@@ -971,49 +971,50 @@ TESTS_DICT = {
                     ]
                 },
 
-                {
-                    "name": "Slice by minExpression",
-                    "minExpression": [
-                        {
-                            "threshold": 100,
-                            "featureName": "CLIC1"
-                        },
-                        {
-                            "threshold": 50,
-                            "featureName": "TSPAN6"
-                        },
-                        {
-                            "threshold": 30,
-                            "featureName": "LTV1"
-                        },
-                    ]
-                },
-
-                {
-                    "name": "Slice by maxExpression",
-                    "maxExpression": [
-                        {
-                            "threshold": 500,
-                            "featureName": "CLIC1"
-                        },
-                        {
-                            "threshold": 80,
-                            "featureName": "TSPAN6"
-                        },
-                        {
-                            "threshold": 50,
-                            "featureName": "LTV1"
-                        },
-                        {
-                            "threshold": 50,
-                            "featureName": "TRIM22"
-                        },
-                        {
-                            "threshold": 50,
-                            "featureName": "NCOA5"
-                        }
-                    ]
-                },
+                #TODO: restore minExpression/maxExpression test cases
+                # {
+                #     "name": "Slice by minExpression",
+                #     "minExpression": [
+                #         {
+                #             "threshold": 100,
+                #            "featureName": "CLIC1"
+                #          },
+                #         {
+                #             "threshold": 50,
+                #             "featureName": "TSPAN6"
+                #         },
+                #         {
+                #             "threshold": 30,
+                #             "featureName": "LTV1"
+                #         },
+                #     ]
+                # },
+                
+                # {
+                #     "name": "Slice by maxExpression",
+                #     "maxExpression": [
+                #         {
+                #             "threshold": 500,
+                #             "featureName": "CLIC1"
+                #         },
+                #         {
+                #             "threshold": 80,
+                #             "featureName": "TSPAN6"
+                #         },
+                #         {
+                #             "threshold": 50,
+                #             "featureName": "LTV1"
+                #         },
+                #         {
+                #             "threshold": 50,
+                #             "featureName": "TRIM22"
+                #         },
+                #         {
+                #             "threshold": 50,
+                #             "featureName": "NCOA5"
+                #         }
+                #     ]
+                # },
 
                 {
                     "name": "slice by featureIDList and sampleIDList",
@@ -1040,117 +1041,118 @@ TESTS_DICT = {
                     ]
                 },
 
-                {
-                    "name": "slice by featureIDList, sampleIDList, and "
-                        + "minExpression",
-                    "featureIDList": [
-                        "ENSG00000110876", "ENSG00000145740", "ENSG00000106278",
-                        "ENSG00000186501", "ENSG00000198677", "ENSG00000124160",
-                        "ENSG00000132274", "ENSG00000135521", "ENSG00000000003",
-                        "ENSG00000213719"
-                    ],
-                    "sampleIDList": [
-                        'DO472 - primary tumour', 'DO1954 - primary tumour',
-                        'DO2503 - primary tumour', 'DO220478 - normal',
-                        'DO219106 - primary tumour', 'DO37259 - primary tumour',
-                        'DO9042 - primary tumour', 'DO40948 - primary tumour',
-                        'DO42881 - primary tumour', 'DO43811 - primary tumour'
-                    ],
-                    "minExpression": [
-                        {
-                            "threshold": 400,
-                            "featureName": "CLIC1"
-                        },
-                        {
-                            "threshold": 140,
-                            "featureName": "TSPAN6"
-                        },
-                        {
-                            "threshold": 35,
-                            "featureName": "LTV1"
-                        },
-                    ]
-                },
+                #TODO: restore minExpression/maxExpression test cases
+                # {
+                #     "name": "slice by featureIDList, sampleIDList, and "
+                #         + "minExpression",
+                #     "featureIDList": [
+                #         "ENSG00000110876", "ENSG00000145740", "ENSG00000106278",
+                #         "ENSG00000186501", "ENSG00000198677", "ENSG00000124160",
+                #         "ENSG00000132274", "ENSG00000135521", "ENSG00000000003",
+                #         "ENSG00000213719"
+                #     ],
+                #     "sampleIDList": [
+                #         'DO472 - primary tumour', 'DO1954 - primary tumour',
+                #         'DO2503 - primary tumour', 'DO220478 - normal',
+                #         'DO219106 - primary tumour', 'DO37259 - primary tumour',
+                #         'DO9042 - primary tumour', 'DO40948 - primary tumour',
+                #         'DO42881 - primary tumour', 'DO43811 - primary tumour'
+                #     ],
+                #     "minExpression": [
+                #         {
+                #             "threshold": 400,
+                #             "featureName": "CLIC1"
+                #         },
+                #         {
+                #             "threshold": 140,
+                #             "featureName": "TSPAN6"
+                #         },
+                #         {
+                #             "threshold": 35,
+                #             "featureName": "LTV1"
+                #         },
+                #     ]
+                # },
 
-                {
-                    "name": "slice by featureIDList, sampleIDList, and "
-                        + "maxExpression",
-                    "featureIDList": [
-                        "ENSG00000110876", "ENSG00000145740", "ENSG00000106278",
-                        "ENSG00000186501", "ENSG00000198677", "ENSG00000124160",
-                        "ENSG00000132274", "ENSG00000135521", "ENSG00000000003",
-                        "ENSG00000213719"
-                    ],
-                    "sampleIDList": [
-                        'DO45161 - primary tumour', 'DO45217 - primary tumour',
-                        'DO28763 - primary tumour', 'DO46342 - primary tumour',
-                        'DO46366 - primary tumour', 'DO46380 - primary tumour',
-                        'DO46408 - primary tumour', 
-                        'DO46556 - recurrent tumour', 
-                        'DO46597 - primary tumour', 'DO34608 - primary tumour'
-                    ],
-                    "maxExpression": [
-                        {
-                            "threshold": 1500,
-                            "featureName": "CLIC1"
-                        },
-                        {
-                            "threshold": 450,
-                            "featureName": "TSPAN6"
-                        },
-                        {
-                            "threshold": 300,
-                            "featureName": "LTV1"
-                        },
-                    ]
-                },
+                # {
+                #     "name": "slice by featureIDList, sampleIDList, and "
+                #         + "maxExpression",
+                #     "featureIDList": [
+                #         "ENSG00000110876", "ENSG00000145740", "ENSG00000106278",
+                #         "ENSG00000186501", "ENSG00000198677", "ENSG00000124160",
+                #         "ENSG00000132274", "ENSG00000135521", "ENSG00000000003",
+                #         "ENSG00000213719"
+                #     ],
+                #     "sampleIDList": [
+                #         'DO45161 - primary tumour', 'DO45217 - primary tumour',
+                #         'DO28763 - primary tumour', 'DO46342 - primary tumour',
+                #         'DO46366 - primary tumour', 'DO46380 - primary tumour',
+                #         'DO46408 - primary tumour', 
+                #         'DO46556 - recurrent tumour', 
+                #         'DO46597 - primary tumour', 'DO34608 - primary tumour'
+                #     ],
+                #     "maxExpression": [
+                #         {
+                #             "threshold": 1500,
+                #             "featureName": "CLIC1"
+                #         },
+                #         {
+                #             "threshold": 450,
+                #             "featureName": "TSPAN6"
+                #         },
+                #         {
+                #             "threshold": 300,
+                #             "featureName": "LTV1"
+                #         },
+                #     ]
+                # },
 
-                {
-                    "name": "slice by featureIDList, sampleIDList, "
-                        + "minExpression, and maxExpression",
-                    "featureIDList": [
-                        "ENSG00000110876", "ENSG00000145740", "ENSG00000106278",
-                        "ENSG00000186501", "ENSG00000198677", "ENSG00000124160",
-                        "ENSG00000132274", "ENSG00000135521", "ENSG00000000003",
-                        "ENSG00000213719"
-                    ],
-                    "sampleIDList": [
-                        'DO45161 - primary tumour', 'DO45217 - primary tumour',
-                        'DO28763 - primary tumour', 'DO46342 - primary tumour',
-                        'DO46366 - primary tumour', 'DO46380 - primary tumour',
-                        'DO46408 - primary tumour', 
-                        'DO46556 - recurrent tumour', 
-                        'DO46597 - primary tumour', 'DO34608 - primary tumour'
-                    ],
-                    "minExpression": [
-                        {
-                            "threshold": 400,
-                            "featureName": "CLIC1"
-                        },
-                        {
-                            "threshold": 140,
-                            "featureName": "TSPAN6"
-                        },
-                        {
-                            "threshold": 35,
-                            "featureName": "LTV1"
-                        },
-                    ],
-                    "maxExpression": [
-                        {
-                            "threshold": 1500,
-                            "featureName": "CLIC1"
-                        },
-                        {
-                            "threshold": 450,
-                            "featureName": "TSPAN6"
-                        },
-                        {
-                            "threshold": 300,
-                            "featureName": "LTV1"
-                        },
-                    ]
-                }
+                # {
+                #     "name": "slice by featureIDList, sampleIDList, "
+                #         + "minExpression, and maxExpression",
+                #     "featureIDList": [
+                #         "ENSG00000110876", "ENSG00000145740", "ENSG00000106278",
+                #         "ENSG00000186501", "ENSG00000198677", "ENSG00000124160",
+                #         "ENSG00000132274", "ENSG00000135521", "ENSG00000000003",
+                #         "ENSG00000213719"
+                #     ],
+                #     "sampleIDList": [
+                #         'DO45161 - primary tumour', 'DO45217 - primary tumour',
+                #         'DO28763 - primary tumour', 'DO46342 - primary tumour',
+                #         'DO46366 - primary tumour', 'DO46380 - primary tumour',
+                #         'DO46408 - primary tumour', 
+                #         'DO46556 - recurrent tumour', 
+                #         'DO46597 - primary tumour', 'DO34608 - primary tumour'
+                #     ],
+                #     "minExpression": [
+                #         {
+                #             "threshold": 400,
+                #             "featureName": "CLIC1"
+                #         },
+                #         {
+                #             "threshold": 140,
+                #             "featureName": "TSPAN6"
+                #         },
+                #         {
+                #             "threshold": 35,
+                #             "featureName": "LTV1"
+                #         },
+                #     ],
+                #     "maxExpression": [
+                #         {
+                #             "threshold": 1500,
+                #             "featureName": "CLIC1"
+                #         },
+                #         {
+                #             "threshold": 450,
+                #             "featureName": "TSPAN6"
+                #         },
+                #         {
+                #             "threshold": 300,
+                #             "featureName": "LTV1"
+                #         },
+                #     ]
+                # }
             ]
         }
     }, "expression_endpoint_not_implemented": {
@@ -1690,7 +1692,7 @@ TESTS_DICT = {
                         + "requested format",
                     "summary_skip": "'Continuous Search Filetypes Match' "
                         + "skipped",
-                    "schema_func": sf.schema_continuous_search_filetypes_match,
+                    "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.add_format_from_retrieved_settings
                 },
 
@@ -1709,7 +1711,7 @@ TESTS_DICT = {
                     "summary_skip": "'Continuous Search No Filetype "
                         + "Mismatches' skipped",
                     "schema_func": \
-                        sf.schema_continuous_search_no_filetype_mismatches,
+                        sf.schema_require_matching_search_params_allow_empty,
                     "request_params_func": pf.switch_format_param
                 },
 

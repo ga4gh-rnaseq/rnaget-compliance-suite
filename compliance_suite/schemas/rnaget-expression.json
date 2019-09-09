@@ -9,9 +9,6 @@
       "RNAGetExpression": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
           "version": {
             "type": "string"
           },
@@ -37,7 +34,7 @@
         },
       
         "required": [
-          "id", "url", "units", "fileType"
+          "url", "units", "fileType"
         ],
         
         "additionalProperties": true

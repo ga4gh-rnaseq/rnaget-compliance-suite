@@ -15,6 +15,7 @@ import compliance_suite.exceptions.test_status_exception as tse
 from compliance_suite.schema_validator import SchemaValidator
 from compliance_suite.config.constants import *
 from compliance_suite.elements.case import Case
+from compliance_suite.functions.general import sanitize_dict
 
 class APICase(Case):
     """Executes a single API-based test case against the service"""
@@ -63,8 +64,8 @@ class APICase(Case):
         
         if self.status != -1:
             self.append_audit("Request: " + url)
-            self.append_audit("Params: " + str(self.params))
-            self.append_audit("Headers: " + str(self.headers))
+            self.append_audit("Params: " + str(sanitize_dict(self.params)))
+            self.append_audit("Headers: " + str(sanitize_dict(self.headers)))
             # only add response body if JSON format is expected
             if self.is_json:
                 if re.compile("json").search(response.headers["Content-Type"]):

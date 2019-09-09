@@ -102,7 +102,7 @@ def test_expression_invalid():
     """asserts invalid expression instances fail with correct message"""
 
     m = [
-        "'id' is a required property",
+        "'url' is a required property",
         "'units' is a required property",
         "1 is not of type 'string'"
     ]

@@ -49,24 +49,24 @@ def test_content_case_failures():
             "message": "Matrix GeneIDs do not match featureIDList"
         },
 
-        {
-            "name": "slice by featureIDList, sampleIDList, minExpression, "
-                + "and maxExpression",
-            "replace": {
-                "url": "expressions/af0ab1d31e93a358f552adcc47dd4dc8"
-            },
-            "message": "There are additional columns returned in the matrix "
-                + "compared to the request sampleIDList"
-        },
+        # {
+        #     "name": "slice by featureIDList, sampleIDList, minExpression, "
+        #         + "and maxExpression",
+        #     "replace": {
+        #         "url": "expressions/af0ab1d31e93a358f552adcc47dd4dc8"
+        #     },
+        #     "message": "There are additional columns returned in the matrix "
+        #         + "compared to the request sampleIDList"
+        # },
 
-        {
-            "name": "Slice by minExpression",
-            "replace": {
-                "url": "expressions/599ffa32b4a673c48dcf82e1f5ad2126"
-            },
-            "message": "Gene CLIC1 NOT above minExpression threshold at "
-                + "column 2"
-        },
+        # {
+        #     "name": "Slice by minExpression",
+        #     "replace": {
+        #         "url": "expressions/599ffa32b4a673c48dcf82e1f5ad2126"
+        #     },
+        #     "message": "Gene CLIC1 NOT above minExpression threshold at "
+        #         + "column 2"
+        # },
 
         {
             "name": "Continuous Get Content, Assert Correct Values, 1",
