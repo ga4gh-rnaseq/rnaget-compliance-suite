@@ -164,7 +164,7 @@ class Runner():
 
         status_d = {1: "PASSED", -1: "FAILED", 0: "SKIPPED",
                     2: "UNKNOWN ERROR"}
-        longest_testname = gf.get_longest_testname_length()
+        longest_testname = self.get_longest_testname_length()
 
         label = node.label + 1
         for child in node.children:
@@ -320,3 +320,12 @@ class Runner():
             self.recurse_label_tests(base_test)
             self.recurse_run_tests(base_test)
             self.recurse_generate_json(obj_type, obj_id, base_test)
+    
+    def get_longest_testname_length(self):
+        """Return the longest test name from the test dictionary
+        
+        Returns:
+            (str): longest test name
+        """
+
+        return max([len(a) for a in tests_config_dict.keys()])

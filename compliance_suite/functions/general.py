@@ -6,17 +6,6 @@ General functions to be used throughout library/application
 
 import sys
 
-from compliance_suite.config.tests import TESTS_DICT
-
-def get_longest_testname_length():
-    """Return the longest test name from the test dictionary
-    
-    Returns:
-        (str): longest test name
-    """
-
-    return max([len(a) for a in TESTS_DICT.keys()])
-
 def sanitize_dict(d):
     """Remove/omit secure information from a dictionary
 

@@ -14,8 +14,8 @@ import loompy
 import os
 import re
 import numpy
-
 from compliance_suite.functions.attribute_handlers import ATTRIBUTE_HANDLERS
+from compliance_suite.functions.general import sanitize_dict
 
 def download_attachment(function):
     """Decorator for content tests that involve file attachment dload
@@ -52,7 +52,7 @@ def download_attachment(function):
         try:
             content_case.append_audit("Request URL: " + url)
             content_case.append_audit(
-                "Request Headers:" + str(content_case.headers))
+                "Request Headers:" + str(sanitize_dict(content_case.headers)))
             content_case.append_audit("Request Params: " + str(request_params))
 
             # make the request for expression object, and get the download URL
