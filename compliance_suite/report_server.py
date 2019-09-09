@@ -102,6 +102,11 @@ class ReportServer(object):
                         "status": "FAILED",
                         "css_class": "text-danger",
                         "fa_class": "fa-times-circle"
+                    },
+                    2: {
+                        "status": "UNKNOWN ERROR",
+                        "css_class": "text-danger",
+                        "fa_class": "fa-times-circle"
                     }
                 }
             },
@@ -112,7 +117,8 @@ class ReportServer(object):
                 ),
                 "server_name_url": lambda name: \
                     name.lower().replace(" ", "") + ".html",
-                "rm_space": lambda text: text.replace(" ", "_"),
+                "rm_space": lambda text: text.replace(" ", "_")\
+                                             .replace(",", ""),
                 "timestamp": lambda: \
                     datetime.datetime.now(datetime.timezone.utc)\
                                      .strftime("%B %d, %Y at %l:%M %p (%Z)"),
@@ -161,8 +167,6 @@ class ReportServer(object):
                 self.render_helper["f"]["server_name_url"](server["server_name"])
             open(report_path, "w").write(report_rendered)
         
-        
-
     def start_mock_server(self, uptime):
         """run server to serve final test report
 

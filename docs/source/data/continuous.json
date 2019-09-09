@@ -1,10 +1,10 @@
 {
-  "tags": [
-      "cancer"
-  ],
-  "URL": "/continuous.loom",
-  "id": "fa057c6d18c44960a1b8b49d065b3889",
-  "fileType": "loom",
+  "id": "5e22e009f41fc53cbea094a41de8798f",
   "version": "1.0",
-  "studyID": "6cccbbd76b9c4837bd7342dd616d0fec"
+  "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
+  "url": "https://url/to/continuous/file",
+  "tags": [
+    "RNAgetCompliance"
+  ],
+  "fileType": "loom/tsv"
 }

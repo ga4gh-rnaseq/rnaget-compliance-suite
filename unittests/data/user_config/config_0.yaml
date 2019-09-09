@@ -1,0 +1,4 @@
+servers:
+  - server_name: Unit Test
+    base_url: http://localhost:5000/
+    token: gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa

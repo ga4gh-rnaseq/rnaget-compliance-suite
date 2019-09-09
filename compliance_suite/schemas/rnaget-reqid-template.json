@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "http://json-schema.org/draft-04/schema#",
+  "title": "RNAGetReqId",
+  "type": "object",
+  "$ref": "VAR_FILENAME#/definitions/RNAGetReqId",
+
+  "definitions": {
+    "RNAGetReqId": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "VAR_REF"
+        },
+        {
+          "properties": {
+            "id": {
+              "type": "string",
+              "enum": ["VAR_ID"]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

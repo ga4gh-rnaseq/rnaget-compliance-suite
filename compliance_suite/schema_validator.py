@@ -81,7 +81,7 @@ class SchemaValidator(object):
             validation_result["status"] = -1
             validation_result["exception_class"] = str(e.__class__.__name__)
             validation_result["message"] = e.message
-        
-        # self.delete_temp()
+        finally:
+            self.delete_temp()
 
         return validation_result

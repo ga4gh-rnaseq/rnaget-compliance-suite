@@ -77,7 +77,9 @@ def main():
 @click.option('--uptime', '-u', default='3600',
               help='time that server will remain up in seconds')
 @click.option('--no-tar', is_flag=True, help='skip the creation of a tarball')
-def report(user_config, output_dir, serve, uptime, no_tar):
+@click.option('--force', '-f', is_flag=True, 
+              help="force overwrite of output directory")
+def report(user_config, output_dir, serve, uptime, no_tar, force):
     """Program entrypoint. Executes compliance tests and generates report
 
     This method parses the CLI command 'report' to execute the report session
@@ -86,11 +88,11 @@ def report(user_config, output_dir, serve, uptime, no_tar):
 
     Arguments:
         user_config (str): Required. Path to user config YAML file
-        file_path_name (str): Optional. File name for w:gz file of web folder.
-            Default is web_<int>.tar.gz
-        json_path (str): Optional. Path to dump the final JSON content to
+        output_dir (str): Optional. Path to output directory
         serve (bool): Optional. If true, spin up a server
+        uptime (int): Optional. How long report server remains up in seconds
         no_tar (bool): Optional. If true, do not create .tar.gz of output dir
+        force (bool): Optional. If true, overwrite output dir if it exists 
     """
 
     final_json = []
@@ -136,11 +138,16 @@ def report(user_config, output_dir, serve, uptime, no_tar):
                                     + output_base_dir + " does not exist")
         
         # raise error if specified archive directory already exists
-        if os.path.exists(output_dir) or \
-            os.path.exists(output_dir + ".tar.gz"):
-            raise ArgumentException("cannot create output directory at " 
-                                    + output_dir + ", directory/archive "
-                                    + "already exists")
+        if not force:
+            if os.path.exists(output_dir) or \
+                os.path.exists(output_dir + ".tar.gz"):
+                raise ArgumentException("cannot create output directory at " 
+                                        + output_dir + ", directory/archive "
+                                        + "already exists")
+        
+        # if force, delete the output directory so it can be overwritten 
+        if force and os.path.exists(output_dir):
+            shutil.rmtree(output_dir)
         
         # create the output archive, and copy the web files there
         template_web_dir = os.path.join(

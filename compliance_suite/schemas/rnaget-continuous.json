@@ -9,9 +9,6 @@
       "RNAGetContinuous": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
           "version": {
             "type": "string"
           },
@@ -27,14 +24,14 @@
           "studyID": {
             "type": "string"
           },
-          "URL": {
+          "url": {
             "type": "string"
           }
           
         },
       
         "required": [
-          "id", "url"
+          "url", "fileType"
         ],
         
         "additionalProperties": true

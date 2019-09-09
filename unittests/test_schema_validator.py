@@ -2,18 +2,13 @@
 """Module unittests.test_schema_validator.py
 
 This module contains methods to test the schema_validator module via pytest.
-
-Attributes:
-    json_dir (str): path to dir containing correct/incorrect json responses
-    project_valid (str): file of valid project response
-    study_valid (str): file of valid study response
 """
 
 import json
 from compliance_suite.schema_validator import SchemaValidator
 import compliance_suite.config.constants as c
 
-json_dir = "unittests/testdata/json_instances/"
+json_dir = "unittests/data/json_instances/"
 project_valid = json_dir + "project_valid.json"
 study_valid = json_dir + "study_valid.json"
 
@@ -56,6 +51,7 @@ def template(messages_list, filename_template, schema, outcome):
         result = sv.validate_instance(json_file_to_dict(json_file))
         assert result["status"] == outcome
         assert result["message"] == messages_list[i]
+        sv.delete_temp()
 
 def schema_pass_template(count, filename_template, schema):
     """template for tests that are expected to pass schema validation"""
@@ -106,8 +102,8 @@ def test_expression_invalid():
     """asserts invalid expression instances fail with correct message"""
 
     m = [
-        "'id' is a required property",
+        "'url' is a required property",
         "'units' is a required property",
-        "'url' is a required property"
+        "1 is not of type 'string'"
     ]
     schema_fail_template(m, "expression_invalid", c.SCHEMA_FILE_EXPRESSION)

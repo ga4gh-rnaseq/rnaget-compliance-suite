@@ -30,10 +30,20 @@ def test_capitalize():
 # 
 #     # start a server, send a keyboard interrupt to the process, then check
 #     # that the process is no longer alive and exited without error (code 0)
-#     p = Process(target=spawn_report_server)
+#     def subprocess():
+#         rs = ReportServer(OUTPUT_DIR)
+#         rs.set_free_port()
+#         rs.serve_thread(uptime=10)
+# 
+#     if not os.path.exists(OUTPUT_DIR):
+#         os.mkdir(OUTPUT_DIR)
+# 
+#     p = Process(target=subprocess)
 #     p.start()
 #     time.sleep(2)
 #     os.kill(p.pid, signal.SIGINT)
 #     time.sleep(2)
 #     assert p.is_alive() == False
 #     assert p.exitcode == 0
+# 
+#     os.rmdir(OUTPUT_DIR)

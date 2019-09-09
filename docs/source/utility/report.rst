@@ -26,7 +26,7 @@ Report: Test Status
 
 This page shows a more detailed report of all tests run on a particular server,
 organized by API route and test case. For any given test, clicking the *Info*
-button will display information for that test, including the request URL, 
+button will display information for that test, including the request url, 
 parameters, and the response body. The *Info* window is also helpful in 
 diagnosing failed compliance tests, as it reports the type of error 
 encountered and related debug messages.

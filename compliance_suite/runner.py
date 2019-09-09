@@ -12,7 +12,7 @@ import logging
 import re
 import sys
 
-from compliance_suite.config.functions import *
+import compliance_suite.functions.general as gf
 from compliance_suite.config.tests import TESTS_DICT as tests_config_dict
 from compliance_suite.config.tests import TESTS_BY_OBJECT_TYPE as tests_by_obj
 from compliance_suite.config.tests import NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE \
@@ -20,7 +20,7 @@ from compliance_suite.config.tests import NOT_IMPLEMENTED_TESTS_BY_OBJECT_TYPE \
 from compliance_suite.config.graph import TEST_GRAPH as graph
 from compliance_suite.config.graph import NOT_IMPLEMENTED_TEST_GRAPH as \
     not_impl_graph
-from compliance_suite.config.constants import ENDPOINTS
+import compliance_suite.config.constants as c
 from compliance_suite.node import Node
 
 class Runner():
@@ -32,7 +32,6 @@ class Runner():
 
     Attributes:
         root (Test): Test instance at the base/root of test graph
-        session_params (dict): variables used to run conditional tests
         total_tests (int): total number of tests, regardless of status
         total_tests_passed (int): total number of tests passed
         total_tests_failed (int): total number of tests failed
@@ -44,6 +43,8 @@ class Runner():
         results (dict): dictionary of tests results for all object types
             (project, study, expression) and instances of those objects
         headers (dict): Additional HTTP headers for the requests
+        retrieved_server_settings (dict): holds information about server-side
+            supported filters/formats to inform subsequent test cases
         
     """
 
@@ -56,17 +57,18 @@ class Runner():
         """
 
         self.root = None
-        # TODO: remove session_params if we don't need
-        self.session_params = {}
         self.total_tests = 0
         self.total_tests_passed = 0
         self.total_tests_failed = 0
         self.total_tests_skipped = 0
         self.total_tests_warning = 0
         self.server_config = server_config
-        self.results = {"projects": {}, "studies": {}, "expressions": {},
-                        "continuous": {}}
+        self.results = {endpoint: {} for endpoint in c.ENDPOINTS}
         self.headers = {}
+        self.retrieved_server_settings = {
+            resource: {"supp_filters": [], "exp_format": ""} 
+            for resource in c.ENDPOINTS
+        }
     
     def processed_func_descrp(self, text):
         """Cleanup test function docstring for output to JSON report
@@ -126,12 +128,11 @@ class Runner():
                     'test_description': self.processed_func_descrp(
                         child.kwargs["name"]),
                     'text': child.to_echo(),
-                    'full_message': child.full_message,
-                    'full_description': child.full_description,
+                    'message': child.message,
+                    'description': child.description,
                     'parents': [str(parent) for parent in child.parents],
                     'children': [str(child) for child in child.children],
-                    'warning': child.warning,
-                    'edge_cases': child.case_outputs
+                    'warning': child.warning
                 }
                 if child.result == 1:
                     self.total_tests_passed = self.total_tests_passed + 1
@@ -163,7 +164,7 @@ class Runner():
 
         status_d = {1: "PASSED", -1: "FAILED", 0: "SKIPPED",
                     2: "UNKNOWN ERROR"}
-        longest_testname = get_longest_testname_length()
+        longest_testname = self.get_longest_testname_length()
 
         label = node.label + 1
         for child in node.children:
@@ -257,13 +258,15 @@ class Runner():
         # appropriate response code error.
         server_config = self.server_config
 
-        for obj_type in ENDPOINTS:
+        for obj_type in c.ENDPOINTS:
             obj_instances = None
             test_list = None
             test_tree = None
 
             if server_config["implemented"][obj_type]:
-                obj_instances = server_config[obj_type]
+                obj_instance_keys = c.TEST_RESOURCES[obj_type].keys()
+                obj_instances = [c.TEST_RESOURCES[obj_type][k] \
+                                 for k in obj_instance_keys]
                 test_list = tests_by_obj[obj_type]
                 test_tree = graph
             else:
@@ -317,3 +320,12 @@ class Runner():
             self.recurse_label_tests(base_test)
             self.recurse_run_tests(base_test)
             self.recurse_generate_json(obj_type, obj_id, base_test)
+    
+    def get_longest_testname_length(self):
+        """Return the longest test name from the test dictionary
+        
+        Returns:
+            (str): longest test name
+        """
+
+        return max([len(a) for a in tests_config_dict.keys()])

@@ -22,9 +22,12 @@ RNAget Servers
 RNAget Servers enable access to RNAseq datasets and their metadata using unique 
 identifiers for each object in a hierarchical data model. Servers can be queried
 for expression matrices, as well as project and study information associated 
-with the raw RNAseq data. Servers support the slicing of expression matrices by
-gene, sample, and/or genomic coordinate, so that only subsets of a large matrix 
-need to be transferred.
+with the raw RNAseq data. Servers support the slicing of expression and 
+continuous signal intensity matrices by various parameters, so that only subsets
+of large matrix files need to be transferred. Expression matrices can be 
+subsetted by gene, sample, and/or expression value thresholds. Continuous
+signal intensity matrices can be subsetted by chromosome and start/end base
+positions.  
 
 Compliance Document
 -------------------
@@ -49,7 +52,7 @@ Table of Contents
    :maxdepth: 2
    
    api_specification
-   example_dataset
+   test_dataset
 
 .. toctree::
     :maxdepth: 2

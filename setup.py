@@ -1,5 +1,10 @@
 import setuptools
 
+NAME = "ga4gh-rnaget-compliance"
+VERSION = "0.1.0"
+AUTHOR = "Sean Upchurch"
+EMAIL = "sau@caltech.edu"
+
 # Work around mbcs bug in distutils.
 # http://bugs.python.org/issue10945
 import codecs
@@ -12,14 +17,14 @@ except LookupError:
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
-install_requires = ['requests', 'click', 'jsonschema', 'PyYAML', "Jinja2"]
+install_requires = ['requests', 'click', 'jsonschema', 'PyYAML', "Jinja2", "loompy"]
 
 
 setuptools.setup(
-    name="rnaget-compliance",
-    version="1.0.0",
-    author="Sean Upchurch",
-    author_email="sau@caltech.edu",
+    name=NAME,
+    version=VERSION,
+    author=AUTHOR,
+    author_email=EMAIL,
     description="A compliance utility reporting system for rnaget server implementations",
     long_description=long_description,
     long_description_content_type="text/markdown",

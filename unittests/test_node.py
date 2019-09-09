@@ -23,25 +23,22 @@ def test_text():
     test_node = tr.base_tests[0][2].children[0]
 
     pass_text = test_node.get_pass_text()
-    assert pass_text == "Project endpoint implemented by the server"
+    assert pass_text == "'Get Project by Id' endpoint correctly implemented"
 
     fail_text = test_node.get_fail_text()
-    assert fail_text == "Project endpoint not implemented by the server"
+    assert fail_text == "'Get Project by Id' endpoint NOT correctly implemented"
 
     skip_text = test_node.get_skip_text()
-    assert skip_text == "Project endpoint test skipped"
+    assert skip_text == "'Get Project by Id' test skipped"
 
     generated_skip_text = test_node.generate_skip_text()
     assert generated_skip_text == "project_get is skipped because "
 
     test_node = tr.base_tests[0][2].children[1].children[0]
-    assert test_node.kwargs["name"] == "project_search_url_params_all"
+    assert test_node.kwargs["name"] == "project_search"
 
     generated_skip_text = test_node.generate_skip_text()
-    assert generated_skip_text.startswith(
-        "project_search_url_params_all is skipped because Projects cannot "
-        + "be retrieved through the search endpoint"
-    )
+    assert generated_skip_text.startswith("project_search")
     
 def test_to_echo():
     """assert echo method emits correct text based on test result status"""
@@ -53,3 +50,11 @@ def test_to_echo():
     test_node.result = 0
     test_node.set_skip_text('')
     assert test_node.to_echo() == "project_get is skipped because "
+
+def test_to_echo_passed_test():
+
+    runner, node, case_params = get_runner_node_case_params_by_case(
+        "Get Test Project")
+    node.result = 1
+    echo = node.to_echo()
+    assert echo == "'Get Project by Id' endpoint correctly implemented"

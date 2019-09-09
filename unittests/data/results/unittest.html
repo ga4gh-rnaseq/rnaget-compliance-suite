@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>RNAget API Compliance Report</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="public/jquery.jsonPresenter.css">
+  <link rel="stylesheet" href="public/index.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="public/jquery.jsonPresenter.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+  
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a id="navbar-title" class="navbar-brand" href="#">GA4GH rnaget API v1 Compliance Report</a>    
+</nav>
+
+<div class="container">
+  <p><a href="."><i class="fa fa-chevron-left"></i> Back</a></p>
+
+  <h1>RNAGet Implementation Compliance Report</h1>
+  <h2>Server: Unit Test</h2>
+  <h4 class="tab1">Base URL: http://localhost:5000/</h4>
+  <p class="tab1">Total tests: 14</p>
+  <p class="tab1">Total tests passed: 0</p>
+  <p class="tab1">Total tests failed: 7</p>
+  <p class="tab1">Total tests skipped: 7</p>
+  <p class="tab1">Total warnings generated: 14</p>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
+    <li><a data-toggle="tab" href="#matrix">Matrix</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="text" class="tab-pane fade in active">
+      
+        <section id="projects">
+          <div class="report-endpoint-section">
+            <h3 class="">Projects 
+            
+            </h3>
+
+            
+            <h4 class="tab1">Project 1 id: 9c0eba51095d3939437e220db196e27b</h4>
+            <p class="tab1">Tests</p>
+
+              
+                
+                <p class='tab2 text-danger'><i class="fa fa-times-circle"></i> Test: Project Get - FAILED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /projects/:id endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Get Project by Id' endpoint NOT correctly implemented</p>
+                
+                <!-- API Testing -->
+                
+                <p class="tab3 text-danger">API Route Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Get Test Project - PASSED</p>
+                  <p class='tab5'>case description: request /projects/:id using test project id. checks content type and status code (200). validates response body matches Project object schema.</p>
+                  <p class='tab5'>case summary: Test project successfully retrieved</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-projects-9c0eba51095d3939437e220db196e27b-Get_Test_Project" aria-expanded="false" aria-controls="collapse-Unit_Test-projects-9c0eba51095d3939437e220db196e27b-Get_Test_Project">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-projects-9c0eba51095d3939437e220db196e27b-Get_Test_Project">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/projects/9c0eba51095d3939437e220db196e27b</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Response Body: {
+  "id": "9c0eba51095d3939437e220db196e27b",
+  "version": "1.0",
+  "name": "RNAgetTestProject0",
+  "description": "Test project object used by RNAget compliance testing suite.",
+  "tags": [
+    "RNAgetCompliance"
+  ]
+}</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Project Not Found - FAILED</p>
+                  <p class='tab5'>case description: request /projects/:id using a project id known to not exist. Checks content type and status code (4xx). Validates response body matches Error schema.</p>
+                  <p class='tab5'>case summary: Server DOES NOT send correct response when requested project not found</p>
+                  
+                    <p class='tab5'>error message: 'message' is a required property</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-projects-9c0eba51095d3939437e220db196e27b-Project_Not_Found" aria-expanded="false" aria-controls="collapse-Unit_Test-projects-9c0eba51095d3939437e220db196e27b-Project_Not_Found">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-projects-9c0eba51095d3939437e220db196e27b-Project_Not_Found">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/projects/nonexistentid9999999999999999999</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">Exception of class SchemaValidationException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: 'message' is a required property</p>
+                        
+                    </div>
+                  </div>
+                
+                
+
+                <!-- Content Testing -->
+                
+
+              
+                
+                <p class='tab2 text-danger'><i class="fa fa-times-circle"></i> Test: Project Search Filters - FAILED</p>
+                <p class="tab3"><strong>description:</strong> requests the /projects/search/filters endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Project Search Filters' endpoint NOT correctly implemented</p>
+                
+                <!-- API Testing -->
+                
+                <p class="tab3 text-danger">API Route Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Project Search Filters - FAILED</p>
+                  <p class='tab5'>case description: request /projects/search/filters. checks content type and status code (200). validates response body matches search filter array schema.</p>
+                  <p class='tab5'>case summary: Project search filters NOT retrieved</p>
+                  
+                    <p class='tab5'>error message: Response Content-Type 'text/html' not in request accepted media types: ['application/vnd.ga4gh.rnaget.v1.0.0+json', 'application/json']</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-projects-9c0eba51095d3939437e220db196e27b-Project_Search_Filters" aria-expanded="false" aria-controls="collapse-Unit_Test-projects-9c0eba51095d3939437e220db196e27b-Project_Search_Filters">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-projects-9c0eba51095d3939437e220db196e27b-Project_Search_Filters">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/projects/search/filters</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Exception of class MediaTypeException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: Response Content-Type 'text/html' not in request accepted media types: ['application/vnd.ga4gh.rnaget.v1.0.0+json', 'application/json']</p>
+                        
+                    </div>
+                  </div>
+                
+                
+
+                <!-- Content Testing -->
+                
+
+              
+                
+                <p class='tab2 text-info'><i class="fa fa-ban"></i> Test: Project Search - SKIPPED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /projects/search endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Project Search' test skipped</p>
+                
+                <!-- API Testing -->
+                
+
+                <!-- Content Testing -->
+                
+
+              
+            
+          </div>
+        </section>
+      
+        <section id="studies">
+          <div class="report-endpoint-section">
+            <h3 class="">Studies 
+            
+            </h3>
+
+            
+            <h4 class="tab1">Study 1 id: f3ba0b59bed0fa2f1030e7cb508324d1</h4>
+            <p class="tab1">Tests</p>
+
+              
+                
+                <p class='tab2 text-danger'><i class="fa fa-times-circle"></i> Test: Study Get - FAILED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /studies/id endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Get Study by Id' endpoint NOT correctly implemented</p>
+                
+                <!-- API Testing -->
+                
+                <p class="tab3 text-danger">API Route Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Get Test Study - FAILED</p>
+                  <p class='tab5'>case description: request /studies/:id using test study id. checks content type and status code (200). validates response body matches Study object schema.</p>
+                  <p class='tab5'>case summary: Test study NOT retrieved</p>
+                  
+                    <p class='tab5'>error message: Response status code: 404 not in expected status code(s): [200]</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-studies-f3ba0b59bed0fa2f1030e7cb508324d1-Get_Test_Study" aria-expanded="false" aria-controls="collapse-Unit_Test-studies-f3ba0b59bed0fa2f1030e7cb508324d1-Get_Test_Study">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-studies-f3ba0b59bed0fa2f1030e7cb508324d1-Get_Test_Study">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/studies/f3ba0b59bed0fa2f1030e7cb508324d1</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">Exception of class StatusCodeException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: Response status code: 404 not in expected status code(s): [200]</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Study Not Found - FAILED</p>
+                  <p class='tab5'>case description: request /studies/:id using a study id known to not exist. Checks content type and status code (4xx). Validates response body matches Error schema.</p>
+                  <p class='tab5'>case summary: Server DOES NOT send correct response when requested study not found</p>
+                  
+                    <p class='tab5'>error message: 'message' is a required property</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-studies-f3ba0b59bed0fa2f1030e7cb508324d1-Study_Not_Found" aria-expanded="false" aria-controls="collapse-Unit_Test-studies-f3ba0b59bed0fa2f1030e7cb508324d1-Study_Not_Found">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-studies-f3ba0b59bed0fa2f1030e7cb508324d1-Study_Not_Found">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/studies/nonexistentid9999999999999999999</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">Exception of class SchemaValidationException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: 'message' is a required property</p>
+                        
+                    </div>
+                  </div>
+                
+                
+
+                <!-- Content Testing -->
+                
+
+              
+                
+                <p class='tab2 text-danger'><i class="fa fa-times-circle"></i> Test: Study Search Filters - FAILED</p>
+                <p class="tab3"><strong>description:</strong> requests the /studies/search/filters endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Study Search Filters' endpoint NOT correctly implemented</p>
+                
+                <!-- API Testing -->
+                
+                <p class="tab3 text-danger">API Route Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Study Search Filters - FAILED</p>
+                  <p class='tab5'>case description: request /studies/search/filters. checks content type and status code (200). validates response body matches search filter array schema.</p>
+                  <p class='tab5'>case summary: Study search filters NOT retrieved</p>
+                  
+                    <p class='tab5'>error message: Response Content-Type 'text/html' not in request accepted media types: ['application/vnd.ga4gh.rnaget.v1.0.0+json', 'application/json']</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-studies-f3ba0b59bed0fa2f1030e7cb508324d1-Study_Search_Filters" aria-expanded="false" aria-controls="collapse-Unit_Test-studies-f3ba0b59bed0fa2f1030e7cb508324d1-Study_Search_Filters">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-studies-f3ba0b59bed0fa2f1030e7cb508324d1-Study_Search_Filters">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/studies/search/filters</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Exception of class MediaTypeException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: Response Content-Type 'text/html' not in request accepted media types: ['application/vnd.ga4gh.rnaget.v1.0.0+json', 'application/json']</p>
+                        
+                    </div>
+                  </div>
+                
+                
+
+                <!-- Content Testing -->
+                
+
+              
+                
+                <p class='tab2 text-info'><i class="fa fa-ban"></i> Test: Study Search - SKIPPED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /studies/search endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Study Search' test skipped</p>
+                
+                <!-- API Testing -->
+                
+
+                <!-- Content Testing -->
+                
+
+              
+            
+          </div>
+        </section>
+      
+        <section id="expressions">
+          <div class="report-endpoint-section">
+            <h3 class="">Expressions 
+            
+            </h3>
+
+            
+            <h4 class="tab1">Expression 1 id: ac3e9279efd02f1c98de4ed3d335b98e</h4>
+            <p class="tab1">Tests</p>
+
+              
+                
+                <p class='tab2 text-danger'><i class="fa fa-times-circle"></i> Test: Expression Get - FAILED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /expressions/:id endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Get Expression by Id' endpoint NOT correctly implemented</p>
+                
+                <!-- API Testing -->
+                
+                <p class="tab3 text-danger">API Route Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Get Test Expression - FAILED</p>
+                  <p class='tab5'>case description: request /expressions/:id using test expression id. checks content type and status code (200). validates response body matches Expression object schema.</p>
+                  <p class='tab5'>case summary: Test expression NOT retrieved</p>
+                  
+                    <p class='tab5'>error message: Response status code: 404 not in expected status code(s): [200]</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Get_Test_Expression" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Get_Test_Expression">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Get_Test_Expression">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">Exception of class StatusCodeException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: Response status code: 404 not in expected status code(s): [200]</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Expression Not Found - FAILED</p>
+                  <p class='tab5'>case description: request /expressions/:id using an expression id known to not exist. Checks content type and status code (4xx). validates response body matches Error schema.</p>
+                  <p class='tab5'>case summary: Server DOES NOT send correct response when requested expression not found</p>
+                  
+                    <p class='tab5'>error message: 'message' is a required property</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Not_Found" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Not_Found">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Not_Found">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/expressions/nonexistentid9999999999999999999</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">Exception of class SchemaValidationException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: 'message' is a required property</p>
+                        
+                    </div>
+                  </div>
+                
+                
+
+                <!-- Content Testing -->
+                
+                <p class="tab3 text-danger">File Content Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 1 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_1" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_1">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_1">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 2 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_2" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_2">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_2">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 3 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_3" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_3">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_3">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 4 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_4" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_4">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_4">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 5 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_5" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_5">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_5">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 6 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_6" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_6">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_6">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 7 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_7" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_7">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_7">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 8 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_8" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_8">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_8">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 9 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_9" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_9">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_9">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Expression Get Content 10 - FAILED</p>
+                  <p class='tab5'>case description: Asserts correct content of expression matrix columns/rows</p>
+                  <p class='tab5'>case summary: Expression matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: 'url'</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_10" aria-expanded="false" aria-controls="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_10">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Get_Content_10">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/expressions/ac3e9279efd02f1c98de4ed3d335b98e</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"Message": "resource not found"}</p>
+                        
+                          <p class="audit-message">'url'</p>
+                        
+                    </div>
+                  </div>
+                
+                
+
+              
+                
+                <p class='tab2 text-info'><i class="fa fa-ban"></i> Test: Expression Formats - SKIPPED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /expressions/formats endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Expression formats' test skipped</p>
+                
+                <!-- API Testing -->
+                
+
+                <!-- Content Testing -->
+                
+
+              
+                
+                <p class='tab2 text-info'><i class="fa fa-ban"></i> Test: Expression Search Filters - SKIPPED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /expressions/search/filters endpoint.</p>
+                <p class="tab3"><strong>summary:</strong> 'Expression Search Filters' test skipped</p>
+                
+                <!-- API Testing -->
+                
+
+                <!-- Content Testing -->
+                
+
+              
+                
+                <p class='tab2 text-info'><i class="fa fa-ban"></i> Test: Expression Search - SKIPPED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /expressions/search endpoint.</p>
+                <p class="tab3"><strong>summary:</strong> 'Expression Search' test skipped</p>
+                
+                <!-- API Testing -->
+                
+
+                <!-- Content Testing -->
+                
+
+              
+            
+          </div>
+        </section>
+      
+        <section id="continuous">
+          <div class="report-endpoint-section">
+            <h3 class="">Continuous 
+            
+            </h3>
+
+            
+            <h4 class="tab1">Continuous 1 id: 5e22e009f41fc53cbea094a41de8798f</h4>
+            <p class="tab1">Tests</p>
+
+              
+                
+                <p class='tab2 text-danger'><i class="fa fa-times-circle"></i> Test: Continuous Get - FAILED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /continuous/:id endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Get Continuous by Id' endpoint NOT correctly implemented</p>
+                
+                <!-- API Testing -->
+                
+                <p class="tab3 text-danger">API Route Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Get Test Continuous - FAILED</p>
+                  <p class='tab5'>case description: request /continous/:id using test continuous id. checks content type and status code (200).</p>
+                  <p class='tab5'>case summary: Test continuous NOT retrieved</p>
+                  
+                    <p class='tab5'>error message: Response Content-Type 'application/json' not in request accepted media types: ['application/vnd.loom', 'text/tab-separated-values']</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Get_Test_Continuous" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Get_Test_Continuous">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Get_Test_Continuous">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.loom, text/tab-separated-values;'}</p>
+                        
+                          <p class="audit-message">Exception of class MediaTypeException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: Response Content-Type 'application/json' not in request accepted media types: ['application/vnd.loom', 'text/tab-separated-values']</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Continuous Not Found - PASSED</p>
+                  <p class='tab5'>case description: request /continuous/:id using a continuous id known to not exist. checks content type and status code (4xx). validates response body matches error schema in the specification</p>
+                  <p class='tab5'>case summary: Server sends correct response when requested continuous not found</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Not_Found" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Not_Found">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Not_Found">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/continuous/nonexistentid9999999999999999999</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Continuous Get Start Specified Without Chr - PASSED</p>
+                  <p class='tab5'>case description: request /continuous/:id, specifying start parameter without chr. checks content type and status code (400). validates response body matches error schema</p>
+                  <p class='tab5'>case summary: Server sends correct response when start is specified without chr</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Start_Specified_Without_Chr" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Start_Specified_Without_Chr">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Start_Specified_Without_Chr">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Params: {'start': '5'}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json, application/vnd.loom, text/tab-separated-values;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Continuous Get End Specified Without Chr - PASSED</p>
+                  <p class='tab5'>case description: request /continuous/:id, specifying end parameter without chr. checks content type and status code (400). validates response body matches error schema</p>
+                  <p class='tab5'>case summary: Server sends correct response when end is specified without chr</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_End_Specified_Without_Chr" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_End_Specified_Without_Chr">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_End_Specified_Without_Chr">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Params: {'end': '1000'}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json, application/vnd.loom, text/tab-separated-values;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Continuous Get Start Greater Than End - FAILED</p>
+                  <p class='tab5'>case description: request /continuous/:id, specifying chr, start, and end parameters, but start is greater than end. checks content type and status code (501). validates response body matches error schema</p>
+                  <p class='tab5'>case summary: Server DOES NOT send correct response when start is greater than end</p>
+                  
+                    <p class='tab5'>error message: Response status code: 400 not in expected status code(s): [501]</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Start_Greater_Than_End" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Start_Greater_Than_End">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Start_Greater_Than_End">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Params: {'chr': '1', 'start': '200', 'end': '100'}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json, application/vnd.loom, text/tab-separated-values;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Exception of class StatusCodeException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: Response status code: 400 not in expected status code(s): [501]</p>
+                        
+                    </div>
+                  </div>
+                
+                
+
+                <!-- Content Testing -->
+                
+                <p class="tab3 text-danger">File Content Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Continuous Get Content, Assert Correct Values, 1 - FAILED</p>
+                  <p class='tab5'>case description: Assert continuous rows, columns, and cell values match expected</p>
+                  <p class='tab5'>case summary: Continuous matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: ''</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_Assert_Correct_Values_1" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_Assert_Correct_Values_1">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_Assert_Correct_Values_1">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Matrix Download URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">''</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Continuous Get Content, chr, 1 - FAILED</p>
+                  <p class='tab5'>case description: Assert positions in continuous matrix are all of same chromosome as requested</p>
+                  <p class='tab5'>case summary: Continuous matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: ''</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_1" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_1">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_1">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {'chr': 'chr1'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Matrix Download URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr1</p>
+                        
+                          <p class="audit-message">''</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Continuous Get Content, chr, 2 - FAILED</p>
+                  <p class='tab5'>case description: Assert positions in continuous matrix are all of same chromosome as requested</p>
+                  <p class='tab5'>case summary: Continuous matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: ''</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_2" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_2">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_2">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {'chr': 'chr5'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Matrix Download URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr5</p>
+                        
+                          <p class="audit-message">''</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Continuous Get Content, chr and start, 1 - FAILED</p>
+                  <p class='tab5'>case description: Assert positions in continuous matrix are within specified range</p>
+                  <p class='tab5'>case summary: Continuous matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: ''</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_start_1" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_start_1">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_start_1">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {'chr': 'chr1', 'start': '32'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Matrix Download URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr1&start=32</p>
+                        
+                          <p class="audit-message">''</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Continuous Get Content, chr and start, 2 - FAILED</p>
+                  <p class='tab5'>case description: Assert positions in continuous matrix are within specified range</p>
+                  <p class='tab5'>case summary: Continuous matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: ''</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_start_2" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_start_2">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_start_2">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {'chr': 'chr5', 'start': '100'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Matrix Download URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr5&start=100</p>
+                        
+                          <p class="audit-message">''</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Continuous Get Content, chr and end, 1 - FAILED</p>
+                  <p class='tab5'>case description: Assert positions in continuous matrix are within specified range</p>
+                  <p class='tab5'>case summary: Continuous matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: ''</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_end_1" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_end_1">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_end_1">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {'chr': 'chr1', 'end': '22'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Matrix Download URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr1&end=22</p>
+                        
+                          <p class="audit-message">''</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Continuous Get Content, chr and end, 2 - FAILED</p>
+                  <p class='tab5'>case description: Assert positions in continuous matrix are within specified range</p>
+                  <p class='tab5'>case summary: Continuous matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: ''</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_end_2" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_end_2">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_and_end_2">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {'chr': 'chr5', 'end': '49'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Matrix Download URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr5&end=49</p>
+                        
+                          <p class="audit-message">''</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Continuous Get Content, chr, start, and end, 1 - FAILED</p>
+                  <p class='tab5'>case description: Assert positions in continuous matrix are within specified range</p>
+                  <p class='tab5'>case summary: Continuous matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: ''</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_start_and_end_1" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_start_and_end_1">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_start_and_end_1">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {'chr': 'chr1', 'start': '30', 'end': '50'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Matrix Download URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr1&start=30&end=50</p>
+                        
+                          <p class="audit-message">''</p>
+                        
+                    </div>
+                  </div>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> Content Test Case: Continuous Get Content, chr, start, and end, 2 - FAILED</p>
+                  <p class='tab5'>case description: Assert positions in continuous matrix are within specified range</p>
+                  <p class='tab5'>case summary: Continuous matrix content DOES NOT match expected</p>
+                  
+                    <p class='tab5'>error message: Error parsing expression json and download url: ''</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_start_and_end_2" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_start_and_end_2">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Get_Content_chr_start_and_end_2">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f</p>
+                        
+                          <p class="audit-message">Request Headers:{'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa'}</p>
+                        
+                          <p class="audit-message">Request Params: {'chr': 'chr5', 'start': '69', 'end': '117'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Matrix Download URL: http://localhost:5000/continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr5&start=69&end=117</p>
+                        
+                          <p class="audit-message">''</p>
+                        
+                    </div>
+                  </div>
+                
+                
+
+              
+                
+                <p class='tab2 text-danger'><i class="fa fa-times-circle"></i> Test: Continuous Formats - FAILED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /continuous/formats endpoint</p>
+                <p class="tab3"><strong>summary:</strong> 'Continuous Formats' endpoint NOT correctly implemented</p>
+                
+                <!-- API Testing -->
+                
+                <p class="tab3 text-danger">API Route Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Get Supported Continuous Formats - FAILED</p>
+                  <p class='tab5'>case description: request /continuous/formats. checks content type and status code (200). validates response body is an array of strings.</p>
+                  <p class='tab5'>case summary: Continuous formats NOT retrieved</p>
+                  
+                    <p class='tab5'>error message: Response status code: 400 not in expected status code(s): [200]</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Get_Supported_Continuous_Formats" aria-expanded="false" aria-controls="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Get_Supported_Continuous_Formats">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Unit_Test-continuous-5e22e009f41fc53cbea094a41de8798f-Get_Supported_Continuous_Formats">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: http://localhost:5000/continuous/formats</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'Bearer gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message": "invalid resource 'continuous'"}</p>
+                        
+                          <p class="audit-message">Exception of class StatusCodeException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: Response status code: 400 not in expected status code(s): [200]</p>
+                        
+                    </div>
+                  </div>
+                
+                
+
+                <!-- Content Testing -->
+                
+
+              
+                
+                <p class='tab2 text-info'><i class="fa fa-ban"></i> Test: Continuous Search Filters - SKIPPED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /continuous/search/filters endpoint.</p>
+                <p class="tab3"><strong>summary:</strong> 'Continuous Search Filters' test skipped</p>
+                
+                <!-- API Testing -->
+                
+
+                <!-- Content Testing -->
+                
+
+              
+                
+                <p class='tab2 text-info'><i class="fa fa-ban"></i> Test: Continuous Search - SKIPPED</p>
+                <p class="tab3"><strong>description:</strong> Requests the /continuous/search endpoint.</p>
+                <p class="tab3"><strong>summary:</strong> 'Continuous Search' test skipped</p>
+                
+                <!-- API Testing -->
+                
+
+                <!-- Content Testing -->
+                
+
+              
+            
+          </div>
+        </section>
+      
+    </div>
+
+    <div id="matrix" class="tab-pane fade">
+        <div class="container">
+            <table id="compliance_matrix" class="table">
+              <thead>
+                <th>Server name</th>
+                <th>Object and Id</th>
+                <th>Test case</th>
+                <th>Status</th>
+              </thead>
+              <tbody>
+              
+              
+                
+                  
+                    <tr class="text-danger">
+                      <td>Unit Test</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
+                      <td>Project Get</td>
+                      <td>FAILED</td>
+                    </tr>
+                  
+                    <tr class="text-danger">
+                      <td>Unit Test</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
+                      <td>Project Search Filters</td>
+                      <td>FAILED</td>
+                    </tr>
+                  
+                    <tr class="text-info">
+                      <td>Unit Test</td>
+                      <td>Projects: 9c0eba51095d3939437e220db196e27b</td>
+                      <td>Project Search</td>
+                      <td>SKIPPED</td>
+                    </tr>
+                  
+                
+              
+                
+                  
+                    <tr class="text-danger">
+                      <td>Unit Test</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
+                      <td>Study Get</td>
+                      <td>FAILED</td>
+                    </tr>
+                  
+                    <tr class="text-danger">
+                      <td>Unit Test</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
+                      <td>Study Search Filters</td>
+                      <td>FAILED</td>
+                    </tr>
+                  
+                    <tr class="text-info">
+                      <td>Unit Test</td>
+                      <td>Studies: f3ba0b59bed0fa2f1030e7cb508324d1</td>
+                      <td>Study Search</td>
+                      <td>SKIPPED</td>
+                    </tr>
+                  
+                
+              
+                
+                  
+                    <tr class="text-danger">
+                      <td>Unit Test</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
+                      <td>Expression Get</td>
+                      <td>FAILED</td>
+                    </tr>
+                  
+                    <tr class="text-info">
+                      <td>Unit Test</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
+                      <td>Expression Formats</td>
+                      <td>SKIPPED</td>
+                    </tr>
+                  
+                    <tr class="text-info">
+                      <td>Unit Test</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
+                      <td>Expression Search Filters</td>
+                      <td>SKIPPED</td>
+                    </tr>
+                  
+                    <tr class="text-info">
+                      <td>Unit Test</td>
+                      <td>Expressions: ac3e9279efd02f1c98de4ed3d335b98e</td>
+                      <td>Expression Search</td>
+                      <td>SKIPPED</td>
+                    </tr>
+                  
+                
+              
+                
+                  
+                    <tr class="text-danger">
+                      <td>Unit Test</td>
+                      <td>Continuous: 5e22e009f41fc53cbea094a41de8798f</td>
+                      <td>Continuous Get</td>
+                      <td>FAILED</td>
+                    </tr>
+                  
+                    <tr class="text-danger">
+                      <td>Unit Test</td>
+                      <td>Continuous: 5e22e009f41fc53cbea094a41de8798f</td>
+                      <td>Continuous Formats</td>
+                      <td>FAILED</td>
+                    </tr>
+                  
+                    <tr class="text-info">
+                      <td>Unit Test</td>
+                      <td>Continuous: 5e22e009f41fc53cbea094a41de8798f</td>
+                      <td>Continuous Search Filters</td>
+                      <td>SKIPPED</td>
+                    </tr>
+                  
+                    <tr class="text-info">
+                      <td>Unit Test</td>
+                      <td>Continuous: 5e22e009f41fc53cbea094a41de8798f</td>
+                      <td>Continuous Search</td>
+                      <td>SKIPPED</td>
+                    </tr>
+                  
+                
+              
+              
+              </tbody>
+            </table>
+        </div>
+    </div>
+    
+  </div>
+</div>
+
+<footer>
+  <div id="footer">
+    <h6>Global Alliance for Genomics and Health</h6>
+  </div>
+</footer>
+
+</body>
+</html>

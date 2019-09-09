@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://json-schema.org/draft-04/schema#",
+    "title": "RNAGetReqSearchParamsArray",
+    "type": "array",
+    "$ref": "VAR_ARRAY_FILENAME#/definitions/RNAGetReqSearchParamsArray",
+
+    "definitions": {
+        "RNAGetReqSearchParamsArray": {
+            "type": "array",
+            "allOf": [
+                {
+                    "items": {
+                        "type": "object",
+                        "$ref": "VAR_SINGLE_FILENAME#/definitions/RNAGetReqSearchParams"
+                    }                    
+                },
+                {
+                    "minItems": 0
+                }
+            ]
+        }
+    }
+}
