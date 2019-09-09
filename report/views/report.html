@@ -23,33 +23,74 @@
       {% for endpoint in h.s.endpoints %}
         <section id="{{endpoint}}">
           <div class="report-endpoint-section">
-            <h3 class="tab1">{{h.f.capitalize(endpoint)}} 
+            <h3 class="">{{h.f.capitalize(endpoint)}} 
             {% if not server.implemented[endpoint] %}
               not implemented by server
             {% endif %}
             </h3>
 
             {% for ins_key in server.test_results[endpoint].keys() %}
-            <h4 class="tab2">{{h.f.capitalize(h.s.singles[endpoint])}} #{{loop.index}}</h4>
-            <h4 class="tab3">{{h.s.singles[endpoint]}} id: {{ ins_key }}</h4>
+            <h4 class="tab1">{{h.f.capitalize(h.s.singles[endpoint])}} {{loop.index}} id: {{ins_key}}</h4>
+            <p class="tab1">Tests</p>
 
               {% for test in server.test_results[endpoint][ins_key] %}
-                <div class="tr-div tab3">
-                  <p class='tab1 tr-elem tr-p {{ h.s.status[test.result].css_class }}'><i class="fa {{h.s.status[test.result].fa_class}}"></i> {{h.f.format_test_name(test.name)}}: {{ h.s.status[test.result].status }}</p>
-                  <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{test.name}}" aria-expanded="false" aria-controls="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{test.name}}">
-                      <i class="fa fa-info-circle"></i> Info
-                  </button>
-                </div>
                 
-                <div class="collapse" id="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{test.name}}">
-                  <div class="well">
-                    <p><strong>Description:</strong> {{test.full_description}}</p>
-                    <p><strong>Summary:</strong> {{test.text}}</p>
-                    {% for m in test.full_message %}
-                    <p><strong>{{m[0]}}:</strong> {{m[1]}}</p>
-                    {% endfor %}
+                <p class='tab2 {{ h.s.status[test.result].css_class }}'><i class="fa {{h.s.status[test.result].fa_class}}"></i> Test: {{h.f.format_test_name(test.name)}} - {{ h.s.status[test.result].status }}</p>
+                <p class="tab3"><strong>description:</strong> {{test.description}}</p>
+                <p class="tab3"><strong>summary:</strong> {{test.text}}</p>
+                
+                <!-- API Testing -->
+                {% if test.message.has_api_component %}
+                <p class="tab3 {{ h.s.status[test.message.api_component.status].css_class }}">API Route Test Cases - {{ h.s.status[test.message.api_component.status].status }}</p>
+                {% for case in test.message.api_component.cases %}
+                  <p class='tab4 {{ h.s.status[case.status].css_class }}'><i class="fa {{h.s.status[case.status].fa_class}}"></i> API Test Case: {{h.f.format_test_name(case.name)}} - {{ h.s.status[case.status].status }}</p>
+                  <p class='tab5'>case description: {{case.description}}</p>
+                  <p class='tab5'>case summary: {{case.summary}}</p>
+                  {% if case.error_message %}
+                    <p class='tab5'>error message: {{case.error_message}}</p>
+                  {% endif %}
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}" aria-expanded="false" aria-controls="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}">
+                    <div class="well audit-logs">
+                        {% for audit_log in case.audit %}
+                          <p class="audit-message">{{audit_log}}</p>
+                        {% endfor %}
+                    </div>
                   </div>
-                </div>
+                {% endfor %}
+                {% endif %}
+
+                <!-- Content Testing -->
+                {% if test.message.has_content_component %}
+                <p class="tab3 {{ h.s.status[test.message.content_component.status].css_class }}">File Content Test Cases - {{ h.s.status[test.message.content_component.status].status }}</p>
+                {% for case in test.message.content_component.cases %}
+                  <p class='tab4 {{ h.s.status[case.status].css_class }}'><i class="fa {{h.s.status[case.status].fa_class}}"></i> Content Test Case: {{h.f.format_test_name(case.name)}} - {{ h.s.status[case.status].status }}</p>
+                  <p class='tab5'>case description: {{case.description}}</p>
+                  <p class='tab5'>case summary: {{case.summary}}</p>
+                  {% if case.error_message %}
+                    <p class='tab5'>error message: {{case.error_message}}</p>
+                  {% endif %}
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}" aria-expanded="false" aria-controls="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-{{h.f.rm_space(server.server_name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(case.name)}}">
+                    <div class="well audit-logs">
+                        {% for audit_log in case.audit %}
+                          <p class="audit-message">{{audit_log}}</p>
+                        {% endfor %}
+                    </div>
+                  </div>
+                {% endfor %}
+                {% endif %}
+
               {% endfor %}
             {% endfor %}
           </div>

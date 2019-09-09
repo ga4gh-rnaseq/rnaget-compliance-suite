@@ -10,6 +10,16 @@ body {
   padding-bottom: 6rem;
   min-height: 100%;
 }
+
+.audit-logs {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.audit-message {
+  margin: 0;
+  word-break: break-all;
+}
+
 .report-endpoint-section {
   /* border: 1px solid #aaa; */
   border-radius: 10px;
@@ -24,14 +34,24 @@ body {
   text-decoration: underline;
 }
 .tab1 {
-  text-indent: 8px;
+  padding-left: 12px;
 }
 .tab2 {
-  text-indent: 16px;
+  padding-left: 24px;
 }
 .tab3 {
-  text-indent: 24px;
+  padding-left: 36px;
 }
+.tab4 {
+  padding-left: 48px;
+}
+.tab5 {
+  padding-left: 60px;
+}
+.tab6 {
+  padding-left: 72px;
+}
+
 .tr-div {
   display: block;
   margin-bottom: 5.0px;
