@@ -1,7 +1,7 @@
 import setuptools
 
 NAME = "ga4gh-rnaget-compliance"
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 AUTHOR = "Jeremy Adams"
 EMAIL = "jeremy.adams@ga4gh.org"
 
@@ -37,8 +37,11 @@ setuptools.setup(
         rnaget-compliance=compliance_suite.cli:main
     ''',
     classifiers=(
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
+        "Natural Language :: English",
+        "Topic :: Scientific/Engineering :: Bio-Informatics"
     ),
 )

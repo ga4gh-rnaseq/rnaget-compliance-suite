@@ -3,7 +3,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/github/ga4gh-rnaseq/rnaget-compliance-suite.svg?style=flat-square)](https://coveralls.io/github/ga4gh-rnaseq/rnaget-compliance-suite)
 [![Read the Docs](https://img.shields.io/readthedocs/rnaget-compliance-suite.svg?style=flat-square)](https://rnaget-compliance-suite.readthedocs.io/en/latest/)
 ![PyPI](https://img.shields.io/pypi/v/ga4gh-rnaget-compliance?style=flat-square)
-[![Python 3.6](https://img.shields.io/badge/python-3.7-blue.svg?style=flat-square)](https://www.python.org)
+[![Python 3.6](https://img.shields.io/badge/python-3.6%20|%203.7-blue.svg?style=flat-square)](https://www.python.org)
 
 # RNAget Compliance Suite
 
@@ -18,5 +18,9 @@ RNAget maintains an up-to-date report of the compliance status of its reference 
 
 ## Installation and Usage
 
-Please review the [Compliance Documentation](https://rnaget-compliance-suite.readthedocs.io/en/latest/utility/installation.html) for 
+Please review the [Compliance Documentation](https://rnaget-compliance-suite.readthedocs.io/en/latest/) for 
 installation and usage instructions.
+
+## Additional Resources
+
+1. [PyPI](https://pypi.org/project/ga4gh-rnaget-compliance/) - The RNAget Compliance Utility is available on the Python Package Index (PyPI)

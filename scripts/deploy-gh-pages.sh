@@ -4,10 +4,7 @@ set -e # exit with non-zero exit code if anything fails
 
 # only run script if travis branch is master
 # and this is NOT a PR
-echo "***"
-echo "$TRAVIS_PYTHON_VERSION"
-echo "***"
-if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then
+if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_PYTHON_VERSION == "3.7" ]]; then
 
 # takes the reference implementation yaml file, and replaces placeholder tokens
 # with the real token stored in secured travis settings 
