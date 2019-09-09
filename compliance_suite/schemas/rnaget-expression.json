@@ -27,9 +27,6 @@
           "url": {
             "type": "string"
           },
-          "url": {
-            "type": "string"
-          },
           "units": {
             "type": "string"
           }
