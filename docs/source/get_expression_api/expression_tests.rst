@@ -182,7 +182,6 @@ Search Expressions by Format
    [
      {
        "tags": [],
-       "id": "2a7ab5533ef941eaa59edbfe887b58c4",
        "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
        "url": "/path/to/E-MTAB-5423-query-results.tpms.loom",
        "units": "TPM",
@@ -193,7 +192,6 @@ Search Expressions by Format
        "tags": [
          "RNAgetCompliance"
        ],
-       "id": "ac3e9279efd02f1c98de4ed3d335b98e",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/path/to/expression.loom",
        "units": "TPM",
@@ -230,7 +228,6 @@ Search Expressions With All Filters
        "tags": [
          "RNAgetCompliance"
        ],
-       "id": "ac3e9279efd02f1c98de4ed3d335b98e",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/path/to/expression.loom",
        "units": "TPM",
@@ -267,7 +264,6 @@ Search Expressions With Single Filter, 1
        "tags": [
          "RNAgetCompliance"
        ],
-       "id": "ac3e9279efd02f1c98de4ed3d335b98e",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/path/to/expression.loom",
        "units": "TPM",
@@ -304,7 +300,6 @@ Search Expressions With Single Filter, 2
        "tags": [
          "RNAgetCompliance"
        ],
-       "id": "ac3e9279efd02f1c98de4ed3d335b98e",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/path/to/expression.loom",
        "units": "TPM",
@@ -391,7 +386,6 @@ Expression Search Filetypes Match
    [
      {
        "tags": [],
-       "id": "2a7ab5533ef941eaa59edbfe887b58c4",
        "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
        "url": "/path/to/E-MTAB-5423-query-results.tpms.loom",
        "units": "TPM",
@@ -402,7 +396,6 @@ Expression Search Filetypes Match
        "tags": [
          "RNAgetCompliance"
        ],
-       "id": "ac3e9279efd02f1c98de4ed3d335b98e",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/path/to/expression.loom",
        "units": "TPM",

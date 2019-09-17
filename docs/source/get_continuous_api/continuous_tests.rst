@@ -257,7 +257,6 @@ Search Continuous by Format
 
    [
      {
-       "id": "fa057c6d18c44960a1b8b49d065b3889",
        "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
        "url": "/path/to/signal-query-results.loom",
        "version": "1.0",
@@ -267,7 +266,6 @@ Search Continuous by Format
        "fileType": "loom"
      },
      {
-       "id": "5e22e009f41fc53cbea094a41de8798f",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/path/to/continuous.loom",
        "version": "1.0",
@@ -303,7 +301,6 @@ Search Continuous With All Filters
 
    [
      {
-       "id": "5e22e009f41fc53cbea094a41de8798f",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/path/to/continuous.loom",
        "version": "1.0",
@@ -339,7 +336,6 @@ Search Continuous With Single Filter, 1
 
    [
      {
-       "id": "fa057c6d18c44960a1b8b49d065b3889",
        "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
        "url": "/path/to/signal-query-results.loom",
        "version": "1.0",
@@ -349,7 +345,6 @@ Search Continuous With Single Filter, 1
        "fileType": "loom"
      },
      {
-       "id": "5e22e009f41fc53cbea094a41de8798f",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/path/to/continuous.loom",
        "version": "1.0",
@@ -385,7 +380,6 @@ Search Continuous With Single Filter, 2
 
    [
      {
-       "id": "5e22e009f41fc53cbea094a41de8798f",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/path/to/continuous.loom",
        "version": "1.0",
@@ -473,7 +467,6 @@ Continuous Search Filetypes Match
 
    [
      {
-       "id": "fa057c6d18c44960a1b8b49d065b3889",
        "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
        "url": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom",
        "version": "1.0",
@@ -483,7 +476,6 @@ Continuous Search Filetypes Match
        "fileType": "loom"
      },
      {
-       "id": "5e22e009f41fc53cbea094a41de8798f",
        "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "url": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom",
        "version": "1.0",
