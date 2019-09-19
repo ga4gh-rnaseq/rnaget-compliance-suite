@@ -544,17 +544,18 @@ correct data has been returned.
 Expression Content Test Cases
 ------------------------------
 
+.. * `Expression Search, Slice by minExpression`_
+.. * `Expression Search, Slice by maxExpression`_
+.. * `Expression Search, Slice by featureIDList, sampleIDList, and minExpression`_
+.. * `Expression Search, Slice by featureIDList, sampleIDList, and maxExpression`_
+.. * `Expression Search, Slice by featureIDList, sampleIDList, minExpression, and maxExpression`_
+
 * `Expression Get Content`_
 * `Expression Search, Slice by featureIDList`_
 * `Expression Search, Slice by featureNameList`_
 * `Expression Search, Slice by sampleIDList`_
-* `Expression Search, Slice by minExpression`_
-* `Expression Search, Slice by maxExpression`_
 * `Expression Search, Slice by featureIDList and sampleIDList`_
 * `Expression Search, Slice by featureNameList and sampleIDList`_
-* `Expression Search, Slice by featureIDList, sampleIDList, and minExpression`_
-* `Expression Search, Slice by featureIDList, sampleIDList, and maxExpression`_
-* `Expression Search, Slice by featureIDList, sampleIDList, minExpression, and maxExpression`_
 
 Expression Get Content
 #######################
@@ -620,37 +621,37 @@ Expression Search, Slice by sampleIDList
 * **Success Criteria:** Downloaded matrix contains ONLY samples (columns) requested in sampleIDList
 * **Failure Criteria:** Downloaded matrix DOES NOT contain ONLY samples (columns) requested in sampleIDList
 
-Expression Search, Slice by minExpression
-##############################################
-* **Route:** :code:`/expressions/search`
-* **Description:** Subset test expression matrix by minExpression, check that all expression values are above minExpression thresholds for each gene
-* **Rationale:** Asserts search endpoint correctly subsets expression matrix by minExpression
+.. Expression Search, Slice by minExpression
+.. ##############################################
+.. * **Route:** :code:`/expressions/search`
+.. * **Description:** Subset test expression matrix by minExpression, check that all expression values are above minExpression thresholds for each gene
+.. * **Rationale:** Asserts search endpoint correctly subsets expression matrix by minExpression
 
-* **Request:**
+.. * **Request:**
 
-.. code-block:: python
+.. .. code-block:: python
 
-   GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&minExpression=[{"threshold": 100,"featureName": "CLIC1"},{"threshold": 50,"featureName": "TSPAN6"},{"threshold": 30,"featureName": "LTV1"}]
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+..    GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&minExpression=[{"threshold": 100,"featureName": "CLIC1"},{"threshold": 50,"featureName": "TSPAN6"},{"threshold": 30,"featureName": "LTV1"}]
+..    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
-* **Success Criteria:** Downloaded matrix expression values are above minExpression thresholds for each gene
-* **Failure Criteria:** Downloaded matrix expression values are NOT above minExpression thresholds for each gene
+.. * **Success Criteria:** Downloaded matrix expression values are above minExpression thresholds for each gene
+.. * **Failure Criteria:** Downloaded matrix expression values are NOT above minExpression thresholds for each gene
 
-Expression Search, Slice by maxExpression
-##############################################
-* **Route:** :code:`/expressions/search`
-* **Description:** Subset test expression matrix by maxExpression, check that all expression values are below maxExpression thresholds for each gene
-* **Rationale:** Asserts search endpoint correctly subsets expression matrix by maxExpression
+.. Expression Search, Slice by maxExpression
+.. ##############################################
+.. * **Route:** :code:`/expressions/search`
+.. * **Description:** Subset test expression matrix by maxExpression, check that all expression values are below maxExpression thresholds for each gene
+.. * **Rationale:** Asserts search endpoint correctly subsets expression matrix by maxExpression
 
-* **Request:**
+.. * **Request:**
 
-.. code-block:: python
+.. .. code-block:: python
 
-   GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&maxExpression=[{"threshold": 500,"featureName": "CLIC1"},{"threshold": 80,"featureName": "TSPAN6"},{"threshold": 50,"featureName": "LTV1"},{"threshold": 50,"featureName": "TRIM22"},{"threshold": 50,"featureName": "NCOA5"}]
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+..    GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&maxExpression=[{"threshold": 500,"featureName": "CLIC1"},{"threshold": 80,"featureName": "TSPAN6"},{"threshold": 50,"featureName": "LTV1"},{"threshold": 50,"featureName": "TRIM22"},{"threshold": 50,"featureName": "NCOA5"}]
+..    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
-* **Success Criteria:** Downloaded matrix expression values are below maxExpression thresholds for each gene
-* **Failure Criteria:** Downloaded matrix expression values are NOT below maxExpression thresholds for each gene
+.. * **Success Criteria:** Downloaded matrix expression values are below maxExpression thresholds for each gene
+.. * **Failure Criteria:** Downloaded matrix expression values are NOT below maxExpression thresholds for each gene
 
 Expression Search, Slice by featureIDList and sampleIDList
 #############################################################
@@ -684,51 +685,51 @@ Expression Search, Slice by featureNameList and sampleIDList
 * **Success Criteria:** Downloaded matrix contains only genes from featureNameList AND samples from sampleIDList
 * **Failure Criteria:** Downloaded matrix DOES NOT contain only genes from featureNameList OR samples from sampleIDList
 
-Expression Search, Slice by featureIDList, sampleIDList, and minExpression
-############################################################################
-* **Route:** :code:`/expressions/search`
-* **Description:** Subset test expression matrix by featureIDList, sampleIDList, and minExpression, check that only requested genes and samples are in downloaded matrix AND expression values are above minExpression thresholds for each gene
-* **Rationale:** Asserts search endpoint correctly subsets expression matrix featureNameList, sampleIDList, and minExpression
+.. Expression Search, Slice by featureIDList, sampleIDList, and minExpression
+.. ############################################################################
+.. * **Route:** :code:`/expressions/search`
+.. * **Description:** Subset test expression matrix by featureIDList, sampleIDList, and minExpression, check that only requested genes and samples are in downloaded matrix AND expression values are above minExpression thresholds for each gene
+.. * **Rationale:** Asserts search endpoint correctly subsets expression matrix featureNameList, sampleIDList, and minExpression
 
-* **Request:**
+.. * **Request:**
 
-.. code-block:: python
+.. .. code-block:: python
 
-   GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&featureIDList=ENSG00000110876,ENSG00000145740,ENSG00000106278,ENSG00000186501,ENSG00000198677,ENSG00000124160,ENSG00000132274,ENSG00000135521,ENSG00000000003,ENSG00000213719&sampleIDList=DO472 - primary tumour,DO1954 - primary tumour,DO2503 - primary tumour,DO220478 - normal,DO219106 - primary tumour,DO37259 - primary tumour,DO9042 - primary tumour,DO40948 - primary tumour,DO42881 - primary tumour,DO43811 - primary tumour&minExpression=[{"threshold": 400,"featureName": "CLIC1"},{"threshold": 140,"featureName": "TSPAN6"},{"threshold": 35,"featureName": "LTV1"}]
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+..    GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&featureIDList=ENSG00000110876,ENSG00000145740,ENSG00000106278,ENSG00000186501,ENSG00000198677,ENSG00000124160,ENSG00000132274,ENSG00000135521,ENSG00000000003,ENSG00000213719&sampleIDList=DO472 - primary tumour,DO1954 - primary tumour,DO2503 - primary tumour,DO220478 - normal,DO219106 - primary tumour,DO37259 - primary tumour,DO9042 - primary tumour,DO40948 - primary tumour,DO42881 - primary tumour,DO43811 - primary tumour&minExpression=[{"threshold": 400,"featureName": "CLIC1"},{"threshold": 140,"featureName": "TSPAN6"},{"threshold": 35,"featureName": "LTV1"}]
+..    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
-* **Success Criteria:** Downloaded matrix contains ONLY genes from featureNameList AND samples from sampleIDList AND values are above minExpression thresholds for each gene
-* **Failure Criteria:** Downloaded matrix DOES NOT contain ONLY genes from featureNameList OR samples from sampleIDList OR values are NOT above minExpression thresholds for each gene
+.. * **Success Criteria:** Downloaded matrix contains ONLY genes from featureNameList AND samples from sampleIDList AND values are above minExpression thresholds for each gene
+.. * **Failure Criteria:** Downloaded matrix DOES NOT contain ONLY genes from featureNameList OR samples from sampleIDList OR values are NOT above minExpression thresholds for each gene
 
-Expression Search, Slice by featureIDList, sampleIDList, and maxExpression
-############################################################################
-* **Route:** :code:`/expressions/search`
-* **Description:** Subset test expression matrix by featureIDList, sampleIDList, and maxExpression, check that only requested genes and samples are in downloaded matrix AND expression values are below maxExpression thresholds for each gene
-* **Rationale:** Asserts search endpoint correctly subsets expression matrix featureNameList, sampleIDList, and maxExpression
+.. Expression Search, Slice by featureIDList, sampleIDList, and maxExpression
+.. ############################################################################
+.. * **Route:** :code:`/expressions/search`
+.. * **Description:** Subset test expression matrix by featureIDList, sampleIDList, and maxExpression, check that only requested genes and samples are in downloaded matrix AND expression values are below maxExpression thresholds for each gene
+.. * **Rationale:** Asserts search endpoint correctly subsets expression matrix featureNameList, sampleIDList, and maxExpression
 
-* **Request:**
+.. * **Request:**
 
-.. code-block:: python
+.. .. code-block:: python
 
-   GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&featureIDList=ENSG00000110876,ENSG00000145740,ENSG00000106278,ENSG00000186501,ENSG00000198677,ENSG00000124160,ENSG00000132274,ENSG00000135521,ENSG00000000003,ENSG00000213719&sampleIDList=DO45161 - primary tumour,DO45217 - primary tumour,DO28763 - primary tumour,DO46342 - primary tumour,DO46366 - primary tumour,DO46380 - primary tumour,DO46408 - primary tumour,DO46556 - recurrent tumour,DO46597 - primary tumour,DO34608 - primary tumour&maxExpression=[{"threshold": 1500,"featureName": "CLIC1"},{"threshold": 450,"featureName": "TSPAN6"},{"threshold": 300,"featureName": "LTV1"}]
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+..    GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&featureIDList=ENSG00000110876,ENSG00000145740,ENSG00000106278,ENSG00000186501,ENSG00000198677,ENSG00000124160,ENSG00000132274,ENSG00000135521,ENSG00000000003,ENSG00000213719&sampleIDList=DO45161 - primary tumour,DO45217 - primary tumour,DO28763 - primary tumour,DO46342 - primary tumour,DO46366 - primary tumour,DO46380 - primary tumour,DO46408 - primary tumour,DO46556 - recurrent tumour,DO46597 - primary tumour,DO34608 - primary tumour&maxExpression=[{"threshold": 1500,"featureName": "CLIC1"},{"threshold": 450,"featureName": "TSPAN6"},{"threshold": 300,"featureName": "LTV1"}]
+..    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
-* **Success Criteria:** Downloaded matrix contains ONLY genes from featureNameList AND samples from sampleIDList AND values are below maxExpression thresholds for each gene
-* **Failure Criteria:** Downloaded matrix DOES NOT contain ONLY genes from featureNameList OR samples from sampleIDList OR values are NOT below maxExpression thresholds for each gene
+.. * **Success Criteria:** Downloaded matrix contains ONLY genes from featureNameList AND samples from sampleIDList AND values are below maxExpression thresholds for each gene
+.. * **Failure Criteria:** Downloaded matrix DOES NOT contain ONLY genes from featureNameList OR samples from sampleIDList OR values are NOT below maxExpression thresholds for each gene
 
-Expression Search, Slice by featureIDList, sampleIDList, minExpression, and maxExpression
-############################################################################################
-* **Route:** :code:`/expressions/search`
-* **Description:** Subset test expression matrix by featureIDList, sampleIDList, minExpression, maxExpression, check that only requested genes and samples are in downloaded matrix AND expression values are above minExpression thresholds for each gene AND expression values are below maxExpression thresholds for each gene
-* **Rationale:** Asserts search endpoint correctly subsets expression matrix featureNameList, sampleIDList, minExpression, and maxExpression
+.. Expression Search, Slice by featureIDList, sampleIDList, minExpression, and maxExpression
+.. ############################################################################################
+.. * **Route:** :code:`/expressions/search`
+.. * **Description:** Subset test expression matrix by featureIDList, sampleIDList, minExpression, maxExpression, check that only requested genes and samples are in downloaded matrix AND expression values are above minExpression thresholds for each gene AND expression values are below maxExpression thresholds for each gene
+.. * **Rationale:** Asserts search endpoint correctly subsets expression matrix featureNameList, sampleIDList, minExpression, and maxExpression
 
-* **Request:**
+.. * **Request:**
 
-.. code-block:: python
+.. .. code-block:: python
 
-   GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&featureIDList=ENSG00000110876,ENSG00000145740,ENSG00000106278,ENSG00000186501,ENSG00000198677,ENSG00000124160,ENSG00000132274,ENSG00000135521,ENSG00000000003,ENSG00000213719&sampleIDList=DO45161 - primary tumour,DO45217 - primary tumour,DO28763 - primary tumour,DO46342 - primary tumour,DO46366 - primary tumour,DO46380 - primary tumour,DO46408 - primary tumour,DO46556 - recurrent tumour,DO46597 - primary tumour,DO34608 - primary tumour&minExpression=[{"threshold": 400,"featureName": "CLIC1"},{"threshold": 140,"featureName": "TSPAN6"},{"threshold": 35,"featureName": "LTV1"}]&maxExpression=[{"threshold": 1500,"featureName": "CLIC1"},{"threshold": 450,"featureName": "TSPAN6"},{"threshold": 300,"featureName": "LTV1"}]
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+..    GET /expressions/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&featureIDList=ENSG00000110876,ENSG00000145740,ENSG00000106278,ENSG00000186501,ENSG00000198677,ENSG00000124160,ENSG00000132274,ENSG00000135521,ENSG00000000003,ENSG00000213719&sampleIDList=DO45161 - primary tumour,DO45217 - primary tumour,DO28763 - primary tumour,DO46342 - primary tumour,DO46366 - primary tumour,DO46380 - primary tumour,DO46408 - primary tumour,DO46556 - recurrent tumour,DO46597 - primary tumour,DO34608 - primary tumour&minExpression=[{"threshold": 400,"featureName": "CLIC1"},{"threshold": 140,"featureName": "TSPAN6"},{"threshold": 35,"featureName": "LTV1"}]&maxExpression=[{"threshold": 1500,"featureName": "CLIC1"},{"threshold": 450,"featureName": "TSPAN6"},{"threshold": 300,"featureName": "LTV1"}]
+..    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
-* **Success Criteria:** Downloaded matrix contains ONLY genes from featureNameList AND samples from sampleIDList AND values are above minExpression thresholds for each gene AND values are below maxExpression thresholds for each gene
-* **Failure Criteria:** Downloaded matrix DOES NOT contain ONLY genes from featureNameList OR samples from sampleIDList OR values are NOT above minExpression thresholds for each gene OR values are NOT below maxExpression thresholds for each gene
+.. * **Success Criteria:** Downloaded matrix contains ONLY genes from featureNameList AND samples from sampleIDList AND values are above minExpression thresholds for each gene AND values are below maxExpression thresholds for each gene
+.. * **Failure Criteria:** Downloaded matrix DOES NOT contain ONLY genes from featureNameList OR samples from sampleIDList OR values are NOT above minExpression thresholds for each gene OR values are NOT below maxExpression thresholds for each gene
 
