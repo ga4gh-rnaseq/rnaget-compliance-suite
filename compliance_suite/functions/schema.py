@@ -112,9 +112,16 @@ def schema_require_matching_search_params(runner, node, params, full=True):
     schemas_by_obj_type = {
         "projects": "rnaget-project.json",
         "studies": "rnaget-study.json",
-        "expressions": "rnaget-expression.json",
-        "continuous": "rnaget-continuous.json"
+        "expressions": "rnaget-ticket.json",
+        "continuous": "rnaget-ticket.json"
     }
+    array_or_single_by_obj_type = {
+        "projects": "array",
+        "studies": "array",
+        "expressions": "single",
+        "continuous": "single"
+    }
+
     obj_type = node.kwargs["obj_type"]
     obj_id = node.kwargs["obj_instance"]["id"]
 
@@ -150,8 +157,12 @@ def schema_require_matching_search_params(runner, node, params, full=True):
 
     render_endpoint_object_and_array(obj_filename, obj_template, obj_replace_l,
         arr_filename, arr_template, arr_replace_l, value, full=full)
+
+    ret = arr_filename
+    if array_or_single_by_obj_type[obj_type] == "single":
+        ret = obj_filename
     
-    return arr_filename
+    return ret
 
 def schema_require_matching_search_params_allow_empty(runner, node, params):
     """Generate schema requiring matching params, allow empty arrays

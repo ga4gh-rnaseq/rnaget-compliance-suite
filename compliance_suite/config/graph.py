@@ -24,7 +24,7 @@ TEST_GRAPH = {
     "projects": {
         "base": {
             "project_get": {},
-            "project_search_filters": {
+            "project_filters": {
                 "project_search": {}
             }
         }
@@ -32,28 +32,31 @@ TEST_GRAPH = {
     "studies": {
         "base": {
             "study_get": {},
-            "study_search_filters": {
+            "study_filters": {
                 "study_search": {}
             }
         }
     },
     "expressions": {
         "base": {
-            "expression_get": {
-                "expression_formats": {
-                    "expression_search_filters": {
-                        "expression_search": {}
-                    }
+            "expression_formats": {
+                "single_expression_ticket": {},
+                "single_expression_bytes": {},
+                "expression_filters": {
+                    "multi_expression_ticket": {},
+                    "multi_expression_bytes": {}
                 }
-            },
+            }
         }
     },
     "continuous": {
         "base": {
-            "continuous_get": {},
             "continuous_formats": {
-                "continuous_search_filters": {
-                    "continuous_search": {}
+                "single_continuous_ticket": {},
+                # "single_continuous_bytes": {},
+                "continuous_filters": {
+                    # "multi_continuous_ticket": {},
+                    # "multi_continuous_bytes": {}
                 }
             }
         }

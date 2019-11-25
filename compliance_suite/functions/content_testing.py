@@ -43,38 +43,19 @@ def download_attachment(function):
 
         # assign url and request params
         result = {"status": 1, "message": ""}
-        url = content_case.get_mature_url()
         c = content_case.case_params
-        request_params = {}
+
         if "request_params_func" in c.keys():
             request_params = c["request_params_func"](content_case)
 
         try:
-            content_case.append_audit("Request URL: " + url)
-            content_case.append_audit(
-                "Request Headers:" + str(sanitize_dict(content_case.headers)))
-            content_case.append_audit("Request Params: " + str(request_params))
 
-            # make the request for expression object, and get the download URL
-            # from the "URL" property
-            # write the file content to a temporary file for subsequent
-            # content checking
-            response = requests.get(url, headers=content_case.headers,
-                params=request_params)
-            
-            if re.compile("json").search(response.headers["Content-Type"]):
-                content_case.append_audit("Response Body: " 
-                    + str(response.text))
-            download_url = c["download_url"](response)
-            content_case.append_audit("Matrix Download URL: " + download_url)
-            r = requests.get(download_url, headers=content_case.headers,
-                allow_redirects=True)
-
+            matrix_bytes = c["download_func"](content_case)
             if os.path.exists(c["tempfile"]):
                 os.remove(c["tempfile"])
 
             file_write = open(c["tempfile"], 'wb')
-            file_write.write(r.content)
+            file_write.write(matrix_bytes)
             file_write.close()
 
             # get the attribute handler based on object type and file format
@@ -94,13 +75,16 @@ def download_attachment(function):
             content_case.set_error_message("Error parsing expression json and "
                 + "download url: " + str(e))
             content_case.append_audit(str(e))
+        finally:
+            if os.path.exists(c["tempfile"]):
+                os.remove(c["tempfile"])
 
         return result
 
     return wrapper
 
 @download_attachment
-def expression_get_case(content_case):
+def expression_value_test_case(content_case):
     """Assertion function for 'Expression Get' Content test cases
 
     Arguments:
@@ -151,7 +135,7 @@ def expression_get_case(content_case):
     return result
 
 @download_attachment
-def expression_search_case(content_case):
+def expression_slice_test_case(content_case):
     """Assertion function for 'Expression Search' Content test cases
 
     Arguments:

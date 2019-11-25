@@ -223,6 +223,15 @@ def switch_format_param(test, runner):
         filters["format"] = "loom"
     return filters
 
+def expression_slice_params(content_case):
+    c = content_case.case_params
+    slice_params = ["featureIDList", "featureNameList", "sampleIDList"]
+    filters = {}
+    for slice_param in slice_params:
+        if slice_param in c.keys():
+            filters[slice_param] = ",".join(c[slice_param])
+    return filters
+
 def all_supported_filters_format_and_slice_params(content_case):
     """Get supported filters, format, and matrix slicing parameters
 

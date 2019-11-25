@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "http://json-schema.org/draft-04/schema#",
+  "title": "RNAGetTicket",
+  "type": "object",
+  "$ref": "rnaget-ticket.json#/definitions/RNAGetTicket",
+
+  "definitions": {
+    "RNAGetTicket": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "studyID": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "units": {
+          "type": "string"
+        },
+        "headers": {
+          "type": "object"
+        },
+        "md5": {
+          "type": "string"
+        }
+      },
+
+      "required": [
+          "url",
+          "units"
+      ],
+      "additionalProperties": true
+    }
+  }
+}
