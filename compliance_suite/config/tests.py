@@ -130,7 +130,7 @@ TESTS_DICT = {
             "cases": [
                 {
                     "name": "Search Projects Without Filters",
-                    "description": "request /projects/search without any "
+                    "description": "request /projects without any "
                         + "parameter filters. checks content type "
                         + "and status code (200). validates "
                         + "response body matches project array "
@@ -145,7 +145,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Search Projects With All Filters",
-                    "description": "request /projects/search using all "
+                    "description": "request /projects using all "
                         + "server-supported project filters. checks content "
                         + "type and status code (200). validates response body "
                         + "matches project array schema.",
@@ -161,7 +161,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Search Projects With Single Filter, 1",
-                    "description": "request /projects/search using the first "
+                    "description": "request /projects using the first "
                         + "parameter filter supported by server. checks "
                         + "type and status code (200). validates response body "
                         + "matches project array schema",
@@ -177,7 +177,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Search Projects With Single Filter, 2",
-                    "description": "request /projects/search using the second "
+                    "description": "request /projects using the second "
                         + "parameter filter supported by server. checks "
                         + "type and status code (200). validates response body "
                         + "matches project array schema",
@@ -193,7 +193,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Project Search Filters Non-Matching Resources",
-                    "description": "request /projects/search using filters "
+                    "description": "request /projects using filters "
                         + "that do not apply to any project. "
                         + "checks content type and status code (200). "
                         + "validates response body is an empty array.",
@@ -904,15 +904,14 @@ TESTS_DICT = {
                 },
 
                 {
-                    "name": "Expression Ticket - Filetypes Match",
+                    "name": "Expression Ticket - Filetype Matches",
                     "description": "request /expressions/tickets endpoint with "
                         + "'format' parameter specified. checks "
                         + "content type and status code (200). validates "
-                        + "ticket objects in response body contain a "
-                        + "fileType that matches the requested format.",
-                    "summary_pass": "Expression Ticket fileTypes match request "
-                        + "format",
-                    "summary_fail": "Expression Ticket fileTypes DO NOT match "
+                        + "ticket fileType matches requested format.",
+                    "summary_pass": "Expression Ticket fileType matches "
+                        + "request format",
+                    "summary_fail": "Expression Ticket fileType DOES NOT match "
                         + "request format",
                     "summary_skip": "'Expression Ticket - Filetypes Match' "
                         + "skipped",
@@ -1373,8 +1372,10 @@ TESTS_DICT = {
                 },
 
                 {
-                    "name": "Continuous Get Start Specified Without Chr",
-                    "description": "request /continuous/:id, specifying start " 
+                    "name": "Single Continuous Ticket - Start Specified "
+                        + "Without Chr",
+                    "description": "request /continuous/:id/tickets, "
+                        + "specifying start " 
                         + "parameter without chr. checks content type and "
                         + "status code (400). validates response body matches "
                         + "error schema",
@@ -1385,17 +1386,16 @@ TESTS_DICT = {
                         + "when start is specified without chr",
                     "summary_skip": "'Continuous Get Start Specified Without "
                         + "Chr' skipped",
-                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/tickets",
                     "schema_file": c.SCHEMA_FILE_ERROR,
-                    "use_default_media_types": True,
-                    "media_types": ["application/vnd.loom", 
-                                    "text/tab-separated-values"],
                     "expected_status": [400]
                 },
 
                 {
-                    "name": "Continuous Get End Specified Without Chr",
-                    "description": "request /continuous/:id, specifying end " 
+                    "name": "Single Continuous Ticket - End Specified Without "
+                        + "Chr",
+                    "description": "request /continuous/:id/tickets, "
+                        + "specifying end " 
                         + "parameter without chr. checks content type and "
                         + "status code (400). validates response body matches "
                         + "error schema",
@@ -1406,17 +1406,15 @@ TESTS_DICT = {
                         + "when end is specified without chr",
                     "summary_skip": "'Continuous Get End Specified Without "
                         + "Chr' skipped",
-                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/tickets",
                     "schema_file": c.SCHEMA_FILE_ERROR,
-                    "use_default_media_types": True,
-                    "media_types": ["application/vnd.loom", 
-                                    "text/tab-separated-values"],
                     "expected_status": [400]
                 },
 
                 {
-                    "name": "Continuous Get Start Greater Than End",
-                    "description": "request /continuous/:id, specifying chr, " 
+                    "name": "Single Continuous Ticket - Start Greater Than End",
+                    "description": "request /continuous/:id/tickets, "
+                        + "specifying chr, " 
                         + "start, and end parameters, but start is greater " 
                         + "than end. checks content type and status code "
                         + "(501). validates response body matches error schema",
@@ -1429,11 +1427,8 @@ TESTS_DICT = {
                         + "when start is greater than end",
                     "summary_skip": "'Continuous Get Start Greater Than End' "
                         + "skipped",
-                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/tickets",
                     "schema_file": c.SCHEMA_FILE_ERROR,
-                    "use_default_media_types": True,
-                    "media_types": ["application/vnd.loom", 
-                                    "text/tab-separated-values"],
                     "expected_status": [501]
                 }
             ]
@@ -1441,314 +1436,322 @@ TESTS_DICT = {
 
         "content": {
             "global_properties": {
-                "function": cf.continuous_get_case,
-                "tempfile": "continuous_get_content_test.loom",
-                "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID",
-                "download_url": lambda response: response.url,
-                "request_params_func": \
-                    pf.chr_start_end,
+                "tempfile": "single_continuous_ticket_content_test.loom",
+                "description": "Assert continuous rows, columns, and cell "
+                    + "values match expected",
+                "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/tickets",
                 "summary_pass": "Continuous matrix content matches expected",
                 "summary_fail": "Continuous matrix content DOES NOT match "
                     + "expected",
                 "summary_skip": "'Continuous Get Content' test case skipped",
+                "download_func": dm.download_from_ticket,
+                "request_params_func": \
+                    pf.chr_start_end,
             },
 
             "cases": [
-
-                # Value assertion case 1
-                {
-                    "name": "Continuous Get Content, Assert Correct Values, 1",
-                    "description": "Assert continuous rows, columns, and cell "
-                        + "values match expected",
-                    "assert_values": [
-                        {
-                            "i": { # input to assertion function,
-                                   # ie attribute values from downloaded matrix
-                                "r": 1, # row
-                                "c": 20 # col
-                            },
-                            "o": { # output, or expected values
-                                "Track": "61729_test", # expected val at row 1
-                                "Position": "chr1:20",
-                                "Value": 8.904
-                            }
-                        },
-
-                        {
-                            "i": {
-                                "r": 0,
-                                "c": 5
-                            },
-                            "o": {
-                                "Track": "61721_test",
-                                "Position": "chr1:5",
-                                "Value": 6.205
-                            } 
-                        },
-
-                        {
-                            "i": {
-                                "r": 2,
-                                "c": 212
-                            },
-                            "o": {
-                                "Track": "61733_test",
-                                "Position": "chr5:143",
-                                "Value": 8.779
-                            } 
-                        },
-
-                        {
-                            "i": {
-                                "r": 3,
-                                "c": 159
-                            },
-                            "o": {
-                                "Track": "61737_test",
-                                "Position": "chr5:90",
-                                "Value": 24.704
-                            } 
-                        },
-
-                        {
-                            "i": {
-                                "r": 1,
-                                "c": 66
-                            },
-                            "o": {
-                                "Track": "61729_test",
-                                "Position": "chr1:66",
-                                "Value": 6.975
-                            } 
-                        }
-                    ]
-                },
-
-                # Chromosome assertion cases 1 and 2
-                {
-                    "name": "Continuous Get Content, chr, 1",
-                    "description": "Assert positions in continuous matrix "
-                        + "are all of same chromosome as requested",
-                    "chr": "chr1"
-                },
-
-                {
-                    "name": "Continuous Get Content, chr, 2",
-                    "description": "Assert positions in continuous matrix "
-                        + "are all of same chromosome as requested",
-                    "chr": "chr5"
-                },
-
-                # Chromosome and start assertion cases 1 and 2
-                {
-                    "name": "Continuous Get Content, chr and start, 1",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr1",
-                    "start": "32"
-                },
-
-                {
-                    "name": "Continuous Get Content, chr and start, 2",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr5",
-                    "start": "100"
-                },
-
-                # Chromosome and end assertion cases 1 and 2
-                {
-                    "name": "Continuous Get Content, chr and end, 1",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr1",
-                    "end": "22"
-                },
-
-                {
-                    "name": "Continuous Get Content, chr and end, 2",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr5",
-                    "end": "49"
-                },
-                
-                # Chromosome, start, and end assertion cases 1 and 2
-                {
-                    "name": "Continuous Get Content, chr, start, and end, 1",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr1",
-                    "start": "30",
-                    "end": "50"
-                },
-
-                {
-                    "name": "Continuous Get Content, chr, start, and end, 2",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr5",
-                    "start": "69",
-                    "end": "117"
-                }
+                dict(cti.CONTINUOUS_VALUE_1,
+                     name="Single Continuous Ticket - " 
+                     + cti.CONTINUOUS_VALUE_1["name"]),
+                dict(cti.CONTINUOUS_VALUE_2,
+                     name="Single Continuous Ticket - " 
+                     + cti.CONTINUOUS_VALUE_2["name"]),
+                dict(cti.CONTINUOUS_VALUE_3,
+                     name="Single Continuous Ticket - " 
+                     + cti.CONTINUOUS_VALUE_3["name"]),
+                dict(cti.CONTINUOUS_SLICE_1,
+                     name="Single Continuous Ticket - " 
+                     + cti.CONTINUOUS_SLICE_1["name"]),
+                dict(cti.CONTINUOUS_SLICE_3,
+                     name="Single Continuous Ticket - " 
+                     + cti.CONTINUOUS_SLICE_3["name"]),
+                dict(cti.CONTINUOUS_SLICE_5,
+                     name="Single Continuous Ticket - " 
+                     + cti.CONTINUOUS_SLICE_5["name"]),
+                dict(cti.CONTINUOUS_SLICE_7,
+                     name="Single Continuous Ticket - " 
+                     + cti.CONTINUOUS_SLICE_7["name"])
             ]
             
         }
-    }, 
-    
-    "continuous_search": {
+    },
+
+    "single_continuous_bytes": {
         # # # # # # # # # # # # # # # # # # # #
-        # TEST: CONTINUOUS SEARCH
-        # # # # # # # # # # # # # # # # # # # #
-        "name": "continuous_search",
-        "description": "Requests the /continuous/search endpoint.",
-        "pass_text": "'Continuous Search' endpoint correctly implemented",
-        "fail_text": "'Continuous Search' endpoint NOT correctly implemented",
-        "skip_text": "'Continuous Search' test skipped",
+        # TEST: SINGLE CONTINUOUS BYTES
+        # # # # # # # # # # # # # # # # # # # # 
+        "name": "single_continuous_bytes",
+        "description": "Requests the /continuous/:id/bytes endpoint",
+        "pass_text": "'Single Continuous Bytes by Id' endpoint correctly "
+            + "implemented",
+        "fail_text": "'Single Continuous Bytes by Id' endpoint NOT correctly "
+            + "implemented",
+        "skip_text": "'Single Continuous Bytes by Id' test skipped",
 
         "api": {
             "global_properties": {
-                "url": c.CONTINUOUS_API + "search",
+                "http_method": c.HTTP_GET,
+                "request_params": {}
+            },
+
+            "cases": [
+                {
+                    "name": "Get Test Continuous Bytes",
+                    "description": "request /continous/:id/bytes using test "
+                        + "continuous id. checks content type and status code "
+                        + "(200).",
+                    "summary_pass": "Test continuous bytes successfully "
+                        + "retrieved",
+                    "summary_fail": "Test continuous bytes NOT retrieved",
+                    "summary_skip": "'Get Test Continuous Bytes' skipped",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/bytes",
+                    "schema_file": c.SCHEMA_FILE_EMPTY,
+                    "use_default_media_types": False,
+                    "media_types": [
+                        "application/octet-stream",
+                        "application/vnd.loom",
+                        "text/tab-separated-values"
+                    ],
+                    "is_json": False
+                },
+
+                {
+                    "name": "Single Continuous Bytes - Not Found",
+                    "description": "request /continuous/:id/bytes using a " 
+                        + "continuous id known to not exist. checks "
+                        + "content type and status code (4xx). validates "
+                        + "response body matches error schema",
+                    "summary_pass": "Server sends correct response when "
+                        + "requested continuous not found",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when requested continuous not found",
+                    "summary_skip": "'Continuous Not Found' skipped",
+                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/bytes",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "expected_status": [400, 404]
+                },
+
+                {
+                    "name": "Single Continuous Bytes - Start Specified "
+                        + "Without Chr",
+                    "description": "request /continuous/:id/bytes, "
+                        + "specifying start " 
+                        + "parameter without chr. checks content type and "
+                        + "status code (400). validates response body matches "
+                        + "error schema",
+                    "request_params": {"start": "5"},
+                    "summary_pass": "Server sends correct response when "
+                        + "start is specified without chr",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when start is specified without chr",
+                    "summary_skip": "'Continuous Get Start Specified Without "
+                        + "Chr' skipped",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/bytes",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "expected_status": [400]
+                },
+
+                {
+                    "name": "Single Continuous Bytes - End Specified Without "
+                        + "Chr",
+                    "description": "request /continuous/:id/bytes, "
+                        + "specifying end " 
+                        + "parameter without chr. checks content type and "
+                        + "status code (400). validates response body matches "
+                        + "error schema",
+                    "request_params": {"end": "1000"},
+                    "summary_pass": "Server sends correct response when "
+                        + "end is specified without chr",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when end is specified without chr",
+                    "summary_skip": "'Continuous Get End Specified Without "
+                        + "Chr' skipped",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/bytes",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "expected_status": [400]
+                },
+
+                {
+                    "name": "Single Continuous Bytes - Start Greater Than End",
+                    "description": "request /continuous/:id/bytes, "
+                        + "specifying chr, " 
+                        + "start, and end parameters, but start is greater " 
+                        + "than end. checks content type and status code "
+                        + "(501). validates response body matches error schema",
+                    "request_params": {
+                        "chr": "1", "start": "200", "end": "100"
+                    },
+                    "summary_pass": "Server sends correct response when "
+                        + "start is greater than end",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when start is greater than end",
+                    "summary_skip": "'Continuous Get Start Greater Than End' "
+                        + "skipped",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/bytes",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "expected_status": [501]
+                }
+            ]
+        },
+
+        "content": {
+            "global_properties": {
+                "tempfile": "single_continuous_bytes_content_test.loom",
+                "description": "Assert continuous rows, columns, and cell "
+                    + "values match expected",
+                "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/bytes",
+                "summary_pass": "Continuous matrix content matches expected",
+                "summary_fail": "Continuous matrix content DOES NOT match "
+                    + "expected",
+                "summary_skip": "'Continuous Get Content' test case skipped",
+                "download_func": dm.download_from_bytes,
+                "request_params_func": \
+                    pf.chr_start_end,
+            },
+
+            "cases": [
+                dict(cti.CONTINUOUS_VALUE_3,
+                     name="Single Continuous Bytes - " 
+                     + cti.CONTINUOUS_VALUE_3["name"]),
+                dict(cti.CONTINUOUS_VALUE_4,
+                     name="Single Continuous Bytes - " 
+                     + cti.CONTINUOUS_VALUE_4["name"]),
+                dict(cti.CONTINUOUS_VALUE_5,
+                     name="Single Continuous Bytes - " 
+                     + cti.CONTINUOUS_VALUE_5["name"]),
+                dict(cti.CONTINUOUS_SLICE_2,
+                     name="Single Continuous Bytes - " 
+                     + cti.CONTINUOUS_SLICE_2["name"]),
+                dict(cti.CONTINUOUS_SLICE_4,
+                     name="Single Continuous Bytes - " 
+                     + cti.CONTINUOUS_SLICE_4["name"]),
+                dict(cti.CONTINUOUS_SLICE_6,
+                     name="Single Continuous Bytes - " 
+                     + cti.CONTINUOUS_SLICE_6["name"]),
+                dict(cti.CONTINUOUS_SLICE_8,
+                     name="Single Continuous Bytes - " 
+                     + cti.CONTINUOUS_SLICE_8["name"])
+            ]   
+        }
+    },
+    
+    "multi_continuous_ticket": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: MULTI CONTINUOUS TICKET
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "multi_continuous_ticket",
+        "description": "Requests the /continuous/tickets endpoint.",
+        "pass_text": "'Continuous Ticket' endpoint correctly implemented",
+        "fail_text": "'Continuous Ticket' endpoint NOT correctly implemented",
+        "skip_text": "'Continuous Ticket' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.CONTINUOUS_API + "tickets",
                 "http_method": c.HTTP_GET
             },
 
             "cases": [
                 {
-                    "name": "Search Continuous by Format",
-                    "description": "requests /continuous/search, only "
+                    "name": "Continuous Ticket by Format",
+                    "description": "requests /continuous/tickets, only "
                        + "specifying the required 'format' parameter. checks "
                        + "content type and status code (200). validates "
-                       + "response body matches continuous array schema",
-                    "summary_pass": "Continuous can be searched by format",
-                    "summary_fail": "Continuous CANNOT be searched by format",
-                    "summary_skip": "'Search Continuous by Format' skipped",
-                    "schema_func": sf.schema_require_matching_search_params,
+                       + "response body matches ticket schema",
+                    "summary_pass": "Continuous Ticket can be retrieved",
+                    "summary_fail": "Continuous Ticket CANNOT be retrieved",
+                    "summary_skip": "'Continuous Ticket by Format' skipped",
+                    "schema_file": c.SCHEMA_FILE_TICKET,
                     "request_params_func": pf.add_format_from_retrieved_settings
                 },
 
                 {
-                    "name": "Search Continuous With All Filters",
-                    "description": "request /continuous/search using all "
+                    "name": "Continuous Ticket - All Filters",
+                    "description": "request /continuous/tickets using all "
                         + "server-supported continuous filters. checks content "
                         + "type and status code (200). validates response body "
-                        + "matches continuous array schema.",
-                    "summary_pass": "Continuous can be searched with all "
+                        + "matches ticket schema.",
+                    "summary_pass": "Continuous Ticket retrieved when all "
                         + "filters specified",
-                    "summary_fail": "Continuous CANNOT be searched with all "
-                        + "filters specified",
-                    "summary_skip": "'Search Continuous With All Filters' "
+                    "summary_fail": "Continuous Ticket CANNOT be retrieved "
+                        + "when all filters specified",
+                    "summary_skip": "'Continuous Ticket - All Filters' "
                         + "skipped",
-                    "schema_func": sf.schema_require_matching_search_params,
+                    "schema_file": c.SCHEMA_FILE_TICKET,
                     "request_params_func": \
                      pf.all_supported_filters_and_format_from_retrieved_settings
                 },
 
                 {
-                    "name": "Search Continuous With Single Filter, 1",
-                    "description": "request /continuous/search using the first "
-                        + "parameter filter supported by server "
+                    "name": "Continuous Ticket - Single Filter, 1",
+                    "description": "request /continuous/tickets using the "
+                        + "first filter supported by server "
                         + "(in addition to format). checks "
                         + "type and status code (200). validates response body "
-                        + "matches continuous array schema",
-                    "summary_pass": "Continuous can be searched when first "
-                        + "filter parameter is supplied",
-                    "summary_fail": "Continuous CANNOT be searched when first "
-                        + "filter parameter is supplied",
-                    "summary_skip": "'Search Continuous With Single Filter, 1' "
+                        + "matches ticket schema",
+                    "summary_pass": "Continuous Ticket retrieved when first "
+                        + "filter supplied",
+                    "summary_fail": "Continuous Ticket NOT retrieved when "
+                        + " first filter supplied",
+                    "summary_skip": "'Continuous Ticket - Single Filter, 1' "
                         + "skipped",
-                    "schema_func": sf.schema_require_matching_search_params,
+                    "schema_file": c.SCHEMA_FILE_TICKET,
                     "request_params_func": pf.first_supported_filter_and_format
                 },
 
                 {
-                    "name": "Search Continuous With Single Filter, 2",
-                    "description": "request /continuous/search using the "
-                        + "second parameter filter supported by server "
+                    "name": "Continuous Ticket - Single Filter, 2",
+                    "description": "request /continuous/tickets using the "
+                        + "second filter supported by server "
                         + "(in addition to format). checks "
                         + "type and status code (200). validates response body "
-                        + "matches continuous array schema",
-                    "summary_pass": "Continuous can be searched when second "
-                        + "filter parameter is supplied",
-                    "summary_fail": "Continuous CANNOT be searched when second "
-                        + "filter parameter is supplied",
-                    "summary_skip": "'Search Continuous With Single Filter, 2' "
+                        + "matches ticket schema",
+                    "summary_pass": "Continuous Ticket retrieved when second "
+                        + "filter supplied",
+                    "summary_fail": "Continuous Ticket NOT retrieved when "
+                        + "second filter supplied",
+                    "summary_skip": "'Continuous Ticket - Single Filter, 2' "
                         + "skipped",
-                    "schema_func": sf.schema_require_matching_search_params,
+                    "schema_file": c.SCHEMA_FILE_TICKET,
                     "request_params_func": pf.second_supported_filter_and_format
                 },
 
                 {
-                    "name": "Continuous Search Filters Non-Matching Resources",
-                    "description": "request /continuous/search using "
-                        + "parameter filters that do not apply to any "
-                        + "continuous. checks content type and status code "
-                        + "(200). validates response body is an empty array.",
-                    "summary_pass": "Continuous search endpoint filters "
-                        + "non-matching resources",
-                    "summary_fail": "Continuous search endpoint DOES NOT "
-                        + "filter non-matching resources",
-                    "summary_skip": "'Continuous Search Filters Non-Matching "
-                        + "Resources' skipped",
-                    "schema_file": c.SCHEMA_FILE_EMPTY_ARRAY,
-                    "request_params_func": pf.incorrect_filters_and_format
-                },
-
-                {
-                    "name": "Continuous Search Format Not Specified",
-                    "description": "request /continuous/search endpoint "
+                    "name": "Continuous Ticket - Format Not Specified",
+                    "description": "request /continuous/tickets endpoint "
                         + "without specifying the required 'format' parameter. "
                         + "checks content type and status code (4xx). "
-                        + "validates response body is an error message JSON.",
+                        + "validates response body matches error schema.",
                     "summary_pass": "Server returns error when format not "
                         + "specified",
                     "summary_fail": "Server DOES NOT return error when format "
                         + "not specified",
-                    "summary_skip": "'Continuous Search Format Not Specified' "
-                        + "skipped",
+                    "summary_skip": "'Continuous Ticket - Format Not "
+                        + "Specified' skipped",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "request_params": {},
                     "expected_status": [400, 404, 422]
                 },
 
                 {
-                    "name": "Continuous Search Filetypes Match",
-                    "description": "request /continuous/search endpoint with "
+                    "name": "Continuous Ticket - Filetype Matches",
+                    "description": "request /continuous/tickets endpoint with "
                         + "'format' parameter specified. checks "
                         + "content type and status code (200). validates "
-                        + "continuous objects in response body contain a "
-                        + "fileType that matches the requested format.",
-                    "summary_pass": "Continuous fileTypes match requested "
-                        + "format",
-                    "summary_fail": "Continuous fileTypes DO NOT match "
-                        + "requested format",
-                    "summary_skip": "'Continuous Search Filetypes Match' "
+                        + "ticket fileType matches requested format.",
+                    "summary_pass": "Continuous Ticket fileType matches "
+                        + "request format",
+                    "summary_fail": "Continuous Ticket fileType DOES NOT match "
+                        + "request format",
+                    "summary_skip": "'Continuous Ticket - Filetypes Match' "
                         + "skipped",
                     "schema_func": sf.schema_require_matching_search_params,
                     "request_params_func": pf.add_format_from_retrieved_settings
                 },
 
                 {
-                    "name": "Continuous Search No Filetype Mismatches",
-                    "description": "request /continuous/search with "
-                        + "'format' parameter that does not match the format "
-                        + "of the continuous in test dataset. checks content "
-                        + "type and status code (200). validates continuous "
-                        + "objects in response body have a fileType matching "
-                        + "the requested format.",
-                    "summary_pass": "Continuous fileTypes match requested "
-                        + "format",
-                    "summary_fail": "Continuous fileTypes DO NOT match "
-                        + "requested format",
-                    "summary_skip": "'Continuous Search No Filetype "
-                        + "Mismatches' skipped",
-                    "schema_func": \
-                        sf.schema_require_matching_search_params_allow_empty,
-                    "request_params_func": pf.switch_format_param
-                },
-
-                {
-                    "name": "Continuous Search Start Specified Without Chr",
-                    "description": "request /continuous/search, specifying " 
+                    "name": "Continuous Ticket - Start Specified Without Chr",
+                    "description": "request /continuous/tickets, specifying " 
                         + "start parameter without chr. checks content type "
                         + "and status code (400). validates response body "
                         + "matches error schema",
@@ -1756,8 +1759,8 @@ TESTS_DICT = {
                         + "start is specified without chr",
                     "summary_fail": "Server DOES NOT send correct response "
                         + "when start is specified without chr",
-                    "summary_skip": "'Continuous Get Start Specified Without "
-                        + "Chr' skipped",
+                    "summary_skip": "'Continuous Ticket - Start Specified "
+                        + "Without Chr' skipped",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "request_params": {"start": "5"},
                     "request_params_func": \
@@ -1766,17 +1769,17 @@ TESTS_DICT = {
                 },
 
                 {
-                    "name": "Continuous Search End Specified Without Chr",
-                    "description": "request /continuous/search, specifying end " 
-                        + "parameter without chr. checks content type and "
+                    "name": "Continuous Ticket - End Specified Without Chr",
+                    "description": "request /continuous/tickets, specifying " 
+                        + "end parameter without chr. checks content type and "
                         + "status code (400). validates response body matches "
                         + "error schema",
                     "summary_pass": "Server sends correct response when "
                         + "end is specified without chr",
                     "summary_fail": "Server DOES NOT send correct response "
                         + "when end is specified without chr",
-                    "summary_skip": "'Continuous Get End Specified Without "
-                        + "Chr' skipped",
+                    "summary_skip": "'Continuous Ticket - End Specified "
+                        + "Without Chr' skipped",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "request_params": {"end": "1000"},
                     "request_params_func": \
@@ -1785,8 +1788,8 @@ TESTS_DICT = {
                 },
 
                 {
-                    "name": "Continuous Search Start Greater Than End",
-                    "description": "request /continuous/search, specifying " 
+                    "name": "Continuous Ticket - Start Greater Than End",
+                    "description": "request /continuous/tickets, specifying "
                         + "chr, start, and end parameters, but start is " 
                         + "greater than end. checks content type and status "
                         + "code (501). validates response body matches error "
@@ -1795,8 +1798,8 @@ TESTS_DICT = {
                         + "start is greater than end",
                     "summary_fail": "Server DOES NOT send correct response "
                         + "when start is greater than end",
-                    "summary_skip": "'Continuous Get Start Greater Than End' "
-                        + "skipped",
+                    "summary_skip": "'Continuous Ticket - Start Greater Than "
+                        + "End' skipped",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "request_params": {
                         "chr": "1", "start": "200", "end": "100"
@@ -1810,94 +1813,277 @@ TESTS_DICT = {
 
         "content": {
             "global_properties": {
-                "function": cf.continuous_get_case,
-                "tempfile": "continuous_search_content_test.loom",
-                "url": c.CONTINUOUS_API + "search",
-                "download_url": lambda response: response.json()[0]["url"],
-                "request_params_func": \
-                    pf.all_supported_filters_format_chr_start_end,
-                "description": "Asserts correct subsetting of continuous"
-                    + "matrix when parameters (chr, start, end) are passed to "
-                    + "search endpoint",
+                "function": cf.continuous_test_case,
+                "tempfile": "multi_continuous_ticket_content_test.loom",
+                "url": c.CONTINUOUS_API + "tickets",
+                "description": "Asserts correct values of continuous matrix, "
+                    + "and correct of matrix by parameters (chr, start, end).",
                 "summary_pass": "Continuous matrix tracks, positions, and "
                     + "values match expected",
                 "summary_fail": "Continuous matrix tracks, positions and "
                     + "values DO NOT match expected",
-                "summary_skip": "'Continuous Search Content' test case skipped",
+                "summary_skip": "Continuous content test case skipped",
+                "download_func": dm.download_from_ticket,
+                "request_params_func": \
+                    pf.all_supported_filters_format_chr_start_end,
             },
 
             "cases": [
-
-                # Chromosome assertion cases 1 and 2
-                {
-                    "name": "Continuous Search Content, chr, 1",
-                    "description": "Assert positions in continuous matrix "
-                        + "are all of same chromosome as requested",
-                    "chr": "chr1"
-                },
-
-                {
-                    "name": "Continuous Search Content, chr, 2",
-                    "description": "Assert positions in continuous matrix "
-                        + "are all of same chromosome as requested",
-                    "chr": "chr5"
-                },
-
-                # Chromosome and start assertion cases 1 and 2
-                {
-                    "name": "Continuous Search Content, chr and start, 1",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr1",
-                    "start": "55"
-                },
-
-                {
-                    "name": "Continuous Search Content, chr and start, 2",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr5",
-                    "start": "16"
-                },
-
-                # Chromosome and end assertion cases 1 and 2
-                {
-                    "name": "Continuous Search Content, chr and end, 1",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr1",
-                    "end": "41"
-                },
-
-                {
-                    "name": "Continuous Search Content, chr and end, 2",
-                    "description": "Assert positions in continuous matrix "
-                        + "are within specified range",
-                    "chr": "chr5",
-                    "end": "73"
-                },
-
-                # Chromosome, start, and end assertion cases 1 and 2
-                {
-                    "name": "Continuous Search Content, chr, start, and end, 1",
-                    "description": "Assert positions in continuous matrix are "
-                        + "within specified range",
-                    "chr": "chr1",
-                    "start": "51",
-                    "end": "66"
-                },
-
-                {
-                    "name": "Continuous Search Content, chr, start, and end, 2",
-                    "description": "Assert positions in continuous matrix are "
-                        + "within specified range",
-                    "chr": "chr5",
-                    "start": "102",
-                    "end": "115"
-                }
+                dict(cti.CONTINUOUS_VALUE_1,
+                     name="Multi Continuous Ticket - "
+                     + cti.CONTINUOUS_VALUE_1["name"]),
+                dict(cti.CONTINUOUS_VALUE_3,
+                     name="Multi Continuous Ticket - "
+                     + cti.CONTINUOUS_VALUE_3["name"]),
+                dict(cti.CONTINUOUS_VALUE_5,
+                     name="Multi Continuous Ticket - "
+                     + cti.CONTINUOUS_VALUE_5["name"]),
+                dict(cti.CONTINUOUS_SLICE_1,
+                     name="Multi Continuous Ticket - "
+                     + cti.CONTINUOUS_SLICE_1["name"]),
+                dict(cti.CONTINUOUS_SLICE_3,
+                     name="Multi Continuous Ticket - "
+                     + cti.CONTINUOUS_SLICE_3["name"]),
+                dict(cti.CONTINUOUS_SLICE_5,
+                     name="Multi Continuous Ticket - "
+                     + cti.CONTINUOUS_SLICE_5["name"]),
+                dict(cti.CONTINUOUS_SLICE_7,
+                     name="Multi Continuous Ticket - "
+                     + cti.CONTINUOUS_SLICE_7["name"])
             ]
         }
-    }, "continuous_endpoint_not_implemented": {
+    },
+
+    "multi_continuous_bytes": {
+        # # # # # # # # # # # # # # # # # # # #
+        # TEST: MULTI CONTINUOUS BYTES
+        # # # # # # # # # # # # # # # # # # # #
+        "name": "multi_continuous_bytes",
+        "description": "Requests the /continuous/bytes endpoint.",
+        "pass_text": "'Continuous Bytes' endpoint correctly implemented",
+        "fail_text": "'Continuous Bytes' endpoint NOT correctly implemented",
+        "skip_text": "'Continuous Bytes' test skipped",
+
+        "api": {
+            "global_properties": {
+                "url": c.CONTINUOUS_API + "bytes",
+                "http_method": c.HTTP_GET
+            },
+
+            "cases": [
+                {
+                    "name": "Continuous Bytes by Format",
+                    "description": "requests /continuous/bytes, only "
+                       + "specifying the required 'format' parameter. checks "
+                       + "content type and status code (200).",
+                    "summary_pass": "Continuous Bytes can be retrieved",
+                    "summary_fail": "Continuous Bytes CANNOT be retrieved",
+                    "summary_skip": "'Continuous Bytes by Format' skipped",
+                    "request_params_func": \
+                        pf.add_format_from_retrieved_settings,
+                    "is_json": False,
+                    "schema_file": c.SCHEMA_FILE_EMPTY,
+                    "use_default_media_types": False,
+                    "media_types": [
+                        "application/octet-stream",
+                        "application/vnd.loom",
+                        "text/tab-separated-values"
+                    ]
+                },
+
+                {
+                    "name": "Continuous Bytes - All Filters",
+                    "description": "request /continuous/bytes using all "
+                        + "server-supported continuous filters. checks content "
+                        + "type and status code (200).",
+                    "summary_pass": "Continuous Bytes retrieved when all "
+                        + "filters specified",
+                    "summary_fail": "Continuous Bytes CANNOT be retrieved "
+                        + "when all filters specified",
+                    "summary_skip": "'Continuous Bytes - All Filters' "
+                        + "skipped",
+                    "request_params_func": \
+                    pf.all_supported_filters_and_format_from_retrieved_settings,
+                    "is_json": False,
+                    "schema_file": c.SCHEMA_FILE_EMPTY,
+                    "use_default_media_types": False,
+                    "media_types": [
+                        "application/octet-stream",
+                        "application/vnd.loom",
+                        "text/tab-separated-values"
+                    ]
+                },
+
+                {
+                    "name": "Continuous Bytes - Single Filter, 1",
+                    "description": "request /continuous/bytes using the "
+                        + "first filter supported by server "
+                        + "(in addition to format). checks "
+                        + "type and status code (200).",
+                    "summary_pass": "Continuous Bytes retrieved when first "
+                        + "filter supplied",
+                    "summary_fail": "Continuous Bytes NOT retrieved when "
+                        + " first filter supplied",
+                    "summary_skip": "'Continuous Bytes - Single Filter, 1' "
+                        + "skipped",
+                    "request_params_func": pf.first_supported_filter_and_format,
+                    "is_json": False,
+                    "schema_file": c.SCHEMA_FILE_EMPTY,
+                    "use_default_media_types": False,
+                    "media_types": [
+                        "application/octet-stream",
+                        "application/vnd.loom",
+                        "text/tab-separated-values"
+                    ]
+                },
+
+                {
+                    "name": "Continuous Bytes - Single Filter, 2",
+                    "description": "request /continuous/bytes using the "
+                        + "second filter supported by server "
+                        + "(in addition to format). checks "
+                        + "type and status code (200).",
+                    "summary_pass": "Continuous Bytes retrieved when second "
+                        + "filter supplied",
+                    "summary_fail": "Continuous Bytes NOT retrieved when "
+                        + "second filter supplied",
+                    "summary_skip": "'Continuous Bytes - Single Filter, 2' "
+                        + "skipped",
+                    "request_params_func": \
+                        pf.second_supported_filter_and_format,
+                    "is_json": False,
+                    "schema_file": c.SCHEMA_FILE_EMPTY,
+                    "use_default_media_types": False,
+                    "media_types": [
+                        "application/octet-stream",
+                        "application/vnd.loom",
+                        "text/tab-separated-values"
+                    ]
+                },
+
+                {
+                    "name": "Continuous Bytes - Format Not Specified",
+                    "description": "request /continuous/bytes endpoint "
+                        + "without specifying the required 'format' parameter. "
+                        + "checks content type and status code (4xx). "
+                        + "validates response body matches error schema.",
+                    "summary_pass": "Server returns error when format not "
+                        + "specified",
+                    "summary_fail": "Server DOES NOT return error when format "
+                        + "not specified",
+                    "summary_skip": "'Continuous Bytes - Format Not "
+                        + "Specified' skipped",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "request_params": {},
+                    "expected_status": [400, 404, 422]
+                },
+
+                {
+                    "name": "Continuous Bytes - Start Specified Without Chr",
+                    "description": "request /continuous/bytes, specifying " 
+                        + "start parameter without chr. checks content type "
+                        + "and status code (400). validates response body "
+                        + "matches error schema",
+                    "summary_pass": "Server sends correct response when "
+                        + "start is specified without chr",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when start is specified without chr",
+                    "summary_skip": "'Continuous Bytes - Start Specified "
+                        + "Without Chr' skipped",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "request_params": {"start": "5"},
+                    "request_params_func": \
+                    pf.all_supported_filters_and_format_from_retrieved_settings,
+                    "expected_status": [400]
+                },
+
+                {
+                    "name": "Continuous Bytes - End Specified Without Chr",
+                    "description": "request /continuous/bytes, specifying " 
+                        + "end parameter without chr. checks content type and "
+                        + "status code (400). validates response body matches "
+                        + "error schema",
+                    "summary_pass": "Server sends correct response when "
+                        + "end is specified without chr",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when end is specified without chr",
+                    "summary_skip": "'Continuous Bytes - End Specified "
+                        + "Without Chr' skipped",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "request_params": {"end": "1000"},
+                    "request_params_func": \
+                    pf.all_supported_filters_and_format_from_retrieved_settings,
+                    "expected_status": [400]
+                },
+
+                {
+                    "name": "Continuous Bytes - Start Greater Than End",
+                    "description": "request /continuous/bytes, specifying "
+                        + "chr, start, and end parameters, but start is " 
+                        + "greater than end. checks content type and status "
+                        + "code (501). validates response body matches error "
+                        + "schema",
+                    "summary_pass": "Server sends correct response when "
+                        + "start is greater than end",
+                    "summary_fail": "Server DOES NOT send correct response "
+                        + "when start is greater than end",
+                    "summary_skip": "'Continuous Bytes - Start Greater Than "
+                        + "End' skipped",
+                    "schema_file": c.SCHEMA_FILE_ERROR,
+                    "request_params": {
+                        "chr": "1", "start": "200", "end": "100"
+                    },
+                    "request_params_func": \
+                    pf.all_supported_filters_and_format_from_retrieved_settings,
+                    "expected_status": [501]
+                }
+            ]
+        },
+
+        "content": {
+            "global_properties": {
+                "function": cf.continuous_test_case,
+                "tempfile": "multi_continuous_bytes_content_test.loom",
+                "url": c.CONTINUOUS_API + "bytes",
+                "description": "Asserts correct values of continuous matrix, "
+                    + "and correct of matrix by parameters (chr, start, end).",
+                "summary_pass": "Continuous matrix tracks, positions, and "
+                    + "values match expected",
+                "summary_fail": "Continuous matrix tracks, positions and "
+                    + "values DO NOT match expected",
+                "summary_skip": "Continuous content test case skipped",
+                "download_func": dm.download_from_bytes,
+                "request_params_func": \
+                    pf.all_supported_filters_format_chr_start_end,
+            },
+
+            "cases": [
+                dict(cti.CONTINUOUS_VALUE_2,
+                     name="Multi Continuous Bytes - "
+                     + cti.CONTINUOUS_VALUE_2["name"]),
+                dict(cti.CONTINUOUS_VALUE_4,
+                     name="Multi Continuous Bytes - "
+                     + cti.CONTINUOUS_VALUE_4["name"]),
+                dict(cti.CONTINUOUS_VALUE_5,
+                     name="Multi Continuous Bytes - "
+                     + cti.CONTINUOUS_VALUE_5["name"]),
+                dict(cti.CONTINUOUS_SLICE_2,
+                     name="Multi Continuous Bytes - "
+                     + cti.CONTINUOUS_SLICE_2["name"]),
+                dict(cti.CONTINUOUS_SLICE_4,
+                     name="Multi Continuous Bytes - "
+                     + cti.CONTINUOUS_SLICE_4["name"]),
+                dict(cti.CONTINUOUS_SLICE_6,
+                     name="Multi Continuous Bytes - "
+                     + cti.CONTINUOUS_SLICE_6["name"]),
+                dict(cti.CONTINUOUS_SLICE_8,
+                     name="Multi Continuous Bytes - "
+                     + cti.CONTINUOUS_SLICE_8["name"])
+            ]
+        }
+    },
+    
+    "continuous_endpoint_not_implemented": {
         # # # # # # # # # # # # # # # # # # # #
         # TEST: CONTINUOUS ENDPOINT NOT IMPLEMENTED
         # # # # # # # # # # # # # # # # # # # # 
@@ -1919,53 +2105,81 @@ TESTS_DICT = {
 
             "cases": [
                 {
-                    "name": "Continuous Get Not Implemented",
-                    "description": "request /continuous/:id, expecting "
-                        + "501 status code",
-                    "summary_pass": "Continuous Get correctly non-implemented",
-                    "summary_fail": "Continuous Get NOT correctly "
-                        + "non-implemented",
-                    "summary_skip": "'Continuous Get Not Implemented' skipped",
-                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID
-                },
-
-                {
-                    "name": "Continuous Search Not Implemented",
-                    "description": "request /continuous/search, expecting 501 "
-                        + "status code",
-                    "summary_pass": "Continuous Search correctly "
-                        + "non-implemented",
-                    "summary_fail": "Continuous Search NOT correctly "
-                        + "non-implemented",
-                    "summary_skip": "'Continuous Search Not Implemented' "
-                        + "skipped",
-                    "url": c.CONTINUOUS_API + "search"
-                },
-
-                {
-                    "name": "Continuous Search Filters Not Implemented",
-                    "description": "request /continuous/search/filters, "
-                        + "expecting 501 status code",
-                    "summary_pass": "Continuous Search Filters correctly "
-                        + "non-implemented",
-                    "summary_fail": "Continuous Search Filters NOT correctly "
-                        + "non-implemented",
-                    "summary_skip": "'Continuous Search Filters Not "
-                        + "Implemented' skipped",
-                    "url": c.CONTINUOUS_API + "search/filters"
-                },
-
-                {
                     "name": "Continuous Formats Not Implemented",
                     "description": "request /continuous/formats, "
                         + "expecting 501 status code",
                     "summary_pass": "Continuous Formats correctly "
                         + "non-implemented",
-                    "summary_fail": "Continuous Formats NOT correctly "
+                    "summary_fail": "Continuous Formats INCORRECTLY "
                         + "non-implemented",
                     "summary_skip": "'Continuous Formats Not Implemented' "
                         + "skipped",
                     "url": c.CONTINUOUS_API + "formats",
+                },
+
+                {
+                    "name": "Continuous Ticket by Id Not Implemented",
+                    "description": "request /continuous/:id/tickets, "
+                        + "expecting 501 status code",
+                    "summary_pass": "Continuous Ticket by Id correctly "
+                        + "non-implemented",
+                    "summary_fail": "Continuous Ticket by Id INCORRECTLY "
+                        + "non-implemented",
+                    "summary_skip": "'Continuous Ticket by Id Not Implemented' "
+                        + "skipped",
+                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/tickets"
+                },
+
+                {
+                    "name": "Continuous Bytes by Id Not Implemented",
+                    "description": "request /continuous/:id/bytes, "
+                        + "expecting 501 status code",
+                    "summary_pass": "Continuous Bytes by Id correctly "
+                        + "non-implemented",
+                    "summary_fail": "Continuous Bytes by Id INCORRECTLY "
+                        + "non-implemented",
+                    "summary_skip": "'Continuous Bytes by Id Not Implemented' "
+                        + "skipped",
+                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/bytes"
+                },
+
+                {
+                    "name": "Continuous Filters Not Implemented",
+                    "description": "request /continuous/filters, "
+                        + "expecting 501 status code",
+                    "summary_pass": "Continuous Filters correctly "
+                        + "non-implemented",
+                    "summary_fail": "Continuous Filters INCORRECTLY "
+                        + "non-implemented",
+                    "summary_skip": "'Continuous Filters Not "
+                        + "Implemented' skipped",
+                    "url": c.CONTINUOUS_API + "filters"
+                },
+
+                {
+                    "name": "Continuous Ticket Not Implemented",
+                    "description": "request /continuous/tickets, "
+                        + "expecting 501 status code",
+                    "summary_pass": "Continuous Ticket correctly "
+                        + "non-implemented",
+                    "summary_fail": "Continuous Ticket INCORRECTLY "
+                        + "non-implemented",
+                    "summary_skip": "'Continuous Ticket Not Implemented' "
+                        + "skipped",
+                    "url": c.CONTINUOUS_API + "tickets"
+                },
+
+                {
+                    "name": "Continuous Bytes Not Implemented",
+                    "description": "request /continuous/bytes, "
+                        + "expecting 501 status code",
+                    "summary_pass": "Continuous Bytes correctly "
+                        + "non-implemented",
+                    "summary_fail": "Continuous Bytes INCORRECTLY "
+                        + "non-implemented",
+                    "summary_skip": "'Continuous Bytes Not Implemented' "
+                        + "skipped",
+                    "url": c.CONTINUOUS_API + "bytes"
                 }
             ]
         }
@@ -1998,9 +2212,9 @@ TESTS_BY_OBJECT_TYPE = {
         "continuous_formats",
         "continuous_filters",
         "single_continuous_ticket",
-        # "single_continuous_bytes",
-        # "multi_continuous_ticket",
-        # "multi_continuous_bytes"
+        "single_continuous_bytes",
+        "multi_continuous_ticket",
+        "multi_continuous_bytes"
     ]
 }
 """dict: names of tests by project, study, expression object types"""

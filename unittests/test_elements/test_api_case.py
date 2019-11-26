@@ -9,8 +9,8 @@ def test_api_case_success():
         {"name": "Get Test Project"},
         {"name": "Search Projects With All Filters"},
         {"name": "Get Test Study"},
-        {"name": "Get Test Expression"},
-        {"name": "Get Test Continuous"}
+        {"name": "Get Test Expression Ticket"},
+        {"name": "Get Test Continuous Ticket"}
     ]
 
     for success_case in success_cases:

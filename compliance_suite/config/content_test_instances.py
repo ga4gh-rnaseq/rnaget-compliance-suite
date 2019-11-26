@@ -224,3 +224,154 @@ EXPRESSION_SLICE_5 = {
         "DO219106 - primary tumour"
     ]
 }
+
+CONTINUOUS_VALUE_1 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Value 1",
+    "assert_values": [
+        {
+            "i": { # input to assertion function,
+                "r": 1, # row
+                "c": 20 # col
+            },
+            "o": { # output, or expected values
+                "Track": "61729_test", # expected val at row 1
+                "Position": "chr1:20",
+                "Value": 8.904
+            }
+        }
+    ]
+}
+
+CONTINUOUS_VALUE_2 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Value 2",
+    "assert_values": [
+        {
+            "i": {
+                "r": 0,
+                "c": 5
+            },
+            "o": {
+                "Track": "61721_test",
+                "Position": "chr1:5",
+                "Value": 6.205
+            }           
+        }
+    ]
+}
+
+CONTINUOUS_VALUE_3 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Value 3",
+    "assert_values": [
+        {
+            "i": {
+                "r": 2,
+                "c": 212
+            },
+            "o": {
+                "Track": "61733_test",
+                "Position": "chr5:143",
+                "Value": 8.779
+            } 
+        }
+    ]
+}
+
+CONTINUOUS_VALUE_4 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Value 4",
+    "assert_values": [
+        {
+            "i": {
+                "r": 3,
+                "c": 159
+            },
+            "o": {
+                "Track": "61737_test",
+                "Position": "chr5:90",
+                "Value": 24.704
+            } 
+        }
+    ]
+}
+
+CONTINUOUS_VALUE_5 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Value 5",
+    "assert_values": [
+        {
+            "i": {
+                "r": 1,
+                "c": 66
+            },
+            "o": {
+                "Track": "61729_test",
+                "Position": "chr1:66",
+                "Value": 6.975
+            } 
+        }
+    ]
+}
+
+CONTINUOUS_SLICE_1 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Slice by chr, 1",
+    "chr": "chr1"
+}
+
+CONTINUOUS_SLICE_2 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Slice by chr, 2",
+    "chr": "chr5"
+}
+
+CONTINUOUS_SLICE_3 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Slice by chr, start, 1",
+    "chr": "chr1",
+    "start": "32"
+}
+
+CONTINUOUS_SLICE_4 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Slice by chr, start, 2",
+    "chr": "chr5",
+    "start": "100"
+}
+
+CONTINUOUS_SLICE_5 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Slice by chr, end, 1",
+    "chr": "chr1",
+    "end": "22"
+}
+
+CONTINUOUS_SLICE_6 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Slice by chr, end, 2",
+    "chr": "chr5",
+    "end": "49"
+}
+
+CONTINUOUS_SLICE_7 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Slice by chr, start, end, 1",
+    "chr": "chr1",
+    "start": "30",
+    "end": "50"
+}
+
+CONTINUOUS_SLICE_8 = {
+    "function": cf.continuous_test_case,
+    "name": "Continuous Slice by chr, start, end, 2",
+    "chr": "chr5",
+    "start": "69",
+    "end": "117"
+}
+
+
+
+
+

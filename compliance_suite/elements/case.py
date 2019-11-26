@@ -89,7 +89,7 @@ class Case(Element):
             self.test.kwargs["obj_instance"]["id"]
         )
 
-        return mature_url
+        return mature_url.rstrip("/")
     
     def set_status(self, status):
         """Set test case status"""

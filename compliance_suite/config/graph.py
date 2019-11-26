@@ -53,10 +53,10 @@ TEST_GRAPH = {
         "base": {
             "continuous_formats": {
                 "single_continuous_ticket": {},
-                # "single_continuous_bytes": {},
+                "single_continuous_bytes": {},
                 "continuous_filters": {
-                    # "multi_continuous_ticket": {},
-                    # "multi_continuous_bytes": {}
+                    "multi_continuous_ticket": {},
+                    "multi_continuous_bytes": {}
                 }
             }
         }

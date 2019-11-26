@@ -84,7 +84,6 @@ def get_runner_node_case_params_by_case(case_name):
                         "test": k,
                         "component": component_k
                     }
-    
     req_case = case_params_by_case_name[case_name]
     req_component = req_case["component"]
     req_test_name = req_case["test"]

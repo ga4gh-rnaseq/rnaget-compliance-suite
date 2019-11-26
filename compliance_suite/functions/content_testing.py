@@ -45,9 +45,6 @@ def download_attachment(function):
         result = {"status": 1, "message": ""}
         c = content_case.case_params
 
-        if "request_params_func" in c.keys():
-            request_params = c["request_params_func"](content_case)
-
         try:
 
             matrix_bytes = c["download_func"](content_case)
@@ -296,7 +293,7 @@ def expression_slice_test_case(content_case):
     return result
 
 @download_attachment
-def continuous_get_case(content_case):
+def continuous_test_case(content_case):
     """Assertion function for Continuous Get and Search Content test cases
 
     Arguments:
