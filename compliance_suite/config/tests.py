@@ -915,7 +915,7 @@ TESTS_DICT = {
                         + "request format",
                     "summary_skip": "'Expression Ticket - Filetypes Match' "
                         + "skipped",
-                    "schema_func": sf.schema_require_matching_search_params,
+                    "schema_file": c.SCHEMA_FILE_TICKET,
                     "request_params_func": pf.add_format_from_retrieved_settings
                 }
             ]
