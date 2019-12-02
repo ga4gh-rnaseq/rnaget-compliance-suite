@@ -1,5 +1,6 @@
 import json
 import requests
+from compliance_suite.functions.general import sanitize_dict
 
 def download_from_ticket(content_case):
 
@@ -9,6 +10,7 @@ def download_from_ticket(content_case):
     ticket_params = c["request_params_func"](content_case)
 
     content_case.append_audit("Ticket URL: " + ticket_url)
+    content_case.append_audit("Params: " + str(sanitize_dict(ticket_params)))
     ticket_response = requests.get(
         ticket_url, params=ticket_params, headers=content_case.headers,
         allow_redirects=True)
@@ -29,6 +31,7 @@ def download_from_bytes(content_case):
     bytes_url = content_case.get_mature_url()
     bytes_params = c["request_params_func"](content_case)
     content_case.append_audit("Bytes URL: " + bytes_url)
+    content_case.append_audit("Params: " + str(sanitize_dict(bytes_params)))
     bytes_response = requests.get(
         bytes_url, params=bytes_params, headers=content_case.headers,
         allow_redirects=True)
