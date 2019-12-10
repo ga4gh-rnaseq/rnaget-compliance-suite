@@ -1164,7 +1164,6 @@ TESTS_DICT = {
         "api": {
             "global_properties": {
                 "http_method": c.HTTP_GET,
-                "request_params": {},
                 "expected_status": [501],
                 "schema_file": c.SCHEMA_FILE_EMPTY
             },
@@ -1182,6 +1181,7 @@ TESTS_DICT = {
                     "summary_skip": "'Expression Formats Not Implemented' "
                         + "skipped",
                     "url": c.EXPRESSION_API + "formats",
+                    "request_params": {}
                 },
 
                 {
@@ -1194,7 +1194,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Expression Ticket by Id Not Implemented' "
                         + "skipped",
-                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/tickets"
+                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/tickets",
+                    "request_params": {}
                 },
 
                 {
@@ -1207,7 +1208,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Expression Bytes by Id Not Implemented' "
                         + "skipped",
-                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/bytes"
+                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/bytes",
+                    "request_params": {}
                 },
 
                 {
@@ -1220,7 +1222,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Expression Filters Not "
                         + "Implemented' skipped",
-                    "url": c.EXPRESSION_API + "filters"
+                    "url": c.EXPRESSION_API + "filters",
+                    "request_params": {}
                 },
 
                 {
@@ -1233,7 +1236,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Expression Ticket Not Implemented' "
                         + "skipped",
-                    "url": c.EXPRESSION_API + "tickets"
+                    "url": c.EXPRESSION_API + "tickets",
+                    "request_params": {"format": "tsv"}
                 },
 
                 {
@@ -1246,7 +1250,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Expression Bytes Not Implemented' "
                         + "skipped",
-                    "url": c.EXPRESSION_API + "bytes"
+                    "url": c.EXPRESSION_API + "bytes",
+                    "request_params": {"format": "tsv"}
                 }
             ]
         }
@@ -2098,7 +2103,6 @@ TESTS_DICT = {
         "api": {
             "global_properties": {
                 "http_method": c.HTTP_GET,
-                "request_params": {},
                 "expected_status": [501],
                 "schema_file": c.SCHEMA_FILE_EMPTY
             },
@@ -2115,6 +2119,7 @@ TESTS_DICT = {
                     "summary_skip": "'Continuous Formats Not Implemented' "
                         + "skipped",
                     "url": c.CONTINUOUS_API + "formats",
+                    "request_params": {}
                 },
 
                 {
@@ -2127,7 +2132,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Continuous Ticket by Id Not Implemented' "
                         + "skipped",
-                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/tickets"
+                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/tickets",
+                    "request_params": {}
                 },
 
                 {
@@ -2140,7 +2146,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Continuous Bytes by Id Not Implemented' "
                         + "skipped",
-                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/bytes"
+                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/bytes",
+                    "request_params": {}
                 },
 
                 {
@@ -2153,7 +2160,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Continuous Filters Not "
                         + "Implemented' skipped",
-                    "url": c.CONTINUOUS_API + "filters"
+                    "url": c.CONTINUOUS_API + "filters",
+                    "request_params": {}
                 },
 
                 {
@@ -2166,7 +2174,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Continuous Ticket Not Implemented' "
                         + "skipped",
-                    "url": c.CONTINUOUS_API + "tickets"
+                    "url": c.CONTINUOUS_API + "tickets",
+                    "request_params": {"format": "tsv"}
                 },
 
                 {
@@ -2179,7 +2188,8 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Continuous Bytes Not Implemented' "
                         + "skipped",
-                    "url": c.CONTINUOUS_API + "bytes"
+                    "url": c.CONTINUOUS_API + "bytes",
+                    "request_params": {"format": "tsv"}
                 }
             ]
         }
