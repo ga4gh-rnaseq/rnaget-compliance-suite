@@ -26,10 +26,10 @@
   <h2>Server: Centre for Genomic Regulation</h2>
   <h4 class="tab1">Base URL: https://genome.crg.cat/rnaget/</h4>
   <p class="tab1">Total tests: 14</p>
-  <p class="tab1">Total tests passed: 2</p>
+  <p class="tab1">Total tests passed: 3</p>
   <p class="tab1">Total tests failed: 5</p>
-  <p class="tab1">Total tests skipped: 7</p>
-  <p class="tab1">Total warnings generated: 12</p>
+  <p class="tab1">Total tests skipped: 6</p>
+  <p class="tab1">Total warnings generated: 11</p>
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
@@ -1185,19 +1185,17 @@
 
               
                 
-                <p class='tab2 text-danger'><i class="fa fa-times-circle"></i> Test: Continuous Formats - FAILED</p>
+                <p class='tab2 text-success'><i class="fa fa-check-circle"></i> Test: Continuous Formats - PASSED</p>
                 <p class="tab3"><strong>description:</strong> Requests the /continuous/formats endpoint</p>
-                <p class="tab3"><strong>summary:</strong> 'Continuous Formats' endpoint NOT correctly implemented</p>
+                <p class="tab3"><strong>summary:</strong> 'Continuous Formats' endpoint correctly implemented</p>
                 
                 <!-- API Testing -->
                 
-                <p class="tab3 text-danger">API Route Test Cases - FAILED</p>
+                <p class="tab3 text-success">API Route Test Cases - PASSED</p>
                 
-                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Get Supported Continuous Formats - FAILED</p>
+                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Get Supported Continuous Formats - PASSED</p>
                   <p class='tab5'>case description: request /continuous/formats. checks content type and status code (200). validates response body is an array of strings.</p>
-                  <p class='tab5'>case summary: Continuous formats NOT retrieved</p>
-                  
-                    <p class='tab5'>error message: Response status code: 501 not in expected status code(s): [200]</p>
+                  <p class='tab5'>case summary: Continuous formats successfully retrieved</p>
                   
 
                   <p class="tab5">
@@ -1214,12 +1212,8 @@
                         
                           <p class="audit-message">Headers: {'Authorization': 'omitted', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: null
+                          <p class="audit-message">Response Body: ["tsv"]
 </p>
-                        
-                          <p class="audit-message">Exception of class StatusCodeException encountered</p>
-                        
-                          <p class="audit-message">Exception Message: Response status code: 501 not in expected status code(s): [200]</p>
                         
                     </div>
                   </div>
@@ -1231,11 +1225,45 @@
 
               
                 
-                <p class='tab2 text-info'><i class="fa fa-ban"></i> Test: Continuous Search Filters - SKIPPED</p>
+                <p class='tab2 text-danger'><i class="fa fa-times-circle"></i> Test: Continuous Search Filters - FAILED</p>
                 <p class="tab3"><strong>description:</strong> Requests the /continuous/search/filters endpoint.</p>
-                <p class="tab3"><strong>summary:</strong> 'Continuous Search Filters' test skipped</p>
+                <p class="tab3"><strong>summary:</strong> 'Continuous Search Filters' endpoint NOT correctly implemented</p>
                 
                 <!-- API Testing -->
+                
+                <p class="tab3 text-danger">API Route Test Cases - FAILED</p>
+                
+                  <p class='tab4 text-danger'><i class="fa fa-times-circle"></i> API Test Case: Continuous Search Filters - FAILED</p>
+                  <p class='tab5'>case description: request /continuous/search/filters. checks content type and status code (200). validates response body matches search filter array schema.</p>
+                  <p class='tab5'>case summary: Continuous search filters NOT retrieved</p>
+                  
+                    <p class='tab5'>error message: Response status code: 404 not in expected status code(s): [200]</p>
+                  
+
+                  <p class="tab5">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Search_Filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Search_Filters">
+                      <i class="fa fa-info-circle"></i> View Test Case Audit Logs
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-continuous-5e22e009f41fc53cbea094a41de8798f-Continuous_Search_Filters">
+                    <div class="well audit-logs">
+                        
+                          <p class="audit-message">Request: https://genome.crg.cat/rnaget/continuous/search/filters</p>
+                        
+                          <p class="audit-message">Params: {}</p>
+                        
+                          <p class="audit-message">Headers: {'Authorization': 'omitted', 'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
+                        
+                          <p class="audit-message">Response Body: {"message":"Not Found"}
+</p>
+                        
+                          <p class="audit-message">Exception of class StatusCodeException encountered</p>
+                        
+                          <p class="audit-message">Exception Message: Response status code: 404 not in expected status code(s): [200]</p>
+                        
+                    </div>
+                  </div>
+                
                 
 
                 <!-- Content Testing -->
@@ -1363,18 +1391,18 @@
                       <td>FAILED</td>
                     </tr>
                   
-                    <tr class="text-danger">
+                    <tr class="text-success">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 5e22e009f41fc53cbea094a41de8798f</td>
                       <td>Continuous Formats</td>
-                      <td>FAILED</td>
+                      <td>PASSED</td>
                     </tr>
                   
-                    <tr class="text-info">
+                    <tr class="text-danger">
                       <td>Centre for Genomic Regulation</td>
                       <td>Continuous: 5e22e009f41fc53cbea094a41de8798f</td>
                       <td>Continuous Search Filters</td>
-                      <td>SKIPPED</td>
+                      <td>FAILED</td>
                     </tr>
                   
                     <tr class="text-info">
