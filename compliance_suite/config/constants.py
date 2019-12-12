@@ -43,6 +43,7 @@ SCHEMA_FILE_CONTINUOUS = "rnaget-continuous.json"
 SCHEMA_FILE_SEARCH_FILTER = "rnaget-search-filter.json"
 SCHEMA_FILE_SEARCH_FILTER_ARRAY = "rnaget-search-filter-array.json"
 SCHEMA_FILE_STRING_ARRAY = "rnaget-string-array.json"
+SCHEMA_FILE_TICKET = "rnaget-ticket.json"
 
 ##################################################
 # API RESOURCES

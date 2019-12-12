@@ -13,25 +13,19 @@ runner_p.retrieved_server_settings["projects"]["supp_filters"] = [
     "version", "name"]
 
 runner_e, node_e, case_params_e = get_runner_node_case_params_by_case(
-    "Search Expressions With All Filters")
+    "Expressions Ticket - All Filters")
 runner_e.retrieved_server_settings["expressions"]["supp_filters"] = [
     "studyID", "version"]
 runner_e.retrieved_server_settings["expressions"]["exp_format"] = "loom"
 
 runner_c, node_c, case_params_c = get_runner_node_case_params_by_case(
-    "Search Continuous With All Filters")
+    "Continuous Ticket - All Filters")
 runner_e.retrieved_server_settings["continuous"]["supp_filters"] = [
     "studyID", "version"]
 runner_e.retrieved_server_settings["continuous"]["exp_format"] = "tsv"
 
-# expression_search = get_runner_node_case_params_by_case(
-#     "slice by featureIDList, sampleIDList, minExpression, and maxExpression"
-# )
-# content_case_expression_search = ContentCase(
-#     expression_search[2], expression_search[1], expression_search[0])
-
 continuous_search = get_runner_node_case_params_by_case(
-    "Continuous Search Content, chr, start, and end, 1"
+    "Multi Continuous Ticket - Continuous Slice by chr, start, end, 1"
 )
 content_case_continuous_search = ContentCase(
     continuous_search[2], continuous_search[1], continuous_search[0])
@@ -108,18 +102,6 @@ def test_switch_format_param():
     filters = switch_format_param(node_c, runner_c)
     assert filters["format"] == "loom"
 
-#TODO: restore once minExpression/maxExpression slicing is re-added
-# def test_all_supported_filters_format_and_slice_params():
-# 
-#     filters = all_supported_filters_format_and_slice_params(
-#         content_case_expression_search)
-#     fk = filters.keys()
-# 
-#     assert "featureIDList" in fk
-#     assert "sampleIDList" in fk
-#     assert "minExpression" in fk
-#     assert "maxExpression" in fk
-
 def test_all_supported_filters_chr_start_end():
 
     filters = all_supported_filters_format_chr_start_end(
@@ -130,5 +112,5 @@ def test_all_supported_filters_chr_start_end():
     assert "start" in fk
     assert "end" in fk
     assert filters["chr"] == "chr1"
-    assert filters["start"] == "51"
-    assert filters["end"] == "66"
+    assert filters["start"] == "30"
+    assert filters["end"] == "50"

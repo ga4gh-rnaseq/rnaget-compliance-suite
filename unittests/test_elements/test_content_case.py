@@ -6,9 +6,10 @@ from unittests.methods import *
 
 def test_content_case_success():
     success_cases = [
-        {"name": "Expression Get Content 1"},
-        {"name": "Continuous Get Content, Assert Correct Values, 1"},
-        {"name": "Continuous Get Content, chr, start, and end, 1"}
+        {"name": "Single Expression Ticket - Expression Value 1"},
+        {"name": "Single Continuous Ticket - Continuous Value 1"},
+        {"name": "Single Continuous Ticket - Continuous Slice by chr, start, "
+            + "end, 1"}
     ]
 
     for success_case in success_cases:
@@ -23,17 +24,17 @@ def test_content_case_success():
 def test_content_case_failures():
     failure_cases = [
         {
-            "name": "Expression Get Content 1",
+            "name": "Single Expression Ticket - Expression Value 1",
             "replace": {
-                "url": "expressions/ecf875d885658ec8c7f17c9c1377037b"
+                "url": "expressions/ecf875d885658ec8c7f17c9c1377037b/tickets"
             },
             "message": "observed Value: 100.0 doesn't match expected: 0.0"
         },
-
+    
         {
-            "name": "Slice by featureIDList",
+            "name": "Single Expression Ticket - Slice by featureIDList",
             "replace": {
-                "url": "expressions/964c54b974cba66cc2cecabf874f2de5"
+                "url": "expressions/964c54b974cba66cc2cecabf874f2de5/tickets"
             },
             "message": "# of matrix rows: 1 does not equal featureIDList "
                 + "length: 3. Matrix rows: ['ENSG00000037965'] "
@@ -42,61 +43,43 @@ def test_content_case_failures():
         },
 
         {
-            "name": "Slice by featureIDList",
+            "name": "Single Expression Ticket - Slice by featureIDList",
             "replace": {
-                "url": "expressions/9d0540df9b867404092bbf9d62d02648"
+                "url": "expressions/9d0540df9b867404092bbf9d62d02648/tickets"
             },
             "message": "Matrix GeneIDs do not match featureIDList"
         },
 
-        # {
-        #     "name": "slice by featureIDList, sampleIDList, minExpression, "
-        #         + "and maxExpression",
-        #     "replace": {
-        #         "url": "expressions/af0ab1d31e93a358f552adcc47dd4dc8"
-        #     },
-        #     "message": "There are additional columns returned in the matrix "
-        #         + "compared to the request sampleIDList"
-        # },
-
-        # {
-        #     "name": "Slice by minExpression",
-        #     "replace": {
-        #         "url": "expressions/599ffa32b4a673c48dcf82e1f5ad2126"
-        #     },
-        #     "message": "Gene CLIC1 NOT above minExpression threshold at "
-        #         + "column 2"
-        # },
-
         {
-            "name": "Continuous Get Content, Assert Correct Values, 1",
+            "name": "Single Continuous Ticket - Continuous Value 1",
             "replace": {
-                "url": "continuous/89c1a7011f8201aeb39d9851bd8b868e"
+                "url": "continuous/89c1a7011f8201aeb39d9851bd8b868e/tickets"
             },
             "message": "observed Value: 100.0 DOES NOT equal expected: 8.904"
         },
-
+    
         {
-            "name": "Continuous Get Content, chr, 1",
+            "name": "Single Continuous Ticket - Continuous Slice by chr, 1",
             "replace": {
-                "url": "continuous/de3d2567774ae951f84783c890504104"
+                "url": "continuous/de3d2567774ae951f84783c890504104/tickets"
             },
             "message": "More than 1 chromosome in continuous file"
         },
-
+    
         {
-            "name": "Continuous Get Content, chr, 1",
+            "name": "Single Continuous Ticket - Continuous Slice by chr, 1",
             "replace": {
-                "url": "continuous/e614231a96d9ffefa21384d8f5227cd1"
+                "url": "continuous/e614231a96d9ffefa21384d8f5227cd1/tickets"
             },
             "message": "chr in continuous file: chr5 DOES NOT match request "
                 + "'chr' parameter: chr1"
         },
-
+    
         {
-            "name": "Continuous Get Content, chr, start, and end, 1",
+            "name": "Single Continuous Ticket - Continuous Slice by chr, "
+                + "start, end, 1",
             "replace": {
-                "url": "continuous/6ccacf344f0f009cbcb19c31543daab2"
+                "url": "continuous/6ccacf344f0f009cbcb19c31543daab2/tickets"
             },
             "message": "observed start: 25 is NOT greater than or equal to "
                 + "requested start: 30"

@@ -44,18 +44,18 @@ file_dict = {
             # will fail content testing because of incorrect expression value
             "ecf875d885658ec8c7f17c9c1377037b": "exp_content_invalid_0.json",
             # fails expression search content testing, wrong featureIDList
-            "964c54b974cba66cc2cecabf874f2de5": "exp_arr_content_inv_0.json",
+            "964c54b974cba66cc2cecabf874f2de5": "exp_content_invalid_1.json",
             # fails expression search content testing, wrong featureID names
-            "9d0540df9b867404092bbf9d62d02648": "exp_arr_content_inv_1.json",
+            "9d0540df9b867404092bbf9d62d02648": "exp_content_invalid_2.json",
             # fails expression search content testing, too many sampleIDs
-            "af0ab1d31e93a358f552adcc47dd4dc8": "exp_arr_content_inv_2.json",
+            "af0ab1d31e93a358f552adcc47dd4dc8": "exp_content_invalid_3.json",
             # fails expression search content testing, minExpression error
-            "599ffa32b4a673c48dcf82e1f5ad2126": "exp_arr_content_inv_3.json"
+            "599ffa32b4a673c48dcf82e1f5ad2126": "exp_content_invalid_4.json"
         }
     },
     "continuous": {
         "valid": {
-            "5e22e009f41fc53cbea094a41de8798f": "continuous_placeholder.json"
+            "5e22e009f41fc53cbea094a41de8798f": "continuous_valid_0.json"
         }, "invalid": {
             # fails continuous get content testing, incorrect intensity value
             "89c1a7011f8201aeb39d9851bd8b868e": "con_content_invalid_0.json",
@@ -69,17 +69,19 @@ file_dict = {
     }
 }
 
-# get the correct continuous loom file based on the parameters supplied to 
-# request
-continuous_file_by_id = {
-    "89c1a7011f8201aeb39d9851bd8b868e": "continuous/con_content_invalid_0.loom",
-    "de3d2567774ae951f84783c890504104": "continuous/continuous.loom",
-    "e614231a96d9ffefa21384d8f5227cd1": "continuous/con_content_invalid_1.loom",
-    "6ccacf344f0f009cbcb19c31543daab2": "continuous/con_content_invalid_2.loom"
+# continuous/con_content_invalid_2.loom
+# get correct continuous ticket based on object id
+continuous_ticket_by_id = {
+    "89c1a7011f8201aeb39d9851bd8b868e": "con_content_invalid_0.json",
+    "de3d2567774ae951f84783c890504104": "con_content_invalid_1.json",
+    "e614231a96d9ffefa21384d8f5227cd1": "con_content_invalid_2.json",
+    "6ccacf344f0f009cbcb19c31543daab2": "con_content_invalid_3.json"
 }
-continuous_file_by_params = {
-    "": "continuous/continuous.loom",
-    "chr=chr1,start=30,end=50": "continuous/continuous_1.loom",
+# get the correct continuous ticket based on the parameters supplied to 
+# request
+continuous_ticket_by_params = {
+    "5e22e009f41fc53cbea094a41de8798f": "continuous_valid_0.json",
+    "5e22e009f41fc53cbea094a41de8798f-chr=chr1-start=30-end=50": "continuous_valid_1.json",
 }
 
 filters_d = {"projects": ["version", "name"],
@@ -91,7 +93,7 @@ def get_response(body, status=200, mimetype="application/json"):
     return Response(body, status=status, mimetype=mimetype)
 
 @app.route("/<obj_type>/<obj_id>")
-def get_project(obj_type, obj_id):
+def get_project_or_study(obj_type, obj_id):
     """get specific object of specific type with requested id
 
     Requests made to this route will return the object (project, study, 
@@ -111,7 +113,7 @@ def get_project(obj_type, obj_id):
     response = None
 
     try:
-        if obj_type not in file_dict.keys():
+        if obj_type not in set(["projects", "studies"]):
             raise Exception("Invalid object type specified")
 
         files_d = {}
@@ -121,29 +123,7 @@ def get_project(obj_type, obj_id):
         if obj_id in files_d.keys():
             json_file = data_dir + files_d[obj_id]
             if os.path.exists(json_file):
-                if obj_type == "continuous":
-
-                    if obj_id in continuous_file_by_id.keys():
-                        path = continuous_file_by_id[obj_id]
-                        response = send_file(path, 
-                                             mimetype="application/vnd.loom")
-
-                    else:
-
-                        potential_params = ["chr", "start", "end"]
-                        used_params = []
-                        for potential_param in potential_params:
-                            param_val = request.args.get(potential_param)
-                            if param_val:
-                                used_params.append("%s=%s" % (
-                                    str(potential_param), str(param_val)))
-                        
-                        param_key = ",".join(used_params)
-                        path = continuous_file_by_params[param_key]
-                        response = send_file(path, 
-                                             mimetype="application/vnd.loom")
-                else:
-                    response = get_response(open(json_file, "r").read())
+                response = get_response(open(json_file, "r").read())
             else:
                 response = get_response(not_found_json, status=404)
         else:
@@ -159,8 +139,8 @@ def get_project(obj_type, obj_id):
     
     return response
 
-@app.route("/<obj_type>/search")
-def search_for_object(obj_type):
+@app.route("/<obj_type>")
+def search_project_or_study(obj_type):
     """search for requested object type based on filters in request
     
     Requests made to this route will return all requested objects of the 
@@ -176,7 +156,7 @@ def search_for_object(obj_type):
     response = None
 
     try:
-        if obj_type not in file_dict.keys():
+        if obj_type not in set(["projects", "studies"]):
             raise Exception("Invalid object type specified")
 
         possible_filters = filters_d[obj_type]
@@ -204,6 +184,51 @@ def search_for_object(obj_type):
         response_body = '''{"message": "invalid resource '%s'"}''' % obj_type
         response = get_response(response_body, status=400)
 
+    return response
+
+@app.route("/<obj_type>/<obj_id>/tickets")
+def get_expression_or_continuous_tickets(obj_type, obj_id):
+    response = None
+    try:
+        if obj_type not in set(["expressions", "continuous"]):
+            raise Exception("Invalid object type specified")
+
+        files_d = {}
+        files_d.update(file_dict[obj_type]["valid"])
+        files_d.update(file_dict[obj_type]["invalid"])
+
+        if obj_id in files_d.keys():
+            json_file = data_dir + files_d[obj_id]
+            if os.path.exists(json_file):
+                if obj_type == "continuous":
+                    dict_key = obj_id
+                    print(dict_key)
+                    if dict_key in continuous_ticket_by_id.keys():
+                        json_file = data_dir + continuous_ticket_by_id[dict_key]
+                    else:
+                        potential_params = ["chr", "start", "end"]
+                        for potential_param in potential_params:
+                            param_val = request.args.get(potential_param)
+                            if param_val:
+                                dict_key += "-" + str(potential_param) + "=" + \
+                                            param_val
+                        json_file = data_dir + \
+                                    continuous_ticket_by_params[dict_key]
+                    response = get_response(open(json_file, "r").read())
+                
+                else:
+                    response = get_response(open(json_file, "r").read())
+            else:
+                response = get_response(not_found_json, status=404)
+        else:
+            if obj_id == "NA":
+                response = get_response(not_found_json, status=501)
+            else:
+                response = get_response(not_found_json, status=404)
+    except Exception as e:
+        response_body = '''{"message": "invalid resource '%s'"}''' % obj_type
+        response = get_response(response_body, status=400)
+    
     return response
 
 @app.route("/emptyresponse")

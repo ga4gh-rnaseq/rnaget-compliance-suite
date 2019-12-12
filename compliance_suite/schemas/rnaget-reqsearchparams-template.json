@@ -15,10 +15,7 @@
         {
           "properties": {
             "VAR_SEARCH_PARAMS": {}
-          },
-          "required": [
-            "id"
-          ]
+          }
         }
       ]
     }
