@@ -90,7 +90,7 @@ TESTS_DICT = {
 
         "api": {
             "global_properties": {
-                "url": c.PROJECT_API + "/filters",
+                "url": c.PROJECT_API + "filters",
                 "http_method": c.HTTP_GET,
                 "request_params": {},
                 "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
@@ -324,7 +324,7 @@ TESTS_DICT = {
 
         "api": {
             "global_properties": {
-                "url": c.STUDY_API + "/filters",
+                "url": c.STUDY_API + "filters",
                 "http_method": c.HTTP_GET,
                 "request_params": {},
                 "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
@@ -545,7 +545,7 @@ TESTS_DICT = {
 
         "api": {
             "global_properties": {
-                "url": c.EXPRESSION_API + "/filters",
+                "url": c.EXPRESSION_API + "filters",
                 "schema_file": c.SCHEMA_FILE_SEARCH_FILTER_ARRAY,
                 "http_method": c.HTTP_GET,
                 "request_params": {},
