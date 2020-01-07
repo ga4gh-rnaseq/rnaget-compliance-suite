@@ -26,7 +26,7 @@ def test_content_case_failures():
         {
             "name": "Single Expression Ticket - Expression Value 1",
             "replace": {
-                "url": "expressions/ecf875d885658ec8c7f17c9c1377037b/tickets"
+                "url": "expressions/ecf875d885658ec8c7f17c9c1377037b/ticket"
             },
             "message": "observed Value: 100.0 doesn't match expected: 0.0"
         },
@@ -34,7 +34,7 @@ def test_content_case_failures():
         {
             "name": "Single Expression Ticket - Slice by featureIDList",
             "replace": {
-                "url": "expressions/964c54b974cba66cc2cecabf874f2de5/tickets"
+                "url": "expressions/964c54b974cba66cc2cecabf874f2de5/ticket"
             },
             "message": "# of matrix rows: 1 does not equal featureIDList "
                 + "length: 3. Matrix rows: ['ENSG00000037965'] "
@@ -45,7 +45,7 @@ def test_content_case_failures():
         {
             "name": "Single Expression Ticket - Slice by featureIDList",
             "replace": {
-                "url": "expressions/9d0540df9b867404092bbf9d62d02648/tickets"
+                "url": "expressions/9d0540df9b867404092bbf9d62d02648/ticket"
             },
             "message": "Matrix GeneIDs do not match featureIDList"
         },
@@ -53,7 +53,7 @@ def test_content_case_failures():
         {
             "name": "Single Continuous Ticket - Continuous Value 1",
             "replace": {
-                "url": "continuous/89c1a7011f8201aeb39d9851bd8b868e/tickets"
+                "url": "continuous/89c1a7011f8201aeb39d9851bd8b868e/ticket"
             },
             "message": "observed Value: 100.0 DOES NOT equal expected: 8.904"
         },
@@ -61,7 +61,7 @@ def test_content_case_failures():
         {
             "name": "Single Continuous Ticket - Continuous Slice by chr, 1",
             "replace": {
-                "url": "continuous/de3d2567774ae951f84783c890504104/tickets"
+                "url": "continuous/de3d2567774ae951f84783c890504104/ticket"
             },
             "message": "More than 1 chromosome in continuous file"
         },
@@ -69,7 +69,7 @@ def test_content_case_failures():
         {
             "name": "Single Continuous Ticket - Continuous Slice by chr, 1",
             "replace": {
-                "url": "continuous/e614231a96d9ffefa21384d8f5227cd1/tickets"
+                "url": "continuous/e614231a96d9ffefa21384d8f5227cd1/ticket"
             },
             "message": "chr in continuous file: chr5 DOES NOT match request "
                 + "'chr' parameter: chr1"
@@ -79,7 +79,7 @@ def test_content_case_failures():
             "name": "Single Continuous Ticket - Continuous Slice by chr, "
                 + "start, end, 1",
             "replace": {
-                "url": "continuous/6ccacf344f0f009cbcb19c31543daab2/tickets"
+                "url": "continuous/6ccacf344f0f009cbcb19c31543daab2/ticket"
             },
             "message": "observed start: 25 is NOT greater than or equal to "
                 + "requested start: 30"
