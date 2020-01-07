@@ -208,7 +208,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "tags": ["PCAWG", "cancer"], "version": "1.0", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "id": "43378a5d48364f9d8cf3c3d5104df560"}, {"name": "RNAgetTestProject0", "tags": ["RNAgetCompliance"], "version": "1.0", "description": "Test project object used by RNAget compliance testing suite.", "id": "9c0eba51095d3939437e220db196e27b"}, {"name": "TCGA", "tags": ["TCGA"], "version": "1.0", "description": "The Cancer Genome Atlas", "id": "0dc1cb6327844b5aa6a1a4eed3f64607"}]
+                          <p class="audit-message">Response Body: [{"id": "43378a5d48364f9d8cf3c3d5104df560", "tags": ["PCAWG", "cancer"], "name": "PCAWG", "version": "1.0", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423"}, {"id": "9c0eba51095d3939437e220db196e27b", "tags": ["RNAgetCompliance"], "name": "RNAgetTestProject0", "version": "1.0", "description": "Test project object used by RNAget compliance testing suite."}, {"id": "0dc1cb6327844b5aa6a1a4eed3f64607", "tags": ["TCGA"], "name": "TCGA", "version": "1.0", "description": "The Cancer Genome Atlas"}]
 </p>
                         
                     </div>
@@ -338,7 +338,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"name": "RNAgetTestStudy0", "tags": ["RNAgetCompliance"], "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "description": "Test study object used by RNAget compliance testing suite.", "version": "1.0", "parentProjectID": "9c0eba51095d3939437e220db196e27b"}
+                          <p class="audit-message">Response Body: {"tags": ["RNAgetCompliance"], "parentProjectID": "9c0eba51095d3939437e220db196e27b", "version": "1.0", "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "name": "RNAgetTestStudy0", "description": "Test study object used by RNAget compliance testing suite."}
 </p>
                         
                     </div>
@@ -403,7 +403,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"fieldType": "string", "filter": "version", "description": "version to search for", "values": ["1.0"]}]
+                          <p class="audit-message">Response Body: [{"fieldType": "string", "filter": "version", "values": ["1.0"], "description": "version to search for"}]
 </p>
                         
                     </div>
@@ -493,7 +493,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "tags": ["PCAWG", "cancer"], "id": "6cccbbd76b9c4837bd7342dd616d0fec", "description": "PCAWG study", "version": "1.0", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560"}, {"name": "RNAgetTestStudy0", "tags": ["RNAgetCompliance"], "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "description": "Test study object used by RNAget compliance testing suite.", "version": "1.0", "parentProjectID": "9c0eba51095d3939437e220db196e27b"}, {"name": "TCGA", "tags": ["TCGA"], "id": "3912338463b344ada95b88d26576abb3", "description": "The Cancer Genome Atlas", "version": "1.0", "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607"}]
+                          <p class="audit-message">Response Body: [{"tags": ["PCAWG", "cancer"], "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "name": "PCAWG", "description": "PCAWG study", "version": "1.0"}, {"tags": ["RNAgetCompliance"], "parentProjectID": "9c0eba51095d3939437e220db196e27b", "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "name": "RNAgetTestStudy0", "description": "Test study object used by RNAget compliance testing suite.", "version": "1.0"}, {"tags": ["TCGA"], "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607", "id": "3912338463b344ada95b88d26576abb3", "name": "TCGA", "description": "The Cancer Genome Atlas", "version": "1.0"}]
 </p>
                         
                     </div>
@@ -1732,7 +1732,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "tags": ["RNAgetCompliance"], "units": "TPM", "id": "ac3e9279efd02f1c98de4ed3d335b98e", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0"}
+                          <p class="audit-message">Response Body: {"tags": ["RNAgetCompliance"], "units": "TPM", "id": "ac3e9279efd02f1c98de4ed3d335b98e", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "version": "1.0", "fileType": "loom"}
 </p>
                         
                     </div>
@@ -1757,7 +1757,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"tags": ["RNAgetCompliance"], "units": "TPM", "id": "ac3e9279efd02f1c98de4ed3d335b98e", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "version": "1.0", "fileType": "loom"}
+                          <p class="audit-message">Response Body: {"fileType": "loom", "tags": ["RNAgetCompliance"], "units": "TPM", "id": "ac3e9279efd02f1c98de4ed3d335b98e", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0"}
 </p>
                         
                     </div>
@@ -1782,7 +1782,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"tags": [], "units": "TPM", "id": "2a7ab5533ef941eaa59edbfe887b58c4", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "version": "1.0", "fileType": "loom"}
+                          <p class="audit-message">Response Body: {"fileType": "loom", "tags": [], "units": "TPM", "id": "2a7ab5533ef941eaa59edbfe887b58c4", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "version": "1.0"}
 </p>
                         
                     </div>
@@ -3268,7 +3268,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"fieldType": "string", "filter": "version", "description": "version to search for", "values": ["1.0"]}]
+                          <p class="audit-message">Response Body: [{"fieldType": "string", "filter": "version", "values": ["1.0"], "description": "version to search for"}]
 </p>
                         
                     </div>
@@ -3383,7 +3383,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"tags": ["RNAgetCompliance"], "units": "counts", "id": "5e22e009f41fc53cbea094a41de8798f", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "version": "1.0", "fileType": "loom"}
+                          <p class="audit-message">Response Body: {"fileType": "loom", "tags": ["RNAgetCompliance"], "units": "counts", "id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0"}
 </p>
                         
                     </div>
