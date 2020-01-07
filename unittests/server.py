@@ -186,8 +186,8 @@ def search_project_or_study(obj_type):
 
     return response
 
-@app.route("/<obj_type>/<obj_id>/tickets")
-def get_expression_or_continuous_tickets(obj_type, obj_id):
+@app.route("/<obj_type>/<obj_id>/ticket")
+def get_expression_or_continuous_ticket(obj_type, obj_id):
     response = None
     try:
         if obj_type not in set(["expressions", "continuous"]):
