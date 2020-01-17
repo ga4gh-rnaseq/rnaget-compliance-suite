@@ -19,7 +19,7 @@ Study API Test Cases
 
 * `Get Test Study`_
 * `Study Not Found`_
-* `Study Search Filters`_
+* `Study Filters`_
 * `Search Studies Without Filters`_
 * `Search Studies With All Filters`_
 * `Search Studies With Single Filter, 1`_
@@ -87,17 +87,17 @@ Study Not Found
 * **Success Criteria:** :code:`Status Code == 404` AND response body is valid :code:`Error` json
 * **Failure Criteria:** :code:`Status Code != 404` OR response body is NOT valid :code:`Error` json
 
-Study Search Filters
+Study Filters
 #######################
-* **Route:** :code:`/studies/search/filters`
+* **Route:** :code:`/studies/filters`
 * **Description:** Requests the filters that can be used to narrow search results for a list of :code:`Studies`
-* **Rationale:** Asserts that the endpoint returns an array of :code:`Search Filter` objects
+* **Rationale:** Asserts that the endpoint returns an array of :code:`filter` objects
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /studies/search/filters
+   GET /studies/filters
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -127,20 +127,20 @@ Study Search Filters
      }
    ]
 
-* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Search Filters`
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Search Filters`
+* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`filters`
+* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`filters`
 
 Search Studies Without Filters
 ################################
-* **Route:** :code:`/studies/search`
+* **Route:** :code:`/studies`
 * **Description:** Searches for all studies, without specifying any filtering parameters. Expects an array of :code:`Studies` in the response body.
-* **Rationale:** Asserts that the :code:`/studies/search` returns an array, and that each element in the array is a :code:`Study`.
+* **Rationale:** Asserts that the :code:`/studies` returns an array, and that each element in the array is a :code:`Study`.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /studies/search
+   GET /studies
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -179,15 +179,15 @@ Search Studies Without Filters
 
 Search Studies With All Filters
 #################################
-* **Route:** :code:`/studies/search`
+* **Route:** :code:`/studies`
 * **Description:** Searches studies, using all filtering parameters associated with test study. Expects an array of :code:`Studies` to be returned in the response body. Array must contain at least 1 object.
-* **Rationale:** Asserts that :code:`/studies/search` returns an array of :code:`Studies` even when specifying filters. The returned array MUST have at least 1 object, as the parameter filters must match the attributes of the test study.
+* **Rationale:** Asserts that :code:`/studies` returns an array of :code:`Studies` even when specifying filters. The returned array MUST have at least 1 object, as the parameter filters must match the attributes of the test study.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /studies/search?version=1.0&name=RNAgetTestStudy0
+   GET /studies?version=1.0&name=RNAgetTestStudy0
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -215,7 +215,7 @@ Search Studies With All Filters
 
 Search Studies With Single Filter, 1
 ######################################
-* **Route:** :code:`/studies/search`
+* **Route:** :code:`/studies`
 * **Description:** Searches studies using only 1 filtering parameter associated with test study. Expects an array of :code:`Studies`, with length of 1 or greater.
 * **Rationale:** Asserts filtering parameters can be used independently of one another, and that each filter yields the test :code:`Study` in the search results.
 
@@ -223,7 +223,7 @@ Search Studies With Single Filter, 1
 
 .. code-block:: python
 
-   GET /studies/search?version=1.0
+   GET /studies?version=1.0
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -251,7 +251,7 @@ Search Studies With Single Filter, 1
 
 Search Studies With Single Filter, 2
 ######################################
-* **Route:** :code:`/studies/search`
+* **Route:** :code:`/studies`
 * **Description:** Searches studies using only 1 filtering parameter (a different filter than above) associated with test study. Expects an array of :code:`Studies`, with length of 1 or greater.
 * **Rationale:** Asserts filtering parameters can be used independently of one another, and that each filter yields the test :code:`Study` in the search results.
 
@@ -259,7 +259,7 @@ Search Studies With Single Filter, 2
 
 .. code-block:: python
 
-   GET /studies/search?name=RNAgetTestStudy0
+   GET /studies?name=RNAgetTestStudy0
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -287,15 +287,15 @@ Search Studies With Single Filter, 2
 
 Study Search Filters Non-Matching Resources
 ##############################################
-* **Route:** :code:`/studies/search`
-* **Description:** Tests that the study search endpoint correctly filters out non-matching :code:`Studies` based on url parameters. Makes a request to the :code:`/studies/search` endpoint with invalid filters (not matching any :code:`Study`), and expects an empty array as a response.
+* **Route:** :code:`/studies`
+* **Description:** Tests that the study search endpoint correctly filters out non-matching :code:`Studies` based on url parameters. Makes a request to the :code:`/studies` endpoint with invalid filters (not matching any :code:`Study`), and expects an empty array as a response.
 * **Rationale:** Asserts that the endpoint correctly filters out non-matching entities, that the endpoint does not return an arbitrary list of :code:`Studies` that differ from filters.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /studies/search?version=nonexistentid9999999999999999999&name=nonexistentid9999999999999999999
+   GET /studies?version=nonexistentid9999999999999999999&name=nonexistentid9999999999999999999
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -342,15 +342,15 @@ Study Get Not Implemented
 
 Study Search Not Implemented
 ###############################
-* **Route:** :code:`/studies/search`
-* **Description:** If the :code:`Studies` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/studies/search` endpoint, expecting a :code:`501 Not Implemented` status code response
+* **Route:** :code:`/studies`
+* **Description:** If the :code:`Studies` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/studies` endpoint, expecting a :code:`501 Not Implemented` status code response
 * **Rationale:** Asserts that :code:`Study` related endpoints are correctly non-implemented according to the spec 
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /studies/search
+   GET /studies
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -365,15 +365,15 @@ Study Search Not Implemented
 
 Study Search Filters Not Implemented
 #######################################
-* **Route:** :code:`/studies/search/filters`
-* **Description:** If the :code:`Studies` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/studies/search/filters` endpoint, expecting a :code:`501 Not Implemented` status code response
+* **Route:** :code:`/studies/filters`
+* **Description:** If the :code:`Studies` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/studies/filters` endpoint, expecting a :code:`501 Not Implemented` status code response
 * **Rationale:** Asserts that :code:`Study` related endpoints are correctly non-implemented according to the spec
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /studies/search/filters
+   GET /studies/filters
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**

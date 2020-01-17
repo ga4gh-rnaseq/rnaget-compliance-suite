@@ -241,26 +241,26 @@ TESTS_DICT = {
 
                 {
                     "name": "Project Search Not Implemented",
-                    "description": "request /projects/search, expecting 501 "
+                    "description": "request /projects, expecting 501 "
                         + "status code",
                     "summary_pass": "Project Search correctly non-implemented",
                     "summary_fail": "Project Search NOT correctly "
                         + "non-implemented",
                     "summary_skip": "'Project Search Not Implemented' skipped",
-                    "url": c.PROJECT_API + "search"
+                    "url": c.PROJECT_API
                 },
 
                 {
-                    "name": "Project Search Filters Not Implemented",
-                    "description": "request /projects/search/filters, "
+                    "name": "Project Filters Not Implemented",
+                    "description": "request /projects/filters, "
                         + "expecting 501 status code",
-                    "summary_pass": "Project Search Filters correctly "
+                    "summary_pass": "Project Filters correctly "
                         + "non-implemented",
-                    "summary_fail": "Project Search Filters NOT correctly "
+                    "summary_fail": "Project Filters NOT correctly "
                         + "non-implemented",
-                    "summary_skip": "'Project Search Filters Not Implemented' "
+                    "summary_skip": "'Project Filters Not Implemented' "
                         + "skipped",
-                    "url": c.PROJECT_API + "search/filters"
+                    "url": c.PROJECT_API + "filters"
                 }
             ]
         }
@@ -350,7 +350,7 @@ TESTS_DICT = {
         # TEST: STUDY SEARCH
         # # # # # # # # # # # # # # # # # # # #
         "name": "study_search",
-        "description": "Requests the /studies/search endpoint",
+        "description": "Requests the /studies endpoint",
         "pass_text": "'Study Search' endpoint correctly implemented",
         "fail_text": "'Study Search' endpoint NOT correctly implemented",
         "skip_text": "'Study Search' test skipped",
@@ -364,7 +364,7 @@ TESTS_DICT = {
             "cases": [
                 {
                     "name": "Search Studies Without Filters",
-                    "description": "request /studies/search without any "
+                    "description": "request /studies without any "
                         + "parameter filters. checks content type "
                         + "and status code (200). validates "
                         + "response body matches study array "
@@ -379,7 +379,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Search Studies With All Filters",
-                    "description": "request /studies/search using all "
+                    "description": "request /studies using all "
                         + "server-supported study filters. checks content "
                         + "type and status code (200). validates response body "
                         + "matches study array schema.",
@@ -394,7 +394,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Search Studies With Single Filter, 1",
-                    "description": "request /studies/search using the first "
+                    "description": "request /studies using the first "
                         + "parameter filter supported by server. checks "
                         + "type and status code (200). validates response body "
                         + "matches study array schema",
@@ -410,7 +410,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Search Studies With Single Filter, 2",
-                    "description": "request /studies/search using the second "
+                    "description": "request /studies using the second "
                         + "parameter filter supported by server. checks "
                         + "type and status code (200). validates response body "
                         + "matches study array schema",
@@ -426,7 +426,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Study Search Filters Non-Matching Resources",
-                    "description": "request /studies/search using filters "
+                    "description": "request /studies using filters "
                         + "that do not apply to any project. "
                         + "checks content type and status code (200). "
                         + "validates response body is an empty array.",
@@ -474,18 +474,18 @@ TESTS_DICT = {
 
                 {
                     "name": "Study Search Not Implemented",
-                    "description": "request /studies/search, expecting 501 "
+                    "description": "request /studies, expecting 501 "
                                    + "status code",
                     "summary_pass": "Study Search correctly non-implemented",
                     "summary_fail": "Study Search NOT correctly "
                         + "non-implemented",
                     "summary_skip": "'Study Search Not Implemented' skipped",
-                    "url": c.STUDY_API + "search"
+                    "url": c.STUDY_API
                 },
 
                 {
                     "name": "Study Search Filters Not Implemented",
-                    "description": "request /studies/search/filters, "
+                    "description": "request /studies/filters, "
                         + "expecting 501 status code",
                     "summary_pass": "Study Search Filters correctly "
                         + "non-implemented",
@@ -493,7 +493,7 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Study Search Filters Not Implemented' "
                         + "skipped",
-                    "url": c.STUDY_API + "search/filters"
+                    "url": c.STUDY_API + "filters"
                 }
             ]
         }
@@ -573,7 +573,7 @@ TESTS_DICT = {
         # TEST: SINGLE EXPRESSION TICKET
         # # # # # # # # # # # # # # # # # # # # 
         "name": "single_expression_ticket",
-        "description": "Requests the /expressions/:id/tickets endpoint",
+        "description": "Requests the /expressions/:id/ticket endpoint",
         "pass_text": "'Single Expression Ticket by Id' endpoint correctly "
             + "implemented",
         "fail_text": "'Single Expression Ticket by Id' endpoint NOT correctly "
@@ -589,7 +589,7 @@ TESTS_DICT = {
             "cases": [
                 {
                     "name": "Get Test Expression Ticket",
-                    "description": "request /expressions/:id/tickets using "
+                    "description": "request /expressions/:id/ticket using "
                         + "test expression id. checks content type and status "
                         + "code (200). validates response body matches Ticket "
                         + "schema.",
@@ -597,14 +597,14 @@ TESTS_DICT = {
                         + "retrieved",
                     "summary_fail": "Test expression ticket NOT retrieved",
                     "summary_skip": "'Get Test Expression Ticket' skipped",
-                    "url": c.EXPRESSION_API + "V_EXPRESSION_ID/tickets",
+                    "url": c.EXPRESSION_API + "V_EXPRESSION_ID/ticket",
                     "schema_file": c.SCHEMA_FILE_TICKET,
                     "server_settings_update_func": uf.update_expected_format
                 },
 
                 {
                     "name": "Single Expression Ticket - Not Found",
-                    "description": "request /expressions/:id/tickets using an "
+                    "description": "request /expressions/:id/ticket using an "
                         + "expression id known to not exist. Checks content "
                         + "type and status code (4xx). validates response body "
                         + "matches Error schema.",
@@ -613,7 +613,7 @@ TESTS_DICT = {
                     "summary_fail": "Server DOES NOT send correct response "
                         + "when requested expression not found",
                     "summary_skip": "'Expression Not Found' skipped",
-                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/tickets",
+                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/ticket",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400, 404]
                 }
@@ -623,7 +623,7 @@ TESTS_DICT = {
         "content": {
             "global_properties": {
                 "tempfile": "single_expression_ticket_content_test.loom",
-                "url": c.EXPRESSION_API + "V_EXPRESSION_ID/tickets",
+                "url": c.EXPRESSION_API + "V_EXPRESSION_ID/ticket",
                 "description": "Asserts correct expression values and slicing "
                     + "operations",
                 "summary_pass": "Expression matrix content matches expected",
@@ -734,7 +734,7 @@ TESTS_DICT = {
                     "summary_fail": "Server DOES NOT send correct response "
                         + "when requested expression not found",
                     "summary_skip": "'Expression Not Found' skipped",
-                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/tickets",
+                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/ticket",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400, 404]
                 }
@@ -810,21 +810,21 @@ TESTS_DICT = {
         # TEST: MULTI EXPRESSION TICKET
         # # # # # # # # # # # # # # # # # # # #
         "name": "multi_expression_ticket",
-        "description": "Requests the /expressions/tickets endpoint.",
+        "description": "Requests the /expressions/ticket endpoint.",
         "pass_text": "'Expression Ticket' endpoint correctly implemented",
         "fail_text": "'Expression Ticket' endpoint NOT correctly implemented",
         "skip_text": "'Expression Ticket' test skipped",
 
         "api": {
             "global_properties": {
-                "url": c.EXPRESSION_API + "tickets",
+                "url": c.EXPRESSION_API + "ticket",
                 "http_method": c.HTTP_GET
             },
 
             "cases": [
                 {
                     "name": "Expression Ticket by Format",
-                    "description": "requests /expressions/tickets, only "
+                    "description": "requests /expressions/ticket, only "
                        + "specifying the required 'format' parameter. checks "
                        + "content type and status code (200). validates "
                        + "response body matches ticket schema",
@@ -836,8 +836,8 @@ TESTS_DICT = {
                 },
 
                 {
-                    "name": "Expressions Ticket - All Filters",
-                    "description": "request /expressions/tickets using all "
+                    "name": "Expression Ticket - All Filters",
+                    "description": "request /expressions/ticket using all "
                         + "server-supported expression filters. checks content "
                         + "type and status code (200). validates response body "
                         + "matches ticket schema.",
@@ -854,7 +854,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Expression Ticket - Single Filter, 1",
-                    "description": "request /expressions/tickets using the "
+                    "description": "request /expressions/ticket using the "
                         + "first filter supported by server "
                         + "(in addition to format). checks "
                         + "type and status code (200). validates response body "
@@ -871,7 +871,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Expression Ticket - Single Filter, 2",
-                    "description": "request /expressions/tickets using the "
+                    "description": "request /expressions/ticket using the "
                         + "second filter supported by server "
                         + "(in addition to format). checks "
                         + "type and status code (200). validates response body "
@@ -888,7 +888,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Expression Ticket - Format Not Specified",
-                    "description": "request /expressions/tickets endpoint "
+                    "description": "request /expressions/ticket endpoint "
                         + "without specifying the required 'format' parameter. "
                         + "checks content type and status code (4xx). "
                         + "validates response body matches error schema.",
@@ -905,7 +905,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Expression Ticket - Filetype Matches",
-                    "description": "request /expressions/tickets endpoint with "
+                    "description": "request /expressions/ticket endpoint with "
                         + "'format' parameter specified. checks "
                         + "content type and status code (200). validates "
                         + "ticket fileType matches requested format.",
@@ -924,10 +924,10 @@ TESTS_DICT = {
         "content": {
             "global_properties": {
                 "tempfile": "multi_expression_ticket_content_test.loom",
-                "url": c.EXPRESSION_API + "tickets",
+                "url": c.EXPRESSION_API + "ticket",
                 "description": "Asserts correct slicing/subsetting of "
                     + "expression matrix when slice parameters are passed to "
-                    + "/expressions/tickets",
+                    + "/expressions/ticket",
                 "summary_pass": "Sliced expression matrix rows, columns, and "
                     + "values match expected",
                 "summary_fail": "Sliced expression matrix rows, columns, and "
@@ -1010,7 +1010,7 @@ TESTS_DICT = {
                 },
 
                 {
-                    "name": "Expressions Bytes - All Filters",
+                    "name": "Expression Bytes - All Filters",
                     "description": "request /expressions/bytes using all "
                         + "server-supported expression filters. checks content "
                         + "type and status code (200).",
@@ -1186,7 +1186,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Expression Ticket by Id Not Implemented",
-                    "description": "request /expressions/:id/tickets, "
+                    "description": "request /expressions/:id/ticket, "
                         + "expecting 501 status code",
                     "summary_pass": "Expression Ticket by Id correctly "
                         + "non-implemented",
@@ -1194,7 +1194,7 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Expression Ticket by Id Not Implemented' "
                         + "skipped",
-                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/tickets",
+                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/ticket",
                     "request_params": {}
                 },
 
@@ -1228,7 +1228,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Expression Ticket Not Implemented",
-                    "description": "request /expressions/tickets, "
+                    "description": "request /expressions/ticket, "
                         + "expecting 501 status code",
                     "summary_pass": "Expression Ticket correctly "
                         + "non-implemented",
@@ -1236,7 +1236,7 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Expression Ticket Not Implemented' "
                         + "skipped",
-                    "url": c.EXPRESSION_API + "tickets",
+                    "url": c.EXPRESSION_API + "ticket",
                     "request_params": {"format": "tsv"}
                 },
 
@@ -1331,7 +1331,7 @@ TESTS_DICT = {
         # TEST: SINGLE CONTINUOUS TICKET
         # # # # # # # # # # # # # # # # # # # #
         "name": "single_continuous_ticket",
-        "description": "Requests the /continuous/:id/tickets endpoint",
+        "description": "Requests the /continuous/:id/ticket endpoint",
         "pass_text": "'Single Continuous Ticket by Id' endpoint correctly "
             + "implemented",
         "fail_text": "'Single Continuous Ticket by Id' endpoint NOT correctly "
@@ -1347,7 +1347,7 @@ TESTS_DICT = {
             "cases": [
                 {
                     "name": "Get Test Continuous Ticket",
-                    "description": "request /continous/:id/tickets using test "
+                    "description": "request /continous/:id/ticket using test "
                         + "continuous id. checks content type and status code "
                         + "(200). validates response body matches Ticket "
                         + "schema",
@@ -1355,14 +1355,14 @@ TESTS_DICT = {
                         + "retrieved",
                     "summary_fail": "Test continuous ticket NOT retrieved",
                     "summary_skip": "'Get Test Continuous Ticket' skipped",
-                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/tickets",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/ticket",
                     "schema_file": c.SCHEMA_FILE_TICKET,
                     "server_settings_update_func": uf.update_expected_format
                 },
 
                 {
                     "name": "Single Continuous Ticket - Not Found",
-                    "description": "request /continuous/:id/tickets using a " 
+                    "description": "request /continuous/:id/ticket using a " 
                         + "continuous id known to not exist. checks "
                         + "content type and status code (4xx). validates "
                         + "response body matches error schema",
@@ -1371,7 +1371,7 @@ TESTS_DICT = {
                     "summary_fail": "Server DOES NOT send correct response "
                         + "when requested continuous not found",
                     "summary_skip": "'Continuous Not Found' skipped",
-                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/tickets",
+                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/ticket",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400, 404]
                 },
@@ -1379,7 +1379,7 @@ TESTS_DICT = {
                 {
                     "name": "Single Continuous Ticket - Start Specified "
                         + "Without Chr",
-                    "description": "request /continuous/:id/tickets, "
+                    "description": "request /continuous/:id/ticket, "
                         + "specifying start " 
                         + "parameter without chr. checks content type and "
                         + "status code (400). validates response body matches "
@@ -1391,7 +1391,7 @@ TESTS_DICT = {
                         + "when start is specified without chr",
                     "summary_skip": "'Continuous Get Start Specified Without "
                         + "Chr' skipped",
-                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/tickets",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/ticket",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400]
                 },
@@ -1399,7 +1399,7 @@ TESTS_DICT = {
                 {
                     "name": "Single Continuous Ticket - End Specified Without "
                         + "Chr",
-                    "description": "request /continuous/:id/tickets, "
+                    "description": "request /continuous/:id/ticket, "
                         + "specifying end " 
                         + "parameter without chr. checks content type and "
                         + "status code (400). validates response body matches "
@@ -1411,14 +1411,14 @@ TESTS_DICT = {
                         + "when end is specified without chr",
                     "summary_skip": "'Continuous Get End Specified Without "
                         + "Chr' skipped",
-                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/tickets",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/ticket",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400]
                 },
 
                 {
                     "name": "Single Continuous Ticket - Start Greater Than End",
-                    "description": "request /continuous/:id/tickets, "
+                    "description": "request /continuous/:id/ticket, "
                         + "specifying chr, " 
                         + "start, and end parameters, but start is greater " 
                         + "than end. checks content type and status code "
@@ -1432,7 +1432,7 @@ TESTS_DICT = {
                         + "when start is greater than end",
                     "summary_skip": "'Continuous Get Start Greater Than End' "
                         + "skipped",
-                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/tickets",
+                    "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/ticket",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [501]
                 }
@@ -1444,7 +1444,7 @@ TESTS_DICT = {
                 "tempfile": "single_continuous_ticket_content_test.loom",
                 "description": "Assert continuous rows, columns, and cell "
                     + "values match expected",
-                "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/tickets",
+                "url": c.CONTINUOUS_API + "V_CONTINUOUS_ID/ticket",
                 "summary_pass": "Continuous matrix content matches expected",
                 "summary_fail": "Continuous matrix content DOES NOT match "
                     + "expected",
@@ -1645,21 +1645,21 @@ TESTS_DICT = {
         # TEST: MULTI CONTINUOUS TICKET
         # # # # # # # # # # # # # # # # # # # #
         "name": "multi_continuous_ticket",
-        "description": "Requests the /continuous/tickets endpoint.",
+        "description": "Requests the /continuous/ticket endpoint.",
         "pass_text": "'Continuous Ticket' endpoint correctly implemented",
         "fail_text": "'Continuous Ticket' endpoint NOT correctly implemented",
         "skip_text": "'Continuous Ticket' test skipped",
 
         "api": {
             "global_properties": {
-                "url": c.CONTINUOUS_API + "tickets",
+                "url": c.CONTINUOUS_API + "ticket",
                 "http_method": c.HTTP_GET
             },
 
             "cases": [
                 {
                     "name": "Continuous Ticket by Format",
-                    "description": "requests /continuous/tickets, only "
+                    "description": "requests /continuous/ticket, only "
                        + "specifying the required 'format' parameter. checks "
                        + "content type and status code (200). validates "
                        + "response body matches ticket schema",
@@ -1672,7 +1672,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket - All Filters",
-                    "description": "request /continuous/tickets using all "
+                    "description": "request /continuous/ticket using all "
                         + "server-supported continuous filters. checks content "
                         + "type and status code (200). validates response body "
                         + "matches ticket schema.",
@@ -1689,7 +1689,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket - Single Filter, 1",
-                    "description": "request /continuous/tickets using the "
+                    "description": "request /continuous/ticket using the "
                         + "first filter supported by server "
                         + "(in addition to format). checks "
                         + "type and status code (200). validates response body "
@@ -1706,7 +1706,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket - Single Filter, 2",
-                    "description": "request /continuous/tickets using the "
+                    "description": "request /continuous/ticket using the "
                         + "second filter supported by server "
                         + "(in addition to format). checks "
                         + "type and status code (200). validates response body "
@@ -1723,7 +1723,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket - Format Not Specified",
-                    "description": "request /continuous/tickets endpoint "
+                    "description": "request /continuous/ticket endpoint "
                         + "without specifying the required 'format' parameter. "
                         + "checks content type and status code (4xx). "
                         + "validates response body matches error schema.",
@@ -1740,7 +1740,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket - Filetype Matches",
-                    "description": "request /continuous/tickets endpoint with "
+                    "description": "request /continuous/ticket endpoint with "
                         + "'format' parameter specified. checks "
                         + "content type and status code (200). validates "
                         + "ticket fileType matches requested format.",
@@ -1756,7 +1756,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket - Start Specified Without Chr",
-                    "description": "request /continuous/tickets, specifying " 
+                    "description": "request /continuous/ticket, specifying " 
                         + "start parameter without chr. checks content type "
                         + "and status code (400). validates response body "
                         + "matches error schema",
@@ -1775,7 +1775,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket - End Specified Without Chr",
-                    "description": "request /continuous/tickets, specifying " 
+                    "description": "request /continuous/ticket, specifying " 
                         + "end parameter without chr. checks content type and "
                         + "status code (400). validates response body matches "
                         + "error schema",
@@ -1794,7 +1794,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket - Start Greater Than End",
-                    "description": "request /continuous/tickets, specifying "
+                    "description": "request /continuous/ticket, specifying "
                         + "chr, start, and end parameters, but start is " 
                         + "greater than end. checks content type and status "
                         + "code (501). validates response body matches error "
@@ -1820,7 +1820,7 @@ TESTS_DICT = {
             "global_properties": {
                 "function": cf.continuous_test_case,
                 "tempfile": "multi_continuous_ticket_content_test.loom",
-                "url": c.CONTINUOUS_API + "tickets",
+                "url": c.CONTINUOUS_API + "ticket",
                 "description": "Asserts correct values of continuous matrix, "
                     + "and correct of matrix by parameters (chr, start, end).",
                 "summary_pass": "Continuous matrix tracks, positions, and "
@@ -2124,7 +2124,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket by Id Not Implemented",
-                    "description": "request /continuous/:id/tickets, "
+                    "description": "request /continuous/:id/ticket, "
                         + "expecting 501 status code",
                     "summary_pass": "Continuous Ticket by Id correctly "
                         + "non-implemented",
@@ -2132,7 +2132,7 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Continuous Ticket by Id Not Implemented' "
                         + "skipped",
-                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/tickets",
+                    "url": c.CONTINUOUS_API + c.NONEXISTENT_ID + "/ticket",
                     "request_params": {}
                 },
 
@@ -2166,7 +2166,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Continuous Ticket Not Implemented",
-                    "description": "request /continuous/tickets, "
+                    "description": "request /continuous/ticket, "
                         + "expecting 501 status code",
                     "summary_pass": "Continuous Ticket correctly "
                         + "non-implemented",
@@ -2174,7 +2174,7 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Continuous Ticket Not Implemented' "
                         + "skipped",
-                    "url": c.CONTINUOUS_API + "tickets",
+                    "url": c.CONTINUOUS_API + "ticket",
                     "request_params": {"format": "tsv"}
                 },
 
