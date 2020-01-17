@@ -734,7 +734,7 @@ TESTS_DICT = {
                     "summary_fail": "Server DOES NOT send correct response "
                         + "when requested expression not found",
                     "summary_skip": "'Expression Not Found' skipped",
-                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/ticket",
+                    "url": c.EXPRESSION_API + c.NONEXISTENT_ID + "/bytes",
                     "schema_file": c.SCHEMA_FILE_ERROR,
                     "expected_status": [400, 404]
                 }
