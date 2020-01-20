@@ -8,7 +8,7 @@
 # RNAget Compliance Suite
 
 The RNAget Compliance Suite determines a server's compliance with the
-[RNAget API specification](https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget.md) for serving RNAseq datasets. The specification, developed by
+[RNAget API specification](https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget-openapi.yaml) for serving RNAseq datasets. The specification, developed by
 the [Global Alliance for Genomics and Health](https://www.ga4gh.org/), serves to provide a standardized API framework and data structure to allow for interoperability of datasets hosted at different institutions.
 
 Please review the [RNAget Compliance Documentation](https://rnaget-compliance-suite.readthedocs.io/en/latest/) for instructions on how to 
