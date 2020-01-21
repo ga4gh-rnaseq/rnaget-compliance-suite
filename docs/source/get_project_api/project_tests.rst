@@ -50,10 +50,7 @@ Get Test Project
       "id": "9c0eba51095d3939437e220db196e27b",
       "version": "1.0",
       "name": "RNAgetTestProject0",
-      "description": "Test project object used by RNAget compliance testing suite.",
-      "tags": [
-         "RNAgetCompliance"
-      ]
+      "description": "Test project object used by RNAget compliance testing suite."
    }
 
 * **Success Criteria:** :code:`Status Code == 200` AND response body is valid :code:`Project` json
@@ -154,16 +151,9 @@ Search Projects Without Filters
        "id": "9c0eba51095d3939437e220db196e27b",
        "version": "1.0",
        "name": "RNAgetTestProject0",
-       "description": "Test project object used by RNAget compliance testing suite.",
-       "tags": [
-         "RNAgetCompliance"
-       ]
+       "description": "Test project object used by RNAget compliance testing suite."
      },
      {
-       "tags": [
-         "PCAWG",
-         "cancer"
-       ],
        "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423",
        "id": "43378a5d48364f9d8cf3c3d5104df560",
        "name": "PCAWG",
@@ -199,10 +189,7 @@ Search Projects With All Filters
        "id": "9c0eba51095d3939437e220db196e27b",
        "version": "1.0",
        "name": "RNAgetTestProject0",
-       "description": "Test project object used by RNAget compliance testing suite.",
-       "tags": [
-         "RNAgetCompliance"
-       ]
+       "description": "Test project object used by RNAget compliance testing suite."
      }
    ]
 
@@ -234,10 +221,7 @@ Search Projects With Single Filter, 1
        "id": "9c0eba51095d3939437e220db196e27b",
        "version": "1.0",
        "name": "RNAgetTestProject0",
-       "description": "Test project object used by RNAget compliance testing suite.",
-       "tags": [
-         "RNAgetCompliance"
-       ]
+       "description": "Test project object used by RNAget compliance testing suite."
      }
    ]
 
@@ -269,10 +253,7 @@ Search Projects With Single Filter, 2
        "id": "9c0eba51095d3939437e220db196e27b",
        "version": "1.0",
        "name": "RNAgetTestProject0",
-       "description": "Test project object used by RNAget compliance testing suite.",
-       "tags": [
-         "RNAgetCompliance"
-       ]
+       "description": "Test project object used by RNAget compliance testing suite."
      }
    ]
 

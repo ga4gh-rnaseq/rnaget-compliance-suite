@@ -51,9 +51,6 @@ Get Test Study
      "version": "1.0",
      "name": "RNAgetTestStudy0",
      "description": "Test study object used by RNAget compliance testing suite.",
-     "tags": [
-       "RNAgetCompliance"
-     ],
      "parentProjectID": "9c0eba51095d3939437e220db196e27b"
    }
 
@@ -154,10 +151,6 @@ Search Studies Without Filters
      {
        "id": "6cccbbd76b9c4837bd7342dd616d0fec",
        "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560",
-       "tags": [
-         "PCAWG",
-         "cancer"
-       ],
        "name": "PCAWG",
        "description": "PCAWG study",
        "version": "1.0"
@@ -165,9 +158,6 @@ Search Studies Without Filters
      {
        "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "parentProjectID": "9c0eba51095d3939437e220db196e27b",
-       "tags": [
-         "RNAgetCompliance"
-       ],
        "name": "RNAgetTestStudy0",
        "description": "Test study object used by RNAget compliance testing suite.",
        "version": "1.0"
@@ -201,9 +191,6 @@ Search Studies With All Filters
      {
        "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "parentProjectID": "9c0eba51095d3939437e220db196e27b",
-       "tags": [
-         "RNAgetCompliance"
-       ],
        "name": "RNAgetTestStudy0",
        "description": "Test study object used by RNAget compliance testing suite.",
        "version": "1.0"
@@ -237,9 +224,6 @@ Search Studies With Single Filter, 1
      {
        "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "parentProjectID": "9c0eba51095d3939437e220db196e27b",
-       "tags": [
-         "RNAgetCompliance"
-       ],
        "name": "RNAgetTestStudy0",
        "description": "Test study object used by RNAget compliance testing suite.",
        "version": "1.0"
@@ -273,9 +257,6 @@ Search Studies With Single Filter, 2
      {
        "id": "f3ba0b59bed0fa2f1030e7cb508324d1",
        "parentProjectID": "9c0eba51095d3939437e220db196e27b",
-       "tags": [
-         "RNAgetCompliance"
-       ],
        "name": "RNAgetTestStudy0",
        "description": "Test study object used by RNAget compliance testing suite.",
        "version": "1.0"

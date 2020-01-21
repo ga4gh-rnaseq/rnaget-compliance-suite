@@ -139,9 +139,6 @@ Get Test Continuous Ticket
      "version": "1.0",
      "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
      "url": "https://url/to/continuous/file",
-     "tags": [
-       "RNAgetCompliance"
-     ],
      "units": "TPM",
      "fileType": "loom/tsv"
    }
@@ -414,9 +411,6 @@ Continuous Ticket by Format
      "url": "/path/to/signal-query-results.loom",
      "units": "TPM",
      "version": "1.0",
-     "tags": [
-       "cancer"
-     ],
      "fileType": "loom"
    }
 
@@ -448,9 +442,6 @@ Continuous Ticket - All Filters
      "url": "/path/to/continuous.loom",
      "units": "TPM",
      "version": "1.0",
-     "tags": [
-       "RNAgetCompliance"
-     ],
      "fileType": "loom"
    }
 

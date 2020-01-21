@@ -3,8 +3,5 @@
   "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
   "url": "https://url/to/expression/file",
   "units": "TPM",
-  "tags": [
-    "RNAgetCompliance"
-  ],
   "fileType": "loom/tsv"
 }

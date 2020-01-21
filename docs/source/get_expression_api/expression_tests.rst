@@ -127,9 +127,6 @@ Get Test Expression Ticket
      "version": "1.0",
      "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
      "url": "https://url/to/expression/file",
-       "tags": [
-         "RNAgetCompliance"
-       ],
      "units": "TPM",
      "fileType": "loom/tsv"
    }
@@ -235,7 +232,6 @@ Expression Ticket by Format
    Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
 
     {
-      "tags": [],
       "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
       "url": "/path/to/E-MTAB-5423-query-results.tpms.loom",
       "units": "TPM",
