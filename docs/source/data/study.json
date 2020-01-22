@@ -3,8 +3,5 @@
   "version": "1.0",
   "name": "RNAgetTestStudy0",
   "description": "Test study object used by RNAget compliance testing suite.",
-  "tags": [
-    "RNAgetCompliance"
-  ],
   "parentProjectID": "9c0eba51095d3939437e220db196e27b"
 }

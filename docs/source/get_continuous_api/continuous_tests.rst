@@ -17,161 +17,40 @@ met when evaluating the response:
 Continuous API Test Cases
 --------------------------
 
-* `Get Test Continuous`_
-* `Continuous Not Found`_
-* `Continuous Get Start Specified Without Chr`_
-* `Continuous Get End Specified Without Chr`_
-* `Continuous Get Start Greater Than End`_
 * `Get Supported Continuous Formats`_
-* `Continuous Search Filters`_
-* `Search Continuous by Format`_
-* `Search Continuous With All Filters`_
-* `Search Continuous With Single Filter, 1`_
-* `Search Continuous With Single Filter, 2`_
-* `Continuous Search Filters Non-Matching Resources`_
-* `Continuous Search Format Not Specified`_
-* `Continuous Search Filetypes Match`_
-* `Continuous Search No Filetype Mismatches`_
-* `Continuous Search Start Specified Without Chr`_
-* `Continuous Search End Specified Without Chr`_
-* `Continuous Search Start Greater Than End`_
-
-Get Test Continuous
-####################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Requests continuous data by its :code:`id`. Expects signal intensity to be returned as a file attachment.
-* **Rationale:** Asserts that the :code:`/continuous/<id>` endpoint returns a signal intensity file as an attachment.
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 200 OK
-   Content-Type: application/vnd.loom
-   Content-Disposition: attachment
-
-* **Success Criteria:** :code:`Status Code == 200` AND :code:`Content-Type` corresponds to the file :code:`format` (loom, tsv, etc.)
-* **Failure Criteria:** :code:`Status Code != 200` OR :code:`Content-Type` DOES NOT correspond to the file :code:`format` (loom, tsv, etc.)
-
-Continuous Not Found
-######################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Requests a continuous with an invalid :code:`id`, that is, an :code:`id` that does not correspond to any :code:`Continuous` on the server. Expects a :code:`404 Not Found` status code in the response, and a response body with a message explaining that the specified resource could not be found.
-* **Rationale:** Asserts that the :code:`/continuous/<id>` endpoint does not return arbitrary :code:`Continuous` objects, and only returns a :code:`Continuous` when the :code:`id` matches.
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/nonexistentid9999999999999999999
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 404 Not Found
-   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
-
-   {
-     "message": "Entry not found in database."
-   }
-
-* **Success Criteria:** :code:`Status Code == 404` AND response body is valid :code:`Error` json
-* **Failure Criteria:** :code:`Status Code != 404` OR response body is NOT valid :code:`Error` json
-
-Continuous Get Start Specified Without Chr
-###########################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Requests test continuous by its id, specifying a start position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
-* **Rationale:** Asserts that the :code:`/continuous/<id>` endpoint raises an error when :code:`start` is specified without :code:`chr`
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?start=5
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 400 Bad Request
-   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
-
-   {
-     "message": "chr required if either start or end is specified"
-   }
-
-* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
-* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
-
-Continuous Get End Specified Without Chr
-###########################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Requests test continuous by its id, specifying an end position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
-* **Rationale:** Asserts that the :code:`/continuous/<id>` endpoint raises an error when :code:`end` is specified without :code:`chr`
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?end=1000
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 400 Bad Request
-   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
-
-   {
-     "message": "chr required if either start or end is specified"
-   }
-
-* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
-* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
-
-Continuous Get Start Greater Than End
-###########################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Requests test continuous by its id, specifying :code:`chr`, :code:`start`, and :code:`end`, however, :code:`start` position is greater than :code:`end`. Expects a :code:`400 Bad Request` status code in the response, and an error message
-* **Rationale:** Asserts that the :code:`/continuous/<id>` endpoint raises an error when :code:`start` is greater than :code:`end`
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?chr=1&start=200&end=100
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 400 Bad Request
-   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
-
-   {
-     "message": "start cannot be greater than end"
-   }
-
-* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
-* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
+* `Continuous Filters`_
+* `Get Test Continuous Ticket`_
+* `Single Continuous Ticket - Not Found`_
+* `Single Continuous Ticket - Start Specified Without Chr`_
+* `Single Continuous Ticket - End Specified Without Chr`_
+* `Single Continuous Ticket - Start Greater Than End`_
+* `Get Test Continuous Bytes`_
+* `Single Continuous Bytes - Not Found`_
+* `Single Continuous Bytes - Start Specified Without Chr`_
+* `Single Continuous Bytes - End Specified Without Chr`_
+* `Single Continuous Bytes - Start Greater Than End`_
+* `Continuous Ticket by Format`_
+* `Continuous Ticket - All Filters`_
+* `Continuous Ticket - Single Filter, 1`_
+* `Continuous Ticket - Single Filter, 2`_
+* `Continuous Ticket - Format Not Specified`_
+* `Continuous Ticket - Filetype Matches`_
+* `Continuous Ticket - Start Specified Without Chr`_
+* `Continuous Ticket - End Specified Without Chr`_
+* `Continuous Ticket - Start Greater Than End`_
+* `Continuous Bytes by Format`_
+* `Continuous Bytes - All Filters`_
+* `Continuous Bytes - Single Filter, 1`_
+* `Continuous Bytes - Single Filter, 2`_
+* `Continuous Bytes - Format Not Specified`_
+* `Continuous Bytes - Start Specified Without Chr`_
+* `Continuous Bytes - End Specified Without Chr`_
+* `Continuous Bytes - Start Greater Than End`_
 
 Get Supported Continuous Formats
 #################################
 * **Route:** :code:`/continuous/formats`
-* **Description:** Requests the available continuous data file formats on the server. Expects an array of strings to be returned in the response body.
+* **Description:** Requests the available continuous file formats on the server. Expects an array of strings to be returned in the response body.
 * **Rationale:** Asserts that :code:`/continuous/formats` returns an array of strings, indicating which continuous file formats the server supports
 
 * **Request:**
@@ -196,17 +75,17 @@ Get Supported Continuous Formats
 * **Success Criteria:** :code:`Status Code == 200` AND response body is an array of strings in json format
 * **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT an array of strings in json format
 
-Continuous Search Filters
+Continuous Filters
 ###########################
-* **Route:** :code:`/continuous/search/filters`
+* **Route:** :code:`/continuous/filters`
 * **Description:** Requests the filters that can be used to narrow search results for a list of :code:`Continuous`
-* **Rationale:** Asserts that the endpoint returns an array of :code:`Search Filter` objects
+* **Rationale:** Asserts that the endpoint returns an array of :code:`filters`
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search/filters
+   GET /continuous/filters
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -232,64 +111,20 @@ Continuous Search Filters
      }
    ]
 
-* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Search Filters`
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Search Filters`
+* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`filters`
+* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`filters`
 
-Search Continuous by Format
-################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Searches for all continuous, specifying only the required 'format' parameter. Expects an array of :code:`Continuous` in the response body.
-* **Rationale:** Asserts that the :code:`/continuous/search` returns an array, and that each element in the array is a :code:`Continuous`.
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/search?format=loom
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 200 OK
-   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
-
-   [
-     {
-       "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
-       "url": "/path/to/signal-query-results.loom",
-       "version": "1.0",
-       "tags": [
-         "cancer"
-       ],
-       "fileType": "loom"
-     },
-     {
-       "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
-       "url": "/path/to/continuous.loom",
-       "version": "1.0",
-       "tags": [
-         "RNAgetCompliance"
-       ],
-       "fileType": "loom"
-     }
-   ]
-
-* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Continuous` json AND :code:`Array Length >= 1`
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Continuous` json OR :code:`Array Length < 1`
-
-Search Continuous With All Filters
-####################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Searches continuous, using all filtering parameters associated with test continuous. Expects an array of :code:`Continuous` to be returned in the response body. Array must contain at least 1 object.
-* **Rationale:** Asserts that :code:`/continuous/search` returns an array of :code:`Continuous` even when specifying filters. The returned array MUST have at least 1 object, as the parameter filters must match the attributes of the test continuous.
+Get Test Continuous Ticket
+###########################
+* **Route:** :code:`/continuous/<id>/ticket`
+* **Description:** Requests continuous ticket by its :code:`id`. Expects valid :code:`ticket`.
+* **Rationale:** Asserts that :code:`/continuous/<id>/ticket` returns valid :code:`ticket`.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/ticket
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -299,111 +134,269 @@ Search Continuous With All Filters
    HTTP/1.1 200 OK
    Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
 
-   [
-     {
-       "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
-       "url": "/path/to/continuous.loom",
-       "version": "1.0",
-       "tags": [
-         "RNAgetCompliance"
-       ],
-       "fileType": "loom"
-    }
-   ]
+   {
+     "id": "5e22e009f41fc53cbea094a41de8798f",
+     "version": "1.0",
+     "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
+     "url": "https://url/to/continuous/file",
+     "units": "TPM",
+     "fileType": "loom/tsv"
+   }
 
-* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Continuous` json AND :code:`Array Length >= 1`
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Continuous` json OR :code:`Array Length < 1`
+* **Success Criteria:** :code:`Status Code == 200` AND response is :code:`ticket`
+* **Failure Criteria:** :code:`Status Code != 200` OR response is NOT :code:`ticket`
 
-Search Continuous With Single Filter, 1
-#########################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Searches continuous using only 1 filtering parameter associated with test continuous (in addition to format). Expects an array of :code:`Continuous`, with length of 1 or greater.
-* **Rationale:** Asserts filtering parameters can be used independently of one another, and that each filter yields the test :code:`Continuous` in the search results.
+Single Continuous Ticket - Not Found
+######################################
+* **Route:** :code:`/continuous/<id>/ticket`
+* **Description:** Requests continuous ticket with an invalid :code:`id`. Expects a :code:`404 Not Found` status code in the response, and error message.
+* **Rationale:** Asserts that the :code:`/continuous/<id>/ticket` endpoint does not return arbitrary :code:`ticket`.
 
-* **Requests:**
+* **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?format=loom&version=1.0
+   GET /continuous/nonexistentid9999999999999999999/ticket
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
 
 .. code-block:: python
 
-   HTTP/1.1 200 OK
+   HTTP/1.1 404 Not Found
    Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
 
-   [
-     {
-       "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
-       "url": "/path/to/signal-query-results.loom",
-       "version": "1.0",
-       "tags": [
-         "cancer"
-       ],
-       "fileType": "loom"
-     },
-     {
-       "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
-       "url": "/path/to/continuous.loom",
-       "version": "1.0",
-       "tags": [
-         "RNAgetCompliance"
-       ],
-       "fileType": "loom"
-     }
-   ]
+   {
+     "message": "Entry not found in database."
+   }
 
-* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Continuous` json AND :code:`Array Length >= 1`
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Continuous` json OR :code:`Array Length < 1`
+* **Success Criteria:** :code:`Status Code == 404` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 404` OR response body is NOT valid :code:`Error` json
 
-Search Continuous With Single Filter, 2
-#########################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Searches continuous using only 1 filtering parameter (a different filter than above) associated with test continuous (in addition to format). Expects an array of :code:`Continuous`, with length of 1 or greater.
-* **Rationale:** Asserts filtering parameters can be used independently of one another, and that each filter yields the test :code:`Continuous` in the search results.
+Single Continuous Ticket - Start Specified Without Chr
+########################################################
+* **Route:** :code:`/continuous/<id>/ticket`
+* **Description:** Requests continuous ticket by its id, specifying a start position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/<id>/ticket` endpoint raises an error when :code:`start` is specified without :code:`chr`
 
-* **Requests:**
+* **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?format=loom&studyID=f3ba0b59bed0fa2f1030e7cb508324d1
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/ticket?start=5
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
 
 .. code-block:: python
 
-   HTTP/1.1 200 OK
+   HTTP/1.1 400 Bad Request
    Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
 
-   [
-     {
-       "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
-       "url": "/path/to/continuous.loom",
-       "version": "1.0",
-       "tags": [
-         "RNAgetCompliance"
-       ],
-       "fileType": "loom"
-     }
-   ]
+   {
+     "message": "chr required if either start or end is specified"
+   }
 
-* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Continuous` json AND :code:`Array Length >= 1`
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Continuous` json OR :code:`Array Length < 1`
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
 
-Continuous Search Filters Non-Matching Resources
+Single Continuous Ticket - End Specified Without Chr
+#####################################################
+* **Route:** :code:`/continuous/<id>/ticket`
+* **Description:** Requests test continuous by its id, specifying an end position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/<id>/ticket` endpoint raises an error when :code:`end` is specified without :code:`chr`
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/ticket?end=1000
+   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "chr required if either start or end is specified"
+   }
+
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
+
+Single Continuous Ticket - Start Greater Than End
+##################################################
+* **Route:** :code:`/continuous/<id>/ticket`
+* **Description:** Requests test continuous ticket by its id, specifying :code:`chr`, :code:`start`, and :code:`end`, however, :code:`start` position is greater than :code:`end`. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/<id>/ticket` endpoint raises an error when :code:`start` is greater than :code:`end`
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/ticket?chr=1&start=200&end=100
+   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "start cannot be greater than end"
+   }
+
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
+
+Get Test Continuous Bytes
+##########################
+* **Route:** :code:`/continuous/<id>/bytes`
+* **Description:** Requests continuous matrix bytes by its :code:`id`.
+* **Rationale:** Asserts that :code:`/continuous/<id>/bytes` returns matrix bytes.
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/bytes
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 200 OK
+   Content-Type: application/octet-stream
+
+* **Success Criteria:** :code:`Status Code == 200`
+* **Failure Criteria:** :code:`Status Code != 200`
+
+Single Continuous Bytes - Not Found
+#####################################
+
+* **Route:** :code:`/continuous/<id>/bytes`
+* **Description:** Requests continuous bytes with an invalid :code:`id`. Expects a :code:`404 Not Found` status code in the response, and error message.
+* **Rationale:** Asserts that the :code:`/continuous/<id>/bytes` endpoint does not return arbitrary matrix.
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/nonexistentid9999999999999999999/bytes
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 404 Not Found
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "Entry not found in database."
+   }
+
+* **Success Criteria:** :code:`Status Code == 404` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 404` OR response body is NOT valid :code:`Error` json
+
+Single Continuous Bytes - Start Specified Without Chr
+#######################################################
+* **Route:** :code:`/continuous/<id>/bytes`
+* **Description:** Requests continuous matrix bytes by its id, specifying a start position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/<id>/bytes` endpoint raises an error when :code:`start` is specified without :code:`chr`
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/bytes?start=5
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "chr required if either start or end is specified"
+   }
+
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
+
+Single Continuous Bytes - End Specified Without Chr
+####################################################
+* **Route:** :code:`/continuous/<id>/bytes`
+* **Description:** Requests test continuous matrix bytes by its id, specifying an end position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/<id>/bytes` endpoint raises an error when :code:`end` is specified without :code:`chr`
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/bytes?end=1000
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "chr required if either start or end is specified"
+   }
+
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
+
+Single Continuous Bytes - Start Greater Than End
 #################################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Tests that the continuous search endpoint correctly filters out non-matching :code:`Continuous` based on url parameters. Makes a request to the :code:`/continuous/search` endpoint with invalid filters (not matching any :code:`Continuous`), and expects an empty array as a response.
-* **Rationale:** Asserts that the endpoint correctly filters out non-matching entities, that the endpoint does not return an arbitrary list of :code:`Continuous` that differ from filters.
+* **Route:** :code:`/continuous/<id>/bytes`
+* **Description:** Requests test continuous matrix bytes by its id, specifying :code:`chr`, :code:`start`, and :code:`end`, however, :code:`start` position is greater than :code:`end`. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/<id>/bytes` endpoint raises an error when :code:`start` is greater than :code:`end`
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?format=nonexistentid9999999999999999999&version=nonexistentid9999999999999999999&studyID=nonexistentid9999999999999999999
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/bytes?chr=1&start=200&end=100
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "start cannot be greater than end"
+   }
+
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
+
+Continuous Ticket by Format
+################################
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Requests joined continuous matrix, specifying only the required 'format' parameter. Expects :code:`ticket`.
+* **Rationale:** Asserts that :code:`/continuous/ticket` returns a :code:`ticket` with which the matrix can be downloaded.
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/ticket?format=loom
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -413,22 +406,119 @@ Continuous Search Filters Non-Matching Resources
    HTTP/1.1 200 OK
    Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
 
-   []
+   {
+     "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
+     "url": "/path/to/signal-query-results.loom",
+     "units": "TPM",
+     "version": "1.0",
+     "fileType": "loom"
+   }
 
-* **Success Criteria:** :code:`Status Code == 200` AND response body is an empty array
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT an empty array
+* **Success Criteria:** :code:`Status Code == 200` AND response body is :code:`ticket`
+* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT :code:`ticket`
 
-Continuous Search Format Not Specified
-#######################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Searches for all continuous WITHOUT specifying the required :code:`format` parameter. Expects a :code:`4xx` error response, with an error message indicating that the request was invalid.
-* **Rationale:** As the :code:`format` parameter is required to specify file format for the :code:`/continuous/search` endpoint, this test asserts malformed requests raise an error.
+Continuous Ticket - All Filters
+####################################
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Requests joined continuous matrix, using all filtering parameters. Expects :code:`ticket`.
+* **Rationale:** Asserts that :code:`/continuous/ticket` returns :code:`ticket` when specifying filters.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search
+   GET /continuous/ticket?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1
+   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 200 OK
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
+     "url": "/path/to/continuous.loom",
+     "units": "TPM",
+     "version": "1.0",
+     "fileType": "loom"
+   }
+
+* **Success Criteria:** :code:`Status Code == 200` AND response body is :code:`ticket`
+* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT :code:`ticket`
+
+Continuous Ticket - Single Filter, 1
+#########################################
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Requests joined continuous matrix, using only 1 filtering parameter associated with test continuous (in addition to format). Expects :code:`ticket`.
+* **Rationale:** Asserts filtering parameters can be used independently of one another, and that each filter yields a valid :code:`ticket`.
+
+* **Requests:**
+
+.. code-block:: python
+
+   GET /continuous/ticket?format=loom&version=1.0
+   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 200 OK
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "url": "/path/to/signal-query-results.loom",
+     "units": "TPM",
+     "version": "1.0",
+     "fileType": "loom"
+   }
+
+* **Success Criteria:** :code:`Status Code == 200` AND response body is :code:`ticket`.
+* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT :code:`ticket`.
+
+Continuous Ticket - Single Filter, 2
+#########################################
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Requests joined continuous matrix, using only 1 filtering parameter (different than above) associated with test continuous (in addition to format). Expects :code:`ticket`.
+* **Rationale:** Asserts filtering parameters can be used independently of one another, and that each filter yields a valid :code:`ticket`.
+
+* **Requests:**
+
+.. code-block:: python
+
+   GET /continuous/ticket?format=loom&studyID=f3ba0b59bed0fa2f1030e7cb508324d1
+   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 200 OK
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
+     "url": "/path/to/signal-query-results.loom",
+     "units": "TPM",
+     "fileType": "loom"
+   }
+
+* **Success Criteria:** :code:`Status Code == 200` AND response body is :code:`ticket`.
+* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT :code:`ticket`.
+
+Continuous Ticket - Format Not Specified
+##########################################
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Requests joined continuous matrix WITHOUT specifying the required :code:`format` parameter. Expects a :code:`4xx` response with error message.
+* **Rationale:** As the :code:`format` parameter is required to specify file format for the :code:`/continuous/ticket` endpoint, this test asserts malformed requests raise an error.
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/ticket
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -445,17 +535,17 @@ Continuous Search Format Not Specified
 * **Success Criteria:** :code:`Status Code == 4xx` AND response body is valid :code:`Error` json
 * **Failure Criteria:** :code:`Status Code != 4xx` AND response body is NOT valid :code:`Error` json
 
-Continuous Search Filetypes Match
+Continuous Ticket - Filetype Matches
 ####################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Search for all continuous, only specifying the required :code:`format` parameter. Checks that all :code:`Continuous` in the response array have a :code:`fileType` that matches the requested :code:`format`.
-* **Rationale:** Asserts that the :code:`/continuous/<id>` endpoint does not return arbitrary :code:`Continuous`, only :code:`Continuous` with a :code:`fileType` matching the requested :code:`format`.
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Request joined continuous matrix, only specifying the required :code:`format` parameter. Checks that :code:`ticket` has a :code:`fileType` matching requested :code:`format`.
+* **Rationale:** Asserts that the :code:`/continuous/ticket` endpoint returns :code:`ticket` with fileType matching the request.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?format=loom
+   GET /continuous/ticket?format=loom
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -465,66 +555,55 @@ Continuous Search Filetypes Match
    HTTP/1.1 200 OK
    Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
 
-   [
-     {
-       "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
-       "url": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom",
-       "version": "1.0",
-       "tags": [
-         "cancer"
-       ],
-       "fileType": "loom"
-     },
-     {
-       "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
-       "url": "/woldlab/castor/home/sau/public_html/rnaget/continuous.loom",
-       "version": "1.0",
-       "tags": [
-         "RNAgetCompliance"
-       ],
-       "fileType": "loom"
-     }
-   ]
+   {
+     "studyID": "6cccbbd76b9c4837bd7342dd616d0fec",
+     "url": "/woldlab/castor/home/sau/public_html/rnaget/signal-query-results.loom",
+     "units": "TPM",
+     "version": "1.0",
+     "fileType": "loom"
+   }
 
-* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Continuous` json AND ALL :code:`Continuous` have a :code:`fileType` matching the requested :code:`format`
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Continuous` json OR ANY :code:`Continuous` DOES NOT have a :code:`fileType` matching the requested :code:`format`
+* **Success Criteria:** :code:`Status Code == 200` AND response body is :code:`ticket` AND :code:`fileType` matches requested :code:`format`
+* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT :code:`ticket` OR :code:`fileType` DOES NOT match requested :code:`format`
 
-Continuous Search No Filetype Mismatches
-#########################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Search for all continuous, only specifying the required :code:`format` parameter. However, the value of :code:`format` is different from that of the test continuous file. Checks that all :code:`Continuous` in the response array have a :code:`fileType` that matches the requested :code:`format`.
-* **Rationale:** This test is used in conjunction with the above to ensure that only :code:`Continuous` of the correct :code:`fileType` are returned. Asserts that all :code:`Continuous` returned from the above test case are excluded from the response of this test case
+Continuous Ticket - Start Specified Without Chr
+################################################
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Requests joined continuous matrix ticket, specifying a start position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/ticket` endpoint raises an error when :code:`start` is specified without :code:`chr`
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?format=tsv
+   GET /continuous/ticket?format=loom&start=5
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
 
 .. code-block:: python
 
-   HTTP/1.1 200 OK
+   HTTP/1.1 400 Bad Request
    Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
 
-   []
+   {
+     "message": "chr required if either start or end is specified"
+   }
 
-* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Continuous` json AND ALL :code:`Continuous` have a :code:`fileType` matching the requested :code:`format`
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Continuous` json OR ANY :code:`Continuous` DOES NOT have a :code:`fileType` matching the requested :code:`format`
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
 
-Continuous Search Start Specified Without Chr
+Continuous Ticket - End Specified Without Chr
 ##############################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Search continuous, specifying a start position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
-* **Rationale:** Asserts that the :code:`/continuous/search` endpoint raises an error when :code:`start` is specified without :code:`chr`
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Requests joined continuous matrix ticket, specifying an end position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/ticket` endpoint raises an error when :code:`end` is specified without :code:`chr`
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?format=loom&start=5
+   GET /continuous/ticket?format=loom&end=1000
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -541,45 +620,218 @@ Continuous Search Start Specified Without Chr
 * **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
 * **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
 
-Continuous Search End Specified Without Chr
-############################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Search continuous, specifying an end position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
-* **Rationale:** Asserts that the :code:`/continuous/search` endpoint raises an error when :code:`end` is specified without :code:`chr`
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/search?format=loom&end=1000
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 400 Bad Request
-   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
-
-   {
-     "message": "chr required if either start or end is specified"
-   }
-
-* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
-* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
-
-Continuous Search Start Greater Than End
+Continuous Ticket - Start Greater Than End
 ###########################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Search continuous, specifying :code:`chr`, :code:`start`, and :code:`end`, however, :code:`start` position is greater than :code:`end`. Expects a :code:`400 Bad Request` status code in the response, and an error message
-* **Rationale:** Asserts that the :code:`/continuous/search` endpoint raises an error when :code:`start` is greater than :code:`end`
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Requests joined continuous matrix ticket, specifying :code:`chr`, :code:`start`, and :code:`end`, however, :code:`start` position is greater than :code:`end`. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/ticket` endpoint raises an error when :code:`start` is greater than :code:`end`
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?format=loom&chr=1&start=200&end=100
+   GET /continuous/ticket?format=loom&chr=1&start=200&end=100
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "start cannot be greater than end"
+   }
+
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
+
+Continuous Bytes by Format
+###############################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** Requests joined continuous matrix as bytes, specifying only the required 'format' parameter.
+* **Rationale:** Asserts that :code:`/continuous/bytes` returns matrix bytes.
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/bytes?format=loom
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 200 OK
+   Content-Type: application/octet-stream
+
+* **Success Criteria:** :code:`Status Code == 200`
+* **Failure Criteria:** :code:`Status Code != 200`
+
+Continuous Bytes - All Filters
+###############################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** Requests joined continuous matrix as bytes, using all filtering parameters.
+* **Rationale:** Asserts that :code:`/continuous/ticket` returns matrix bytes when specifying filters.
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/bytes?format=loom&version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 200 OK
+   Content-Type: application/octet-stream
+
+* **Success Criteria:** :code:`Status Code == 200`
+* **Failure Criteria:** :code:`Status Code != 200`
+
+Continuous Bytes - Single Filter, 1
+###############################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** Requests joined continuous matrix as bytes, using only 1 filtering parameter associated with test continuous (in addition to format).
+* **Rationale:** Asserts filtering parameters can be used independently of one another.
+
+* **Requests:**
+
+.. code-block:: python
+
+   GET /continuous/bytes?format=loom&version=1.0
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 200 OK
+   Content-Type: application/octet-stream
+
+* **Success Criteria:** :code:`Status Code == 200`
+* **Failure Criteria:** :code:`Status Code != 200`
+
+Continuous Bytes - Single Filter, 2
+###############################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** Requests joined continuous matrix as bytes, using only 1 filtering parameter (different than above) associated with test continuous (in addition to format).
+* **Rationale:** Asserts filtering parameters can be used independently of one another.
+
+* **Requests:**
+
+.. code-block:: python
+
+   GET /continuous/bytes?format=loom&studyID=f3ba0b59bed0fa2f1030e7cb508324d1
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 200 OK
+   Content-Type: application/octet-stream
+
+* **Success Criteria:** :code:`Status Code == 200`
+* **Failure Criteria:** :code:`Status Code != 200`
+
+Continuous Bytes - Format Not Specified
+###############################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** Requests joined continuous matrix as bytes WITHOUT specifying the required :code:`format` parameter. Expects a :code:`4xx` response with error message.
+* **Rationale:** As the :code:`format` parameter is required to specify file format for the :code:`/continuous/bytes` endpoint, this test asserts malformed requests raise an error.
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/bytes
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "Input payload validation failed"
+   }
+
+* **Success Criteria:** :code:`Status Code == 4xx` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 4xx` AND response body is NOT valid :code:`Error` json
+
+Continuous Bytes - Start Specified Without Chr
+###############################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** Requests joined continuous matrix as bytes, specifying a start position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/bytes` endpoint raises an error when :code:`start` is specified without :code:`chr`
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/bytes?format=loom&start=5
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "chr required if either start or end is specified"
+   }
+
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
+
+Continuous Bytes - End Specified Without Chr
+###############################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** Requests joined continuous matrix as bytes, specifying an end position without a chromosome. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/bytes` endpoint raises an error when :code:`end` is specified without :code:`chr`
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/bytes?format=loom&end=1000
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+   {
+     "message": "chr required if either start or end is specified"
+   }
+
+* **Success Criteria:** :code:`Status Code == 400` AND response body is valid :code:`Error` json
+* **Failure Criteria:** :code:`Status Code != 400` OR response body is NOT valid :code:`Error` json
+
+Continuous Bytes - Start Greater Than End
+###############################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** Requests joined continuous matrix as bytes, specifying :code:`chr`, :code:`start`, and :code:`end`, however, :code:`start` position is greater than :code:`end`. Expects a :code:`400 Bad Request` status code in the response, and an error message
+* **Rationale:** Asserts that the :code:`/continuous/bytes` endpoint raises an error when :code:`start` is greater than :code:`end`
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/bytes?format=loom&chr=1&start=200&end=100
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
 
 * **Successful Response:**
 
@@ -598,85 +850,18 @@ Continuous Search Start Greater Than End
 Continuous API Non-Implemented Test Cases
 ------------------------------------------
 
-* `Continuous Get Not Implemented`_
-* `Continuous Search Not Implemented`_
-* `Continuous Search Filters Not Implemented`_
 * `Continuous Formats Not Implemented`_
-
-Continuous Get Not Implemented
-###############################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** If the :code:`Continuous` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/continuous/<id>` endpoint, expecting a :code:`501 Not Implemented` status code response
-* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented according to the spec 
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/nonexistentid9999999999999999999
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 501 Not Implemented
-   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
-
-* **Success Criteria:** :code:`Status Code == 501`
-* **Failure Criteria:** :code:`Status Code != 501`
-
-Continuous Search Not Implemented
-##################################
-* **Route:** :code:`/continuous/search`
-* **Description:** If the :code:`Continuous` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/continuous/search` endpoint, expecting a :code:`501 Not Implemented` status code response
-* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented according to the spec 
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/search
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 501 Not Implemented
-   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
-
-* **Success Criteria:** :code:`Status Code == 501`
-* **Failure Criteria:** :code:`Status Code != 501`
-
-Continuous Search Filters Not Implemented
-##########################################
-* **Route:** :code:`/continuous/search/filters`
-* **Description:** If the :code:`Continuous` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/continuous/search/filters` endpoint, expecting a :code:`501 Not Implemented` status code response
-* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented according to the spec
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/search/filters
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Successful Response:**
-
-.. code-block:: python
-
-   HTTP/1.1 501 Not Implemented
-   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
-
-* **Success Criteria:** :code:`Status Code == 501`
-* **Failure Criteria:** :code:`Status Code != 501`
+* `Continuous Ticket by Id Not Implemented`_
+* `Continuous Bytes by Id Not Implemented`_
+* `Continuous Filters Not Implemented`_
+* `Continuous Ticket Not Implemented`_
+* `Continuous Bytes Not Implemented`_
 
 Continuous Formats Not Implemented
 ##########################################
 * **Route:** :code:`/continuous/formats`
-* **Description:** If the :code:`Continuous` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/continuous/formats` endpoint, expecting a :code:`501 Not Implemented` status code response
-* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented according to the spec
+* **Description:** If :code:`Continuous` endpoints are :code:`Not Implemented`, then request :code:`/continuous/formats`, expecting a :code:`501 Not Implemented` status code response
+* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented
 
 * **Request:**
 
@@ -695,10 +880,125 @@ Continuous Formats Not Implemented
 * **Success Criteria:** :code:`Status Code == 501`
 * **Failure Criteria:** :code:`Status Code != 501`
 
+Continuous Ticket By Id Not Implemented
+#########################################
+* **Route:** :code:`/continuous/<id>/ticket`
+* **Description:** If :code:`Continuous` endpoints are :code:`Not Implemented`, then request :code:`/continuous/<id>/ticket`, expecting a :code:`501 Not Implemented` status code response
+* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/nonexistentid9999999999999999999/ticket
+   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 501 Not Implemented
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+* **Success Criteria:** :code:`Status Code == 501`
+* **Failure Criteria:** :code:`Status Code != 501`
+
+Continuous Bytes By Id Not Implemented
+#########################################
+* **Route:** :code:`/continuous/<id>/bytes`
+* **Description:** If :code:`Continuous` endpoints are :code:`Not Implemented`, then request :code:`/continuous/<id>/bytes`, expecting a :code:`501 Not Implemented` status code response
+* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/nonexistentid9999999999999999999/bytes
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 501 Not Implemented
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+* **Success Criteria:** :code:`Status Code == 501`
+* **Failure Criteria:** :code:`Status Code != 501`
+
+Continuous Filters Not Implemented
+##########################################
+* **Route:** :code:`/continuous/filters`
+* **Description:** If :code:`Continuous` endpoints are :code:`Not Implemented`, then request :code:`/continuous/filters`, expecting a :code:`501 Not Implemented` status code response
+* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/filters
+   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 501 Not Implemented
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+* **Success Criteria:** :code:`Status Code == 501`
+* **Failure Criteria:** :code:`Status Code != 501`
+
+Continuous Ticket Not Implemented
+##################################
+* **Route:** :code:`/continuous/ticket`
+* **Description:** If :code:`Continuous` endpoints are :code:`Not Implemented`, then request :code:`/continuous/ticket`, expecting a :code:`501 Not Implemented` status code response
+* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/ticket?format=loom
+   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 501 Not Implemented
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+* **Success Criteria:** :code:`Status Code == 501`
+* **Failure Criteria:** :code:`Status Code != 501`
+
+Continuous Bytes Not Implemented
+##################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** If :code:`Continuous` endpoints are :code:`Not Implemented`, then request :code:`/continuous/bytes`, expecting a :code:`501 Not Implemented` status code response
+* **Rationale:** Asserts that :code:`Continuous` related endpoints are correctly non-implemented
+
+* **Request:**
+
+.. code-block:: python
+
+   GET /continuous/bytes?format=loom
+   Accept: application/octet-stream, application/vnd.loom, text/tab-separated-values
+
+* **Successful Response:**
+
+.. code-block:: python
+
+   HTTP/1.1 501 Not Implemented
+   Content-Type: application/vnd.ga4gh.rnaget.v1.0.0+json
+
+* **Success Criteria:** :code:`Status Code == 501`
+* **Failure Criteria:** :code:`Status Code != 501`
+
 Continuous Content Tests
 -------------------------
 
-Continuous content tests assert that continuous data files/matrices downloaded
+Continuous content tests assert that continuous matrices downloaded
 from the RNAget server contain the expected content based on the request. 
 Continuous file tracks, positions, and intensity values are cross-referenced
 against the request to ensure the expected data has been returned.
@@ -706,292 +1006,71 @@ against the request to ensure the expected data has been returned.
 Continuous Content Test Cases
 ------------------------------
 
-* `Continuous Get Content, Assert Correct Values, 1`_
-* `Continuous Get Content, chr, 1`_
-* `Continuous Get Content, chr, 2`_
-* `Continuous Get Content, chr and start, 1`_
-* `Continuous Get Content, chr and start, 2`_
-* `Continuous Get Content, chr and end, 1`_
-* `Continuous Get Content, chr and end, 2`_
-* `Continuous Get Content, chr, start, and end, 1`_
-* `Continuous Get Content, chr, start, and end, 2`_
-* `Continuous Search Content, chr, 1`_
-* `Continuous Search Content, chr, 2`_
-* `Continuous Search Content, chr and start, 1`_
-* `Continuous Search Content, chr and start, 2`_
-* `Continuous Search Content, chr and end, 1`_
-* `Continuous Search Content, chr and end, 2`_
-* `Continuous Search Content, chr, start, and end, 1`_
-* `Continuous Search Content, chr, start, and end, 2`_
+* `Continuous Ticket by Id Content Test Cases`_
+* `Continuous Bytes by Id Content Test Cases`_
+* `Continuous Ticket Content Test Cases`_
+* `Continuous Bytes Content Test Cases`_
 
-Continuous Get Content, Assert Correct Values, 1
-################################################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Download test continuous, check matrix tracks (rows), positions (columns), and signal intensity values against known values
-* **Rationale:** Asserts the correct matrix file is associated with the test :code:`Continuous`
+Continuous Ticket by Id Content Test Cases
+###########################################
+* **Route:** :code:`/continuous/<id>/ticket`
+* **Description:** Download test continuous matrix by ticket multiple times (sometimes slicing by chr, start, end).
+* **Rationale:** Asserts correct matrix file is associated with the test continuous :code:`id`. Validates signal intensity values match expected. Validates returned columns/rows match expected based on slice parameters.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Test continuous matrix, rows, and values match expected
-* **Failure Criteria:** Test continuous matrix, rows, and values DO NOT match expected
-
-Continuous Get Content, chr, 1
-################################################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Subset test continuous by chr, check matrix only contains positions from requested chr
-* **Rationale:** Asserts continuous get endpoint correctly subsets continuous matrix by chr
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr1
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr
-
-Continuous Get Content, chr, 2
-################################################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Subset test continuous by chr, check matrix only contains positions from requested chr
-* **Rationale:** Asserts continuous get endpoint correctly subsets continuous matrix by chr
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr5
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr
-
-Continuous Get Content, chr and start, 1
-################################################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Subset test continuous by chr and start, check matrix ONLY contains positions from requested chr above or equal to start base
-* **Rationale:** Asserts continuous get endpoint correctly subsets continuous matrix by chr and start
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr1&start=32
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr above or equal to start base
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr above or equal to start base
-
-Continuous Get Content, chr and start, 2
-################################################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Subset test continuous by chr and start, check matrix ONLY contains positions from requested chr above or equal to start base
-* **Rationale:** Asserts continuous get endpoint correctly subsets continuous matrix by chr and start
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr5&start=100
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr above or equal to start base
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr above or equal to start base
-
-Continuous Get Content, chr and end, 1
-################################################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Subset test continuous by chr and end, check matrix ONLY contains positions from requested chr below end base
-* **Rationale:** Asserts continuous get endpoint correctly subsets continuous matrix by chr and end
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr1&end=22
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr below end base
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr below end base
-
-Continuous Get Content, chr and end, 2
-################################################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Subset test continuous by chr and end, check matrix ONLY contains positions from requested chr below end base
-* **Rationale:** Asserts continuous get endpoint correctly subsets continuous matrix by chr and end
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr5&end=49
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr below end base
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr below end base
-
-Continuous Get Content, chr, start, and end, 1
-################################################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Subset test continuous by chr, start, and end, check matrix ONLY contains positions from requested chr between start and end bases
-* **Rationale:** Asserts continuous get endpoint correctly subsets continuous matrix by chr, start, and end
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr1&start=30&end=50
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr between start and end bases
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr between start and end bases
-
-Continuous Get Content, chr, start, and end, 2
-################################################################
-* **Route:** :code:`/continuous/<id>`
-* **Description:** Subset test continuous by chr, start, and end, check matrix ONLY contains positions from requested chr between start and end bases
-* **Rationale:** Asserts continuous get endpoint correctly subsets continuous matrix by chr, start, and end
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/5e22e009f41fc53cbea094a41de8798f?chr=chr5&start=69&end=117
-   Accept: application/vnd.loom, text/tab-separated-values, application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr between start and end bases
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr between start and end bases
-
-Continuous Search Content, chr, 1
-################################################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Subset test continuous by chr, check matrix only contains positions from requested chr
-* **Rationale:** Asserts continuous search endpoint correctly subsets continuous matrix by chr
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/search?version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&chr=chr1
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/ticket
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
-* **Success Criteria:** Matrix contains ONLY positions from request chr
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr
+* **Success Criteria:** Test continuous matrix columns, rows, values match expected
+* **Failure Criteria:** Test continuous matrix columns, rows, values DO NOT match expected
 
-Continuous Search Content, chr, 2
-################################################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Subset test continuous by chr, check matrix only contains positions from requested chr
-* **Rationale:** Asserts continuous search endpoint correctly subsets continuous matrix by chr
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/search?version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&chr=chr5
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr
-
-Continuous Search Content, chr and start, 1
-################################################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Subset test continuous by chr and start, check matrix ONLY contains positions from requested chr above or equal to start base
-* **Rationale:** Asserts continuous search endpoint correctly subsets continuous matrix by chr and start
+Continuous Bytes by Id Content Test Cases
+###########################################
+* **Route:** :code:`/continuous/<id>/bytes`
+* **Description:** Download test continuous matrix bytes multiple times (sometimes slicing by chr, start, end).
+* **Rationale:** Asserts correct matrix file is associated with the test continuous :code:`id`. Validates signal intensity values match expected. Validates returned columns/rows match expected based on slice parameters.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&chr=chr1&start=55
+   GET /continuous/5e22e009f41fc53cbea094a41de8798f/bytes
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
-* **Success Criteria:** Matrix contains ONLY positions from request chr above or equal to start base
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr above or equal to start base
+* **Success Criteria:** Test continuous matrix columns, rows, values match expected
+* **Failure Criteria:** Test continuous matrix columns, rows, values DO NOT match expected
 
-Continuous Search Content, chr and start, 2
-################################################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Subset test continuous by chr and start, check matrix ONLY contains positions from requested chr above or equal to start base
-* **Rationale:** Asserts continuous search endpoint correctly subsets continuous matrix by chr and start
+Continuous Ticket Content Test Cases
+###########################################
+* **Route:** :code:`/continuous/ticket`
+* **Description:** Download joined continuous matrix by ticket multiple times (sometimes slicing by chr, start, end).
+* **Rationale:** Asserts joined matrix. Validates signal intensity values match expected. Validates returned columns/rows match expected based on slice parameters.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&chr=chr5&start=16
+   GET /continuous/ticket?format=loom
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
-* **Success Criteria:** Matrix contains ONLY positions from request chr above or equal to start base
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr above or equal to start base
+* **Success Criteria:** Joined continuous matrix columns, rows, values match expected
+* **Failure Criteria:** Joined continuous matrix columns, rows, values DO NOT match expected
 
-Continuous Search Content, chr and end, 1
-################################################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Subset test continuous by chr and end, check matrix ONLY contains positions from requested chr below end base
-* **Rationale:** Asserts continuous search endpoint correctly subsets continuous matrix by chr and end
+Continuous Bytes Content Test Cases
+###########################################
+* **Route:** :code:`/continuous/bytes`
+* **Description:** Download joined continuous matrix as bytes multiple times (sometimes slicing by chr, start, end).
+* **Rationale:** Asserts joined matrix. Validates signal intensity values match expected. Validates returned columns/rows match expected based on slice parameters.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /continuous/search?version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&chr=chr1&end=41
+   GET /continuous/bytes?format=loom
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
-* **Success Criteria:** Matrix contains ONLY positions from request chr below end base
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr below end base
-
-Continuous Search Content, chr and end, 2
-################################################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Subset test continuous by chr and end, check matrix ONLY contains positions from requested chr below end base
-* **Rationale:** Asserts continuous search endpoint correctly subsets continuous matrix by chr and end
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/search?version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&chr=chr5&end=73
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr below end base
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr below end base
-
-Continuous Search Content, chr, start, and end, 1
-################################################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Subset test continuous by chr, start, and end, check matrix ONLY contains positions from requested chr between start and end bases
-* **Rationale:** Asserts continuous search endpoint correctly subsets continuous matrix by chr, start, and end
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/search?version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&chr=chr1&start=51&end=66
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr between start and end bases
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr between start and end bases
-
-Continuous Search Content, chr, start, and end, 2
-################################################################
-* **Route:** :code:`/continuous/search`
-* **Description:** Subset test continuous by chr, start, and end, check matrix ONLY contains positions from requested chr between start and end bases
-* **Rationale:** Asserts continuous search endpoint correctly subsets continuous matrix by chr, start, and end
-
-* **Request:**
-
-.. code-block:: python
-
-   GET /continuous/search?version=1.0&studyID=f3ba0b59bed0fa2f1030e7cb508324d1&chr=chr5&start=102&end=115
-   Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
-
-* **Success Criteria:** Matrix contains ONLY positions from request chr between start and end bases
-* **Failure Criteria:** Matrix DOES NOT contain ONLY positions from request chr between start and end bases
+* **Success Criteria:** Joined continuous matrix columns, rows, values match expected
+* **Failure Criteria:** Joined continuous matrix columns, rows, values DO NOT match expected

@@ -10,7 +10,7 @@ Welcome to the RNAget Server Compliance documentation.
 
 This documentation (and associated `compliance testing application <https://github.com/ga4gh-rnaseq/rnaget-compliance-suite>`_) determines a
 server's compliance with the 
-`RNAget API specification <https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget.md>`_
+`RNAget API specification <https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget-openapi.yaml>`_
 for serving RNAseq datasets. The specification,
 developed by the `Global Alliance for Genomics and Health <https://www.ga4gh.org/>`_, serves to provide a
 standardized API framework and data structure to allow for interoperability of datasets
@@ -35,7 +35,7 @@ Compliance Document
 This documentation is for implementers of RNAget servers. Implementers **MUST**
 adhere to this documentation during development of RNAget-compliant servers, as 
 the compliance tests outlined herein conform with the 
-`RNAget specification <https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget.md>`_. 
+`RNAget specification <https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget-openapi.yaml>`_. 
 The testing suite performs API testing on all routes discussed in the specification. 
 Reference server responses **MUST** comply with the correct responses in this document
 for requests made to each route/endpoint.

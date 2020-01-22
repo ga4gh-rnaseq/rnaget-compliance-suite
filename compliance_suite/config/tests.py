@@ -241,26 +241,26 @@ TESTS_DICT = {
 
                 {
                     "name": "Project Search Not Implemented",
-                    "description": "request /projects/search, expecting 501 "
+                    "description": "request /projects, expecting 501 "
                         + "status code",
                     "summary_pass": "Project Search correctly non-implemented",
                     "summary_fail": "Project Search NOT correctly "
                         + "non-implemented",
                     "summary_skip": "'Project Search Not Implemented' skipped",
-                    "url": c.PROJECT_API + "search"
+                    "url": c.PROJECT_API
                 },
 
                 {
-                    "name": "Project Search Filters Not Implemented",
-                    "description": "request /projects/search/filters, "
+                    "name": "Project Filters Not Implemented",
+                    "description": "request /projects/filters, "
                         + "expecting 501 status code",
-                    "summary_pass": "Project Search Filters correctly "
+                    "summary_pass": "Project Filters correctly "
                         + "non-implemented",
-                    "summary_fail": "Project Search Filters NOT correctly "
+                    "summary_fail": "Project Filters NOT correctly "
                         + "non-implemented",
-                    "summary_skip": "'Project Search Filters Not Implemented' "
+                    "summary_skip": "'Project Filters Not Implemented' "
                         + "skipped",
-                    "url": c.PROJECT_API + "search/filters"
+                    "url": c.PROJECT_API + "filters"
                 }
             ]
         }
@@ -350,7 +350,7 @@ TESTS_DICT = {
         # TEST: STUDY SEARCH
         # # # # # # # # # # # # # # # # # # # #
         "name": "study_search",
-        "description": "Requests the /studies/search endpoint",
+        "description": "Requests the /studies endpoint",
         "pass_text": "'Study Search' endpoint correctly implemented",
         "fail_text": "'Study Search' endpoint NOT correctly implemented",
         "skip_text": "'Study Search' test skipped",
@@ -364,7 +364,7 @@ TESTS_DICT = {
             "cases": [
                 {
                     "name": "Search Studies Without Filters",
-                    "description": "request /studies/search without any "
+                    "description": "request /studies without any "
                         + "parameter filters. checks content type "
                         + "and status code (200). validates "
                         + "response body matches study array "
@@ -379,7 +379,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Search Studies With All Filters",
-                    "description": "request /studies/search using all "
+                    "description": "request /studies using all "
                         + "server-supported study filters. checks content "
                         + "type and status code (200). validates response body "
                         + "matches study array schema.",
@@ -394,7 +394,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Search Studies With Single Filter, 1",
-                    "description": "request /studies/search using the first "
+                    "description": "request /studies using the first "
                         + "parameter filter supported by server. checks "
                         + "type and status code (200). validates response body "
                         + "matches study array schema",
@@ -410,7 +410,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Search Studies With Single Filter, 2",
-                    "description": "request /studies/search using the second "
+                    "description": "request /studies using the second "
                         + "parameter filter supported by server. checks "
                         + "type and status code (200). validates response body "
                         + "matches study array schema",
@@ -426,7 +426,7 @@ TESTS_DICT = {
 
                 {
                     "name": "Study Search Filters Non-Matching Resources",
-                    "description": "request /studies/search using filters "
+                    "description": "request /studies using filters "
                         + "that do not apply to any project. "
                         + "checks content type and status code (200). "
                         + "validates response body is an empty array.",
@@ -474,18 +474,18 @@ TESTS_DICT = {
 
                 {
                     "name": "Study Search Not Implemented",
-                    "description": "request /studies/search, expecting 501 "
+                    "description": "request /studies, expecting 501 "
                                    + "status code",
                     "summary_pass": "Study Search correctly non-implemented",
                     "summary_fail": "Study Search NOT correctly "
                         + "non-implemented",
                     "summary_skip": "'Study Search Not Implemented' skipped",
-                    "url": c.STUDY_API + "search"
+                    "url": c.STUDY_API
                 },
 
                 {
                     "name": "Study Search Filters Not Implemented",
-                    "description": "request /studies/search/filters, "
+                    "description": "request /studies/filters, "
                         + "expecting 501 status code",
                     "summary_pass": "Study Search Filters correctly "
                         + "non-implemented",
@@ -493,7 +493,7 @@ TESTS_DICT = {
                         + "non-implemented",
                     "summary_skip": "'Study Search Filters Not Implemented' "
                         + "skipped",
-                    "url": c.STUDY_API + "search/filters"
+                    "url": c.STUDY_API + "filters"
                 }
             ]
         }
@@ -836,7 +836,7 @@ TESTS_DICT = {
                 },
 
                 {
-                    "name": "Expressions Ticket - All Filters",
+                    "name": "Expression Ticket - All Filters",
                     "description": "request /expressions/ticket using all "
                         + "server-supported expression filters. checks content "
                         + "type and status code (200). validates response body "
@@ -1010,7 +1010,7 @@ TESTS_DICT = {
                 },
 
                 {
-                    "name": "Expressions Bytes - All Filters",
+                    "name": "Expression Bytes - All Filters",
                     "description": "request /expressions/bytes using all "
                         + "server-supported expression filters. checks content "
                         + "type and status code (200).",

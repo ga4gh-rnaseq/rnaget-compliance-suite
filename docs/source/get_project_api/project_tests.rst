@@ -19,7 +19,7 @@ Project API Test Cases
 
 * `Get Test Project`_
 * `Project Not Found`_
-* `Project Search Filters`_
+* `Project Filters`_
 * `Search Projects Without Filters`_
 * `Search Projects With All Filters`_
 * `Search Projects With Single Filter, 1`_
@@ -50,10 +50,7 @@ Get Test Project
       "id": "9c0eba51095d3939437e220db196e27b",
       "version": "1.0",
       "name": "RNAgetTestProject0",
-      "description": "Test project object used by RNAget compliance testing suite.",
-      "tags": [
-         "RNAgetCompliance"
-      ]
+      "description": "Test project object used by RNAget compliance testing suite."
    }
 
 * **Success Criteria:** :code:`Status Code == 200` AND response body is valid :code:`Project` json
@@ -86,17 +83,17 @@ Project Not Found
 * **Success Criteria:** :code:`Status Code == 404` AND response body is valid :code:`Error` json
 * **Failure Criteria:** :code:`Status Code != 404` OR response body is NOT valid :code:`Error` json
 
-Project Search Filters
+Project Filters
 #######################
-* **Route:** :code:`/projects/search/filters`
+* **Route:** :code:`/projects/filters`
 * **Description:** Requests the filters that can be used to narrow search results for a list of :code:`Projects`
-* **Rationale:** Asserts that the endpoint returns an array of :code:`Search Filter` objects
+* **Rationale:** Asserts that the endpoint returns an array of :code:`Filter` objects
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /projects/search/filters
+   GET /projects/filters
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -126,20 +123,20 @@ Project Search Filters
      }
    ]
 
-* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Search Filters`
-* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Search Filters`
+* **Success Criteria:** :code:`Status Code == 200` AND response body is array of :code:`Filters`
+* **Failure Criteria:** :code:`Status Code != 200` OR response body is NOT array of :code:`Filters`
 
 Search Projects Without Filters
 ################################
-* **Route:** :code:`/projects/search`
+* **Route:** :code:`/projects`
 * **Description:** Searches for all projects, without specifying any filtering parameters. Expects an array of :code:`Projects` in the response body.
-* **Rationale:** Asserts that the :code:`/projects/search` returns an array, and that each element in the array is a :code:`Project`.
+* **Rationale:** Asserts that :code:`/projects` returns an array, and that each element in the array is a :code:`Project`.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /projects/search
+   GET /projects
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -154,16 +151,9 @@ Search Projects Without Filters
        "id": "9c0eba51095d3939437e220db196e27b",
        "version": "1.0",
        "name": "RNAgetTestProject0",
-       "description": "Test project object used by RNAget compliance testing suite.",
-       "tags": [
-         "RNAgetCompliance"
-       ]
+       "description": "Test project object used by RNAget compliance testing suite."
      },
      {
-       "tags": [
-         "PCAWG",
-         "cancer"
-       ],
        "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423",
        "id": "43378a5d48364f9d8cf3c3d5104df560",
        "name": "PCAWG",
@@ -176,15 +166,15 @@ Search Projects Without Filters
 
 Search Projects With All Filters
 #################################
-* **Route:** :code:`/projects/search`
+* **Route:** :code:`/projects`
 * **Description:** Searches projects, using all filtering parameters associated with test project. Expects an array of :code:`Projects` to be returned in the response body. Array must contain at least 1 object.
-* **Rationale:** Asserts that :code:`/projects/search` returns an array of :code:`Projects` even when specifying filters. The returned array MUST have at least 1 object, as the parameter filters must match the attributes of the test project.
+* **Rationale:** Asserts that :code:`/projects` returns an array of :code:`Projects` even when specifying filters. The returned array MUST have at least 1 object, as the parameter filters must match the attributes of the test project.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /projects/search?version=1.0&name=RNAgetTestProject0
+   GET /projects?version=1.0&name=RNAgetTestProject0
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -199,10 +189,7 @@ Search Projects With All Filters
        "id": "9c0eba51095d3939437e220db196e27b",
        "version": "1.0",
        "name": "RNAgetTestProject0",
-       "description": "Test project object used by RNAget compliance testing suite.",
-       "tags": [
-         "RNAgetCompliance"
-       ]
+       "description": "Test project object used by RNAget compliance testing suite."
      }
    ]
 
@@ -211,7 +198,7 @@ Search Projects With All Filters
 
 Search Projects With Single Filter, 1
 ######################################
-* **Route:** :code:`/projects/search`
+* **Route:** :code:`/projects`
 * **Description:** Searches projects using only 1 filtering parameter associated with test project. Expects an array of :code:`Projects`, with length of 1 or greater.
 * **Rationale:** Asserts filtering parameters can be used independently of one another, and that each filter yields the test :code:`Project` in the search results.
 
@@ -219,7 +206,7 @@ Search Projects With Single Filter, 1
 
 .. code-block:: python
 
-   GET /projects/search?version=1.0
+   GET /projects?version=1.0
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -234,10 +221,7 @@ Search Projects With Single Filter, 1
        "id": "9c0eba51095d3939437e220db196e27b",
        "version": "1.0",
        "name": "RNAgetTestProject0",
-       "description": "Test project object used by RNAget compliance testing suite.",
-       "tags": [
-         "RNAgetCompliance"
-       ]
+       "description": "Test project object used by RNAget compliance testing suite."
      }
    ]
 
@@ -246,7 +230,7 @@ Search Projects With Single Filter, 1
 
 Search Projects With Single Filter, 2
 ######################################
-* **Route:** :code:`/projects/search`
+* **Route:** :code:`/projects`
 * **Description:** Searches projects using only 1 filtering parameter (a different filter than above) associated with test project. Expects an array of :code:`Projects`, with length of 1 or greater.
 * **Rationale:** Asserts filtering parameters can be used independently of one another, and that each filter yields the test :code:`Project` in the search results.
 
@@ -254,7 +238,7 @@ Search Projects With Single Filter, 2
 
 .. code-block:: python
 
-   GET /projects/search?name=RNAgetTestProject0
+   GET /projects?name=RNAgetTestProject0
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -269,10 +253,7 @@ Search Projects With Single Filter, 2
        "id": "9c0eba51095d3939437e220db196e27b",
        "version": "1.0",
        "name": "RNAgetTestProject0",
-       "description": "Test project object used by RNAget compliance testing suite.",
-       "tags": [
-         "RNAgetCompliance"
-       ]
+       "description": "Test project object used by RNAget compliance testing suite."
      }
    ]
 
@@ -281,15 +262,15 @@ Search Projects With Single Filter, 2
 
 Project Search Filters Non-Matching Resources
 ##############################################
-* **Route:** :code:`/projects/search`
-* **Description:** Tests that the project search endpoint correctly filters out non-matching :code:`Projects` based on url parameters. Makes a request to the :code:`/projects/search` endpoint with invalid filters (not matching any :code:`Project`), and expects an empty array as a response.
+* **Route:** :code:`/projects`
+* **Description:** Tests that the project search endpoint correctly filters out non-matching :code:`Projects` based on url parameters. Makes a request to the :code:`/projects` endpoint with invalid filters (not matching any :code:`Project`), and expects an empty array as a response.
 * **Rationale:** Asserts that the endpoint correctly filters out non-matching entities, that the endpoint does not return an arbitrary list of :code:`Projects` that differ from filters.
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /projects/search?version=nonexistentid9999999999999999999&name=nonexistentid9999999999999999999
+   GET /projects?version=nonexistentid9999999999999999999&name=nonexistentid9999999999999999999
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -309,7 +290,7 @@ Project API Non-Implemented Test Cases
 
 * `Project Get Not Implemented`_
 * `Project Search Not Implemented`_
-* `Project Search Filters Not Implemented`_
+* `Project Filters Not Implemented`_
 
 Project Get Not Implemented
 ############################
@@ -336,15 +317,15 @@ Project Get Not Implemented
 
 Project Search Not Implemented
 ###############################
-* **Route:** :code:`/projects/search`
-* **Description:** If the :code:`Projects` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/projects/search` endpoint, expecting a :code:`501 Not Implemented` status code response
+* **Route:** :code:`/projects`
+* **Description:** If the :code:`Projects` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/projects` endpoint, expecting a :code:`501 Not Implemented` status code response
 * **Rationale:** Asserts that :code:`Project` related endpoints are correctly non-implemented according to the spec 
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /projects/search
+   GET /projects
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
@@ -357,17 +338,17 @@ Project Search Not Implemented
 * **Success Criteria:** :code:`Status Code == 501`
 * **Failure Criteria:** :code:`Status Code != 501`
 
-Project Search Filters Not Implemented
+Project Filters Not Implemented
 #######################################
-* **Route:** :code:`/projects/search/filters`
-* **Description:** If the :code:`Projects` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/projects/search/filters` endpoint, expecting a :code:`501 Not Implemented` status code response
+* **Route:** :code:`/projects/filters`
+* **Description:** If the :code:`Projects` endpoint is specified as :code:`Not Implemented` in the config file, then this test will be run. Requests the :code:`/projects/filters` endpoint, expecting a :code:`501 Not Implemented` status code response
 * **Rationale:** Asserts that :code:`Project` related endpoints are correctly non-implemented according to the spec 
 
 * **Request:**
 
 .. code-block:: python
 
-   GET /projects/search/filters
+   GET /projects/filters
    Accept: application/vnd.ga4gh.rnaget.v1.0.0+json, application/json
 
 * **Successful Response:**
