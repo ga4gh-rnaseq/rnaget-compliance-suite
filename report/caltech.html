@@ -16,7 +16,7 @@
 <body>
   
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a id="navbar-title" class="navbar-brand" href="#">GA4GH rnaget API v1 Compliance Report</a>    
+    <a id="navbar-title" class="navbar-brand" href="#">GA4GH RNAget API v1.0.0 Compliance Report</a>
 </nav>
 
 <div class="container">
@@ -78,7 +78,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"name": "RNAgetTestProject0", "tags": ["RNAgetCompliance"], "id": "9c0eba51095d3939437e220db196e27b", "version": "1.0", "studies": [{"name": "RNAgetTestStudy0", "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0", "parentProjectID": "9c0eba51095d3939437e220db196e27b", "tags": ["RNAgetCompliance"], "description": "Test study object used by RNAget compliance testing suite."}], "description": "Test project object used by RNAget compliance testing suite."}
+                          <p class="audit-message">Response Body: {"studies": [{"id": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0", "tags": ["RNAgetCompliance"], "parentProjectID": "9c0eba51095d3939437e220db196e27b", "description": "Test study object used by RNAget compliance testing suite.", "name": "RNAgetTestStudy0"}], "version": "1.0", "tags": ["RNAgetCompliance"], "id": "9c0eba51095d3939437e220db196e27b", "description": "Test project object used by RNAget compliance testing suite.", "name": "RNAgetTestProject0"}
 </p>
                         
                     </div>
@@ -143,7 +143,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"values": ["1.0"], "filter": "version", "fieldType": "string", "description": "version to search for"}]
+                          <p class="audit-message">Response Body: [{"values": ["1.0"], "description": "version to search for", "fieldType": "string", "filter": "version"}]
 </p>
                         
                     </div>
@@ -183,7 +183,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "tags": ["PCAWG", "cancer"], "id": "43378a5d48364f9d8cf3c3d5104df560", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "version": "1.0"}, {"name": "RNAgetTestProject0", "tags": ["RNAgetCompliance"], "id": "9c0eba51095d3939437e220db196e27b", "description": "Test project object used by RNAget compliance testing suite.", "version": "1.0"}, {"name": "TCGA", "tags": ["TCGA"], "id": "0dc1cb6327844b5aa6a1a4eed3f64607", "description": "The Cancer Genome Atlas", "version": "1.0"}]
+                          <p class="audit-message">Response Body: [{"version": "1.0", "tags": ["PCAWG", "cancer"], "id": "43378a5d48364f9d8cf3c3d5104df560", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "name": "PCAWG"}, {"version": "1.0", "tags": ["RNAgetCompliance"], "id": "9c0eba51095d3939437e220db196e27b", "description": "Test project object used by RNAget compliance testing suite.", "name": "RNAgetTestProject0"}, {"version": "1.0", "tags": ["TCGA"], "id": "0dc1cb6327844b5aa6a1a4eed3f64607", "description": "The Cancer Genome Atlas", "name": "TCGA"}]
 </p>
                         
                     </div>
@@ -208,7 +208,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "version": "1.0", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "tags": ["PCAWG", "cancer"], "id": "43378a5d48364f9d8cf3c3d5104df560"}, {"name": "RNAgetTestProject0", "version": "1.0", "description": "Test project object used by RNAget compliance testing suite.", "tags": ["RNAgetCompliance"], "id": "9c0eba51095d3939437e220db196e27b"}, {"name": "TCGA", "version": "1.0", "description": "The Cancer Genome Atlas", "tags": ["TCGA"], "id": "0dc1cb6327844b5aa6a1a4eed3f64607"}]
+                          <p class="audit-message">Response Body: [{"version": "1.0", "id": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG", "tags": ["PCAWG", "cancer"], "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423"}, {"version": "1.0", "id": "9c0eba51095d3939437e220db196e27b", "name": "RNAgetTestProject0", "tags": ["RNAgetCompliance"], "description": "Test project object used by RNAget compliance testing suite."}, {"version": "1.0", "id": "0dc1cb6327844b5aa6a1a4eed3f64607", "name": "TCGA", "tags": ["TCGA"], "description": "The Cancer Genome Atlas"}]
 </p>
                         
                     </div>
@@ -233,7 +233,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "version": "1.0", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "tags": ["PCAWG", "cancer"], "id": "43378a5d48364f9d8cf3c3d5104df560"}, {"name": "RNAgetTestProject0", "version": "1.0", "description": "Test project object used by RNAget compliance testing suite.", "tags": ["RNAgetCompliance"], "id": "9c0eba51095d3939437e220db196e27b"}, {"name": "TCGA", "version": "1.0", "description": "The Cancer Genome Atlas", "tags": ["TCGA"], "id": "0dc1cb6327844b5aa6a1a4eed3f64607"}]
+                          <p class="audit-message">Response Body: [{"version": "1.0", "tags": ["PCAWG", "cancer"], "id": "43378a5d48364f9d8cf3c3d5104df560", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "name": "PCAWG"}, {"version": "1.0", "tags": ["RNAgetCompliance"], "id": "9c0eba51095d3939437e220db196e27b", "description": "Test project object used by RNAget compliance testing suite.", "name": "RNAgetTestProject0"}, {"version": "1.0", "tags": ["TCGA"], "id": "0dc1cb6327844b5aa6a1a4eed3f64607", "description": "The Cancer Genome Atlas", "name": "TCGA"}]
 </p>
                         
                     </div>
@@ -258,7 +258,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "version": "1.0", "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423", "tags": ["PCAWG", "cancer"], "id": "43378a5d48364f9d8cf3c3d5104df560"}, {"name": "RNAgetTestProject0", "version": "1.0", "description": "Test project object used by RNAget compliance testing suite.", "tags": ["RNAgetCompliance"], "id": "9c0eba51095d3939437e220db196e27b"}, {"name": "TCGA", "version": "1.0", "description": "The Cancer Genome Atlas", "tags": ["TCGA"], "id": "0dc1cb6327844b5aa6a1a4eed3f64607"}]
+                          <p class="audit-message">Response Body: [{"version": "1.0", "id": "43378a5d48364f9d8cf3c3d5104df560", "name": "PCAWG", "tags": ["PCAWG", "cancer"], "description": "Pan Cancer Analysis of Whole Genomes test data from Expression Atlas E-MTAB-5423"}, {"version": "1.0", "id": "9c0eba51095d3939437e220db196e27b", "name": "RNAgetTestProject0", "tags": ["RNAgetCompliance"], "description": "Test project object used by RNAget compliance testing suite."}, {"version": "1.0", "id": "0dc1cb6327844b5aa6a1a4eed3f64607", "name": "TCGA", "tags": ["TCGA"], "description": "The Cancer Genome Atlas"}]
 </p>
                         
                     </div>
@@ -338,7 +338,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"name": "RNAgetTestStudy0", "version": "1.0", "description": "Test study object used by RNAget compliance testing suite.", "tags": ["RNAgetCompliance"], "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "parentProjectID": "9c0eba51095d3939437e220db196e27b"}
+                          <p class="audit-message">Response Body: {"id": "f3ba0b59bed0fa2f1030e7cb508324d1", "parentProjectID": "9c0eba51095d3939437e220db196e27b", "version": "1.0", "name": "RNAgetTestStudy0", "tags": ["RNAgetCompliance"], "description": "Test study object used by RNAget compliance testing suite."}
 </p>
                         
                     </div>
@@ -403,7 +403,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"values": ["1.0"], "filter": "version", "fieldType": "string", "description": "version to search for"}]
+                          <p class="audit-message">Response Body: [{"values": ["1.0"], "description": "version to search for", "fieldType": "string", "filter": "version"}]
 </p>
                         
                     </div>
@@ -417,7 +417,7 @@
               
                 
                 <p class='tab2 text-success'><i class="fa fa-check-circle"></i> Test: Study Search - PASSED</p>
-                <p class="tab3"><strong>description:</strong> Requests the /studies/search endpoint</p>
+                <p class="tab3"><strong>description:</strong> Requests the /studies endpoint</p>
                 <p class="tab3"><strong>summary:</strong> 'Study Search' endpoint correctly implemented</p>
                 
                 <!-- API Testing -->
@@ -425,7 +425,7 @@
                 <p class="tab3 text-success">API Route Test Cases - PASSED</p>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Search Studies Without Filters - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search without any parameter filters. checks content type and status code (200). validates response body matches study array schema.</p>
+                  <p class='tab5'>case description: request /studies without any parameter filters. checks content type and status code (200). validates response body matches study array schema.</p>
                   <p class='tab5'>case summary: Studies can be searched without filters</p>
                   
 
@@ -443,14 +443,14 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "version": "1.0", "description": "PCAWG study", "tags": ["PCAWG", "cancer"], "id": "6cccbbd76b9c4837bd7342dd616d0fec", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560"}, {"name": "RNAgetTestStudy0", "version": "1.0", "description": "Test study object used by RNAget compliance testing suite.", "tags": ["RNAgetCompliance"], "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "parentProjectID": "9c0eba51095d3939437e220db196e27b"}, {"name": "TCGA", "version": "1.0", "description": "The Cancer Genome Atlas", "tags": ["TCGA"], "id": "3912338463b344ada95b88d26576abb3", "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607"}]
+                          <p class="audit-message">Response Body: [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "version": "1.0", "tags": ["PCAWG", "cancer"], "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "description": "PCAWG study", "name": "PCAWG"}, {"id": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0", "tags": ["RNAgetCompliance"], "parentProjectID": "9c0eba51095d3939437e220db196e27b", "description": "Test study object used by RNAget compliance testing suite.", "name": "RNAgetTestStudy0"}, {"id": "3912338463b344ada95b88d26576abb3", "version": "1.0", "tags": ["TCGA"], "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607", "description": "The Cancer Genome Atlas", "name": "TCGA"}]
 </p>
                         
                     </div>
                   </div>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Search Studies With All Filters - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search using all server-supported study filters. checks content type and status code (200). validates response body matches study array schema.</p>
+                  <p class='tab5'>case description: request /studies using all server-supported study filters. checks content type and status code (200). validates response body matches study array schema.</p>
                   <p class='tab5'>case summary: Studies can be searched with all filters specified</p>
                   
 
@@ -468,14 +468,14 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "version": "1.0", "description": "PCAWG study", "tags": ["PCAWG", "cancer"], "id": "6cccbbd76b9c4837bd7342dd616d0fec", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560"}, {"name": "RNAgetTestStudy0", "version": "1.0", "description": "Test study object used by RNAget compliance testing suite.", "tags": ["RNAgetCompliance"], "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "parentProjectID": "9c0eba51095d3939437e220db196e27b"}, {"name": "TCGA", "version": "1.0", "description": "The Cancer Genome Atlas", "tags": ["TCGA"], "id": "3912338463b344ada95b88d26576abb3", "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607"}]
+                          <p class="audit-message">Response Body: [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "version": "1.0", "tags": ["PCAWG", "cancer"], "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "description": "PCAWG study", "name": "PCAWG"}, {"id": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0", "tags": ["RNAgetCompliance"], "parentProjectID": "9c0eba51095d3939437e220db196e27b", "description": "Test study object used by RNAget compliance testing suite.", "name": "RNAgetTestStudy0"}, {"id": "3912338463b344ada95b88d26576abb3", "version": "1.0", "tags": ["TCGA"], "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607", "description": "The Cancer Genome Atlas", "name": "TCGA"}]
 </p>
                         
                     </div>
                   </div>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Search Studies With Single Filter, 1 - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search using the first parameter filter supported by server. checks type and status code (200). validates response body matches study array schema</p>
+                  <p class='tab5'>case description: request /studies using the first parameter filter supported by server. checks type and status code (200). validates response body matches study array schema</p>
                   <p class='tab5'>case summary: Studies can be searched when first filter parameter is supplied</p>
                   
 
@@ -493,14 +493,14 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "version": "1.0", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "tags": ["PCAWG", "cancer"], "description": "PCAWG study"}, {"name": "RNAgetTestStudy0", "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0", "parentProjectID": "9c0eba51095d3939437e220db196e27b", "tags": ["RNAgetCompliance"], "description": "Test study object used by RNAget compliance testing suite."}, {"name": "TCGA", "id": "3912338463b344ada95b88d26576abb3", "version": "1.0", "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607", "tags": ["TCGA"], "description": "The Cancer Genome Atlas"}]
+                          <p class="audit-message">Response Body: [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "version": "1.0", "name": "PCAWG", "tags": ["PCAWG", "cancer"], "description": "PCAWG study"}, {"id": "f3ba0b59bed0fa2f1030e7cb508324d1", "parentProjectID": "9c0eba51095d3939437e220db196e27b", "version": "1.0", "name": "RNAgetTestStudy0", "tags": ["RNAgetCompliance"], "description": "Test study object used by RNAget compliance testing suite."}, {"id": "3912338463b344ada95b88d26576abb3", "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607", "version": "1.0", "name": "TCGA", "tags": ["TCGA"], "description": "The Cancer Genome Atlas"}]
 </p>
                         
                     </div>
                   </div>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Search Studies With Single Filter, 2 - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search using the second parameter filter supported by server. checks type and status code (200). validates response body matches study array schema</p>
+                  <p class='tab5'>case description: request /studies using the second parameter filter supported by server. checks type and status code (200). validates response body matches study array schema</p>
                   <p class='tab5'>case summary: Studies can be searched when second filter parameter is supplied</p>
                   
 
@@ -518,14 +518,14 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"name": "PCAWG", "id": "6cccbbd76b9c4837bd7342dd616d0fec", "version": "1.0", "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "tags": ["PCAWG", "cancer"], "description": "PCAWG study"}, {"name": "RNAgetTestStudy0", "id": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0", "parentProjectID": "9c0eba51095d3939437e220db196e27b", "tags": ["RNAgetCompliance"], "description": "Test study object used by RNAget compliance testing suite."}, {"name": "TCGA", "id": "3912338463b344ada95b88d26576abb3", "version": "1.0", "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607", "tags": ["TCGA"], "description": "The Cancer Genome Atlas"}]
+                          <p class="audit-message">Response Body: [{"id": "6cccbbd76b9c4837bd7342dd616d0fec", "version": "1.0", "tags": ["PCAWG", "cancer"], "parentProjectID": "43378a5d48364f9d8cf3c3d5104df560", "description": "PCAWG study", "name": "PCAWG"}, {"id": "f3ba0b59bed0fa2f1030e7cb508324d1", "version": "1.0", "tags": ["RNAgetCompliance"], "parentProjectID": "9c0eba51095d3939437e220db196e27b", "description": "Test study object used by RNAget compliance testing suite.", "name": "RNAgetTestStudy0"}, {"id": "3912338463b344ada95b88d26576abb3", "version": "1.0", "tags": ["TCGA"], "parentProjectID": "0dc1cb6327844b5aa6a1a4eed3f64607", "description": "The Cancer Genome Atlas", "name": "TCGA"}]
 </p>
                         
                     </div>
                   </div>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Study Search Filters Non-Matching Resources - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search using filters that do not apply to any project. checks content type and status code (200). validates response body is an empty array.</p>
+                  <p class='tab5'>case description: request /studies using filters that do not apply to any project. checks content type and status code (200). validates response body is an empty array.</p>
                   <p class='tab5'>case summary: Study search endpoint filters non-matching resources</p>
                   
 
@@ -638,7 +638,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "units": "TPM", "version": "1.0", "tags": ["RNAgetCompliance"], "id": "ac3e9279efd02f1c98de4ed3d335b98e", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom"}
+                          <p class="audit-message">Response Body: {"id": "ac3e9279efd02f1c98de4ed3d335b98e", "fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "units": "TPM", "version": "1.0", "tags": ["RNAgetCompliance"]}
 </p>
                         
                     </div>
@@ -1667,7 +1667,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"values": ["1.0"], "filter": "version", "fieldType": "string", "description": "version to search for"}, {"values": [""], "filter": "studyID", "fieldType": "string", "description": "parent studyID"}]
+                          <p class="audit-message">Response Body: [{"values": ["1.0"], "description": "version to search for", "fieldType": "string", "filter": "version"}, {"values": [""], "description": "parent studyID", "fieldType": "string", "filter": "studyID"}]
 </p>
                         
                     </div>
@@ -1707,23 +1707,23 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "units": "TPM", "version": "1.0", "tags": [], "id": "2a7ab5533ef941eaa59edbfe887b58c4", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom"}
+                          <p class="audit-message">Response Body: {"id": "2a7ab5533ef941eaa59edbfe887b58c4", "fileType": "loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "units": "TPM", "version": "1.0", "tags": []}
 </p>
                         
                     </div>
                   </div>
                 
-                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Expressions Ticket - All Filters - PASSED</p>
+                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Expression Ticket - All Filters - PASSED</p>
                   <p class='tab5'>case description: request /expressions/ticket using all server-supported expression filters. checks content type and status code (200). validates response body matches ticket schema.</p>
                   <p class='tab5'>case summary: Expression Ticket retrieved when all filters specified</p>
                   
 
                   <p class="tab5">
-                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Ticket_-_All_Filters" aria-expanded="false" aria-controls="collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Ticket_-_All_Filters">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Ticket_-_All_Filters" aria-expanded="false" aria-controls="collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Ticket_-_All_Filters">
                       <i class="fa fa-info-circle"></i> View Test Case Audit Logs
                     </button>
                   </p>
-                  <div class="collapse" id="collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Ticket_-_All_Filters">
+                  <div class="collapse" id="collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Ticket_-_All_Filters">
                     <div class="well audit-logs">
                         
                           <p class="audit-message">Request: https://felcat.caltech.edu/rnaget/expressions/ticket</p>
@@ -1732,7 +1732,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "units": "TPM", "version": "1.0", "tags": ["RNAgetCompliance"], "id": "ac3e9279efd02f1c98de4ed3d335b98e", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom"}
+                          <p class="audit-message">Response Body: {"id": "ac3e9279efd02f1c98de4ed3d335b98e", "fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "units": "TPM", "version": "1.0", "tags": ["RNAgetCompliance"]}
 </p>
                         
                     </div>
@@ -1757,7 +1757,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "units": "TPM", "version": "1.0", "tags": ["RNAgetCompliance"], "id": "ac3e9279efd02f1c98de4ed3d335b98e", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom"}
+                          <p class="audit-message">Response Body: {"id": "ac3e9279efd02f1c98de4ed3d335b98e", "fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "http://woldlab.caltech.edu/~sau/rnaget/expression.loom", "units": "TPM", "version": "1.0", "tags": ["RNAgetCompliance"]}
 </p>
                         
                     </div>
@@ -1782,7 +1782,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "units": "TPM", "version": "1.0", "tags": [], "id": "2a7ab5533ef941eaa59edbfe887b58c4", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom"}
+                          <p class="audit-message">Response Body: {"id": "2a7ab5533ef941eaa59edbfe887b58c4", "fileType": "loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "units": "TPM", "version": "1.0", "tags": []}
 </p>
                         
                     </div>
@@ -1807,7 +1807,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"errors": {"format": "format of data to return"}, "message": "Input payload validation failed"}
+                          <p class="audit-message">Response Body: {"message": "Input payload validation failed", "errors": {"format": "format of data to return"}}
 </p>
                         
                     </div>
@@ -1832,7 +1832,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "units": "TPM", "version": "1.0", "tags": [], "id": "2a7ab5533ef941eaa59edbfe887b58c4", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom"}
+                          <p class="audit-message">Response Body: {"id": "2a7ab5533ef941eaa59edbfe887b58c4", "url": "http://woldlab.caltech.edu/~sau/rnaget/E-MTAB-5423-query-results.tpms.loom", "version": "1.0", "tags": [], "studyID": "6cccbbd76b9c4837bd7342dd616d0fec", "fileType": "loom", "units": "TPM"}
 </p>
                         
                     </div>
@@ -2166,17 +2166,17 @@
                     </div>
                   </div>
                 
-                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Expressions Bytes - All Filters - PASSED</p>
+                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Expression Bytes - All Filters - PASSED</p>
                   <p class='tab5'>case description: request /expressions/bytes using all server-supported expression filters. checks content type and status code (200).</p>
                   <p class='tab5'>case summary: Expression Bytes retrieved when all filters specified</p>
                   
 
                   <p class="tab5">
-                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Bytes_-_All_Filters" aria-expanded="false" aria-controls="collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Bytes_-_All_Filters">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Bytes_-_All_Filters" aria-expanded="false" aria-controls="collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Bytes_-_All_Filters">
                       <i class="fa fa-info-circle"></i> View Test Case Audit Logs
                     </button>
                   </p>
-                  <div class="collapse" id="collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Bytes_-_All_Filters">
+                  <div class="collapse" id="collapse-Caltech-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Bytes_-_All_Filters">
                     <div class="well audit-logs">
                         
                           <p class="audit-message">Request: https://felcat.caltech.edu/rnaget/expressions/bytes</p>
@@ -2637,7 +2637,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "units": "counts", "version": "1.0", "tags": ["RNAgetCompliance"], "id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom"}
+                          <p class="audit-message">Response Body: {"id": "5e22e009f41fc53cbea094a41de8798f", "fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "units": "counts", "version": "1.0", "tags": ["RNAgetCompliance"]}
 </p>
                         
                     </div>
@@ -3268,7 +3268,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: [{"fieldType": "string", "description": "version to search for", "filter": "version", "values": ["1.0"]}]
+                          <p class="audit-message">Response Body: [{"filter": "version", "fieldType": "string", "description": "version to search for", "values": ["1.0"]}]
 </p>
                         
                     </div>
@@ -3308,7 +3308,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"units": "counts", "id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "version": "1.0", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom"}
+                          <p class="audit-message">Response Body: {"id": "5e22e009f41fc53cbea094a41de8798f", "fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "units": "counts", "version": "1.0", "tags": ["RNAgetCompliance"]}
 </p>
                         
                     </div>
@@ -3333,7 +3333,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "units": "counts", "version": "1.0", "tags": ["RNAgetCompliance"], "id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom"}
+                          <p class="audit-message">Response Body: {"id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "version": "1.0", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom", "units": "counts"}
 </p>
                         
                     </div>
@@ -3358,7 +3358,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "units": "counts", "version": "1.0", "tags": ["RNAgetCompliance"], "id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom"}
+                          <p class="audit-message">Response Body: {"id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "version": "1.0", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom", "units": "counts"}
 </p>
                         
                     </div>
@@ -3383,7 +3383,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"units": "counts", "id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "version": "1.0", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom"}
+                          <p class="audit-message">Response Body: {"id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "version": "1.0", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom", "units": "counts"}
 </p>
                         
                     </div>
@@ -3433,7 +3433,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"units": "counts", "id": "5e22e009f41fc53cbea094a41de8798f", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "version": "1.0", "tags": ["RNAgetCompliance"], "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "fileType": "loom"}
+                          <p class="audit-message">Response Body: {"id": "5e22e009f41fc53cbea094a41de8798f", "fileType": "loom", "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1", "url": "https://woldlab.caltech.edu/~sau/rnaget/continuous.loom", "units": "counts", "version": "1.0", "tags": ["RNAgetCompliance"]}
 </p>
                         
                     </div>
@@ -3813,7 +3813,7 @@
                         
                           <p class="audit-message">Headers: {'Accept': 'application/vnd.ga4gh.rnaget.v1.0.0+json, application/json;'}</p>
                         
-                          <p class="audit-message">Response Body: {"errors": {"format": "format of data to return"}, "message": "Input payload validation failed"}
+                          <p class="audit-message">Response Body: {"message": "Input payload validation failed", "errors": {"format": "format of data to return"}}
 </p>
                         
                     </div>

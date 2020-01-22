@@ -16,7 +16,7 @@
 <body>
   
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a id="navbar-title" class="navbar-brand" href="#">GA4GH rnaget API v1 Compliance Report</a>    
+    <a id="navbar-title" class="navbar-brand" href="#">GA4GH RNAget API v1.0.0 Compliance Report</a>
 </nav>
 
 <div class="container">
@@ -417,7 +417,7 @@
               
                 
                 <p class='tab2 text-success'><i class="fa fa-check-circle"></i> Test: Study Search - PASSED</p>
-                <p class="tab3"><strong>description:</strong> Requests the /studies/search endpoint</p>
+                <p class="tab3"><strong>description:</strong> Requests the /studies endpoint</p>
                 <p class="tab3"><strong>summary:</strong> 'Study Search' endpoint correctly implemented</p>
                 
                 <!-- API Testing -->
@@ -425,7 +425,7 @@
                 <p class="tab3 text-success">API Route Test Cases - PASSED</p>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Search Studies Without Filters - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search without any parameter filters. checks content type and status code (200). validates response body matches study array schema.</p>
+                  <p class='tab5'>case description: request /studies without any parameter filters. checks content type and status code (200). validates response body matches study array schema.</p>
                   <p class='tab5'>case summary: Studies can be searched without filters</p>
                   
 
@@ -450,7 +450,7 @@
                   </div>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Search Studies With All Filters - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search using all server-supported study filters. checks content type and status code (200). validates response body matches study array schema.</p>
+                  <p class='tab5'>case description: request /studies using all server-supported study filters. checks content type and status code (200). validates response body matches study array schema.</p>
                   <p class='tab5'>case summary: Studies can be searched with all filters specified</p>
                   
 
@@ -475,7 +475,7 @@
                   </div>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Search Studies With Single Filter, 1 - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search using the first parameter filter supported by server. checks type and status code (200). validates response body matches study array schema</p>
+                  <p class='tab5'>case description: request /studies using the first parameter filter supported by server. checks type and status code (200). validates response body matches study array schema</p>
                   <p class='tab5'>case summary: Studies can be searched when first filter parameter is supplied</p>
                   
 
@@ -500,7 +500,7 @@
                   </div>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Search Studies With Single Filter, 2 - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search using the second parameter filter supported by server. checks type and status code (200). validates response body matches study array schema</p>
+                  <p class='tab5'>case description: request /studies using the second parameter filter supported by server. checks type and status code (200). validates response body matches study array schema</p>
                   <p class='tab5'>case summary: Studies can be searched when second filter parameter is supplied</p>
                   
 
@@ -525,7 +525,7 @@
                   </div>
                 
                   <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Study Search Filters Non-Matching Resources - PASSED</p>
-                  <p class='tab5'>case description: request /studies/search using filters that do not apply to any project. checks content type and status code (200). validates response body is an empty array.</p>
+                  <p class='tab5'>case description: request /studies using filters that do not apply to any project. checks content type and status code (200). validates response body is an empty array.</p>
                   <p class='tab5'>case summary: Study search endpoint filters non-matching resources</p>
                   
 
@@ -1713,17 +1713,17 @@
                     </div>
                   </div>
                 
-                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Expressions Ticket - All Filters - PASSED</p>
+                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Expression Ticket - All Filters - PASSED</p>
                   <p class='tab5'>case description: request /expressions/ticket using all server-supported expression filters. checks content type and status code (200). validates response body matches ticket schema.</p>
                   <p class='tab5'>case summary: Expression Ticket retrieved when all filters specified</p>
                   
 
                   <p class="tab5">
-                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Ticket_-_All_Filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Ticket_-_All_Filters">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Ticket_-_All_Filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Ticket_-_All_Filters">
                       <i class="fa fa-info-circle"></i> View Test Case Audit Logs
                     </button>
                   </p>
-                  <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Ticket_-_All_Filters">
+                  <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Ticket_-_All_Filters">
                     <div class="well audit-logs">
                         
                           <p class="audit-message">Request: https://genome.crg.cat/rnaget/expressions/ticket</p>
@@ -2166,17 +2166,17 @@
                     </div>
                   </div>
                 
-                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Expressions Bytes - All Filters - PASSED</p>
+                  <p class='tab4 text-success'><i class="fa fa-check-circle"></i> API Test Case: Expression Bytes - All Filters - PASSED</p>
                   <p class='tab5'>case description: request /expressions/bytes using all server-supported expression filters. checks content type and status code (200).</p>
                   <p class='tab5'>case summary: Expression Bytes retrieved when all filters specified</p>
                   
 
                   <p class="tab5">
-                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Bytes_-_All_Filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Bytes_-_All_Filters">
+                    <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Bytes_-_All_Filters" aria-expanded="false" aria-controls="collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Bytes_-_All_Filters">
                       <i class="fa fa-info-circle"></i> View Test Case Audit Logs
                     </button>
                   </p>
-                  <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expressions_Bytes_-_All_Filters">
+                  <div class="collapse" id="collapse-Centre_for_Genomic_Regulation-expressions-ac3e9279efd02f1c98de4ed3d335b98e-Expression_Bytes_-_All_Filters">
                     <div class="well audit-logs">
                         
                           <p class="audit-message">Request: https://genome.crg.cat/rnaget/expressions/bytes</p>
