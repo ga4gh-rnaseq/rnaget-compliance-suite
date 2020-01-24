@@ -1,7 +1,7 @@
 import setuptools
 
 NAME = "ga4gh-rnaget-compliance"
-VERSION = "0.2.0"
+VERSION = "1.0.0"
 AUTHOR = "Jeremy Adams"
 EMAIL = "jeremy.adams@ga4gh.org"
 
@@ -19,13 +19,12 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 install_requires = ['requests', 'click', 'jsonschema', 'PyYAML', "Jinja2", "loompy"]
 
-
 setuptools.setup(
     name=NAME,
     version=VERSION,
     author=AUTHOR,
     author_email=EMAIL,
-    description="A compliance utility reporting system for rnaget server implementations",
+    description="Reports web service compliance to GA4GH RNAget specification",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ga4gh-rnaseq/rnaget-compliance-suite",
