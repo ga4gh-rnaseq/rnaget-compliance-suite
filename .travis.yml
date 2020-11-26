@@ -13,9 +13,6 @@ script:
   - pytest --cov=compliance_suite/ --cov-report=term-missing unittests/
 after_success:
   - coveralls
-  - echo "Checking REQUESTS_CA_BUNDLE"
-  - ls $REQUESTS_CA_BUNDLE
-  - cat $REQUESTS_CA_BUNDLE
   - bash ./scripts/deploy-gh-pages.sh
 after_script:
   - kill %1
