@@ -10,6 +10,7 @@ to assert whether the test case passes requirements.
 import os
 import re
 import requests
+from requests.exceptions import SSLError
 
 import compliance_suite.exceptions.test_status_exception as tse
 from compliance_suite.schema_validator import SchemaValidator
@@ -38,11 +39,18 @@ class APICase(Case):
         # make GET/POST request
         url = self.get_mature_url()
         request_method = REQUEST_METHOD[self.case_params["http_method"]]
-        response = request_method(
-            url,
-            headers=self.headers, 
-            params=self.params)
-        self.set_test_status(url, response)
+        response = None
+
+        try:
+            response = request_method(
+                url,
+                headers=self.headers, 
+                params=self.params,
+                verify=True)
+        except SSLError:
+            pass
+        finally:
+            self.set_test_status(url, response)
     
     def set_test_status(self, url, response):
         """Sets test status and messages based on response
@@ -59,19 +67,25 @@ class APICase(Case):
             params (dict): key-value mapping of supplied parameters
             response (Response): response object from the request
         """
-
-        # apply_params = self.test.kwargs["apply_params"]
         
         if self.status != -1:
             self.append_audit("Request: " + url)
             self.append_audit("Params: " + str(sanitize_dict(self.params)))
             self.append_audit("Headers: " + str(sanitize_dict(self.headers)))
-            # only add response body if JSON format is expected
-            if self.is_json:
-                if re.compile("json").search(response.headers["Content-Type"]):
-                    self.append_audit("Response Body: " + response.text)
 
             try:
+
+                # Validation 0, if the response is None type, that means the
+                # request did not complete successfully, this is an automatic
+                # failure
+                if response == None:
+                    raise tse.NoResponseException("No response returned by HTTP request")
+
+                # only add response body if JSON format is expected
+                if self.is_json:
+                    if re.compile("json").search(response.headers["Content-Type"]):
+                        self.append_audit("Response Body: " + response.text)
+            
                 # Validation 1, Content-Type, Media Type validation
                 # check response content type is in accepted media types
                 response_media_type = self.__get_response_media_type(response)
