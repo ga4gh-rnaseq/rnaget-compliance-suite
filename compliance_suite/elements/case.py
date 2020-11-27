@@ -58,7 +58,7 @@ class Case(Element):
                if "summary_skip" in self.case_params.keys() else "",
             2: "An unhandled exception occurred"
         }
-        self.summary = self.set_summary()
+        self.set_summary()
 
         self.error_message = None
         self.audit = []
