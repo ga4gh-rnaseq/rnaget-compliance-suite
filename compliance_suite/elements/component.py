@@ -9,6 +9,7 @@ attachments. A component holds multiple Cases.
 """
 
 from compliance_suite.elements.element import Element
+from compliance_suite.elements.api_case import APICase
 import json
 
 class Component(Element):
@@ -35,7 +36,8 @@ class Component(Element):
         self.test_params = test_params
         self.test = test
         self.runner = runner
-        self.case_class = None
+        self.case_class = APICase
+        self.test_cases = []
     
     def create_test_cases(self):
         """Create all test cases from params

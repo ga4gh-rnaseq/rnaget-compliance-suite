@@ -15,6 +15,11 @@ class TestStatusException(Exception):
     
     pass
 
+class NoResponseException(TestStatusException):
+    """Raised when no response was received from the endpoint"""
+
+    pass
+
 class MediaTypeException(TestStatusException):
     """Raised when response content type does not match accepted media types"""
 
