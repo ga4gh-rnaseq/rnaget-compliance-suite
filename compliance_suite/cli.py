@@ -48,18 +48,22 @@ def scan_for_errors(json):
     high_level_summary = {}
     available_tests = ('project_get')
 
-    # testbed report
+    # testbed report testbed name and such
     ga4gh_report = Report()
     ga4gh_report.set_testbed_name("rnaget-compliance-suite")
 
     for server in json:
+
+        # ga4gh-testbed-lib report platform attributes
+        ga4gh_report.set_platform_name(server["server_name"])
+        ga4gh_report.set_platform_description(server["base_url"])
+
         for obj_type in ["projects", "studies", "expressions", "continuous"]:
 
             # ga4gh-testbed-lib phase
             ga4gh_phase = ga4gh_report.add_phase()
             ga4gh_phase.set_phase_name(obj_type)
-
-
+            
             for obj_id in server["test_results"][obj_type].keys():
 
                 #print(server["test_results"][obj_type][obj_id][0]["name"])
