@@ -18,6 +18,8 @@ import inspect
 
 import click
 import compliance_suite
+import ga4gh
+
 from compliance_suite.report_server import ReportServer
 from compliance_suite.runner import Runner
 from compliance_suite.user_config_parser import UserConfigParser
@@ -25,6 +27,8 @@ from compliance_suite.exceptions.argument_exception import ArgumentException
 from compliance_suite.exceptions.user_config_exception import \
     UserConfigException
 from compliance_suite.config.tests import TESTS_BY_OBJECT_TYPE
+
+from ga4gh.testbed.report.report import Report
 
 def scan_for_errors(json):
     """generate high-level summaries from available results data structure
@@ -35,6 +39,7 @@ def scan_for_errors(json):
         - project
         - study
         - expression
+        - continuous
 
     Args:
         json (dict): dictionary structure of test results JSON report
@@ -43,15 +48,47 @@ def scan_for_errors(json):
     high_level_summary = {}
     available_tests = ('project_get')
 
+    # testbed report
+    ga4gh_report = Report()
+    ga4gh_report.set_testbed_name("rnaget-compliance-suite")
+
     for server in json:
-        for obj_type in ["projects", "studies", "expressions"]:
+        for obj_type in ["projects", "studies", "expressions", "continuous"]:
+
+            # ga4gh-testbed-lib phase
+            ga4gh_phase = ga4gh_report.add_phase()
+            ga4gh_phase.set_phase_name(obj_type)
+
+
             for obj_id in server["test_results"][obj_type].keys():
+
+                #print(server["test_results"][obj_type][obj_id][0]["name"])
+
                 server_tests = server["test_results"][obj_type][obj_id]
                 
                 for high_level_name in (available_tests):
+
                     # We are successful unless proven otherwise
                     result = 1
                     for test in server_tests:
+
+                        # ga4gh-testbed-lib test
+                        ga4gh_test = ga4gh_phase.add_test()
+                        ga4gh_test.set_test_name(test["name"])
+                        ga4gh_test.set_test_description(test["test_description"])
+
+                        for case in test["message"]["api_component"]["cases"]:
+
+                            # ga4gh-testbed-lib case
+                            ga4gh_case = ga4gh_test.add_case()
+                            ga4gh_case.set_case_name(case["name"])
+                            ga4gh_case.set_case_description(case["description"])
+
+                            # ga4gh-testbed-lib log messages
+                            for log_message in case["audit"]:
+                                ga4gh_case.add_log_message(log_message)
+
+                        
                         if high_level_name in test["parents"]:
                             """
                             if test['warning']:
@@ -64,6 +101,9 @@ def scan_for_errors(json):
                     }
 
                 server["high_level_summary"] = high_level_summary
+
+    ga4gh_report.finalize()
+    return ga4gh_report
     
 @click.group()
 def main():
@@ -172,11 +212,13 @@ def report(user_config, output_dir, serve, uptime, no_tar, force):
             tr.run_tests()
             final_json.append(tr.generate_final_json())
 
-        scan_for_errors(final_json)
+        ga4gh_report = scan_for_errors(final_json)
+
+
 
         # write results.json to output directory
         with open(os.path.join(output_dir, 'results.json'), 'w+') as outfile:
-            json.dump(final_json, outfile)
+            outfile.write(ga4gh_report.to_json())
         
         logging.info("all tests complete, results json available at %s/%s" %(
             output_dir, 'results.json'
