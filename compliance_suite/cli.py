@@ -39,8 +39,6 @@ def scan_for_errors(json):
         - project
         - study
         - expression
-        - continuous
-
     Args:
         json (dict): dictionary structure of test results JSON report
     """
@@ -48,51 +46,15 @@ def scan_for_errors(json):
     high_level_summary = {}
     available_tests = ('project_get')
 
-    # testbed report testbed name and such
-    ga4gh_report = Report()
-    ga4gh_report.set_testbed_name("rnaget-compliance-suite")
-
     for server in json:
-
-        # ga4gh-testbed-lib report platform attributes
-        ga4gh_report.set_platform_name(server["server_name"])
-        ga4gh_report.set_platform_description(server["base_url"])
-
-        for obj_type in ["projects", "studies", "expressions", "continuous"]:
-
-            # ga4gh-testbed-lib phase
-            ga4gh_phase = ga4gh_report.add_phase()
-            ga4gh_phase.set_phase_name(obj_type)
-            
+        for obj_type in ["projects", "studies", "expressions"]:
             for obj_id in server["test_results"][obj_type].keys():
-
-                #print(server["test_results"][obj_type][obj_id][0]["name"])
-
                 server_tests = server["test_results"][obj_type][obj_id]
                 
                 for high_level_name in (available_tests):
-
                     # We are successful unless proven otherwise
                     result = 1
                     for test in server_tests:
-
-                        # ga4gh-testbed-lib test
-                        ga4gh_test = ga4gh_phase.add_test()
-                        ga4gh_test.set_test_name(test["name"])
-                        ga4gh_test.set_test_description(test["test_description"])
-
-                        for case in test["message"]["api_component"]["cases"]:
-
-                            # ga4gh-testbed-lib case
-                            ga4gh_case = ga4gh_test.add_case()
-                            ga4gh_case.set_case_name(case["name"])
-                            ga4gh_case.set_case_description(case["description"])
-
-                            # ga4gh-testbed-lib log messages
-                            for log_message in case["audit"]:
-                                ga4gh_case.add_log_message(log_message)
-
-                        
                         if high_level_name in test["parents"]:
                             """
                             if test['warning']:
@@ -105,9 +67,6 @@ def scan_for_errors(json):
                     }
 
                 server["high_level_summary"] = high_level_summary
-
-    ga4gh_report.finalize()
-    return ga4gh_report
     
 @click.group()
 def main():
@@ -123,7 +82,9 @@ def main():
 @click.option('--no-tar', is_flag=True, help='skip the creation of a tarball')
 @click.option('--force', '-f', is_flag=True, 
               help="force overwrite of output directory")
-def report(user_config, output_dir, serve, uptime, no_tar, force):
+@click.option('--rnaget-format', '-r', is_flag=True, 
+              help='option to generate rnaget report format instead of testbed-lib report format')
+def report(user_config, output_dir, serve, uptime, no_tar, force, rnaget_format):
     """Program entrypoint. Executes compliance tests and generates report
 
     This method parses the CLI command 'report' to execute the report session
@@ -216,13 +177,20 @@ def report(user_config, output_dir, serve, uptime, no_tar, force):
             tr.run_tests()
             final_json.append(tr.generate_final_json())
 
-        ga4gh_report = scan_for_errors(final_json)
+        if rnaget_format:
+            print("if rnaget_format is HERE")
+            scan_for_errors(final_json)
+        else:
+            final_report = testbed_report(final_json)
 
 
 
         # write results.json to output directory
         with open(os.path.join(output_dir, 'results.json'), 'w+') as outfile:
-            outfile.write(ga4gh_report.to_json())
+            if rnaget_format:
+                json.dump(final_json, outfile)
+            else:
+                outfile.write(final_report.to_json())
         
         logging.info("all tests complete, results json available at %s/%s" %(
             output_dir, 'results.json'
@@ -239,20 +207,21 @@ def report(user_config, output_dir, serve, uptime, no_tar, force):
             logging.info("gzipped tarball of results directory available "
                          + "at " + output_dir + ".tar.gz")
 
-        # start server if user specified --serve
-        server = ReportServer(output_dir)
-        server.render_html()
+        if rnaget_format:
+            # start server if user specified --serve and -r 
+            server = ReportServer(output_dir)
+            server.render_html()
 
-        if serve is True:
-            logging.info("serving results as HTML report from output " 
-                         + "directory " + output_dir)
-            server.set_free_port()
-            server.serve_thread(uptime=int(uptime))
-        else:
-            logging.info("Report results can be served as HTML from results "
-                         + "directory " + output_dir + ". (python3) -> "
-                         + "python -m http.server 8000 OR (python2) -> python "
-                         + "-m SimpleHTTPServer 8000")
+            if serve is True:
+                logging.info("serving results as HTML report from output " 
+                            + "directory " + output_dir)
+                server.set_free_port()
+                server.serve_thread(uptime=int(uptime))
+            else:
+                logging.info("Report results can be served as HTML from results "
+                            + "directory " + output_dir + ". (python3) -> "
+                            + "python -m http.server 8000 OR (python2) -> python "
+                            + "-m SimpleHTTPServer 8000")
             
     # handle various exception classes, each time printing the usage
     # instructions to terminal along with a description of what went wrong
@@ -271,3 +240,51 @@ def report(user_config, output_dir, serve, uptime, no_tar, force):
             click.echo(report.get_help(ctx))
         print("\n"+ str(e) + "\n")
         sys.exit(1)
+
+def testbed_report(json):
+
+    # testbed report testbed name and such
+    ga4gh_report = Report()
+    ga4gh_report.set_testbed_name("rnaget-compliance-suite")
+    available_tests = ('project_get')
+
+    for server in json:
+        # ga4gh-testbed-lib report platform attributes
+        ga4gh_report.set_platform_name(server["server_name"])
+        ga4gh_report.set_platform_description(server["base_url"])
+
+        for obj_type in ["projects", "studies", "expressions", "continuous"]:
+
+            # ga4gh-testbed-lib phase
+            ga4gh_phase = ga4gh_report.add_phase()
+            ga4gh_phase.set_phase_name(obj_type)
+            
+            for obj_id in server["test_results"][obj_type].keys():
+
+                #print(server["test_results"][obj_type][obj_id][0]["name"])
+
+                server_tests = server["test_results"][obj_type][obj_id]
+                
+                for high_level_name in (available_tests):
+
+                    # We are successful unless proven otherwise
+                    result = 1
+                    for test in server_tests:
+
+                        # ga4gh-testbed-lib test
+                        ga4gh_test = ga4gh_phase.add_test()
+                        ga4gh_test.set_test_name(test["name"])
+                        ga4gh_test.set_test_description(test["test_description"])
+
+                        for case in test["message"]["api_component"]["cases"]:
+
+                            # ga4gh-testbed-lib case
+                            ga4gh_case = ga4gh_test.add_case()
+                            ga4gh_case.set_case_name(case["name"])
+                            ga4gh_case.set_case_description(case["description"])
+
+                            # ga4gh-testbed-lib log messages
+                            for log_message in case["audit"]:
+                                ga4gh_case.add_log_message(log_message)
+    ga4gh_report.finalize()
+    return ga4gh_report
