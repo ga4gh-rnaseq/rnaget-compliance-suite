@@ -178,7 +178,6 @@ def report(user_config, output_dir, serve, uptime, no_tar, force, rnaget_format)
             final_json.append(tr.generate_final_json())
 
         if rnaget_format:
-            print("if rnaget_format is HERE")
             scan_for_errors(final_json)
         else:
             final_report = testbed_report(final_json)
