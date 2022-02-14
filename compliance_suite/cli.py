@@ -84,7 +84,8 @@ def main():
               help="force overwrite of output directory")
 @click.option('--rnaget-format', '-r', is_flag=True, 
               help='option to generate rnaget report format instead of testbed-lib report format')
-def report(user_config, output_dir, serve, uptime, no_tar, force, rnaget_format):
+@click.option('--pretty', '-p', help="choose to output json as pretty/formatted version")
+def report(user_config, output_dir, serve, uptime, no_tar, force, rnaget_format, pretty):
     """Program entrypoint. Executes compliance tests and generates report
 
     This method parses the CLI command 'report' to execute the report session
@@ -189,7 +190,10 @@ def report(user_config, output_dir, serve, uptime, no_tar, force, rnaget_format)
             if rnaget_format:
                 json.dump(final_json, outfile)
             else:
-                outfile.write(final_report.to_json())
+                if pretty:
+                    outfile.write(final_report.to_json(pretty=True))
+                else:
+                    outfile.write(final_report.to_json())
         
         logging.info("all tests complete, results json available at %s/%s" %(
             output_dir, 'results.json'
@@ -266,7 +270,6 @@ def testbed_report(json):
                 
                 for high_level_name in (available_tests):
 
-                    # We are successful unless proven otherwise
                     result = 1
                     for test in server_tests:
 
@@ -282,8 +285,25 @@ def testbed_report(json):
                             ga4gh_case.set_case_name(case["name"])
                             ga4gh_case.set_case_description(case["description"])
 
+                            # update message
+                            ga4gh_case.set_message(case["summary"])
+
                             # ga4gh-testbed-lib log messages
                             for log_message in case["audit"]:
                                 ga4gh_case.add_log_message(log_message)
+
+                            # update status
+                            if case["status"] == 1:
+                                ga4gh_case.set_status_pass()
+                            elif case["status"] == 0:
+                                ga4gh_case.set_status_skip()
+                            elif case["status"] == -1:
+                                ga4gh_case.set_status_fail()
+                            elif case["status"] == 2:
+                                ga4gh_case.set_status_unknown()
+
+                            
+
+
     ga4gh_report.finalize()
     return ga4gh_report
