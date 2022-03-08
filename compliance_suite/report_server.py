@@ -32,21 +32,19 @@ def capitalize(text):
 
     return text[0].upper() + text[1:]
 
-def get_route_status(route_obj):
+def get_route_status(phase):
 
-    count_d = {"pass": 0, "fail": 0, "skip": 0, "unknown": 0}
-    symbol_d = {"1": "pass", "-1": "fail", "0": "skip", "2": "unknown"}
+    count_d = {"unknown": 0, "passed": 0, "warned": 0, "failed": 0, "skipped": 0}
     ret = {"btn": "btn-success", "text": "Pass"}
 
-    for obj_key in route_obj.keys():
-        for test in route_obj[obj_key]:
-            count_d[symbol_d[str(test["result"])]] += 1
+    for count in phase["summary"].keys():
+        count_d[count] = phase["summary"][count]
 
-    if count_d["fail"] > 0 or count_d["skip"] > 0:
+    if count_d["failed"] > 0 or count_d["skipped"] > 0:
         ret = {
             "btn": "btn-danger",
-            "text": "%s Failed / %s Skipped" % (str(count_d["fail"]),
-                                                str(count_d["skip"]))
+            "text": "%s Failed / %s Skipped" % (str(count_d["failed"]),
+                                                str(count_d["skipped"]))
         }
     
     return ret
@@ -88,22 +86,22 @@ class ReportServer(object):
                     "continuous": "continuous"
                 },
                 "status": {
-                    0: {
+                    "SKIP": {
                         "status": "SKIPPED",
                         "css_class": "text-info",
                         "fa_class": "fa-ban"
                     },
-                    1: {
+                    "PASS": {
                         "status": "PASSED",
                         "css_class": "text-success",
                         "fa_class": "fa-check-circle"
                     },
-                    -1: {
+                    "FAIL": {
                         "status": "FAILED",
                         "css_class": "text-danger",
                         "fa_class": "fa-times-circle"
                     },
-                    2: {
+                    "UNKNOWN": {
                         "status": "UNKNOWN ERROR",
                         "css_class": "text-danger",
                         "fa_class": "fa-times-circle"
@@ -159,13 +157,12 @@ class ReportServer(object):
         home_path = self.web_dir + "/index.html"
         open(home_path, "w").write(home_rendered)
 
-        for server in data:
-            report_template = view_env.get_template("views/report.html")
-            report_rendered = report_template.render(server=server,
-                                                     h=self.render_helper)
-            report_path = self.web_dir + "/" + \
-                self.render_helper["f"]["server_name_url"](server["server_name"])
-            open(report_path, "w").write(report_rendered)
+
+        report_template = view_env.get_template("views/report.html")
+        report_rendered = report_template.render(data=data, h=self.render_helper)
+        report_path = self.web_dir + "/" + \
+            self.render_helper["f"]["server_name_url"](data["platform_name"])
+        open(report_path, "w").write(report_rendered)
         
     def start_mock_server(self, uptime):
         """run server to serve final test report

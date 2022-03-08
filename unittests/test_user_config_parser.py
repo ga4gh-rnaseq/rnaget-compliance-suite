@@ -23,11 +23,9 @@ def test_parse_config_file_pass():
     parser = UserConfigParser(user_config_pass)
     parser.parse_config_file()
     assert parser.d != None
-    assert len(parser.d["servers"]) == 2
-
-    server_a = parser.d["servers"][0]
-    assert server_a["server_name"] == "Caltech"
-    assert server_a["base_url"] == "https://felcat.caltech.edu/rnaget/"
+    
+    assert parser.d["server_name"] == "Caltech"
+    assert parser.d["base_url"] == "https://felcat.caltech.edu/rnaget/"
 
 def test_parse_config_file_not_found():
     """asserts correct error raised when yaml file not found"""
@@ -51,16 +49,14 @@ def test_validate_config_file_failures():
     """asserts parser invalidates different yaml files with message"""
 
     messages = [
-        '"servers" should be the only root key',
-        '"servers" should be the only root key',
         "YAML config file could not be parsed. Please refer to the template "
             + "config file.",
         'value of implemented:expressions must be a boolean',
         'wrongendpoint not a valid endpoint',
-        "missing attribute(s) from server 1: server_name"
+        "missing attribute(s) from server : server_name"
     ]
 
-    for i in range(0,6):
+    for i in range(0,4):
         config_file = yaml_dir + "fail_" + str(i) + ".yaml"
         message = messages[i]
 
@@ -68,8 +64,8 @@ def test_validate_config_file_failures():
             parser = UserConfigParser(config_file)
             parser.parse_config_file()
             parser.validate_config_file()
+
             assert True == False # config parser must raise an error before
                                  # getting to this line
         except Exception as e:
             assert message == str(e)
-

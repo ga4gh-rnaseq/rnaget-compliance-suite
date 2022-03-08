@@ -70,53 +70,39 @@ class UserConfigParser(object):
             # for one or more endpoints
         
         try:
-            # validate the root element is "servers" and that there is only
-            # one root element
-            if len(self.d.keys()) != 1:
-                raise UserConfigException('"servers" should be the only root '
-                    + 'key')
-            
-            if list(self.d.keys())[0] != "servers":
-                raise UserConfigException('"servers" should be the only root '
-                    + 'key')
-
-            server_count = 0
-            
-            # for each server, validate that there are no missing attributes
+            # validate that there are no missing attributes
             # given the list of required server keys above
-            for server in self.d["servers"]:
-                server_keys = set(list(server.keys()))
+            server_keys = set(list(self.d.keys()))
 
-                # for the server, all endpoints are expected to be implemented
-                # except if specified in the "implemented" config
-                obj_implemented = {e: True for e in ENDPOINTS}
-                if "implemented" in server_keys:
-                    for impl_key in server["implemented"]:
-                        if impl_key not in set(ENDPOINTS):
+            # for the server, all endpoints are expected to be implemented
+            # except if specified in the "implemented" config
+            obj_implemented = {e: True for e in ENDPOINTS}
+            if "implemented" in server_keys:
+                for impl_key in self.d["implemented"]:
+                    if impl_key not in set(ENDPOINTS):
+                        raise UserConfigException(
+                            impl_key + ' not a valid endpoint'
+                        )
+
+                for obj_type in ENDPOINTS:
+                    if obj_type in self.d["implemented"].keys():
+                        if type(self.d["implemented"][obj_type]) != bool:
                             raise UserConfigException(
-                                impl_key + ' not a valid endpoint'
-                            )
-
-                    for obj_type in ENDPOINTS:
-                        if obj_type in server["implemented"].keys():
-                            if type(server["implemented"][obj_type]) != bool:
-                                raise UserConfigException(
-                                    'value of implemented:' + obj_type 
-                                    + ' must be a boolean')
-                            obj_implemented[obj_type] = \
-                                server["implemented"][obj_type]
+                                'value of implemented:' + obj_type 
+                                + ' must be a boolean')
+                        obj_implemented[obj_type] = \
+                            self.d["implemented"][obj_type]
                 
-                self.d["servers"][server_count]["implemented"] = obj_implemented
+                self.d["implemented"] = obj_implemented
                 
-                server_req_keys = server_req_keys_template.copy()
-                server_keys_diff = server_req_keys.difference(server_keys)
-                if len(server_keys_diff) > 0:
-                    raise UserConfigException(
-                        "missing attribute(s) from server " 
-                        + str(server_count + 1) + ": " 
-                        + ", ".join(sorted(list(server_keys_diff))))
+            server_req_keys = server_req_keys_template.copy()
+            server_keys_diff = server_req_keys.difference(server_keys)
+            print("server_keys are : " + str(server_keys))
+            if len(server_keys_diff) > 0:
+                raise UserConfigException(
+                    "missing attribute(s) from server : " 
+                    + ", ".join(sorted(list(server_keys_diff))))
 
-                server_count += 1
         
         # AttributeError converted to UserConfigException
         except AttributeError as e:
