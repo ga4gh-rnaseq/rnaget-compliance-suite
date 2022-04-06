@@ -97,7 +97,6 @@ class UserConfigParser(object):
                 
             server_req_keys = server_req_keys_template.copy()
             server_keys_diff = server_req_keys.difference(server_keys)
-            print("server_keys are : " + str(server_keys))
             if len(server_keys_diff) > 0:
                 raise UserConfigException(
                     "missing attribute(s) from server : " 

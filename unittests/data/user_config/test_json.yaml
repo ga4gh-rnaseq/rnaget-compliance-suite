@@ -1,0 +1,7 @@
+server_name: Unittest
+base_url: http://localhost:8000/
+implemented:
+  projects: true
+  studies: true
+  expressions: true
+  continuous: true

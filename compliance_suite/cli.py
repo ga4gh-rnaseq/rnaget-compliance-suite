@@ -157,24 +157,8 @@ def report(user_config, output_dir, serve, uptime, no_tar, force, pretty):
             os.path.dirname(compliance_suite.report_server.__file__), 'web')
         shutil.copytree(template_web_dir, output_dir)
 
-        # create a Runner for user_config
-        # run associated tests and add the resulting JSON to the final json
-        # report
-        
-        tr = Runner(user_config.d)
-
-        token = None
-        if "token" in user_config.d.keys():
-            token = user_config.d["token"]
-
-        if token:
-            tr.headers['Authorization'] = 'Bearer ' + str(token)
-        logging.info("starting tests for server: " 
-                        + str(user_config.d["server_name"]))
-        sys.stdout.flush()
-        tr.run_tests()
-
-        final_report = testbed_report(tr.generate_final_json())
+        # run method here
+        final_report = test_report(user_config)
 
         # write results.json to output directory
         with open(os.path.join(output_dir, 'results.json'), 'w+') as outfile:
@@ -231,7 +215,32 @@ def report(user_config, output_dir, serve, uptime, no_tar, force, pretty):
         print("\n"+ str(e) + "\n")
         sys.exit(1)
 
-def testbed_report(json):
+def test_report(user_config):
+
+    # create a Runner for user_config
+    # run associated tests and add the resulting JSON to the final json
+    # report
+    
+    tr = Runner(user_config.d)
+
+    token = None
+    if "token" in user_config.d.keys():
+        token = user_config.d["token"]
+
+    if token:
+        tr.headers['Authorization'] = 'Bearer ' + str(token)
+    logging.info("starting tests for server: " 
+                    + str(user_config.d["server_name"]))
+    sys.stdout.flush()
+    tr.run_tests()
+
+    final_report = convert_report_format(tr.generate_final_json())
+
+    return final_report
+
+
+
+def convert_report_format(json):
 
     # testbed report testbed name and such
     ga4gh_report = Report()
@@ -263,32 +272,34 @@ def testbed_report(json):
                     ga4gh_test = ga4gh_phase.add_test()
                     ga4gh_test.set_test_name(test["name"])
                     ga4gh_test.set_test_description(test["description"])
+                    ga4gh_test.set_message(test["text"])
 
-                    for case in test["message"]["api_component"]["cases"]:
+                    if test["result"] != 0:
+                        for case in test["message"]["api_component"]["cases"]:
 
-                        # ga4gh-testbed-lib case
-                        ga4gh_case = ga4gh_test.add_case()
-                        ga4gh_case.set_case_name(case["name"])
-                        ga4gh_case.set_case_description(case["description"])
+                            # ga4gh-testbed-lib case
+                            ga4gh_case = ga4gh_test.add_case()
+                            ga4gh_case.set_case_name(case["name"])
+                            ga4gh_case.set_case_description(case["description"])
 
-                        # update message
-                        ga4gh_case.set_message(case["summary"])
+                            # update message
+                            ga4gh_case.set_message(case["summary"])
 
-                        # ga4gh-testbed-lib log messages
-                        for log_message in case["audit"]:
-                            ga4gh_case.add_log_message(log_message)
+                            # ga4gh-testbed-lib log messages
+                            for log_message in case["audit"]:
+                                ga4gh_case.add_log_message(log_message)
 
-                        # update status
-                        if case["status"] == 1:
-                            ga4gh_case.set_status_pass()
-                        elif case["status"] == 0:
-                            ga4gh_case.set_status_skip()
-                        elif case["status"] == -1:
-                            ga4gh_case.set_status_fail()
-                        elif case["status"] == 2:
-                            ga4gh_case.set_status_unknown()
-                        
-                        ga4gh_case.set_end_time_now()
+                            # update status
+                            if case["status"] == 1:
+                                ga4gh_case.set_status_pass()
+                            elif case["status"] == 0:
+                                ga4gh_case.set_status_skip()
+                            elif case["status"] == -1:
+                                ga4gh_case.set_status_fail()
+                            elif case["status"] == 2:
+                                ga4gh_case.set_status_unknown()
+                            
+                            ga4gh_case.set_end_time_now()
 
                     ga4gh_test.set_end_time_now()
                     

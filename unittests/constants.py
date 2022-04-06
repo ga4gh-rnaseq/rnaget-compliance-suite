@@ -17,7 +17,7 @@ OUTPUT_ARCHIVE = OUTPUT_DIR + ".tar.gz"
 
 SERVER_CONFIG = {
     "server_name": "Unit Test Server",
-    "base_url": "http://localhost:5000/",
+    "base_url": "http://localhost:8000/",
     "token": "gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa",
     "implemented": {
         "projects": True,
@@ -30,7 +30,7 @@ SERVER_CONFIG = {
 
 SERVER_CONFIG_NOT_IMPLEMENTED = {
     "server_name": "Not Implemented Server",
-    "base_url": "http://localhost:5000/",
+    "base_url": "http://localhost:8000/",
     "token": "gd3uhUnyk3pVVDakkPSK7Pa0V7EvuOCa",
     "implemented": {
         "projects": False,

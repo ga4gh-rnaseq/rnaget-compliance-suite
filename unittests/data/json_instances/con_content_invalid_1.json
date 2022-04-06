@@ -2,7 +2,7 @@
   "id": "de3d2567774ae951f84783c890504104",
   "version": "1.0",
   "studyID": "f3ba0b59bed0fa2f1030e7cb508324d1",
-  "url": "http://localhost:5000/matrices/continuous/continuous.loom",
+  "url": "http://localhost:8000/matrices/continuous/continuous.loom",
   "tags": [
     "RNAgetCompliance"
   ],
