@@ -194,8 +194,8 @@ def report(user_config, output_dir, serve, uptime, no_tar, force, pretty):
         else:
             logging.info("Report results can be served as HTML from results "
                         + "directory " + output_dir + ". (python3) -> "
-                        + "python -m http.server 8000 OR (python2) -> python "
-                        + "-m SimpleHTTPServer 8000")
+                        + "python -m http.server 5000 OR (python2) -> python "
+                        + "-m SimpleHTTPServer 5000")
             
     # handle various exception classes, each time printing the usage
     # instructions to terminal along with a description of what went wrong

@@ -8,8 +8,6 @@ from compliance_suite.user_config_parser import UserConfigParser
 def validate_json(expected, actual):
 
     if type(expected) != type(actual):
-        print(type(expected))
-        print(type(actual))
         raise tse.JsonParseException("JSON type expected")
 
     if len(expected) != len(actual):

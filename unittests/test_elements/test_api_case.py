@@ -17,11 +17,6 @@ def test_api_case_success():
         runner, node, case_params = get_runner_node_case_params_by_case(
             success_case["name"])
         api_case = APICase(case_params, node, runner)
-
-        print(case_params)
-        print(node)
-        print(runner)
-
         api_case.execute_test_case()
         assert api_case.status == 1
 

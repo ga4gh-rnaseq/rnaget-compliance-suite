@@ -1,5 +1,5 @@
 server_name: Unittest
-base_url: http://localhost:8000/
+base_url: http://localhost:5000/
 implemented:
   projects: true
   studies: true
