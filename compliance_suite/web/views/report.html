@@ -30,7 +30,7 @@
               
               <p class='tab2 {{ h.s.status[test.status].css_class }}'><i class="fa {{h.s.status[test.status].fa_class}}"></i> Test: {{h.f.format_test_name(test.test_name)}} - {{ h.s.status[test.status].status }}</p>
               <p class="tab3"><strong>description:</strong> {{test.test_description}}</p>
-              <p class="tab3"><strong>summary:</strong> {{test.summary}}</p>
+              <p class="tab3"><strong>summary:</strong> {{test.message}}</p>
               
               <!-- API Testing -->
               {% for case in test.cases %}
