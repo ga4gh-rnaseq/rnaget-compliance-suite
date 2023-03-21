@@ -24,7 +24,6 @@ installation and usage instructions.
 ### Installation
 
 ```
-pip install -r requirements_doc.txt
 python setup.py install
 ```
 
