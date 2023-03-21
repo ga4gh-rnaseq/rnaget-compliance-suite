@@ -17,7 +17,7 @@ jsonschema==3.0.1
 loompy==2.0.17
 MarkupSafe==1.1.1
 more-itertools==7.0.0
-numpy==1.17.0
+numpy==1.18.0
 packaging==19.0
 pandas==0.25.0
 pluggy==0.11.0

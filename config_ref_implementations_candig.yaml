@@ -1,0 +1,8 @@
+server_name: CanDIG
+base_url: https://candig.bcgsc.ca/rnaget/
+token: SERVER_API_KEY_CANDIG
+implemented:
+    projects: true
+    studies: true
+    expressions: true
+    continuous: false

@@ -47,6 +47,7 @@ class APICase(Case):
                 headers=self.headers, 
                 params=self.params,
                 verify=True)
+                
         except SSLError:
             pass
         finally:
@@ -81,15 +82,17 @@ class APICase(Case):
                 if response == None:
                     raise tse.NoResponseException("No response returned by HTTP request")
 
+
                 # only add response body if JSON format is expected
                 if self.is_json:
-                    if re.compile("json").search(response.headers["Content-Type"]):
+                    if re.compile("json").search(response.headers.get("Content-Type","")):
                         self.append_audit("Response Body: " + response.text)
             
                 # Validation 1, Content-Type, Media Type validation
                 # check response content type is in accepted media types
                 response_media_type = self.__get_response_media_type(response)
                 if not response_media_type in set(self.media_types):
+
                     raise tse.MediaTypeException(
                         "Response Content-Type '%s'" % response_media_type
                         + " not in request accepted media types: "
@@ -158,7 +161,7 @@ class APICase(Case):
     def __get_response_media_type(self, response):
         """Get media type from 'Content-Type' field of response header"""
 
-        ct = response.headers["Content-Type"].split(";")[0]
+        ct = response.headers.get("Content-Type","").split(";")[0]
         return ct
     
     def __set_test_properties(self):

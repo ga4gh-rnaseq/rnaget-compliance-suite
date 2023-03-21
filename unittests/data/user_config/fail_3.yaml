@@ -1,7 +1,1 @@
-servers:
-  - server_name: Server A
-    base_url: https://felcat.caltech.edu/rnaget/
-    implemented:
-      projects: true
-      studies: true
-      expressions: foo
+base_url: http://localhost:5000/

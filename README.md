@@ -21,6 +21,12 @@ RNAget maintains an up-to-date report of the compliance status of its reference 
 Please review the [Compliance Documentation](https://rnaget-compliance-suite.readthedocs.io/en/latest/) for 
 installation and usage instructions.
 
+### Installation
+
+```
+python setup.py install
+```
+
 ## Additional Resources
 
 1. [PyPI](https://pypi.org/project/ga4gh-rnaget-compliance/) - The RNAget Compliance Utility is available on the Python Package Index (PyPI)

@@ -202,7 +202,6 @@ def get_expression_or_continuous_ticket(obj_type, obj_id):
             if os.path.exists(json_file):
                 if obj_type == "continuous":
                     dict_key = obj_id
-                    print(dict_key)
                     if dict_key in continuous_ticket_by_id.keys():
                         json_file = data_dir + continuous_ticket_by_id[dict_key]
                     else:
