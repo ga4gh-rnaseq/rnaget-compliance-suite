@@ -36,7 +36,7 @@ broken down by data type, are as follows:
     * :code:`/continuous/bytes`
 
 Detailed descriptions of each route are available in the 
-`specification document <https://github.com/ga4gh-rnaseq/schema/blob/master/rnaget.md>`_.
+`specification document <https://github.com/ga4gh-rnaseq/schema/blob/master/README.md>`_.
 
 Important points:
 
